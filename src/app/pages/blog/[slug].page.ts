@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { MarkdownComponent, injectContent } from '@analogjs/content';
@@ -7,12 +7,26 @@ import { BlogPost } from '@models/post';
 
 @Component({
   standalone: true,
-  imports: [AsyncPipe, MarkdownComponent, NgIf],
+  imports: [AsyncPipe, DatePipe, MarkdownComponent, NgIf],
   template: `
-    <div *ngIf="post$ | async as post">
-      <h2>{{ post.attributes.title }}</h2>
-
-      <analog-markdown [content]="post.content" />
+    <div class="md:max-w md:mx-auto md:flex md:justify-center">
+      <div *ngIf="post$ | async as post" class="md:max-w-3xl p-4">
+        <div class="max-w mx-auto">
+          <div>
+            <h1 class="text-white text-xl font-bold text-shadow shadow-black">
+              {{ post.attributes.title }}
+            </h1>
+            <div class="flex justify-between items-center text-white text-xs">
+              <div class="flex text-shadow shadow-black">
+                <div *ngIf="post?.attributes?.date">
+                  Posted {{ post.attributes.date | date }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <analog-markdown [content]="post.content" />
+      </div>
     </div>
   `,
 })
