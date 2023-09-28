@@ -26,6 +26,7 @@
       "@models/*": ["app/models/*"],
       "@pages/*": ["app/pages/*"],
       "@services/*": ["app/services/*"],
+      "@svg/*": ["app/svg/*"],
       "@utils/*": ["app/utils/*"],
     },
     "useDefineForClassFields": false,

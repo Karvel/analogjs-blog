@@ -14,7 +14,26 @@
     "build": "ng build",
     "watch": "ng build --watch",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prestart": "npm run svg",
+    "prebuild": "npm run svg",
+    "svg": "svg-generator"
+  },
+  "svgGenerator": {
+    "outputPath": "./src/app/svg",
+    "srcPath": "./src/assets/svg",
+    "svgoConfig": {
+      "plugins": [
+        "removeDimensions",
+        "cleanupAttrs",
+        {
+          "name": "convertColors",
+          "params": {
+            "currentColor": true
+          }
+        }
+      ]
+    }
   },
   "dependencies": {
     "@analogjs/content": "^0.2.0",
@@ -28,6 +47,7 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/platform-server": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@ngneat/svg-icon": "^7.1.0",
     "@nx/angular": "16.6.0",
     "front-matter": "^4.0.2",
     "marked": "^5.0.2",
@@ -49,6 +69,7 @@
     "@angular-eslint/template-parser": "16.2.0",
     "@angular/cli": "^16.2.0",
     "@angular/compiler-cli": "^16.2.0",
+    "@ngneat/svg-generator": "^7.0.2",
     "@nx/vite": "16.6.0",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
