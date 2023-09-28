@@ -7,7 +7,7 @@ import HeaderComponent from '@components/header/header.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterOutlet],
+  imports: [FooterComponent, HeaderComponent, RouterOutlet],
   template: `
     <div class="flex flex-col h-screen">
       <app-header />
