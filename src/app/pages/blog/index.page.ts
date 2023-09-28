@@ -8,7 +8,7 @@ import { BlogPost } from '@models/post';
 
 @Component({
   standalone: true,
-  imports: [NgFor, RouterLink, AsyncPipe],
+  imports: [AsyncPipe, NgFor, RouterLink],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
