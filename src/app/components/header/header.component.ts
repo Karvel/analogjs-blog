@@ -71,6 +71,10 @@ export default class HeaderComponent {
       label: 'About',
       path: 'about',
     },
+    {
+      label: 'Blog',
+      path: 'blog',
+    },
   ];
   public showMenu = false;
 
