@@ -43,7 +43,7 @@ import { Component } from '@angular/core';
 export default class HomeComponent {
   count = 0;
 
-  increment() {
+  public increment(): void {
     this.count++;
   }
 }

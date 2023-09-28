@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+package.json
+package-lock.json
+yarn.lock
+dist
+angular.json
+.vscode/*
+.github
