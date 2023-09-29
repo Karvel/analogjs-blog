@@ -1,15 +1,18 @@
 import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import {
   ContentFile,
   MarkdownComponent,
   injectContent,
+  injectContentFiles,
 } from '@analogjs/content';
 
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
 import { BlogPost } from '@models/post';
+import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
   standalone: true,
@@ -97,7 +100,16 @@ import { BlogPost } from '@models/post';
 export default class BlogPostPageComponent {
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>();
+  private posts = injectContentFiles<BlogPost>().sort(
+    sortByUpdatedOrOriginalDate,
+  );
   public prevPost!: ContentFile<BlogPost>;
+
+  constructor() {
+    this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
+      this.setNavigation(post, this.posts);
+    });
+  }
 
   private setNavigation(
     post: ContentFile<BlogPost | Record<string, never>>,
