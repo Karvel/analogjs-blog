@@ -5,9 +5,9 @@ import { RouterLink } from '@angular/router';
 
 import {
   ContentFile,
-  MarkdownComponent,
   injectContent,
   injectContentFiles,
+  MarkdownComponent,
 } from '@analogjs/content';
 
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
