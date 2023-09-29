@@ -96,12 +96,22 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           [content]="post.content"
         />
         <div class="flex justify-between text-sm mt-2 gap-2">
-          <a *ngIf="prevPost" [routerLink]="['/blog', prevPost.slug]">{{
-            prevPost.attributes.title
-          }}</a>
-          <a *ngIf="nextPost" [routerLink]="['/blog', nextPost.slug]">{{
-            nextPost.attributes.title
-          }}</a>
+          <button
+            *ngIf="prevPost"
+            [routerLink]="['/blog', prevPost.slug]"
+            type="button"
+            class="inline-flex focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+          >
+            {{ prevPost.attributes.title }}
+          </button>
+          <button
+            *ngIf="nextPost"
+            [routerLink]="['/blog', nextPost.slug]"
+            type="button"
+            class="inline-flex ml-auto focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+          >
+            {{ nextPost.attributes.title }}
+          </button>
         </div>
       </div>
     </div>
