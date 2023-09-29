@@ -37,6 +37,13 @@ import { BlogPost } from '@models/post';
           {{ post.attributes.description }}
         </div>
       </div>
+      <div *ngIf="post?.attributes?.cover_image">
+        <img
+          [src]="post.attributes.cover_image"
+          class="sm:max-w-xs rounded-md"
+          [alt]="post.attributes.cover_image_title || 'Post Cover Image'"
+        />
+      </div>
     </div>
   `,
 })
