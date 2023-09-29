@@ -1,7 +1,11 @@
 import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { MarkdownComponent, injectContent } from '@analogjs/content';
+import {
+  ContentFile,
+  MarkdownComponent,
+  injectContent,
+} from '@analogjs/content';
 
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
@@ -91,5 +95,19 @@ import { BlogPost } from '@models/post';
   `,
 })
 export default class BlogPostPageComponent {
-  post$ = injectContent<BlogPost>();
+  public nextPost!: ContentFile<BlogPost>;
+  public post$ = injectContent<BlogPost>();
+  public prevPost!: ContentFile<BlogPost>;
+
+  private setNavigation(
+    post: ContentFile<BlogPost | Record<string, never>>,
+    posts: ContentFile<BlogPost>[],
+  ): void {
+    const index = posts.findIndex((p) => p.slug === post.slug);
+    const nextPost = posts[index + 1];
+    const previousPost = posts[index - 1];
+
+    this.nextPost = nextPost;
+    this.prevPost = previousPost;
+  }
 }
