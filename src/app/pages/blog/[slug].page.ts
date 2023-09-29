@@ -21,14 +21,17 @@ import { BlogPost } from '@models/post';
             <div
               class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"
             >
-              <h1 class="text-white text-xl font-bold">
+              <h1 class="text-white text-xl font-bold text-shadow shadow-black">
                 {{ post.attributes.title }}
               </h1>
-              <div *ngIf="post.attributes.author" class="text-white text-xs">
+              <div
+                *ngIf="post.attributes.author"
+                class="text-white text-xs text-shadow shadow-black"
+              >
                 By: {{ post.attributes.author }}
               </div>
               <div class="flex justify-between items-center text-white text-xs">
-                <div class="flex">
+                <div class="flex text-shadow shadow-black">
                   <div *ngIf="post?.attributes?.last_updated">
                     Updated {{ post.attributes.last_updated | date }}
                   </div>
