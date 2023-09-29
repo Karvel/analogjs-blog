@@ -12,10 +12,12 @@ import { Component, Input } from '@angular/core';
       <a [href]="cover_image_source" class="" target="_blank" rel="noopener">{{
         cover_image_title
       }}</a>
+      <span *ngIf="cover_image_author"> by {{ cover_image_author }}</span>
     </div>
   `,
 })
 export default class ImageInfoPopoverContentComponent {
+  @Input() public cover_image_author!: string | undefined;
   @Input() public cover_image_source!: string | undefined;
   @Input() public cover_image_title!: string | undefined;
 }
