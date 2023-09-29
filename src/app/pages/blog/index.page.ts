@@ -5,6 +5,7 @@ import { injectContentFiles } from '@analogjs/content';
 
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { BlogPost } from '@models/post';
+import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
   standalone: true,
@@ -34,5 +35,5 @@ import { BlogPost } from '@models/post';
   `,
 })
 export default class IndexPageComponent {
-  posts = injectContentFiles<BlogPost>();
+  posts = injectContentFiles<BlogPost>().sort(sortByUpdatedOrOriginalDate);
 }
