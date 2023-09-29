@@ -5,5 +5,5 @@ export interface BlogPost {
   date?: string;
   description?: string;
   last_updated?: string;
-  title: string;
+  title?: string | null;
 }
