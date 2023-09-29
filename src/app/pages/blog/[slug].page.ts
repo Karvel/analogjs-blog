@@ -3,11 +3,21 @@ import { Component } from '@angular/core';
 
 import { MarkdownComponent, injectContent } from '@analogjs/content';
 
+import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
+import PopoverComponent from '@components/popover/popover.component';
 import { BlogPost } from '@models/post';
 
 @Component({
   standalone: true,
-  imports: [AsyncPipe, DatePipe, MarkdownComponent, NgClass, NgIf],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    ImageInfoPopoverContentComponent,
+    MarkdownComponent,
+    NgClass,
+    NgIf,
+    PopoverComponent,
+  ],
   styleUrls: ['./[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
@@ -46,6 +56,27 @@ import { BlogPost } from '@models/post';
                   <div *ngIf="post?.attributes?.date">
                     Posted {{ post.attributes.date | date }}
                   </div>
+                </div>
+                <div
+                  *ngIf="
+                    post.attributes.cover_image &&
+                    post?.attributes?.cover_image_source &&
+                    post?.attributes?.cover_image_title
+                  "
+                  class="flex"
+                >
+                  <app-popover
+                    [altText]="'Image information'"
+                    [icon]="'svg/info.svg'"
+                  >
+                    <app-image-info-popover-content
+                      [cover_image_author]="
+                        post?.attributes?.cover_image_author
+                      "
+                      [cover_image_source]="post.attributes.cover_image_source"
+                      [cover_image_title]="post?.attributes?.cover_image_title"
+                    />
+                  </app-popover>
                 </div>
               </div>
             </div>
