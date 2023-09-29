@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { MarkdownComponent, injectContent } from '@analogjs/content';
@@ -7,20 +7,20 @@ import { BlogPost } from '@models/post';
 
 @Component({
   standalone: true,
-  imports: [AsyncPipe, DatePipe, MarkdownComponent, NgIf],
+  imports: [AsyncPipe, DatePipe, MarkdownComponent, NgClass, NgIf],
+  styleUrls: ['./[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div *ngIf="post$ | async as post" class="md:max-w-3xl p-4">
         <div class="max-w mx-auto">
-          <div class="relative">
+          <div [ngClass]="{ relative: post.attributes.cover_image }">
             <img
+              *ngIf="post.attributes.cover_image"
               [src]="post.attributes.cover_image"
-              [alt]="post?.attributes?.cover_image_title"
+              [alt]="post.attributes.cover_image_title"
               class="w-full max-w-full rounded-md"
             />
-            <div
-              class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"
-            >
+            <div [ngClass]="{ image_container: post.attributes.cover_image }">
               <h1 class="text-white text-xl font-bold text-shadow shadow-black">
                 {{ post.attributes.title }}
               </h1>
