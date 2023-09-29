@@ -1,6 +1,7 @@
 import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 import {
   ContentFile,
@@ -24,6 +25,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     NgClass,
     NgIf,
     PopoverComponent,
+    RouterLink,
   ],
   styleUrls: ['./[slug].page.scss'],
   template: `
@@ -93,6 +95,14 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
           [content]="post.content"
         />
+        <div class="flex justify-between text-sm mt-2 gap-2">
+          <a *ngIf="prevPost" [routerLink]="['/blog', prevPost.slug]">{{
+            prevPost.attributes.title
+          }}</a>
+          <a *ngIf="nextPost" [routerLink]="['/blog', nextPost.slug]">{{
+            nextPost.attributes.title
+          }}</a>
+        </div>
       </div>
     </div>
   `,
