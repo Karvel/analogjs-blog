@@ -16,6 +16,12 @@ import { BlogPost } from '@models/post';
             <h1 class="text-white text-xl font-bold text-shadow shadow-black">
               {{ post.attributes.title }}
             </h1>
+            <div
+              *ngIf="post.attributes.author"
+              class="text-white text-xs text-shadow shadow-black"
+            >
+              By: {{ post.attributes.author }}
+            </div>
             <div class="flex justify-between items-center text-white text-xs">
               <div class="flex text-shadow shadow-black">
                 <div *ngIf="post?.attributes?.date">
