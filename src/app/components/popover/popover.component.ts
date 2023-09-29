@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
       (keypress)="toggle()"
       [src]="icon"
       [alt]="altText"
-      class="cursor-pointer"
+      class="cursor-pointer drop-shadow-lg"
       tabindex="0"
       width="20"
     />
