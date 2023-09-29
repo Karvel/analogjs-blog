@@ -14,6 +14,18 @@ import { BlogPost } from '@models/post';
     <div class="py-5 flex flex-col-reverse sm:flex-row">
       <div class="sm:pr-2 sm:max-w grow">
         <div class="flex items-center">
+          <div
+            *ngIf="post?.attributes?.last_updated"
+            class="text-xs pt-1 sm:pt-0"
+          >
+            Updated {{ post.attributes.last_updated | date }}
+          </div>
+          <div
+            *ngIf="post?.attributes?.date && post?.attributes?.last_updated"
+            class="text-xs pl-2 pt-1 sm:pt-0"
+          >
+            | &nbsp;
+          </div>
           <div *ngIf="post?.attributes?.date" class="text-xs pt-1 sm:pt-0">
             Posted {{ post.attributes.date | date }}
           </div>
