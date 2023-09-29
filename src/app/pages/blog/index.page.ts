@@ -1,6 +1,5 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 import { injectContentFiles } from '@analogjs/content';
 
@@ -9,7 +8,7 @@ import { BlogPost } from '@models/post';
 
 @Component({
   standalone: true,
-  imports: [AsyncPipe, BlogCardComponent, NgFor, RouterLink],
+  imports: [BlogCardComponent, NgFor],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
