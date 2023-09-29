@@ -102,7 +102,8 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
             type="button"
             class="inline-flex focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
           >
-            <span class="truncate">{{ prevPost.attributes.title }}</span>
+            <span>&laquo; &nbsp;</span
+            ><span class="truncate">{{ prevPost.attributes.title }}</span>
           </button>
           <button
             *ngIf="nextPost"
@@ -110,7 +111,8 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
             type="button"
             class="inline-flex ml-auto focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
           >
-            <span class="truncate">{{ nextPost.attributes.title }}</span>
+            <span class="truncate">{{ nextPost.attributes.title }}</span
+            ><span>&nbsp; &raquo;</span>
           </button>
         </div>
       </div>
