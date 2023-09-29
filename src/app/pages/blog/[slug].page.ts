@@ -1,11 +1,19 @@
 import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
-import { MarkdownComponent, injectContent } from '@analogjs/content';
+import {
+  ContentFile,
+  injectContent,
+  injectContentFiles,
+  MarkdownComponent,
+} from '@analogjs/content';
 
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
 import { BlogPost } from '@models/post';
+import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
   standalone: true,
@@ -17,6 +25,7 @@ import { BlogPost } from '@models/post';
     NgClass,
     NgIf,
     PopoverComponent,
+    RouterLink,
   ],
   styleUrls: ['./[slug].page.scss'],
   template: `
@@ -86,10 +95,59 @@ import { BlogPost } from '@models/post';
           class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
           [content]="post.content"
         />
+        <div class="flex justify-between text-sm mt-2 gap-2">
+          <button
+            *ngIf="prevPost"
+            [routerLink]="['/blog', prevPost.slug]"
+            attr.alt="Click to go to the previous post: {{
+              prevPost.attributes.title
+            }}"
+            type="button"
+            class="inline-flex focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+          >
+            <span>&laquo; &nbsp;</span
+            ><span class="truncate">{{ prevPost.attributes.title }}</span>
+          </button>
+          <button
+            *ngIf="nextPost"
+            [routerLink]="['/blog', nextPost.slug]"
+            attr.alt="Click to go to the next post: {{
+              nextPost.attributes.title
+            }}"
+            type="button"
+            class="inline-flex ml-auto focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+          >
+            <span class="truncate">{{ nextPost.attributes.title }}</span
+            ><span>&nbsp; &raquo;</span>
+          </button>
+        </div>
       </div>
     </div>
   `,
 })
 export default class BlogPostPageComponent {
-  post$ = injectContent<BlogPost>();
+  public nextPost!: ContentFile<BlogPost>;
+  public post$ = injectContent<BlogPost>();
+  private posts = injectContentFiles<BlogPost>().sort(
+    sortByUpdatedOrOriginalDate,
+  );
+  public prevPost!: ContentFile<BlogPost>;
+
+  constructor() {
+    this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
+      this.setNavigation(post, this.posts);
+    });
+  }
+
+  private setNavigation(
+    post: ContentFile<BlogPost | Record<string, never>>,
+    posts: ContentFile<BlogPost>[],
+  ): void {
+    const index = posts.findIndex((p) => p.slug === post.slug);
+    const nextPost = posts[index + 1];
+    const previousPost = posts[index - 1];
+
+    this.nextPost = nextPost;
+    this.prevPost = previousPost;
+  }
 }
