@@ -25,7 +25,10 @@ import { BlogPost } from '@models/post';
             </div>
           </div>
         </div>
-        <analog-markdown [content]="post.content" />
+        <analog-markdown
+          class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
+          [content]="post.content"
+        />
       </div>
     </div>
   `,
