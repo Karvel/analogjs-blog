@@ -115,9 +115,12 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
             <ng-container
               *ngFor="let tag of splitTagStringIntoArray(post.attributes.tags)"
             >
-              <a [routerLink]="['/tag', tag.name]" class="m-1">{{
-                tag.name
-              }}</a>
+              <app-pill
+                [label]="tag.name"
+                [route]="'/tag'"
+                [slug]="tag.name"
+                class="mx-1"
+              />
             </ng-container>
           </div>
         </div>
