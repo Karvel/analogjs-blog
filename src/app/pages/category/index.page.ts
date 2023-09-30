@@ -34,7 +34,7 @@ export default class IndexPageComponent {
   public posts = injectContentFiles<BlogPost>().sort(
     sortByUpdatedOrOriginalDate,
   );
-  public categories = this.extractUniqueCategories(this.posts).sort();
+  public categories = this.extractUniqueCategories(this.posts);
 
   private extractUniqueCategories(
     blogPosts: ContentFile<BlogPost>[],
@@ -47,7 +47,7 @@ export default class IndexPageComponent {
       }
     }
 
-    const uniqueCategoriesArray = Array.from(uniqueCategories);
+    const uniqueCategoriesArray = Array.from(uniqueCategories).sort();
 
     return uniqueCategoriesArray;
   }
