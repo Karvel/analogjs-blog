@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 
@@ -10,7 +10,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 
 @Component({
   standalone: true,
-  imports: [BlogCardComponent, NgFor, NgIf],
+  imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -24,6 +24,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
             </li>
           </ul>
         </div>
+        <div><a [routerLink]="['/category']">All Categories</a></div>
       </div>
     </div>
   `,
