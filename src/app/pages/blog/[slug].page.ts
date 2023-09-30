@@ -17,6 +17,7 @@ import PopoverComponent from '@components/popover/popover.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
@@ -166,12 +167,14 @@ export default class BlogPostPageComponent {
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
 
+  private metadataService = inject(MetadataService);
   private titleService = inject(Title);
 
   constructor() {
     this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
       this.setPageTitle(post);
       this.setNavigation(post, this.posts);
+      this.metadataService.setMetaTagsFromFrontMatter(post);
     });
   }
 
