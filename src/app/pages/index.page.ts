@@ -2,10 +2,16 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { injectContentFiles } from '@analogjs/content';
+import { RouteMeta } from '@analogjs/router';
 
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
+import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+
+export const routeMeta: RouteMeta = {
+  title: `${siteName}`,
+};
 
 @Component({
   selector: 'app-home',
