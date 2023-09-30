@@ -4,12 +4,13 @@ import { RouterLink } from '@angular/router';
 
 import { ContentFile } from '@analogjs/content';
 
+import PillComponent from '@components/pill/pill.component';
 import { BlogPost } from '@models/post';
 
 @Component({
   selector: 'app-blog-card',
   standalone: true,
-  imports: [DatePipe, NgIf, RouterLink],
+  imports: [DatePipe, NgIf, PillComponent, RouterLink],
   template: `
     <div class="py-5 flex flex-col-reverse sm:flex-row">
       <div class="sm:pr-2 sm:max-w grow">
@@ -36,10 +37,12 @@ import { BlogPost } from '@models/post';
         <div class="sm:max-w-prose text-sm">
           {{ post.attributes.description }}
         </div>
-        <div *ngIf="post?.attributes?.category">
-          <a [routerLink]="['/category', post.attributes.category]">{{
-            post.attributes.category
-          }}</a>
+        <div *ngIf="post?.attributes?.category" class="pt-1">
+          <app-pill
+            [label]="post.attributes.category"
+            [route]="'/category'"
+            [slug]="post.attributes.category"
+          />
         </div>
       </div>
       <div *ngIf="post?.attributes?.cover_image">
