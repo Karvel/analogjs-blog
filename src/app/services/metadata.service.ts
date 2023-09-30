@@ -96,6 +96,13 @@ export class MetadataService {
     });
   }
 
+  public setPageURLMetaTags(pageUrl?: string): void {
+    if (pageUrl) {
+      this.updateTag({ property: 'og:url', content: pageUrl });
+      this.updateTag({ property: 'twitter:url', content: pageUrl });
+    }
+  }
+
   public updateTag(tag: MetaDefinition): void {
     this.meta.removeTag(this.mapMetaTagToQuerySelector(tag));
     if (tag) {
@@ -116,12 +123,5 @@ export class MetadataService {
       return `property="${tag.property}"`;
     }
     return '';
-  }
-
-  private setPageURLMetaTags(pageUrl?: string): void {
-    if (pageUrl) {
-      this.updateTag({ property: 'og:url', content: pageUrl });
-      this.updateTag({ property: 'twitter:url', content: pageUrl });
-    }
   }
 }

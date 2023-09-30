@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
           : '';
         this.metadataService.removeTags();
         this.metadataService.setCanonicalUrl(pageUrl);
+        this.metadataService.setPageURLMetaTags(pageUrl);
         this.metadataService.updateTag({
           property: 'og:site_name',
           content: `${siteName}`,
