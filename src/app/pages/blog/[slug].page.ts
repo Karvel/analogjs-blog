@@ -30,7 +30,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
   styleUrls: ['./[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
-      <div *ngIf="post$ | async as post" class="md:max-w-3xl p-4">
+      <div *ngIf="post$ | async as post" class="md:w-[48rem] p-4">
         <div class="max-w mx-auto">
           <div [ngClass]="{ relative: post.attributes.cover_image }">
             <img
