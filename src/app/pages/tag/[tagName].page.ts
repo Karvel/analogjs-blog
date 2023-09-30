@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { MetaDefinition, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
@@ -8,6 +8,7 @@ import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
@@ -38,6 +39,25 @@ export default class TagNamePageComponent implements OnInit {
   public tagName!: string;
   public filteredPosts!: ContentFile<BlogPost>[];
 
+  private metadataService = inject(MetadataService);
+  private metaTagList: MetaDefinition[] = [
+    {
+      name: 'description',
+      content: '',
+    },
+    {
+      name: 'author',
+      content: 'Elanna Grossman',
+    },
+    {
+      property: 'og:description',
+      content: '',
+    },
+    {
+      property: 'twitter:description',
+      content: '',
+    },
+  ];
   private posts = injectContentFiles<BlogPost>().sort(
     sortByUpdatedOrOriginalDate,
   );
@@ -47,6 +67,7 @@ export default class TagNamePageComponent implements OnInit {
   public ngOnInit(): void {
     this.tagName = this.route.snapshot.paramMap.get('tagName') || '';
     this.setPageTitle(this.tagName);
+    this.setMetadata(this.tagName);
     this.filteredPosts = this.filterBlogPostsByTag(this.posts, this.tagName);
   }
 
@@ -63,6 +84,16 @@ export default class TagNamePageComponent implements OnInit {
       }
       return false; // No tags in this post
     });
+  }
+
+  private setMetadata(tagName: string): void {
+    const description = `Blog posts filtered by ${tagName}.`;
+    this.metaTagList.map((metaTag) => {
+      metaTag.content = description;
+
+      return metaTag;
+    });
+    this.metadataService.updateTags(this.metaTagList);
   }
 
   /**
