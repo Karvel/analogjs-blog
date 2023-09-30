@@ -18,12 +18,15 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           <h1 class="md:flex md:flex-col md:self-start">
             Category: {{ categoryName }}
           </h1>
-          <ul *ngIf="filteredPosts?.length">
+          <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
               <app-blog-card [post]="post" />
             </li>
           </ul>
         </div>
+        <ng-template #emptyResult
+          >There are no posts matching "{{ categoryName }}".</ng-template
+        >
         <div><a [routerLink]="['/category']">All Categories</a></div>
       </div>
     </div>
