@@ -104,5 +104,6 @@ export default class TagNamePageComponent implements OnInit {
       ? `${tagName} Tag | ${siteName}`
       : `Tag | ${siteName}`;
     this.titleService.setTitle(title);
+    this.metadataService.setPageURLMetaTitle(title);
   }
 }

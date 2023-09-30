@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
@@ -7,11 +7,14 @@ import { RouteMeta } from '@analogjs/router';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
-export const routeMeta: RouteMeta = {
+export const pageTitle = {
   title: `${siteName}`,
 };
+
+export const routeMeta: RouteMeta = pageTitle;
 
 @Component({
   selector: 'app-home',
@@ -33,8 +36,14 @@ export const routeMeta: RouteMeta = {
     </div>
   `,
 })
-export default class HomeComponent {
-  posts = injectContentFiles<BlogPost>()
+export default class HomeComponent implements OnInit {
+  public posts = injectContentFiles<BlogPost>()
     .sort(sortByUpdatedOrOriginalDate)
     .slice(0, 3);
+
+  private metadataService = inject(MetadataService);
+
+  ngOnInit(): void {
+    this.metadataService.setPageURLMetaTitle(pageTitle.title);
+  }
 }

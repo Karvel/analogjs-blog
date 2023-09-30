@@ -90,6 +90,7 @@ export default class CategoryNamePageComponent implements OnInit {
 
       return metaTag;
     });
+
     this.metadataService.updateTags(this.metaTagList);
   }
 
@@ -101,5 +102,6 @@ export default class CategoryNamePageComponent implements OnInit {
       ? `${categoryName} Category | ${siteName}`
       : `Category | ${siteName}`;
     this.titleService.setTitle(title);
+    this.metadataService.setPageURLMetaTitle(title);
   }
 }

@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -157,7 +157,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     </div>
   `,
 })
-export default class BlogPostPageComponent {
+export default class BlogPostPageComponent implements OnInit {
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>();
   private posts = injectContentFiles<BlogPost>().sort(
@@ -170,8 +170,8 @@ export default class BlogPostPageComponent {
   private metadataService = inject(MetadataService);
   private titleService = inject(Title);
 
-  constructor() {
-    this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
+  public ngOnInit(): void {
+    this.post$.subscribe((post) => {
       this.setPageTitle(post);
       this.setNavigation(post, this.posts);
       this.metadataService.setMetaTagsFromFrontMatter(post);
@@ -200,5 +200,6 @@ export default class BlogPostPageComponent {
       ? `${post.attributes.title} | ${siteName}`
       : `Post | ${siteName}`;
     this.titleService.setTitle(title);
+    this.metadataService.setPageURLMetaTitle(title);
   }
 }

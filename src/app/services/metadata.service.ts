@@ -34,20 +34,6 @@ export class MetadataService {
   public setMetaTagsFromFrontMatter(
     frontMatter: ContentFile<BlogPost | Record<string, never>>,
   ): void {
-    if (frontMatter.attributes.title) {
-      this.updateTag({
-        name: 'title',
-        content: frontMatter.attributes.title,
-      });
-      this.updateTag({
-        property: 'og:title',
-        content: frontMatter.attributes.title,
-      });
-      this.updateTag({
-        property: 'twitter:title',
-        content: frontMatter.attributes.title,
-      });
-    }
     if (frontMatter.attributes.description) {
       this.updateTag({
         name: 'description',
@@ -100,6 +86,14 @@ export class MetadataService {
     if (pageUrl) {
       this.updateTag({ property: 'og:url', content: pageUrl });
       this.updateTag({ property: 'twitter:url', content: pageUrl });
+    }
+  }
+
+  public setPageURLMetaTitle(title?: string): void {
+    if (title) {
+      this.updateTag({ name: 'title', content: title });
+      this.updateTag({ property: 'og:title', content: title });
+      this.updateTag({ property: 'twitter:title', content: title });
     }
   }
 

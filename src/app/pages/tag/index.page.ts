@@ -13,9 +13,11 @@ import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
-export const routeMeta: RouteMeta = {
+export const pageTitle = {
   title: `Tags | ${siteName}`,
 };
+
+export const routeMeta: RouteMeta = pageTitle;
 
 export const metaTagList: MetaDefinition[] = [
   {
@@ -63,6 +65,7 @@ export default class IndexPageComponent implements OnInit {
   private metadataService = inject(MetadataService);
 
   public ngOnInit(): void {
+    this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
   }
 
