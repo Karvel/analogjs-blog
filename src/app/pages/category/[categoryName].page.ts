@@ -1,10 +1,12 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
+import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
@@ -40,9 +42,11 @@ export default class CategoryNamePageComponent implements OnInit {
     sortByUpdatedOrOriginalDate,
   );
   private route = inject(ActivatedRoute);
+  private titleService = inject(Title);
 
   public ngOnInit(): void {
     this.categoryName = this.route.snapshot.paramMap.get('categoryName') || '';
+    this.setPageTitle(this.categoryName);
     this.filteredPosts = this.filterBlogPostsByCategory(
       this.posts,
       this.categoryName,
@@ -56,5 +60,15 @@ export default class CategoryNamePageComponent implements OnInit {
     return posts.filter(
       (post) => post.attributes.category === categoryToFilter,
     );
+  }
+
+  /**
+   * Setting dynamic page title in component
+   */
+  private setPageTitle(categoryName: string): void {
+    const title = categoryName
+      ? `${categoryName} Category | ${siteName}`
+      : `Category | ${siteName}`;
+    this.titleService.setTitle(title);
   }
 }
