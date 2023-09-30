@@ -93,6 +93,13 @@ export class MetadataService {
     });
   }
 
+  public updateTag(tag: MetaDefinition): void {
+    this.meta.removeTag(this.mapMetaTagToQuerySelector(tag));
+    if (tag) {
+      this.meta.updateTag(tag);
+    }
+  }
+
   public updateTags(tags: MetaDefinition[]): void {
     this.removeTags();
     tags.forEach((tag) => {
@@ -117,13 +124,6 @@ export class MetadataService {
     if (pageUrl) {
       this.updateTag({ property: 'og:url', content: pageUrl });
       this.updateTag({ property: 'twitter:url', content: pageUrl });
-    }
-  }
-
-  private updateTag(tag: MetaDefinition): void {
-    this.meta.removeTag(this.mapMetaTagToQuerySelector(tag));
-    if (tag) {
-      this.meta.updateTag(tag);
     }
   }
 }

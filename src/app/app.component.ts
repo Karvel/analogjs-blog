@@ -12,6 +12,7 @@ import { filter, map, mergeMap } from 'rxjs';
 import FooterComponent from '@components/footer/footer.component';
 import HeaderComponent from '@components/header/header.component';
 import { MetadataService } from '@services/metadata.service';
+import { siteName } from '@constants/site-name';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +60,14 @@ export class AppComponent implements OnInit {
           ? `${this.document.location.origin}${this.router.url}`
           : '';
         this.metadataService.setCanonicalUrl(pageUrl);
+        this.metadataService.updateTag({
+          property: 'og:site_name',
+          content: `${siteName}`,
+        });
+        this.metadataService.updateTag({
+          property: 'og:locale',
+          content: 'en_US',
+        });
       });
   }
 }
