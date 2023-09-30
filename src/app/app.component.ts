@@ -1,8 +1,17 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
+
+import { filter, map, mergeMap } from 'rxjs';
 
 import FooterComponent from '@components/footer/footer.component';
 import HeaderComponent from '@components/header/header.component';
+import { MetadataService } from '@services/metadata.service';
 
 @Component({
   selector: 'app-root',
@@ -18,4 +27,38 @@ import HeaderComponent from '@components/header/header.component';
     </div>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private document = inject(DOCUMENT);
+  private metadataService = inject(MetadataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  public ngOnInit(): void {
+    this.setMetaOnRouteLoad();
+  }
+
+  /**
+   * Set the canonical URL on route load.
+   */
+  private setMetaOnRouteLoad(): void {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        map(() => this.route),
+        map((route) => {
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route;
+        }),
+        filter((route) => route.outlet === 'primary'),
+        mergeMap((route) => route.data),
+      )
+      .subscribe(() => {
+        const pageUrl = this.router.url
+          ? `${this.document.location.origin}${this.router.url}`
+          : '';
+        this.metadataService.setCanonicalUrl(pageUrl);
+      });
+  }
+}
