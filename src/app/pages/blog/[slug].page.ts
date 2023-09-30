@@ -95,6 +95,16 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
           [content]="post.content"
         />
+        <div class="flex flex-col">
+          <div *ngIf="post.attributes.category" class="text-sm">
+            Category:
+            <a
+              [routerLink]="['/category', post.attributes.category]"
+              class="m-1"
+              >{{ post.attributes.category }}</a
+            >
+          </div>
+        </div>
         <div class="flex justify-between text-sm mt-2 gap-2">
           <button
             *ngIf="prevPost"
