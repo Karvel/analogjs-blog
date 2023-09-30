@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
         const pageUrl = this.router.url
           ? `${this.document.location.origin}${this.router.url}`
           : '';
+        this.metadataService.removeTags();
         this.metadataService.setCanonicalUrl(pageUrl);
         this.metadataService.updateTag({
           property: 'og:site_name',

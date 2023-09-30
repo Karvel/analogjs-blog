@@ -13,6 +13,10 @@ export class MetadataService {
   private document = inject(DOCUMENT);
   private meta = inject(Meta);
 
+  public removeTags(): void {
+    metadataTags.forEach((tag) => this.meta.removeTag(tag));
+  }
+
   public setCanonicalUrl(url: string): void {
     const relLinkType = 'canonical';
     const head = this.document.getElementsByTagName('head')[0];
@@ -30,7 +34,6 @@ export class MetadataService {
   public setMetaTagsFromFrontMatter(
     frontMatter: ContentFile<BlogPost | Record<string, never>>,
   ): void {
-    this.removeTags();
     if (frontMatter.attributes.title) {
       this.updateTag({
         name: 'title',
@@ -101,14 +104,9 @@ export class MetadataService {
   }
 
   public updateTags(tags: MetaDefinition[]): void {
-    this.removeTags();
     tags.forEach((tag) => {
       this.meta.updateTag(tag);
     });
-  }
-
-  private removeTags(): void {
-    metadataTags.forEach((tag) => this.meta.removeTag(tag));
   }
 
   private mapMetaTagToQuerySelector(tag: MetaDefinition): string {
