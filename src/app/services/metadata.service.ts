@@ -23,6 +23,7 @@ export class MetadataService {
     }
     element.setAttribute('rel', relLinkType);
     element.setAttribute('href', url);
+    this.setPageURLMetaTags(url);
   }
 
   public setMetaTagsFromFrontMatter(
@@ -88,5 +89,12 @@ export class MetadataService {
       property: 'twitter:card',
       content: 'summary_large_image',
     });
+  }
+
+  private setPageURLMetaTags(pageUrl?: string): void {
+    if (pageUrl) {
+      this.meta.updateTag({ property: 'og:url', content: pageUrl });
+      this.meta.updateTag({ property: 'twitter:url', content: pageUrl });
+    }
   }
 }
