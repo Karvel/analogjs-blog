@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -13,7 +13,9 @@ import {
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
 import { BlogPost } from '@models/post';
+import { Tag } from '@models/tag';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
 @Component({
   standalone: true,
@@ -23,6 +25,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     ImageInfoPopoverContentComponent,
     MarkdownComponent,
     NgClass,
+    NgFor,
     NgIf,
     PopoverComponent,
     RouterLink,
@@ -104,6 +107,16 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
               >{{ post.attributes.category }}</a
             >
           </div>
+          <div *ngIf="post.attributes.tags?.length" class="text-sm">
+            Tags:
+            <ng-container
+              *ngFor="let tag of splitTagStringIntoArray(post.attributes.tags)"
+            >
+              <a [routerLink]="['/tag', tag.name]" class="m-1">{{
+                tag.name
+              }}</a>
+            </ng-container>
+          </div>
         </div>
         <div class="flex justify-between text-sm mt-2 gap-2">
           <button
@@ -142,6 +155,8 @@ export default class BlogPostPageComponent {
     sortByUpdatedOrOriginalDate,
   );
   public prevPost!: ContentFile<BlogPost>;
+  public splitTagStringIntoArray = splitTagStringIntoArray;
+  public tagList: Tag[] = [];
 
   constructor() {
     this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
