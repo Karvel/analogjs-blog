@@ -93,6 +93,13 @@ export class MetadataService {
     });
   }
 
+  public updateTags(tags: MetaDefinition[]): void {
+    this.removeTags();
+    tags.forEach((tag) => {
+      this.meta.updateTag(tag);
+    });
+  }
+
   private removeTags(): void {
     metadataTags.forEach((tag) => this.meta.removeTag(tag));
   }
