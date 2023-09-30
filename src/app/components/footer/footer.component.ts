@@ -19,7 +19,7 @@ import { Navigation } from '@models/navigation';
         </div>
         <div class="flex">All Rights Reserved.</div>
       </div>
-      <div class="container mx-auto flex justify-center space-x-6">
+      <div class="container mx-auto flex flex-wrap justify-center space-x-6">
         <!-- Social Icons -->
         <div *ngFor="let link of linkList" class="pt-2">
           <a

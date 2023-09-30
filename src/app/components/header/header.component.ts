@@ -15,7 +15,7 @@ import { Navigation } from '@models/navigation';
       >
         <a routerLink="/" class="flex items-center no-underline">
           <span
-            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white"
             >Hapax Legomenon</span
           >
         </a>

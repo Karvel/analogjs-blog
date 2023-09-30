@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
+import PillComponent from '@components/pill/pill.component';
 import { BlogPost } from '@models/post';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
@@ -14,7 +15,7 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   standalone: true,
-  imports: [NgFor, RouterLink],
+  imports: [NgFor, PillComponent, RouterLink],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -22,7 +23,11 @@ export const routeMeta: RouteMeta = {
           <h1 class="md:flex md:flex-col md:self-start">Categories:</h1>
           <ul class="pt-5 flex flex-wrap justify-evenly">
             <li *ngFor="let category of categories" class="flex m-1">
-              <a [routerLink]="['/category', category]">{{ category }}</a>
+              <app-pill
+                [label]="category"
+                [route]="'/category'"
+                [slug]="category"
+              />
             </li>
           </ul>
         </div>

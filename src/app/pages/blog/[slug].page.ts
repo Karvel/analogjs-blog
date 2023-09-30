@@ -10,6 +10,7 @@ import {
   MarkdownComponent,
 } from '@analogjs/content';
 
+import PillComponent from '@components/pill/pill.component';
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
 import { BlogPost } from '@models/post';
@@ -27,6 +28,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     NgClass,
     NgFor,
     NgIf,
+    PillComponent,
     PopoverComponent,
     RouterLink,
   ],
@@ -101,20 +103,24 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
         <div class="flex flex-col">
           <div *ngIf="post.attributes.category" class="text-sm">
             Category:
-            <a
-              [routerLink]="['/category', post.attributes.category]"
+            <app-pill
+              [label]="post.attributes.category"
+              [route]="'/category'"
+              [slug]="post.attributes.category"
               class="m-1"
-              >{{ post.attributes.category }}</a
-            >
+            />
           </div>
           <div *ngIf="post.attributes.tags?.length" class="text-sm">
             Tags:
             <ng-container
               *ngFor="let tag of splitTagStringIntoArray(post.attributes.tags)"
             >
-              <a [routerLink]="['/tag', tag.name]" class="m-1">{{
-                tag.name
-              }}</a>
+              <app-pill
+                [label]="tag.name"
+                [route]="'/tag'"
+                [slug]="tag.name"
+                class="mx-1"
+              />
             </ng-container>
           </div>
         </div>
