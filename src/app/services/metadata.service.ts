@@ -3,6 +3,7 @@ import { ContentFile } from '@analogjs/content';
 import { Injectable, inject } from '@angular/core';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
 
+import { metadataTags } from '@constants/metadata-tags';
 import { BlogPost } from '@models/post';
 
 @Injectable({
@@ -29,6 +30,7 @@ export class MetadataService {
   public setMetaTagsFromFrontMatter(
     frontMatter: ContentFile<BlogPost | Record<string, never>>,
   ): void {
+    this.removeTags();
     if (frontMatter.attributes.title) {
       this.updateTag({
         name: 'title',
@@ -89,6 +91,10 @@ export class MetadataService {
       property: 'twitter:card',
       content: 'summary_large_image',
     });
+  }
+
+  private removeTags(): void {
+    metadataTags.forEach((tag) => this.meta.removeTag(tag));
   }
 
   private mapMetaTagToQuerySelector(tag: MetaDefinition): string {
