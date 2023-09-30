@@ -3,8 +3,10 @@ import { RouterLink } from '@angular/router';
 
 import { RouteMeta } from '@analogjs/router';
 
+import { siteName } from '@constants/site-name';
+
 export const routeMeta: RouteMeta = {
-  title: `Not Found | Hapax Legomenon`,
+  title: `Not Found | ${siteName}`,
 };
 
 @Component({

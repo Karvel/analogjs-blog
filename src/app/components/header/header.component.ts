@@ -2,6 +2,7 @@ import { NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { siteName } from '@constants/site-name';
 import { Navigation } from '@models/navigation';
 
 @Component({
@@ -16,7 +17,7 @@ import { Navigation } from '@models/navigation';
         <a routerLink="/" class="flex items-center no-underline">
           <span
             class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white"
-            >Hapax Legomenon</span
+            >{{ siteName }}</span
           >
         </a>
         <button
@@ -76,6 +77,7 @@ export default class HeaderComponent {
       path: 'blog',
     },
   ];
+  public siteName = siteName;
   public showMenu = false;
 
   public toggleNavbar(): void {

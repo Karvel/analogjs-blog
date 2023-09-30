@@ -6,12 +6,13 @@ import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
 import PillComponent from '@components/pill/pill.component';
+import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
 export const routeMeta: RouteMeta = {
-  title: `Tags | Hapax Legomenon`,
+  title: `Tags | ${siteName}`,
 };
 
 @Component({

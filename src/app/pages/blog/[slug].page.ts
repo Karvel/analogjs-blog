@@ -1,6 +1,7 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -13,6 +14,7 @@ import {
 import PillComponent from '@components/pill/pill.component';
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
+import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
@@ -164,8 +166,11 @@ export default class BlogPostPageComponent {
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
 
+  private titleService = inject(Title);
+
   constructor() {
     this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
+      this.setPageTitle(post);
       this.setNavigation(post, this.posts);
     });
   }
@@ -180,5 +185,17 @@ export default class BlogPostPageComponent {
 
     this.nextPost = nextPost;
     this.prevPost = previousPost;
+  }
+
+  /**
+   * Setting dynamic page title in component
+   */
+  private setPageTitle(
+    post: ContentFile<BlogPost | Record<string, never>>,
+  ): void {
+    const title = post?.attributes?.title
+      ? `${post.attributes.title} | ${siteName}`
+      : `Post | ${siteName}`;
+    this.titleService.setTitle(title);
   }
 }
