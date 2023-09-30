@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ContentFile } from '@analogjs/content';
 import { Injectable, inject } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Meta, MetaDefinition } from '@angular/platform-browser';
 
 import { BlogPost } from '@models/post';
 
@@ -30,71 +30,87 @@ export class MetadataService {
     frontMatter: ContentFile<BlogPost | Record<string, never>>,
   ): void {
     if (frontMatter.attributes.title) {
-      this.meta.updateTag({
+      this.updateTag({
         name: 'title',
         content: frontMatter.attributes.title,
       });
-      this.meta.updateTag({
+      this.updateTag({
         property: 'og:title',
         content: frontMatter.attributes.title,
       });
-      this.meta.updateTag({
+      this.updateTag({
         property: 'twitter:title',
         content: frontMatter.attributes.title,
       });
     }
     if (frontMatter.attributes.description) {
-      this.meta.updateTag({
+      this.updateTag({
         name: 'description',
         content: frontMatter.attributes.description,
       });
-      this.meta.updateTag({
+      this.updateTag({
         property: 'og:description',
         content: frontMatter.attributes.description,
       });
-      this.meta.updateTag({
+      this.updateTag({
         property: 'twitter:description',
         content: frontMatter.attributes.description,
       });
     }
     if (frontMatter.attributes.author) {
-      this.meta.updateTag({
+      this.updateTag({
         name: 'author',
         content: frontMatter.attributes.author,
       });
     }
     if (frontMatter.attributes.cover_image) {
-      this.meta.updateTag({
+      this.updateTag({
         property: 'og:image',
         content: frontMatter.attributes.cover_image,
       });
-      this.meta.updateTag({
+      this.updateTag({
         property: 'twitter:image',
         content: frontMatter.attributes.cover_image,
       });
     }
     if (frontMatter.attributes.date) {
-      this.meta.updateTag({
+      this.updateTag({
         property: 'article:published_time',
         content: frontMatter.attributes.date,
       });
     }
     if (frontMatter.attributes.last_updated) {
-      this.meta.updateTag({
+      this.updateTag({
         property: 'article:modified_time',
         content: frontMatter.attributes.last_updated,
       });
     }
-    this.meta.updateTag({
+    this.updateTag({
       property: 'twitter:card',
       content: 'summary_large_image',
     });
   }
 
+  private mapMetaTagToQuerySelector(tag: MetaDefinition): string {
+    if (tag.name) {
+      return `name="${tag.name}"`;
+    } else if (tag.property) {
+      return `property="${tag.property}"`;
+    }
+    return '';
+  }
+
   private setPageURLMetaTags(pageUrl?: string): void {
     if (pageUrl) {
-      this.meta.updateTag({ property: 'og:url', content: pageUrl });
-      this.meta.updateTag({ property: 'twitter:url', content: pageUrl });
+      this.updateTag({ property: 'og:url', content: pageUrl });
+      this.updateTag({ property: 'twitter:url', content: pageUrl });
+    }
+  }
+
+  private updateTag(tag: MetaDefinition): void {
+    this.meta.removeTag(this.mapMetaTagToQuerySelector(tag));
+    if (tag) {
+      this.meta.updateTag(tag);
     }
   }
 }
