@@ -36,6 +36,11 @@ import { BlogPost } from '@models/post';
         <div class="sm:max-w-prose text-sm">
           {{ post.attributes.description }}
         </div>
+        <div *ngIf="post?.attributes?.category">
+          <a [routerLink]="['/category', post.attributes.category]">{{
+            post.attributes.category
+          }}</a>
+        </div>
       </div>
       <div *ngIf="post?.attributes?.cover_image">
         <img
