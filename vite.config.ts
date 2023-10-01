@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
     setupFiles: ['src/test.ts'],
     include: ['**/*.spec.ts'],
     coverage: {
-      provider: 'istanbul', // or 'v8'
+      provider: 'v8', // or 'v8'
       reporter: ['text', 'json', 'html'],
     },
   },
