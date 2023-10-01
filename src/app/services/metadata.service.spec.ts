@@ -69,6 +69,26 @@ describe('MetadataService', () => {
     expect(meta.updateTag).toHaveBeenCalledTimes(9);
   });
 
+  it('should skip meta tags from front matter that are empty', () => {
+    const frontMatter: ContentFile<BlogPost> = {
+      attributes: {
+        description: '',
+        author: '',
+        cover_image: '',
+        date: '',
+        last_updated: '',
+      },
+      filename: '',
+      slug: '',
+    };
+
+    vi.spyOn(meta, 'updateTag');
+
+    service.setMetaTagsFromFrontMatter(frontMatter);
+
+    expect(meta.updateTag).toHaveBeenCalledTimes(1);
+  });
+
   it('should set page URL meta tags', () => {
     const pageUrl = 'https://example.com';
     vi.spyOn(meta, 'updateTag');
