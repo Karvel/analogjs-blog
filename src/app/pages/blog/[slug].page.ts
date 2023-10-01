@@ -14,6 +14,7 @@ import PillComponent from '@components/pill/pill.component';
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
 import PopoverComponent from '@components/popover/popover.component';
 import { siteName } from '@constants/site-name';
+import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
@@ -32,9 +33,10 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     NgIf,
     PillComponent,
     PopoverComponent,
+    ReplaceBrokenImageDirective,
     RouterLink,
   ],
-  styleUrls: ['./[slug].page.scss'],
+  styleUrls: ['./[slug].page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div *ngIf="post$ | async as post" class="md:w-[48rem] p-4">
@@ -44,6 +46,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
               *ngIf="post.attributes.cover_image"
               [src]="post.attributes.cover_image"
               [alt]="post.attributes.cover_image_title"
+              appReplaceBrokenImage
               class="w-full max-w-full rounded-md"
             />
             <div [ngClass]="{ image_container: post.attributes.cover_image }">

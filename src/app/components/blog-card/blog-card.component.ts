@@ -5,12 +5,19 @@ import { RouterLink } from '@angular/router';
 import { ContentFile } from '@analogjs/content';
 
 import PillComponent from '@components/pill/pill.component';
+import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
 
 @Component({
   selector: 'app-blog-card',
   standalone: true,
-  imports: [DatePipe, NgIf, PillComponent, RouterLink],
+  imports: [
+    DatePipe,
+    NgIf,
+    PillComponent,
+    ReplaceBrokenImageDirective,
+    RouterLink,
+  ],
   template: `
     <div class="py-5 flex flex-col-reverse sm:flex-row">
       <div class="sm:pr-2 sm:max-w grow">
@@ -48,8 +55,9 @@ import { BlogPost } from '@models/post';
       <div *ngIf="post?.attributes?.cover_image">
         <img
           [src]="post.attributes.cover_image"
-          class="sm:max-w-xs rounded-md"
           [alt]="post.attributes.cover_image_title || 'Post Cover Image'"
+          appReplaceBrokenImage
+          class="sm:max-w-xs rounded-md"
         />
       </div>
     </div>
