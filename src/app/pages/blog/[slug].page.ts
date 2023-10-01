@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
@@ -156,7 +156,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     </div>
   `,
 })
-export default class BlogPostPageComponent implements OnInit {
+export default class BlogPostPageComponent {
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>();
   private posts = injectContentFiles<BlogPost>().sort(
@@ -168,7 +168,7 @@ export default class BlogPostPageComponent implements OnInit {
 
   private metadataService = inject(MetadataService);
 
-  public ngOnInit(): void {
+  constructor() {
     this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
       this.setPageTitle(post);
       this.setNavigation(post, this.posts);
