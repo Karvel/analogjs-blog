@@ -14,6 +14,7 @@
     "build": "ng build",
     "watch": "ng build --watch",
     "test": "ng test",
+    "coverage": "vitest run --coverage",
     "lint": "ng lint",
     "prestart": "npm run svg",
     "prebuild": "npm run svg",
