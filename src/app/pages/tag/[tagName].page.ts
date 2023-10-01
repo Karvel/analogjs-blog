@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { MetaDefinition, Title } from '@angular/platform-browser';
+import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
@@ -62,7 +62,6 @@ export default class TagNamePageComponent implements OnInit {
     sortByUpdatedOrOriginalDate,
   );
   private route = inject(ActivatedRoute);
-  private titleService = inject(Title);
 
   public ngOnInit(): void {
     this.tagName = this.route.snapshot.paramMap.get('tagName') || '';
@@ -103,7 +102,7 @@ export default class TagNamePageComponent implements OnInit {
     const title = tagName
       ? `${tagName} Tag | ${siteName}`
       : `Tag | ${siteName}`;
-    this.titleService.setTitle(title);
+    this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }
 }

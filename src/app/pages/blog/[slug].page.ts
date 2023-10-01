@@ -1,7 +1,6 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -168,10 +167,9 @@ export default class BlogPostPageComponent implements OnInit {
   public tagList: Tag[] = [];
 
   private metadataService = inject(MetadataService);
-  private titleService = inject(Title);
 
   public ngOnInit(): void {
-    this.post$.subscribe((post) => {
+    this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
       this.setPageTitle(post);
       this.setNavigation(post, this.posts);
       this.metadataService.setMetaTagsFromFrontMatter(post);
@@ -199,7 +197,7 @@ export default class BlogPostPageComponent implements OnInit {
     const title = post?.attributes?.title
       ? `${post.attributes.title} | ${siteName}`
       : `Post | ${siteName}`;
-    this.titleService.setTitle(title);
+    this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }
 }

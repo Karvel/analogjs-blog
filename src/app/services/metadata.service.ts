@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ContentFile } from '@analogjs/content';
 import { Injectable, inject } from '@angular/core';
-import { Meta, MetaDefinition } from '@angular/platform-browser';
+import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 
 import { metadataTags } from '@constants/metadata-tags';
 import { BlogPost } from '@models/post';
@@ -12,6 +12,7 @@ import { BlogPost } from '@models/post';
 export class MetadataService {
   private document = inject(DOCUMENT);
   private meta = inject(Meta);
+  private title = inject(Title);
 
   public removeTags(): void {
     metadataTags.forEach((tag) => this.meta.removeTag(tag));
@@ -94,6 +95,12 @@ export class MetadataService {
       this.updateTag({ name: 'title', content: title });
       this.updateTag({ property: 'og:title', content: title });
       this.updateTag({ property: 'twitter:title', content: title });
+    }
+  }
+
+  public setTitle(title: string): void {
+    if (title) {
+      this.title.setTitle(title);
     }
   }
 
