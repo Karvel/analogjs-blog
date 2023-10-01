@@ -20,7 +20,7 @@ import { Component, Input } from '@angular/core';
       <ng-content />
     </div>
   `,
-  styleUrls: ['./popover.component.scss'],
+  styleUrls: ['./popover.component.css'],
 })
 export default class PopoverComponent {
   @Input() public altText!: string | undefined;

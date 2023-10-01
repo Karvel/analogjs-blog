@@ -36,7 +36,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     ReplaceBrokenImageDirective,
     RouterLink,
   ],
-  styleUrls: ['./[slug].page.scss'],
+  styleUrls: ['./[slug].page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div *ngIf="post$ | async as post" class="md:w-[48rem] p-4">
