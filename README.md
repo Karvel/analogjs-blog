@@ -1,9 +1,9 @@
 # Analog App
 
-| Branch      | Status                                                                                                                     |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------- |
-| development | ![development](https://github.com/Karvel/analogjs-blog/workflows/Build,%20Test,%20and%20Lint/badge.svg?branch=development) |
-| main        | ![main](https://github.com/Karvel/analogjs-blog/workflows/Build,%20Test,%20and%20Lint/badge.svg?branch=main)               |
+| Branch  | Status                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------ |
+| develop | ![develop](https://github.com/Karvel/analogjs-blog/workflows/Build,%20Test,%20and%20Lint/badge.svg?branch=develop) |
+| main    | ![main](https://github.com/Karvel/analogjs-blog/workflows/Build,%20Test,%20and%20Lint/badge.svg?branch=main)       |
 
 This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.
 
