@@ -11,7 +11,7 @@ import {
 } from '@analogjs/content';
 
 import PillComponent from '@components/pill/pill.component';
-import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content';
+import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
 import PopoverComponent from '@components/popover/popover.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
