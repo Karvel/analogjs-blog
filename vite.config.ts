@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     include: ['**/*.spec.ts'],
     coverage: {
       provider: 'v8', // or 'v8'
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json', 'html', 'lcovonly'],
     },
   },
   define: {
