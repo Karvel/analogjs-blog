@@ -1,9 +1,10 @@
-import { Component, DebugElement, Directive, ElementRef } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReplaceBrokenImageDirective } from './replace-broken-image.directive';
 import { By } from '@angular/platform-browser';
+
 import { fallbackImagePath } from '@constants/fallback-image-path';
 import { siteName } from '@constants/site-name';
+import { ReplaceBrokenImageDirective } from './replace-broken-image.directive';
 
 @Component({
   template: ` <img src="test" alt="test" appReplaceBrokenImage /> `,
