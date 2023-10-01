@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
@@ -8,6 +8,7 @@ import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
@@ -38,15 +39,34 @@ export default class CategoryNamePageComponent implements OnInit {
   public categoryName!: string;
   public filteredPosts!: ContentFile<BlogPost>[];
 
+  private metadataService = inject(MetadataService);
+  private metaTagList: MetaDefinition[] = [
+    {
+      name: 'description',
+      content: '',
+    },
+    {
+      name: 'author',
+      content: 'Elanna Grossman',
+    },
+    {
+      property: 'og:description',
+      content: '',
+    },
+    {
+      property: 'twitter:description',
+      content: '',
+    },
+  ];
   private posts = injectContentFiles<BlogPost>().sort(
     sortByUpdatedOrOriginalDate,
   );
   private route = inject(ActivatedRoute);
-  private titleService = inject(Title);
 
   public ngOnInit(): void {
     this.categoryName = this.route.snapshot.paramMap.get('categoryName') || '';
     this.setPageTitle(this.categoryName);
+    this.setMetadata(this.categoryName);
     this.filteredPosts = this.filterBlogPostsByCategory(
       this.posts,
       this.categoryName,
@@ -62,6 +82,17 @@ export default class CategoryNamePageComponent implements OnInit {
     );
   }
 
+  private setMetadata(categoryName: string): void {
+    const description = `Blog posts filtered by ${categoryName}.`;
+    this.metaTagList.map((metaTag) => {
+      metaTag.content = description;
+
+      return metaTag;
+    });
+
+    this.metadataService.updateTags(this.metaTagList);
+  }
+
   /**
    * Setting dynamic page title in component
    */
@@ -69,6 +100,7 @@ export default class CategoryNamePageComponent implements OnInit {
     const title = categoryName
       ? `${categoryName} Category | ${siteName}`
       : `Category | ${siteName}`;
-    this.titleService.setTitle(title);
+    this.metadataService.setTitle(title);
+    this.metadataService.setPageURLMetaTitle(title);
   }
 }

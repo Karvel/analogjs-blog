@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
@@ -8,11 +9,33 @@ import { RouteMeta } from '@analogjs/router';
 import PillComponent from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
-export const routeMeta: RouteMeta = {
+export const pageTitle = {
   title: `Categories | ${siteName}`,
 };
+
+export const routeMeta: RouteMeta = pageTitle;
+
+export const metaTagList: MetaDefinition[] = [
+  {
+    name: 'description',
+    content: 'A collection of all of the site categories.',
+  },
+  {
+    name: 'author',
+    content: 'Elanna Grossman',
+  },
+  {
+    property: 'og:description',
+    content: 'A collection of all of the site categories.',
+  },
+  {
+    property: 'twitter:description',
+    content: 'A collection of all of the site categories.',
+  },
+];
 
 @Component({
   standalone: true,
@@ -36,11 +59,18 @@ export const routeMeta: RouteMeta = {
     </div>
   `,
 })
-export default class IndexPageComponent {
+export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>().sort(
     sortByUpdatedOrOriginalDate,
   );
   public categories = this.extractUniqueCategories(this.posts);
+
+  private metadataService = inject(MetadataService);
+
+  public ngOnInit(): void {
+    this.metadataService.setPageURLMetaTitle(pageTitle.title);
+    this.metadataService.updateTags(metaTagList);
+  }
 
   private extractUniqueCategories(
     blogPosts: ContentFile<BlogPost>[],

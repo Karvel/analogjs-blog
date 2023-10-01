@@ -1,7 +1,6 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -17,6 +16,7 @@ import PopoverComponent from '@components/popover/popover.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
@@ -166,12 +166,13 @@ export default class BlogPostPageComponent {
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
 
-  private titleService = inject(Title);
+  private metadataService = inject(MetadataService);
 
   constructor() {
     this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
       this.setPageTitle(post);
       this.setNavigation(post, this.posts);
+      this.metadataService.setMetaTagsFromFrontMatter(post);
     });
   }
 
@@ -196,6 +197,7 @@ export default class BlogPostPageComponent {
     const title = post?.attributes?.title
       ? `${post.attributes.title} | ${siteName}`
       : `Post | ${siteName}`;
-    this.titleService.setTitle(title);
+    this.metadataService.setTitle(title);
+    this.metadataService.setPageURLMetaTitle(title);
   }
 }

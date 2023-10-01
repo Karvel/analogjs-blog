@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
@@ -8,12 +9,34 @@ import { RouteMeta } from '@analogjs/router';
 import PillComponent from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
+import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
-export const routeMeta: RouteMeta = {
+export const pageTitle = {
   title: `Tags | ${siteName}`,
 };
+
+export const routeMeta: RouteMeta = pageTitle;
+
+export const metaTagList: MetaDefinition[] = [
+  {
+    name: 'description',
+    content: 'A collection of all of the site tags.',
+  },
+  {
+    name: 'author',
+    content: 'Elanna Grossman',
+  },
+  {
+    property: 'og:description',
+    content: 'A collection of all of the site tags.',
+  },
+  {
+    property: 'twitter:description',
+    content: 'A collection of all of the site tags.',
+  },
+];
 
 @Component({
   standalone: true,
@@ -33,11 +56,18 @@ export const routeMeta: RouteMeta = {
     </div>
   `,
 })
-export default class IndexPageComponent {
+export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>().sort(
     sortByUpdatedOrOriginalDate,
   );
   public tags = this.extractUniqueTags(this.posts);
+
+  private metadataService = inject(MetadataService);
+
+  public ngOnInit(): void {
+    this.metadataService.setPageURLMetaTitle(pageTitle.title);
+    this.metadataService.updateTags(metaTagList);
+  }
 
   private extractUniqueTags(blogPosts: ContentFile<BlogPost>[]): string[] {
     const uniqueTags = new Set<string>();
