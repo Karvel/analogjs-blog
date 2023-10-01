@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import ImageInfoPopoverContentComponent from './image-info-popover-content';
+import ImageInfoPopoverContentComponent from './image-info-popover-content.component';
 
 @Component({
   template: `
