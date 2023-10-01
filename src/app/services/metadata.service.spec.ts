@@ -39,4 +39,28 @@ describe('MetadataService', () => {
 
     expect(title.setTitle).toHaveBeenCalledWith(titleValue);
   });
+
+  it('should update tag', () => {
+    const tag = { name: 'description', content: 'Updated description' };
+    vi.spyOn(meta, 'removeTag');
+    vi.spyOn(meta, 'updateTag');
+
+    service.updateTag(tag);
+
+    expect(meta.removeTag).toHaveBeenCalled();
+    expect(meta.updateTag).toHaveBeenCalledWith(tag);
+  });
+
+  it('should update tags', () => {
+    const tags = [
+      { name: 'description', content: 'Updated description' },
+      { name: 'author', content: 'Updated author' },
+    ];
+
+    vi.spyOn(meta, 'updateTag');
+
+    service.updateTags(tags);
+
+    expect(meta.updateTag).toHaveBeenCalledTimes(tags.length);
+  });
 });
