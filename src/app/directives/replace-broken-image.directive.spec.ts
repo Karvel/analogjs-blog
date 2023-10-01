@@ -13,6 +13,7 @@ class TestComponent {}
 
 describe('ReplaceBrokenImageDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let des: DebugElement[]; // the three elements w/ the directive
 
   beforeEach(() => {

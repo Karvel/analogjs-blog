@@ -18,6 +18,7 @@ class TestHostComponent {
 
 describe('PopoverComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let hostComponent: TestHostComponent;
   let popoverComponent: PopoverComponent;
 

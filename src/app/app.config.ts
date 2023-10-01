@@ -6,7 +6,7 @@ import { provideContent, withMarkdownRenderer } from '@analogjs/content';
 import { provideFileRouter } from '@analogjs/router';
 import { provideSvgIcons } from '@ngneat/svg-icon';
 
-import { svgIcons } from '../assets/svg/index';
+import { svgIcons } from '../../svg/index';
 
 export const appConfig: ApplicationConfig = {
   providers: [
