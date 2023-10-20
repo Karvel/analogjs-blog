@@ -32,10 +32,7 @@ export const routeMeta: RouteMeta = pageTitle;
               <app-blog-card [post]="post" />
             </li>
           </ul>
-          <div>
-            <h2>Latest Photo Albums:</h2>
-            <app-recent-photo-albums />
-          </div>
+          <app-recent-photo-albums />
         </div>
       </div>
     </div>
