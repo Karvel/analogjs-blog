@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { RouteMeta } from '@analogjs/router';
 
+import { MasonryGridComponent } from '@components/masonry-grid/masonry-grid.component';
 import { siteName } from '@constants/site-name';
 import { MetadataService } from '@services/metadata.service';
 
@@ -14,10 +15,13 @@ export const routeMeta: RouteMeta = pageTitle;
 @Component({
   selector: 'app-photos-index',
   standalone: true,
+  imports: [MasonryGridComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="xl:w-[80rem] p-4">
-        <div class="flex-1">Photos</div>
+        <div class="flex-1">
+          <div>Grid: <app-masonry-grid></app-masonry-grid></div>
+        </div>
       </div>
     </div>
   `,
