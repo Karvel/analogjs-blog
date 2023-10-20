@@ -1,9 +1,10 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { flickr } from '@constants/flickr';
+import { PhotoSetListItem, PhotoSetsListResponse } from '@models/flickr';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -16,7 +17,7 @@ export class FlickrService {
   /**
    * Get 3 most recent photo sets, excluding the first, which is a collection of favorites.
    */
-  public getRecentPhotosets() {
+  public getRecentPhotosets(): Observable<PhotoSetListItem[]> {
     const paramObj = {
       method: 'flickr.photosets.getList',
       api_key: atob(flickr.api_key),
@@ -26,8 +27,9 @@ export class FlickrService {
       nojsoncallback: '1',
     };
     const params = new HttpParams({ fromObject: paramObj });
+
     return this.apiService
-      .get(`${this.baseUrl}`, { params })
-      .pipe(map((response: any) => response.photosets.photoset.slice(1, 4)));
+      .get<PhotoSetsListResponse>(`${this.baseUrl}`, { params })
+      .pipe(map((response) => response.photosets.photoset.slice(1, 4)));
   }
 }
