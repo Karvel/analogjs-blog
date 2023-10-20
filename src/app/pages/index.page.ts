@@ -32,17 +32,9 @@ export const routeMeta: RouteMeta = pageTitle;
               <app-blog-card [post]="post" />
             </li>
           </ul>
-        </div>
-      </div>
-    </div>
-    <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
-      <div class="xl:w-[80rem] p-4">
-        <div class="flex-1">
           <div>
-            Here some of my most recent photo albums:
-            <div>
-              <app-recent-photo-albums></app-recent-photo-albums>
-            </div>
+            <h2>Latest Photo Albums:</h2>
+            <app-recent-photo-albums />
           </div>
         </div>
       </div>
