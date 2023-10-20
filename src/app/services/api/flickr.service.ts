@@ -5,8 +5,8 @@ import { Observable, map } from 'rxjs';
 
 import { flickr } from '@constants/flickr';
 import {
-  PhotoSetListItem,
-  PhotoSetsListResponse,
+  PhotosetListItem,
+  PhotosetListResponse,
   PhotosetPhoto,
   PhotosetPhotoListResponse,
 } from '@models/flickr';
@@ -45,7 +45,7 @@ export class FlickrService {
   /**
    * Get 3 most recent photo sets, excluding the first, which is a collection of favorites.
    */
-  public getRecentPhotosets(): Observable<PhotoSetListItem[]> {
+  public getRecentPhotosets(): Observable<PhotosetListItem[]> {
     const paramObj = {
       method: 'flickr.photosets.getList',
       api_key: atob(flickr.api_key),
@@ -57,7 +57,7 @@ export class FlickrService {
     const params = new HttpParams({ fromObject: paramObj });
 
     return this.apiService
-      .get<PhotoSetsListResponse>(`${this.baseUrl}`, { params })
+      .get<PhotosetListResponse>(`${this.baseUrl}`, { params })
       .pipe(map((response) => response.photosets.photoset.slice(1, 4)));
   }
 }

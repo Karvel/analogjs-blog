@@ -46,7 +46,7 @@ export interface PhotosetPhotoListResponse {
   stat: string;
 }
 
-export interface PhotoSetListItem {
+export interface PhotosetListItem {
   id: string;
   owner: string;
   username: string;
@@ -61,13 +61,13 @@ export interface PhotoSetListItem {
   needs_interstitial: number;
 }
 
-export interface PhotoSetsListResponse {
+export interface PhotosetListResponse {
   photosets: {
     page: number;
     pages: number;
     perpage: number;
     total: number;
-    photoset: PhotoSetListItem[];
+    photoset: PhotosetListItem[];
   };
   stat: string;
 }
