@@ -4,7 +4,12 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { flickr } from '@constants/flickr';
-import { PhotoSetListItem, PhotoSetsListResponse } from '@models/flickr';
+import {
+  PhotoSetListItem,
+  PhotoSetsListResponse,
+  PhotosetPhoto,
+  PhotosetPhotoListResponse,
+} from '@models/flickr';
 import { shuffleArray } from '@utils/shuffle-array';
 import { ApiService } from './api.service';
 
@@ -18,7 +23,7 @@ export class FlickrService {
   /**
    * Get 9 randomized photos from my photo set of favorite photos.
    */
-  public getFavoritePhotos(): Observable<any> {
+  public getFavoritePhotos(): Observable<PhotosetPhoto[]> {
     const paramObj = {
       method: 'flickr.photosets.getPhotos',
       api_key: atob(flickr.api_key),
@@ -31,7 +36,7 @@ export class FlickrService {
     const params = new HttpParams({ fromObject: paramObj });
 
     return this.apiService
-      .get<any>(`${this.baseUrl}`, { params })
+      .get<PhotosetPhotoListResponse>(`${this.baseUrl}`, { params })
       .pipe(
         map((response) => shuffleArray(response.photoset.photo).slice(0, 9)),
       );
