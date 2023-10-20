@@ -12,6 +12,7 @@ import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
+  selector: 'app-tag-name-page',
   standalone: true,
   imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
   template: `

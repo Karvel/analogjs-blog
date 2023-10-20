@@ -10,6 +10,7 @@ export const routeMeta: RouteMeta = {
 };
 
 @Component({
+  selector: 'app-page-not-found',
   standalone: true,
   imports: [RouterLink],
   template: `

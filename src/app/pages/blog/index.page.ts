@@ -17,6 +17,7 @@ export const pageTitle = {
 export const routeMeta: RouteMeta = pageTitle;
 
 @Component({
+  selector: 'app-blog-index',
   standalone: true,
   imports: [BlogCardComponent, NgFor, NgIf],
   template: `

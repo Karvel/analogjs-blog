@@ -22,6 +22,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
 @Component({
+  selector: 'app-slug',
   standalone: true,
   imports: [
     AsyncPipe,
