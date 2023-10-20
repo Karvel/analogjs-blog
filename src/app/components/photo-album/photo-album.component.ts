@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+import { flickr } from '@constants/flickr';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 
 @Component({
@@ -10,13 +11,13 @@ import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.di
   template: `
     <div *ngIf="photo.id" class="relative">
       <a
-        [href]="flickrAlbumUrl + '/' + photo.id"
+        [href]="flickr.albumUrl + '/' + photo.id"
         target="_blank"
         rel="noopener"
       >
         <img
           [src]="
-            flickrAlbumPhotoUrl +
+            flickr.albumPhotoUrl +
             '/' +
             photo.server +
             '/' +
@@ -49,6 +50,5 @@ import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.di
 export class PhotoAlbumComponent {
   @Input() public photo: any;
 
-  public flickrAlbumPhotoUrl = 'https://live.staticflickr.com';
-  public flickrAlbumUrl = 'https://www.flickr.com/photos/jadeilyn/albums';
+  public flickr = flickr;
 }
