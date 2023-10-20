@@ -38,6 +38,7 @@ export const metaTagList: MetaDefinition[] = [
 ];
 
 @Component({
+  selector: 'app-category-index',
   standalone: true,
   imports: [NgFor, PillComponent, RouterLink],
   template: `
