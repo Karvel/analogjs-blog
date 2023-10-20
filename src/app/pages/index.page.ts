@@ -35,9 +35,7 @@ export const routeMeta: RouteMeta = pageTitle;
         </div>
       </div>
     </div>
-    <div
-      class="md:max-w md:mx-auto md:flex md:flex-col md:items-center justify-center"
-    >
+    <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="xl:w-[80rem] p-4">
         <div class="flex-1">
           <div>
