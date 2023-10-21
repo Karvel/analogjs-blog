@@ -20,11 +20,11 @@ export const routeMeta: RouteMeta = pageTitle;
   imports: [AsyncPipe, NgIf, MasonryGridComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
-      <div class="xl:w-[48rem] p-4">
+      <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1>Photos:</h1>
           <div *ngIf="profile$ | async as profile">
-            <div class="py-6">
+            <div class="py-5">
               I host my photos on
               <a [href]="profile?.photosurl?._content">Flickr</a>.
             </div>
