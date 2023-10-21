@@ -18,9 +18,9 @@ export const routeMeta: RouteMeta = pageTitle;
   imports: [MasonryGridComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
-      <div class="xl:w-[80rem] p-4">
+      <div class="xl:w-[48rem] p-4">
         <div class="flex-1">
-          <div>Grid: <app-masonry-grid></app-masonry-grid></div>
+          <app-masonry-grid></app-masonry-grid>
         </div>
       </div>
     </div>
