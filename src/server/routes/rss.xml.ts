@@ -29,13 +29,12 @@ async function generateRssFeed() {
       );
       return {
         attributes: fm(fileContents).attributes as BlogPost,
-        slug: contentFile,
       };
     })
     .sort((a1, a2) =>
       (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
     )
-    .forEach(({ attributes, slug }) => {
+    .forEach(({ attributes }) => {
       feed.item({
         title: attributes.title,
         author: attributes.author,
