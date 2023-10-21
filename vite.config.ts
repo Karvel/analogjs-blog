@@ -16,7 +16,15 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     analog({
       prerender: {
-        routes: async () => ['/api/rss.xml'],
+        routes: async () => [
+          '/',
+          '/about',
+          '/api/rss.xml',
+          '/blog',
+          '/category',
+          '/photos',
+          '/tag',
+        ],
         sitemap: {
           host: 'https://elanna.me/',
         },
