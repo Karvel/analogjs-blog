@@ -42,6 +42,19 @@ export class FlickrService {
       );
   }
 
+  public getProfile(): Observable<any> {
+    const paramObj = {
+      method: 'flickr.people.getInfo',
+      api_key: atob(flickr.api_key),
+      user_id: flickr.user_id,
+      format: 'json',
+      nojsoncallback: '1',
+    };
+    const params = new HttpParams({ fromObject: paramObj });
+
+    return this.apiService.get<any>(`${this.baseUrl}`, { params });
+  }
+
   /**
    * Get 3 most recent photo sets, excluding the first, which is a collection of favorites.
    */
