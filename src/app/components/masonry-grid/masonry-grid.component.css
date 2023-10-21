@@ -17,7 +17,7 @@
 
 .image-gallery::after {
   content: '';
-  flex-grow: 999;
+  flex-grow: 10;
 }
 
 .image-gallery li img {
