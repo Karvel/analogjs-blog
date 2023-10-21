@@ -14,12 +14,15 @@ import { Navigation } from '@models/navigation';
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
-        <a routerLink="/" class="flex items-center no-underline">
-          <span
-            class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white"
-            >{{ siteName }}</span
-          >
-        </a>
+        <div class="flex">
+          <a routerLink="/" class="flex items-center no-underline">
+            <img src="logo.png" width="50" alt="Hapax Legomenon logo">
+            <span
+              class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white max-[350px]:hidden"
+              >{{ siteName }}</span
+            >
+          </a>
+        </div>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
