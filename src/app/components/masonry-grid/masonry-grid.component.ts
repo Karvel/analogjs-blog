@@ -12,12 +12,18 @@ import { FlickrService } from '@services/api/flickr.service';
     <div *ngIf="photos$ | async as photos" class="-masonry-container">
       <ul class="image-gallery">
         <li *ngFor="let photo of photos">
-          <img
-            *ngIf="photo.url_m"
-            [src]="photo.url_m"
-            [alt]="photo.title"
-            loading="lazy"
-          />
+          <a
+            [href]="flickr.photoUrl + '/' + photo.id"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              *ngIf="photo.url_m"
+              [src]="photo.url_m"
+              [alt]="photo.title"
+              loading="lazy"
+            />
+          </a>
         </li>
         <li></li>
       </ul>
@@ -27,6 +33,6 @@ import { FlickrService } from '@services/api/flickr.service';
 })
 export class MasonryGridComponent {
   private flickrService = inject(FlickrService);
-  public flickrUrl = flickr.photoUrl;
+  public flickr = flickr;
   public photos$ = this.flickrService.getFavoritePhotos();
 }
