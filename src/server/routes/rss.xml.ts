@@ -3,6 +3,7 @@ import RSS from 'rss';
 import * as fs from 'fs';
 import * as path from 'path';
 import fm from 'front-matter';
+import { BlogPost } from '@models/post';
 const posts = fs.readdirSync('./src/content');
 async function generateRssFeed() {
   const site_url = 'https://elanna.me';
@@ -18,20 +19,28 @@ async function generateRssFeed() {
 
   const feed = new RSS(feedOptions);
 
-  posts.forEach((postFile) => {
-    const fileContents = fs.readFileSync(
-      path.resolve('src/content', postFile),
-      'utf8',
-    );
-    const post: any = fm(fileContents).attributes;
-
-    feed.item({
-      title: post.title,
-      description: post.description,
-      url: `${site_url}/blog/${post.slug}`,
-      date: post.publishedDate,
+  posts
+    .map((contentFile) => {
+      const fileContents = fs.readFileSync(
+        path.resolve('src/content', contentFile),
+        'utf8',
+      );
+      return {
+        attributes: fm(fileContents).attributes as BlogPost,
+        slug: contentFile,
+      };
+    })
+    .sort((a1, a2) =>
+      (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
+    )
+    .forEach(({ attributes, slug }) => {
+      feed.item({
+        title: attributes.title,
+        description: attributes.description,
+        url: `${site_url}/blog/${slug}`,
+        date: attributes.date,
+      });
     });
-  });
 
   return feed.xml({ indent: true });
 }
