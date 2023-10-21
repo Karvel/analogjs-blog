@@ -1,29 +1,48 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 
+import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
+import PopoverComponent from '@components/popover/popover.component';
 import { flickr } from '@constants/flickr';
 import { FlickrService } from '@services/api/flickr.service';
 
 @Component({
   selector: 'app-masonry-grid',
   standalone: true,
-  imports: [AsyncPipe, NgFor, NgIf],
+  imports: [
+    AsyncPipe,
+    ImageInfoPopoverContentComponent,
+    NgFor,
+    NgIf,
+    PopoverComponent,
+  ],
   template: `
     <div *ngIf="photos$ | async as photos">
       <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
-          <a
-            [href]="flickr.photoUrl + '/' + photo.id"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              *ngIf="photo.url_m"
-              [src]="photo.url_m"
-              [alt]="photo.title"
-              loading="lazy"
-            />
-          </a>
+          <img *ngIf="photo.url_m" [src]="photo.url_m" [alt]="photo.title" />
+          <div class="relative">
+            <div
+              class="absolute -top-6 left-0 -right-2 bottom-0 flex flex-col justify-end p-4"
+            >
+              <div class="flex justify-end items-center">
+                <div *ngIf="photo.url_m && photo.title" class="flex">
+                  <app-popover
+                    [altText]="'Image information'"
+                    [icon]="'svg/info.svg'"
+                  >
+                    <app-image-info-popover-content
+                      [cover_image_author]="'Elanna Grossman'"
+                      [cover_image_source]="
+                        flickr.photoUrl + '/' + photo.ownername + '/' + photo.id
+                      "
+                      [cover_image_title]="photo.title"
+                    />
+                  </app-popover>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
         <li></li>
       </ul>

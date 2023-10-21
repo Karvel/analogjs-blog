@@ -11,7 +11,6 @@
 .image-gallery > li {
   flex: 1 1 auto; /* or flex: auto; */
   height: 300px;
-  cursor: pointer;
   position: relative;
 }
 
