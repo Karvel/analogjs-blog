@@ -26,7 +26,12 @@ export const routeMeta: RouteMeta = pageTitle;
           <div *ngIf="profile$ | async as profile">
             <div class="py-5">
               I host my photos on
-              <a [href]="profile?.photosurl?._content">Flickr</a>.
+              <a
+                [href]="profile?.photosurl?._content"
+                target="_blank"
+                rel="noopener"
+                >Flickr</a
+              >.
             </div>
             <span class="whitespace-pre-line">
               {{ profile?.description?._content }}
