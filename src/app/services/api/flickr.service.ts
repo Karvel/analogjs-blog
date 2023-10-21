@@ -5,10 +5,12 @@ import { Observable, map } from 'rxjs';
 
 import { flickr } from '@constants/flickr';
 import {
+  Person,
   PhotosetListItem,
   PhotosetListResponse,
   PhotosetPhoto,
   PhotosetPhotoListResponse,
+  UserProfileResponse,
 } from '@models/flickr';
 import { shuffleArray } from '@utils/shuffle-array';
 import { ApiService } from './api.service';
@@ -42,7 +44,7 @@ export class FlickrService {
       );
   }
 
-  public getProfile(): Observable<any> {
+  public getProfile(): Observable<Person> {
     const paramObj = {
       method: 'flickr.people.getInfo',
       api_key: atob(flickr.api_key),
@@ -52,7 +54,11 @@ export class FlickrService {
     };
     const params = new HttpParams({ fromObject: paramObj });
 
-    return this.apiService.get<any>(`${this.baseUrl}`, { params });
+    return this.apiService
+      .get<UserProfileResponse>(`${this.baseUrl}`, {
+        params,
+      })
+      .pipe(map((response) => response.person));
   }
 
   /**

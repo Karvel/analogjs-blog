@@ -1,3 +1,5 @@
+// Interfaces for Flickr API responses
+
 export interface PhotosetPhoto {
   id: string;
   secret: string;
@@ -53,8 +55,8 @@ export interface PhotosetListItem {
   primary: string;
   secret: string;
   server: string;
-  title: { _content: string };
-  description: { _content: string };
+  title: Content;
+  description: Content;
   date_create: string;
   date_update: string;
   visibility_can_see_set: number;
@@ -70,4 +72,34 @@ export interface PhotosetListResponse {
     photoset: PhotosetListItem[];
   };
   stat: string;
+}
+
+export interface Person {
+  id: string;
+  nsid: string;
+  path_alias: string;
+  has_stats: number;
+  pro_badge: string;
+  expire: string;
+  username: Content;
+  realname: Content;
+  location: Content;
+  description: Content;
+  photosurl: Content;
+  profileurl: Content;
+  mobileurl: Content;
+  photos: {
+    firstdatetaken: string;
+    firstdate: string;
+    count: number;
+  };
+}
+
+export interface UserProfileResponse {
+  person: Person;
+  stat: string;
+}
+
+export interface Content {
+  _content: string;
 }
