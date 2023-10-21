@@ -5,4 +5,6 @@ export const flickr = {
   user_id: '83957127@N00',
   albumPhotoUrl: 'https://live.staticflickr.com',
   albumUrl: 'https://www.flickr.com/photos/jadeilyn/albums',
+  myPhotoUrl: 'https://www.flickr.com/photos/jadeilyn',
+  photoUrl: 'https://www.flickr.com/photos',
 };

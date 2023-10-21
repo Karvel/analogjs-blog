@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 
 import { flickr } from '@constants/flickr';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
-import { PhotoSetListItem } from '@models/flickr';
+import { PhotosetListItem } from '@models/flickr';
 
 @Component({
   selector: 'app-photo-album',
@@ -49,7 +49,7 @@ import { PhotoSetListItem } from '@models/flickr';
   `,
 })
 export class PhotoAlbumComponent {
-  @Input() public photo!: PhotoSetListItem;
+  @Input() public photo!: PhotosetListItem;
 
   public flickr = flickr;
 }

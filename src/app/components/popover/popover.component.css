@@ -8,6 +8,6 @@
 }
 
 .drop-shadow-lg {
-  --tw-drop-shadow: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04))
-    drop-shadow(0 4px 3px rgba(0, 0, 0, 0.4));
+  --tw-drop-shadow: drop-shadow(0 10px 8px rgba(0, 0, 0, 1))
+    drop-shadow(0 4px 3px rgba(0, 0, 0, 1));
 }

@@ -76,6 +76,10 @@ export default class HeaderComponent {
       label: 'Blog',
       path: 'blog',
     },
+    {
+      label: 'Photos',
+      path: 'photos',
+    },
   ];
   public siteName = siteName;
   public showMenu = false;
