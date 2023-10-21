@@ -44,7 +44,6 @@ import { FlickrService } from '@services/api/flickr.service';
             </div>
           </div>
         </li>
-        <li></li>
       </ul>
     </div>
   `,
