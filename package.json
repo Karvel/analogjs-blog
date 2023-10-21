@@ -58,6 +58,7 @@
     "marked-highlight": "^2.0.1",
     "mermaid": "^10.2.4",
     "prismjs": "^1.29.0",
+    "rss": "^1.2.2",
     "rxjs": "~7.5.6",
     "tslib": "^2.4.0",
     "zone.js": "~0.13.0"
@@ -75,6 +76,7 @@
     "@ngneat/svg-generator": "^7.0.2",
     "@nx/vite": "16.6.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/rss": "^0.0.31",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "@vitest/coverage-istanbul": "^0.34.6",

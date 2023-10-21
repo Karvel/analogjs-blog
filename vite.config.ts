@@ -13,7 +13,25 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     mainFields: ['module'],
   },
-  plugins: [analog(), tsconfigPaths()],
+  plugins: [
+    analog({
+      prerender: {
+        routes: async () => [
+          '/',
+          '/about',
+          '/api/rss.xml',
+          '/blog',
+          '/category',
+          '/photos',
+          '/tag',
+        ],
+        sitemap: {
+          host: 'https://elanna.me/',
+        },
+      },
+    }),
+    tsconfigPaths(),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
