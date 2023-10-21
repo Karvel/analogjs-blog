@@ -3,7 +3,9 @@ import RSS from 'rss';
 import * as fs from 'fs';
 import * as path from 'path';
 import fm from 'front-matter';
+
 import { BlogPost } from '@models/post';
+
 const posts = fs.readdirSync('./src/content');
 async function generateRssFeed() {
   const site_url = 'https://elanna.me';
@@ -36,8 +38,9 @@ async function generateRssFeed() {
     .forEach(({ attributes, slug }) => {
       feed.item({
         title: attributes.title,
+        author: attributes.author,
         description: attributes.description,
-        url: `${site_url}/blog/${slug}`,
+        url: `${site_url}/blog/${attributes.slug}`,
         date: attributes.date,
       });
     });

@@ -8,6 +8,7 @@ export interface BlogPost {
   date?: string;
   description?: string;
   last_updated?: string;
+  slug?: string;
   tags?: string;
   title?: string | null;
 }
