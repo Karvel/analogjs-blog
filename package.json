@@ -76,6 +76,7 @@
     "@ngneat/svg-generator": "^7.0.2",
     "@nx/vite": "16.6.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/rss": "^0.0.31",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "@vitest/coverage-istanbul": "^0.34.6",
