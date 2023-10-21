@@ -1,6 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 
+import { flickr } from '@constants/flickr';
 import { FlickrService } from '@services/api/flickr.service';
 
 @Component({
@@ -26,6 +27,6 @@ import { FlickrService } from '@services/api/flickr.service';
 })
 export class MasonryGridComponent {
   private flickrService = inject(FlickrService);
-  public flickrUrl = 'https://www.flickr.com/photos';
+  public flickrUrl = flickr.photoUrl;
   public photos$ = this.flickrService.getFavoritePhotos();
 }
