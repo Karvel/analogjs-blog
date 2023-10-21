@@ -9,8 +9,8 @@ import { FlickrService } from '@services/api/flickr.service';
   standalone: true,
   imports: [AsyncPipe, NgFor, NgIf],
   template: `
-    <div *ngIf="photos$ | async as photos" class="-masonry-container">
-      <ul class="image-gallery">
+    <div *ngIf="photos$ | async as photos">
+      <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
           <a
             [href]="flickr.photoUrl + '/' + photo.id"
