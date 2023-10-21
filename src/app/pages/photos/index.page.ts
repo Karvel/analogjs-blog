@@ -23,7 +23,7 @@ export const routeMeta: RouteMeta = pageTitle;
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1>Photos:</h1>
-          <div *ngIf="profile$ | async as profile">
+          <div *ngIf="profile$ | async as profile; else emptyResponse">
             <div class="py-5">
               I host my photos on
               <a
@@ -36,11 +36,16 @@ export const routeMeta: RouteMeta = pageTitle;
             <span class="whitespace-pre-line">
               {{ profile?.description?._content }}
             </span>
+            <div class="pt-6">
+              Here is random sampling some of my favorite photos:
+              <app-masonry-grid></app-masonry-grid>
+            </div>
           </div>
-          <div class="pt-6">
-            Here is random sampling some of my favorite photos:
-            <app-masonry-grid></app-masonry-grid>
-          </div>
+          <ng-template #emptyResponse>
+            <div class="pt-5">
+              No photos are available from Flickr. Try again later?
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
