@@ -75,6 +75,11 @@ export default class FooterComponent {
       label: 'Dev.to',
       path: 'https://dev.to/karvel',
     },
+    {
+      icon: 'rss',
+      label: 'RSS',
+      path: 'api/rss.xml',
+    },
   ];
   public readonly startYear = 2015;
 }
