@@ -1,12 +1,12 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
 
 import { MarkdownComponent, injectContent } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
 import { siteName } from '@constants/site-name';
 import { MetadataService } from '@services/metadata.service';
-import { MetaDefinition } from '@angular/platform-browser';
 
 export const pageTitle = {
   title: `About Me | ${siteName}`,
