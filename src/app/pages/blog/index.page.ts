@@ -24,7 +24,7 @@ export const routeMeta: RouteMeta = pageTitle;
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1>Blog Posts:</h1>
+          <h1 class="text-xl">Blog Posts:</h1>
           <ul>
             <ng-container *ngIf="posts?.length; else emptyList">
               <li *ngFor="let post of posts">

@@ -22,7 +22,7 @@ export const routeMeta: RouteMeta = pageTitle;
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1>Photos:</h1>
+          <h1 class="text-xl">Photos:</h1>
           <div *ngIf="profile$ | async as profile; else emptyResponse">
             <div class="py-5">
               I host my photos on

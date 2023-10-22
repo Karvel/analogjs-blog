@@ -26,7 +26,7 @@ export const routeMeta: RouteMeta = pageTitle;
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1>Home</h1>
-          <h2>Latest Blog Posts:</h2>
+          <h2 class="text-xl">Latest Blog Posts:</h2>
           <ul>
             <li *ngFor="let post of posts">
               <app-blog-card [post]="post" />
