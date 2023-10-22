@@ -6,12 +6,32 @@ import { RouteMeta } from '@analogjs/router';
 
 import { siteName } from '@constants/site-name';
 import { MetadataService } from '@services/metadata.service';
+import { MetaDefinition } from '@angular/platform-browser';
 
 export const pageTitle = {
   title: `About Me | ${siteName}`,
 };
 
 export const routeMeta: RouteMeta = pageTitle;
+
+export const metaTagList: MetaDefinition[] = [
+  {
+    name: 'description',
+    content: 'About me.',
+  },
+  {
+    name: 'author',
+    content: 'Elanna Grossman',
+  },
+  {
+    property: 'og:description',
+    content: 'About me.',
+  },
+  {
+    property: 'twitter:description',
+    content: 'About me.',
+  },
+];
 
 @Component({
   selector: 'app-about-index',
@@ -34,5 +54,6 @@ export default class IndexPageComponent {
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
+    this.metadataService.updateTags(metaTagList);
   }
 }
