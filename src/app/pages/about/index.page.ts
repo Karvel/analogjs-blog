@@ -38,11 +38,23 @@ export const metaTagList: MetaDefinition[] = [
   standalone: true,
   imports: [AsyncPipe, NgIf, MarkdownComponent],
   template: `
-    <div *ngIf="about$ | async as about">
-      <analog-markdown
-        class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
-        [content]="about.content"
-      />
+    <h1 class="sr-only">About</h1>
+    <div class="md:max-w md:mx-auto md:flex md:justify-center">
+      <div class="md:w-[48rem] p-4">
+        <div class="flex-1">
+          <img
+            src="me.jpg"
+            class="rounded max-h-[32rem] mx-auto"
+            alt="Me in Norway"
+          />
+          <div *ngIf="about$ | async as about">
+            <analog-markdown
+              class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
+              [content]="about.content"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   `,
 })
