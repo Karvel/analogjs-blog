@@ -16,7 +16,9 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
   standalone: true,
   imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
   template: `
-    <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
+    <div
+      class="md:max-w md:mx-auto md:flex md:flex-col md:items-center text-xl"
+    >
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start">

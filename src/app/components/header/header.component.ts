@@ -16,7 +16,7 @@ import { Navigation } from '@models/navigation';
       >
         <div class="flex">
           <a routerLink="/" class="flex items-center no-underline">
-            <img src="logo.png" width="50" alt="Hapax Legomenon logo">
+            <img src="logo.png" width="50" alt="Hapax Legomenon logo" />
             <span
               class="self-center text-lg sm:text-2xl font-semibold whitespace-nowrap dark:text-white max-[350px]:hidden"
               >{{ siteName }}</span
@@ -71,10 +71,6 @@ import { Navigation } from '@models/navigation';
 })
 export default class HeaderComponent {
   public linkList: Navigation[] = [
-    {
-      label: 'About',
-      path: 'about',
-    },
     {
       label: 'Blog',
       path: 'blog',

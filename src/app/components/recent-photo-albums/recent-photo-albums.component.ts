@@ -10,7 +10,7 @@ import { FlickrService } from '@services/api/flickr.service';
   imports: [AsyncPipe, NgFor, NgIf, PhotoAlbumComponent],
   template: `
     <div *ngIf="photos$ | async as photos">
-      <h2>Latest Photo Albums:</h2>
+      <h2 class="text-xl">Latest Photo Albums:</h2>
       <div class="flex gap-4 flex-wrap justify-center xl:justify-normal">
         <ng-container *ngFor="let photo of photos">
           <app-photo-album

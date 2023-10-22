@@ -46,7 +46,7 @@ export const metaTagList: MetaDefinition[] = [
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1 class="md:flex md:flex-col md:self-start">Tags:</h1>
+          <h1 class="md:flex md:flex-col md:self-start text-xl">Tags:</h1>
           <ul class="pt-5 flex flex-wrap justify-evenly">
             <li *ngFor="let tag of tags" class="flex m-1">
               <app-pill [label]="tag" [route]="'/tag'" [slug]="tag" />

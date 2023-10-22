@@ -19,7 +19,9 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1 class="md:flex md:flex-col md:self-start">Tag: {{ tagName }}</h1>
+          <h1 class="md:flex md:flex-col md:self-start text-xl">
+            Tag: {{ tagName }}
+          </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
               <app-blog-card [post]="post" />

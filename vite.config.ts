@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => ({
       prerender: {
         routes: async () => [
           '/',
-          '/about',
           '/api/rss.xml',
           '/blog',
           '/category',
