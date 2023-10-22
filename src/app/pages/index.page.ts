@@ -39,7 +39,9 @@ export const routeMeta: RouteMeta = pageTitle;
   `,
 })
 export default class HomeComponent implements OnInit {
-  public posts = injectContentFiles<BlogPost>()
+  public posts = injectContentFiles<BlogPost>((mdFile) =>
+    mdFile.filename.includes('/src/content/posts'),
+  )
     .sort(sortByUpdatedOrOriginalDate)
     .slice(0, 3);
 

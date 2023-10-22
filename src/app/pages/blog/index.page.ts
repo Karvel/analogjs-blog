@@ -45,7 +45,9 @@ export const routeMeta: RouteMeta = pageTitle;
   `,
 })
 export default class IndexPageComponent {
-  posts = injectContentFiles<BlogPost>().sort(sortByUpdatedOrOriginalDate);
+  posts = injectContentFiles<BlogPost>((mdFile) =>
+    mdFile.filename.includes('/src/content/posts'),
+  ).sort(sortByUpdatedOrOriginalDate);
 
   private metadataService = inject(MetadataService);
 

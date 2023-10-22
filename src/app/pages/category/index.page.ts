@@ -61,9 +61,9 @@ export const metaTagList: MetaDefinition[] = [
   `,
 })
 export default class IndexPageComponent implements OnInit {
-  public posts = injectContentFiles<BlogPost>().sort(
-    sortByUpdatedOrOriginalDate,
-  );
+  public posts = injectContentFiles<BlogPost>((mdFile) =>
+    mdFile.filename.includes('/src/content/posts'),
+  ).sort(sortByUpdatedOrOriginalDate);
   public categories = this.extractUniqueCategories(this.posts);
 
   private metadataService = inject(MetadataService);

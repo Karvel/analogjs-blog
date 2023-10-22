@@ -33,9 +33,9 @@ export const routeMeta: RouteMeta = pageTitle;
                 >Flickr</a
               >.
             </div>
-            <span class="whitespace-pre-line">
+            <div class="whitespace-pre-line">
               {{ profile?.description?._content }}
-            </span>
+            </div>
             <div class="pt-6">
               Here is random sampling some of my favorite photos:
               <app-masonry-grid></app-masonry-grid>
