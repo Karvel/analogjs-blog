@@ -11,8 +11,8 @@ export const talks: Talk[] = [
         path: 'https://github.com/Karvel/iwdc-2020-imposter-syndrome-talk',
       },
       {
-        label: 'GitHub - Karvel/iwdc-2020-imposter-syndrome-talk',
-        path: 'https://github.com/Karvel/iwdc-2020-imposter-syndrome-talk',
+        label: `International Women's Day Fresno 2020 Session Info`,
+        path: 'https://iwd.wtmfresno.com/sessions/-M1CYJnw2uA8QN98CYuT',
       },
     ],
     imageLink: 'iwdc_fresno_2020.png',

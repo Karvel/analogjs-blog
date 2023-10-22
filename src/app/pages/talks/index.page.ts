@@ -57,6 +57,11 @@ export const metaTagList: MetaDefinition[] = [
                   <div class="sm:max-w-prose text-sm">
                     {{ talk.description }}
                   </div>
+                  <ul *ngIf="talk.urlList" class="list-disc ml-4">
+                    <li *ngFor="let url of talk.urlList">
+                      <a [href]="url.path" target="_blank">{{ url.label }}</a>
+                    </li>
+                  </ul>
                 </div>
                 <div *ngIf="talk?.imageLink">
                   <img
