@@ -60,7 +60,7 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class IndexPageComponent {
   private metadataService = inject(MetadataService);
-  readonly about$ = injectContent({
+  readonly about$ = injectContent<{ content: string }>({
     customFilename: 'about/about',
   });
 
