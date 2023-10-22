@@ -51,7 +51,9 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
               class="w-full max-w-full rounded-md"
             />
             <div [ngClass]="{ image_container: post.attributes.cover_image }">
-              <h1 class="text-white text-xl font-bold text-shadow-sm shadow-black">
+              <h1
+                class="text-white text-xl font-bold text-shadow-sm shadow-black"
+              >
                 {{ post.attributes.title }}
               </h1>
               <div
@@ -162,10 +164,13 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 })
 export default class BlogPostPageComponent {
   public nextPost!: ContentFile<BlogPost>;
-  public post$ = injectContent<BlogPost>();
-  private posts = injectContentFiles<BlogPost>().sort(
-    sortByUpdatedOrOriginalDate,
-  );
+  public post$ = injectContent<BlogPost>({
+    param: 'slug',
+    subdirectory: 'posts',
+  });
+  private posts = injectContentFiles<BlogPost>((mdFile) =>
+    mdFile.filename.includes('/src/content/posts'),
+  ).sort(sortByUpdatedOrOriginalDate);
   public prevPost!: ContentFile<BlogPost>;
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
