@@ -18,7 +18,7 @@ import { Navigation } from '@models/navigation';
           <a routerLink="/" class="flex items-center no-underline">
             <img src="logo.png" width="50" alt="Hapax Legomenon logo">
             <span
-              class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white max-[350px]:hidden"
+              class="self-center text-lg sm:text-2xl font-semibold whitespace-nowrap dark:text-white max-[350px]:hidden"
               >{{ siteName }}</span
             >
           </a>

@@ -45,23 +45,23 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
           <div [ngClass]="{ relative: post.attributes.cover_image }">
             <img
               *ngIf="post.attributes.cover_image"
+              appReplaceBrokenImage
               [src]="post.attributes.cover_image"
               [alt]="post.attributes.cover_image_title"
-              appReplaceBrokenImage
               class="w-full max-w-full rounded-md"
             />
             <div [ngClass]="{ image_container: post.attributes.cover_image }">
-              <h1 class="text-white text-xl font-bold text-shadow shadow-black">
+              <h1 class="text-white text-xl font-bold text-shadow-sm shadow-black">
                 {{ post.attributes.title }}
               </h1>
               <div
                 *ngIf="post.attributes.author"
-                class="text-white text-xs text-shadow shadow-black"
+                class="text-white text-xs text-shadow-sm shadow-black"
               >
                 By: {{ post.attributes.author }}
               </div>
               <div class="flex justify-between items-center text-white text-xs">
-                <div class="flex text-shadow shadow-black">
+                <div class="flex text-shadow-sm shadow-black">
                   <div *ngIf="post?.attributes?.last_updated">
                     Updated {{ post.attributes.last_updated | date }}
                   </div>
