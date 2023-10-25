@@ -17,12 +17,7 @@ export const getArchiveLinks = (
       const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
       const label = `${getMonthName(parseInt(month))} ${year}`;
 
-      if (archiveMap.has(label)) {
-        const existingLink = archiveMap.get(label);
-        if (existingLink && year > existingLink.year) {
-          existingLink.year = year;
-        }
-      } else {
+      if (!isNaN(date.getTime()) && post.attributes.date) {
         archiveMap.set(label, { label, month, year });
       }
     }
