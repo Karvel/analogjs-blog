@@ -9,6 +9,7 @@ import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
+import { getMonthName } from '@utils/get-month-name';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
@@ -21,7 +22,9 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     >
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1 class="md:flex md:flex-col md:self-start">Month: {{ month }}</h1>
+          <h1 class="md:flex md:flex-col md:self-start">
+            Month: {{ monthName }}
+          </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
               <app-blog-card [post]="post" />
@@ -37,6 +40,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 })
 export default class monthPageComponent implements OnInit {
   public month!: string;
+  public monthName!: string;
   public year!: string;
   public filteredPosts!: ContentFile<BlogPost>[];
 
@@ -67,8 +71,9 @@ export default class monthPageComponent implements OnInit {
   public ngOnInit(): void {
     this.month = this.route.snapshot.paramMap.get('month') || '';
     this.year = this.route.snapshot.paramMap.get('year') || '';
-    this.setPageTitle(this.month);
-    this.setMetadata(this.month);
+    this.monthName = getMonthName(parseInt(this.month));
+    this.setPageTitle(this.monthName);
+    this.setMetadata(this.monthName);
     this.filteredPosts = this.filterBlogPostsByMonth(
       this.posts,
       this.year,
@@ -106,9 +111,7 @@ export default class monthPageComponent implements OnInit {
    * Setting dynamic page title in component
    */
   private setPageTitle(month: string): void {
-    const title = month
-      ? `${month} Month | ${siteName}`
-      : `Month | ${siteName}`;
+    const title = month ? `${month} | ${siteName}` : `Month | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }
