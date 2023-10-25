@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 
 import { ContentFile } from '@analogjs/content';
 
+import { ArchiveLink } from '@models/archive-link';
 import { BlogPost } from '@models/post';
 import { getMonthName } from '@utils/get-month-name';
 
@@ -54,10 +55,4 @@ export class ArchiveComponent implements OnInit {
 
     return Array.from(archiveMap.values());
   }
-}
-
-export interface ArchiveLink {
-  label: string;
-  month: string;
-  year: string;
 }
