@@ -1,5 +1,5 @@
 import { DatePipe, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ContentFile } from '@analogjs/content';
@@ -39,7 +39,9 @@ import { BlogPost } from '@models/post';
           </div>
         </div>
         <div class="text-lg font-bold">
-          <a [routerLink]="['/blog', post.slug]">{{ post.attributes.title }}</a>
+          <a [routerLink]="['/blog', year, month, post.slug]">{{
+            post.attributes.title
+          }}</a>
         </div>
         <div class="sm:max-w-prose text-sm">
           {{ post.attributes.description }}
@@ -63,6 +65,18 @@ import { BlogPost } from '@models/post';
     </div>
   `,
 })
-export class BlogCardComponent {
+export class BlogCardComponent implements OnInit {
   @Input() post!: ContentFile<BlogPost>;
+
+  public month = '';
+  public year = '';
+
+  public ngOnInit(): void {
+    this.year = new Date(this.post.attributes.date || '')
+      .getFullYear()
+      ?.toString();
+    this.month = (new Date(this.post.attributes.date || '').getMonth() + 1)
+      ?.toString()
+      ?.padStart(2, '0');
+  }
 }
