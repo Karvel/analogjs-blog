@@ -34,7 +34,7 @@ import { ArchiveComponent } from '@components/archive/archive.component';
             There are no posts from {{ year }}.
           </div></ng-template
         >
-        <ng-container *ngIf="posts?.length && !filteredPosts?.length">
+        <ng-container *ngIf="posts?.length">
           <div class="mt-5">
             <app-archive [posts]="posts" />
           </div>
