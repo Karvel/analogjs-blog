@@ -14,7 +14,7 @@ import { getArchiveLinks } from '@utils/get-archive-links';
   imports: [NgFor, NgIf, JsonPipe, RouterLink],
   template: `
     <ng-container *ngIf="posts?.length">
-      <h2>Archives:</h2>
+      <h2 class="text-xl pb-5">Archives:</h2>
       <div *ngFor="let link of archiveLinks">
         <a [routerLink]="['/blog', link.year, link.month]">{{ link.label }}</a>
       </div>
