@@ -23,7 +23,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start">
-            Month: {{ monthName }}
+            Posts filtered by month and year: {{ monthName }} {{ year }}
           </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
@@ -72,8 +72,8 @@ export default class monthPageComponent implements OnInit {
     this.month = this.route.snapshot.paramMap.get('month') || '';
     this.year = this.route.snapshot.paramMap.get('year') || '';
     this.monthName = getMonthName(parseInt(this.month));
-    this.setPageTitle(this.monthName);
-    this.setMetadata(this.monthName);
+    this.setPageTitle(this.monthName, this.year);
+    this.setMetadata(this.monthName, this.year);
     this.filteredPosts = this.filterBlogPostsByMonth(
       this.posts,
       this.year,
@@ -96,8 +96,8 @@ export default class monthPageComponent implements OnInit {
     );
   }
 
-  private setMetadata(month: string): void {
-    const description = `Blog posts filtered by ${month}.`;
+  private setMetadata(month: string, year: string): void {
+    const description = `Blog posts filtered by ${month} ${year}.`;
     this.metaTagList.map((metaTag) => {
       metaTag.content = description;
 
@@ -110,8 +110,10 @@ export default class monthPageComponent implements OnInit {
   /**
    * Setting dynamic page title in component
    */
-  private setPageTitle(month: string): void {
-    const title = month ? `${month} | ${siteName}` : `Month | ${siteName}`;
+  private setPageTitle(month: string, year: string): void {
+    const title = month
+      ? `${month} ${year} | ${siteName}`
+      : `Month | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }

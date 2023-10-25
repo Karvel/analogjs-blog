@@ -21,7 +21,9 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     >
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1 class="md:flex md:flex-col md:self-start">Year: {{ year }}</h1>
+          <h1 class="md:flex md:flex-col md:self-start">
+            Posts filtered by year: {{ year }}
+          </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
               <app-blog-card [post]="post" />
@@ -97,7 +99,7 @@ export default class YearPageComponent implements OnInit {
    * Setting dynamic page title in component
    */
   private setPageTitle(year: string): void {
-    const title = year ? `${year} Year | ${siteName}` : `Year | ${siteName}`;
+    const title = year ? `${year} | ${siteName}` : `Year | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }
