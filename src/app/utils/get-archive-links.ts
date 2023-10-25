@@ -4,6 +4,7 @@ import { ArchiveLink } from '@models/archive-link';
 import { BlogPost } from '@models/post';
 
 import { getMonthName } from './get-month-name';
+import { isValidDate } from './is-valid-date';
 
 export const getArchiveLinks = (
   posts: ContentFile<BlogPost>[],
@@ -17,7 +18,7 @@ export const getArchiveLinks = (
       const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
       const label = `${getMonthName(parseInt(month))} ${year}`;
 
-      if (!isNaN(date.getTime()) && post.attributes.date) {
+      if (isValidDate(date) && post.attributes.date) {
         archiveMap.set(label, { label, month, year });
       }
     }
