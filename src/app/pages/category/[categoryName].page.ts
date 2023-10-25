@@ -16,12 +16,10 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
   standalone: true,
   imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
   template: `
-    <div
-      class="md:max-w md:mx-auto md:flex md:flex-col md:items-center text-xl"
-    >
+    <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
-          <h1 class="md:flex md:flex-col md:self-start">
+          <h1 class="md:flex md:flex-col md:self-start text-xl">
             Category: {{ categoryName }}
           </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
@@ -31,9 +29,13 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           </ul>
         </div>
         <ng-template #emptyResult
-          >There are no posts matching "{{ categoryName }}".</ng-template
+          ><div class="pt-5 flex grow">
+            There are no posts matching "{{ categoryName }}".
+          </div></ng-template
         >
-        <div><a [routerLink]="['/category']">All Categories</a></div>
+        <div class="pt-5">
+          <a [routerLink]="['/category']">All Categories</a>
+        </div>
       </div>
     </div>
   `,
