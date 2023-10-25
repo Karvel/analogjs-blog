@@ -10,17 +10,18 @@ import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { ArchiveComponent } from '@components/archive/archive.component';
 
 @Component({
-  selector: 'app-category-name-page',
+  selector: 'app-year-page',
   standalone: true,
-  imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
+  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf, RouterLink],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">
-            Category: {{ categoryName }}
+            Posts filtered by year: {{ year }}
           </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
@@ -29,20 +30,25 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           </ul>
         </div>
         <ng-template #emptyResult
-          ><div class="pt-5 flex grow">
-            There are no posts matching "{{ categoryName }}".
+          ><div class="pt-5">
+            There are no posts from {{ year }}.
           </div></ng-template
         >
-        <div class="pt-5">
-          <a [routerLink]="['/category']">All Categories</a>
-        </div>
+        <ng-container *ngIf="posts?.length">
+          <div class="mt-5">
+            <app-archive [posts]="posts" />
+          </div>
+        </ng-container>
       </div>
     </div>
   `,
 })
-export default class CategoryNamePageComponent implements OnInit {
-  public categoryName!: string;
+export default class YearPageComponent implements OnInit {
   public filteredPosts!: ContentFile<BlogPost>[];
+  public posts = injectContentFiles<BlogPost>((mdFile) =>
+    mdFile.filename.includes('/src/content/posts'),
+  ).sort(sortByUpdatedOrOriginalDate);
+  public year!: string;
 
   private metadataService = inject(MetadataService);
   private metaTagList: MetaDefinition[] = [
@@ -63,32 +69,29 @@ export default class CategoryNamePageComponent implements OnInit {
       content: '',
     },
   ];
-  private posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.categoryName = this.route.snapshot.paramMap.get('categoryName') || '';
-    this.setPageTitle(this.categoryName);
-    this.setMetadata(this.categoryName);
-    this.filteredPosts = this.filterBlogPostsByCategory(
-      this.posts,
-      this.categoryName,
-    );
+    this.year = this.route.snapshot.paramMap.get('year') || '';
+    this.setPageTitle(this.year);
+    this.setMetadata(this.year);
+    this.filteredPosts = this.filterBlogPostsByYear(this.posts, this.year);
   }
 
-  private filterBlogPostsByCategory(
+  private filterBlogPostsByYear(
     posts: ContentFile<BlogPost>[],
-    categoryToFilter: string,
+    filterBy: string,
   ): ContentFile<BlogPost>[] {
-    return posts.filter(
-      (post) => post.attributes.category === categoryToFilter,
-    );
+    return posts.filter((post) => {
+      return (
+        new Date(post.attributes.date || '').getFullYear()?.toString() ===
+        filterBy
+      );
+    });
   }
 
-  private setMetadata(categoryName: string): void {
-    const description = `Blog posts filtered by ${categoryName}.`;
+  private setMetadata(year: string): void {
+    const description = `Blog posts filtered by ${year}.`;
     this.metaTagList.map((metaTag) => {
       metaTag.content = description;
 
@@ -101,10 +104,8 @@ export default class CategoryNamePageComponent implements OnInit {
   /**
    * Setting dynamic page title in component
    */
-  private setPageTitle(categoryName: string): void {
-    const title = categoryName
-      ? `${categoryName} Category | ${siteName}`
-      : `Category | ${siteName}`;
+  private setPageTitle(year: string): void {
+    const title = year ? `${year} | ${siteName}` : `Year | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }

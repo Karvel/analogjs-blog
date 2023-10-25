@@ -28,12 +28,12 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
             </li>
           </ul>
         </div>
-        <ng-template #emptyResult>
-          <div class="flex grow">
+        <ng-template #emptyResult
+          ><div class="pt-5 flex grow">
             There are no posts matching "{{ tagName }}".
-          </div>
-        </ng-template>
-        <div><a [routerLink]="['/tag']">All Tags</a></div>
+          </div></ng-template
+        >
+        <div class="pt-5"><a [routerLink]="['/tag']">All Tags</a></div>
       </div>
     </div>
   `,

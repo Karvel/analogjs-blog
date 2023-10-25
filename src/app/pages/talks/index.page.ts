@@ -34,7 +34,7 @@ export const metaTagList: MetaDefinition[] = [
 ];
 
 @Component({
-  selector: 'app-category-index',
+  selector: 'app-talks-index',
   standalone: true,
   imports: [JsonPipe, NgFor, NgIf],
   template: `

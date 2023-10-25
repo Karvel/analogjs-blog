@@ -9,18 +9,20 @@ import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
+import { getMonthName } from '@utils/get-month-name';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { ArchiveComponent } from '@components/archive/archive.component';
 
 @Component({
-  selector: 'app-category-name-page',
+  selector: 'app-month-page',
   standalone: true,
-  imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
+  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf, RouterLink],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">
-            Category: {{ categoryName }}
+            Posts filtered by month and year: {{ monthName }} {{ year }}
           </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
             <li *ngFor="let post of filteredPosts">
@@ -29,20 +31,27 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           </ul>
         </div>
         <ng-template #emptyResult
-          ><div class="pt-5 flex grow">
-            There are no posts matching "{{ categoryName }}".
+          ><div class="pt-5">
+            There are no posts from {{ monthName }} {{ year }}.
           </div></ng-template
         >
-        <div class="pt-5">
-          <a [routerLink]="['/category']">All Categories</a>
-        </div>
+        <ng-container *ngIf="posts?.length">
+          <div class="mt-5">
+            <app-archive [posts]="posts" />
+          </div>
+        </ng-container>
       </div>
     </div>
   `,
 })
-export default class CategoryNamePageComponent implements OnInit {
-  public categoryName!: string;
+export default class monthPageComponent implements OnInit {
   public filteredPosts!: ContentFile<BlogPost>[];
+  public month!: string;
+  public monthName!: string;
+  public posts = injectContentFiles<BlogPost>((mdFile) =>
+    mdFile.filename.includes('/src/content/posts'),
+  ).sort(sortByUpdatedOrOriginalDate);
+  public year!: string;
 
   private metadataService = inject(MetadataService);
   private metaTagList: MetaDefinition[] = [
@@ -63,32 +72,38 @@ export default class CategoryNamePageComponent implements OnInit {
       content: '',
     },
   ];
-  private posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.categoryName = this.route.snapshot.paramMap.get('categoryName') || '';
-    this.setPageTitle(this.categoryName);
-    this.setMetadata(this.categoryName);
-    this.filteredPosts = this.filterBlogPostsByCategory(
+    this.month = this.route.snapshot.paramMap.get('month') || '';
+    this.year = this.route.snapshot.paramMap.get('year') || '';
+    this.monthName = getMonthName(parseInt(this.month));
+    this.setPageTitle(this.monthName, this.year);
+    this.setMetadata(this.monthName, this.year);
+    this.filteredPosts = this.filterBlogPostsByMonth(
       this.posts,
-      this.categoryName,
+      this.year,
+      this.month,
     );
   }
 
-  private filterBlogPostsByCategory(
+  private filterBlogPostsByMonth(
     posts: ContentFile<BlogPost>[],
-    categoryToFilter: string,
+    filterByYear: string,
+    filterByMonth: string,
   ): ContentFile<BlogPost>[] {
     return posts.filter(
-      (post) => post.attributes.category === categoryToFilter,
+      (post) =>
+        new Date(post.attributes.date || '').getFullYear()?.toString() ===
+          filterByYear &&
+        (new Date(post.attributes.date || '').getMonth() + 1)
+          ?.toString()
+          ?.padStart(2, '0') === filterByMonth,
     );
   }
 
-  private setMetadata(categoryName: string): void {
-    const description = `Blog posts filtered by ${categoryName}.`;
+  private setMetadata(month: string, year: string): void {
+    const description = `Blog posts filtered by ${month} ${year}.`;
     this.metaTagList.map((metaTag) => {
       metaTag.content = description;
 
@@ -101,10 +116,10 @@ export default class CategoryNamePageComponent implements OnInit {
   /**
    * Setting dynamic page title in component
    */
-  private setPageTitle(categoryName: string): void {
-    const title = categoryName
-      ? `${categoryName} Category | ${siteName}`
-      : `Category | ${siteName}`;
+  private setPageTitle(month: string, year: string): void {
+    const title = month
+      ? `${month} ${year} | ${siteName}`
+      : `Month | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
   }
