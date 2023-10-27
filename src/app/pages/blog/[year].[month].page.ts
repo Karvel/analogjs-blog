@@ -10,6 +10,8 @@ import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
+import { getYear } from '@utils/get-year';
+import { getMonth } from '@utils/get-month';
 import { getMonthName } from '@utils/get-month-name';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
@@ -94,11 +96,8 @@ export default class monthPageComponent implements OnInit {
   ): ContentFile<BlogPost>[] {
     return posts.filter(
       (post) =>
-        new Date(post.attributes.date || '').getFullYear()?.toString() ===
-          filterByYear &&
-        (new Date(post.attributes.date || '').getMonth() + 1)
-          ?.toString()
-          ?.padStart(2, '0') === filterByMonth,
+        getYear(post.attributes.date) === filterByYear &&
+        getMonth(post.attributes.date) === filterByMonth,
     );
   }
 

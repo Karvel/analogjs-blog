@@ -22,6 +22,8 @@ import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
+import { getYear } from '@utils/get-year';
+import { getMonth } from '@utils/get-month';
 
 @Component({
   selector: 'app-blog-slug',
@@ -192,11 +194,10 @@ export default class BlogPostPageComponent {
   }).pipe(
     filter((post) => {
       return (
-        new Date(post.attributes.date || '').getFullYear()?.toString() ===
+        getYear(post.attributes.date) ===
           this.route.snapshot.paramMap.get('year') &&
-        (new Date(post.attributes.date || '').getMonth() + 1)
-          ?.toString()
-          ?.padStart(2, '0') === this.route.snapshot.paramMap.get('month')
+        getMonth(post.attributes.date) ===
+          this.route.snapshot.paramMap.get('month')
       );
     }),
   );

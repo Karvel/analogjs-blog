@@ -11,6 +11,7 @@ import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { ArchiveComponent } from '@components/archive/archive.component';
+import { getYear } from '@utils/get-year';
 
 @Component({
   selector: 'app-year-page',
@@ -82,12 +83,7 @@ export default class YearPageComponent implements OnInit {
     posts: ContentFile<BlogPost>[],
     filterBy: string,
   ): ContentFile<BlogPost>[] {
-    return posts.filter((post) => {
-      return (
-        new Date(post.attributes.date || '').getFullYear()?.toString() ===
-        filterBy
-      );
-    });
+    return posts.filter((post) => getYear(post.attributes.date) === filterBy);
   }
 
   private setMetadata(year: string): void {
