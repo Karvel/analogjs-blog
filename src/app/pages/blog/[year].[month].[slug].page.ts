@@ -1,7 +1,7 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import {
   ContentFile,
@@ -15,6 +15,7 @@ import { ArchiveComponent } from '@components/archive/archive.component';
 import PillComponent from '@components/pill/pill.component';
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
 import PopoverComponent from '@components/popover/popover.component';
+import { PostNavigationComponent } from '@components/post-navigation/post-navigation.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
@@ -39,8 +40,8 @@ import { getMonth } from '@utils/get-month';
     NgIf,
     PillComponent,
     PopoverComponent,
+    PostNavigationComponent,
     ReplaceBrokenImageDirective,
-    RouterLink,
   ],
   styleUrls: ['./[year].[month].[slug].page.css'],
   template: `
@@ -146,32 +147,7 @@ import { getMonth } from '@utils/get-month';
               </ng-container>
             </div>
           </div>
-          <div class="flex justify-between text-sm mt-2 gap-2">
-            <button
-              *ngIf="prevPost"
-              [routerLink]="['/blog', prevPost.slug]"
-              attr.alt="Click to go to the previous post: {{
-                prevPost.attributes.title
-              }}"
-              type="button"
-              class="inline-flex focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
-            >
-              <span>&laquo; &nbsp;</span
-              ><span class="truncate">{{ prevPost.attributes.title }}</span>
-            </button>
-            <button
-              *ngIf="nextPost"
-              [routerLink]="['/blog', nextPost.slug]"
-              attr.alt="Click to go to the next post: {{
-                nextPost.attributes.title
-              }}"
-              type="button"
-              class="inline-flex ml-auto focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
-            >
-              <span class="truncate">{{ nextPost.attributes.title }}</span
-              ><span>&nbsp; &raquo;</span>
-            </button>
-          </div>
+          <app-post-navigation [post]="post" [posts]="posts" />
         </div>
       </div>
       <ng-template #emptyResult>
@@ -187,7 +163,6 @@ import { getMonth } from '@utils/get-month';
 })
 export default class BlogPostPageComponent {
   private route = inject(ActivatedRoute);
-  public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
@@ -204,7 +179,6 @@ export default class BlogPostPageComponent {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
-  public prevPost!: ContentFile<BlogPost>;
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
 
@@ -213,21 +187,8 @@ export default class BlogPostPageComponent {
   constructor() {
     this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
       this.setPageTitle(post);
-      this.setNavigation(post, this.posts);
       this.metadataService.setMetaTagsFromFrontMatter(post);
     });
-  }
-
-  private setNavigation(
-    post: ContentFile<BlogPost | Record<string, never>>,
-    posts: ContentFile<BlogPost>[],
-  ): void {
-    const index = posts.findIndex((p) => p.slug === post.slug);
-    const nextPost = posts[index + 1];
-    const previousPost = posts[index - 1];
-
-    this.nextPost = nextPost;
-    this.prevPost = previousPost;
   }
 
   /**
