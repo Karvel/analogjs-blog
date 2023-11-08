@@ -1,7 +1,6 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
 
 import {
   ContentFile,
@@ -9,7 +8,6 @@ import {
   injectContentFiles,
   MarkdownComponent,
 } from '@analogjs/content';
-import { filter } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
 import PillComponent from '@components/pill/pill.component';
@@ -23,8 +21,6 @@ import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
-import { getYear } from '@utils/get-year';
-import { getMonth } from '@utils/get-month';
 
 @Component({
   selector: 'app-blog-slug',
@@ -162,20 +158,10 @@ import { getMonth } from '@utils/get-month';
   `,
 })
 export default class BlogPostPageComponent {
-  private route = inject(ActivatedRoute);
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
-  }).pipe(
-    filter((post) => {
-      return (
-        getYear(post.attributes.date) ===
-          this.route.snapshot.paramMap.get('year') &&
-        getMonth(post.attributes.date) ===
-          this.route.snapshot.paramMap.get('month')
-      );
-    }),
-  );
+  });
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
