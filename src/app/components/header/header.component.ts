@@ -77,20 +77,20 @@ import { Navigation } from '@models/navigation';
 export default class HeaderComponent {
   public linkList: Navigation[] = [
     {
-      label: 'Blog',
-      path: 'blog',
-    },
-    {
       label: 'About',
       path: 'about',
     },
     {
-      label: 'Photos',
-      path: 'photos',
+      label: 'Blog',
+      path: 'blog',
     },
     {
       label: 'Talks',
       path: 'talks',
+    },
+    {
+      label: 'Photos',
+      path: 'photos',
     },
   ];
   public siteName = siteName;
