@@ -121,8 +121,8 @@ export default class monthPageComponent implements OnInit {
     this.route.paramMap
       .pipe(
         tap((params) => {
-          this.month = params.get('month') || '';
-          this.year = params.get('year') || '';
+          this.month = params.get('month') ?? '';
+          this.year = params.get('year') ?? '';
           this.monthName = getMonthName(parseInt(this.month));
           this.setPageTitle(this.monthName, this.year);
           this.setMetadata(this.monthName, this.year);

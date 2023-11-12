@@ -73,7 +73,7 @@ export default class YearPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.year = this.route.snapshot.paramMap.get('year') || '';
+    this.year = this.route.snapshot.paramMap.get('year') ?? '';
     this.setPageTitle(this.year);
     this.setMetadata(this.year);
     this.filteredPosts = this.filterBlogPostsByYear(this.posts, this.year);

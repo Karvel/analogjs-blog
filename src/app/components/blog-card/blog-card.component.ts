@@ -59,7 +59,7 @@ import { getMonth } from '@utils/get-month';
       <div *ngIf="post?.attributes?.cover_image">
         <img
           [src]="post.attributes.cover_image"
-          [alt]="post.attributes.cover_image_title || 'Post Cover Image'"
+          [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
           appReplaceBrokenImage
           class="sm:max-w-xs rounded-md"
         />

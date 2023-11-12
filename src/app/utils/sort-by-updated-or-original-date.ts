@@ -15,9 +15,9 @@ export const sortByUpdatedOrOriginalDate = (
   }
 
   const originalOrUpdatedDateA =
-    a.attributes?.last_updated || a.attributes?.date;
+    a.attributes?.last_updated ?? a.attributes?.date;
   const originalOrUpdatedDateB =
-    b.attributes?.last_updated || b.attributes?.date;
+    b.attributes?.last_updated ?? b.attributes?.date;
   const dateA = originalOrUpdatedDateA
     ? new Date(originalOrUpdatedDateA)
     : null;
