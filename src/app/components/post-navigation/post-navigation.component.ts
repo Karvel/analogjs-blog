@@ -1,9 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { ContentFile } from '@analogjs/content';
-import { debounceTime, tap } from 'rxjs';
 
 import { BlogPost } from '@models/post';
 import { getMonth } from '@utils/get-month';
@@ -50,47 +49,12 @@ import { getYear } from '@utils/get-year';
     </div>
   `,
 })
-export class PostNavigationComponent implements OnInit {
+export class PostNavigationComponent {
+  @Input() public nextPost!: ContentFile<BlogPost>;
   @Input() public post!: ContentFile<BlogPost | Record<string, never>>;
   @Input() public posts!: ContentFile<BlogPost>[];
+  @Input() public prevPost!: ContentFile<BlogPost>;
 
   public getMonth: (dateString: string | undefined) => string = getMonth;
   public getYear: (dateString: string | undefined) => string = getYear;
-  public nextPost!: ContentFile<BlogPost>;
-  public prevPost!: ContentFile<BlogPost>;
-
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-
-  public ngOnInit(): void {
-    this.setRouteListener();
-  }
-
-  private setNavigation(
-    post: ContentFile<BlogPost | Record<string, never>>,
-    posts: ContentFile<BlogPost>[],
-  ): void {
-    const index = posts.findIndex((p) => p.slug === post.slug);
-    const nextPost = posts[index + 1];
-    const previousPost = posts[index - 1];
-
-    this.nextPost = nextPost;
-    this.prevPost = previousPost;
-  }
-
-  private setRouteListener(): void {
-    // TODO: Remove need for debounce
-    this.route.params
-      .pipe(
-        debounceTime(100),
-        tap(() => {
-          this.setNavigation(this.post, this.posts);
-          void this.router.navigate([this.router.url], {
-            relativeTo: this.route,
-            skipLocationChange: false,
-          });
-        }),
-      )
-      .subscribe();
-  }
 }

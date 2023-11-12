@@ -1,6 +1,7 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
 import {
   ContentFile,
@@ -8,6 +9,7 @@ import {
   injectContentFiles,
   MarkdownComponent,
 } from '@analogjs/content';
+import { switchMap, tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
 import PillComponent from '@components/pill/pill.component';
@@ -143,7 +145,12 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
               </ng-container>
             </div>
           </div>
-          <app-post-navigation [post]="post" [posts]="posts" />
+          <app-post-navigation
+            [nextPost]="nextPost"
+            [post]="post"
+            [posts]="posts"
+            [prevPost]="prevPost"
+          />
         </div>
       </div>
       <ng-template #emptyResult>
@@ -158,6 +165,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
   `,
 })
 export default class BlogPostPageComponent {
+  public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
@@ -165,16 +173,28 @@ export default class BlogPostPageComponent {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
+  public prevPost!: ContentFile<BlogPost>;
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
 
+  private destroyRef = inject(DestroyRef);
   private metadataService = inject(MetadataService);
+  private route = inject(ActivatedRoute);
 
   constructor() {
-    this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
-      this.setPageTitle(post);
-      this.metadataService.setMetaTagsFromFrontMatter(post);
-    });
+    this.setRouteListener();
+  }
+
+  private setNavigation(
+    post: ContentFile<BlogPost | Record<string, never>>,
+    posts: ContentFile<BlogPost>[],
+  ): void {
+    const index = posts.findIndex((p) => p.slug === post.slug);
+    const nextPost = posts[index + 1];
+    const previousPost = posts[index - 1];
+
+    this.nextPost = nextPost;
+    this.prevPost = previousPost;
   }
 
   /**
@@ -188,5 +208,19 @@ export default class BlogPostPageComponent {
       : `Post | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
+  }
+
+  private setRouteListener(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap(() => this.post$),
+        tap((post) => {
+          this.setPageTitle(post);
+          this.metadataService.setMetaTagsFromFrontMatter(post);
+          this.setNavigation(post, this.posts);
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 }
