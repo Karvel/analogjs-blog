@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => ({
         routes: async () => [
           '/',
           '/api/rss.xml',
+          '/about',
           '/blog',
           '/category',
           '/photos',
