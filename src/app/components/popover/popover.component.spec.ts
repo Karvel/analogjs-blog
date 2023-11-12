@@ -37,7 +37,7 @@ describe('PopoverComponent', () => {
     expect(renderer2.listen).not.toHaveBeenCalled();
   });
 
-  it('should toggle isActive state', () => {
+  it('toggle() should toggle isActive state', () => {
     expect(popoverComponent.isActive).toBe(false);
     popoverComponent.toggle();
     expect(popoverComponent.isActive).toBe(true);
