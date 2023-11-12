@@ -29,6 +29,7 @@ describe('PopoverComponent', () => {
     });
 
     fixture = TestBed.createComponent(TestHostComponent);
+    fixture.detectChanges();
     hostComponent = fixture.componentInstance;
     popoverComponent = fixture.debugElement.query(
       By.directive(PopoverComponent),
