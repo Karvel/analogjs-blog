@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 import { flickr } from '@constants/flickr';
 import {
@@ -21,6 +21,7 @@ import { ApiService } from './api.service';
 export class FlickrService {
   private apiService = inject(ApiService);
   private baseUrl = 'https://www.flickr.com/services/rest';
+  private cache: { [key: string]: Person } = {};
 
   /**
    * Get 9 randomized photos from my photo set of favorite photos.
@@ -45,6 +46,12 @@ export class FlickrService {
   }
 
   public getProfile(): Observable<Person> {
+    const cacheKey = 'profile';
+    // Check if the result is already in the cache
+    if (this.cache[cacheKey]) {
+      return of(this.cache[cacheKey]);
+    }
+
     const paramObj = {
       method: 'flickr.people.getInfo',
       api_key: atob(flickr.api_key),
@@ -58,7 +65,15 @@ export class FlickrService {
       .get<UserProfileResponse>(`${this.baseUrl}`, {
         params,
       })
-      .pipe(map((response) => response.person));
+      .pipe(
+        map((response) => {
+          const profile = response.person;
+          // Store the result in the cache
+          this.cache[cacheKey] = profile;
+
+          return profile;
+        }),
+      );
   }
 
   /**

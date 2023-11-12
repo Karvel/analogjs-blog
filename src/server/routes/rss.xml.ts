@@ -5,8 +5,10 @@ import * as path from 'path';
 import fm from 'front-matter';
 
 import { BlogPost } from '@models/post';
+import { getMonth } from '../../app/utils/get-month';
+import { getYear } from '../../app/utils/get-year';
 
-const posts = fs.readdirSync('./src/content');
+const posts = fs.readdirSync('./src/content/posts');
 async function generateRssFeed() {
   const site_url = 'https://elanna.me';
 
@@ -24,7 +26,7 @@ async function generateRssFeed() {
   posts
     .map((contentFile) => {
       const fileContents = fs.readFileSync(
-        path.resolve('src/content', contentFile),
+        path.resolve('src/content/posts', contentFile),
         'utf8',
       );
       return {
@@ -35,11 +37,13 @@ async function generateRssFeed() {
       (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
     )
     .forEach(({ attributes }) => {
+      const month = getMonth(attributes.date);
+      const year = getYear(attributes.date);
       feed.item({
         title: attributes.title,
         author: attributes.author,
         description: attributes.description,
-        url: `${site_url}/blog/${attributes.slug}`,
+        url: `${site_url}/blog/${year}/${month}/${attributes.slug}`,
         date: attributes.date,
       });
     });

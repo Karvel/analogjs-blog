@@ -62,6 +62,7 @@ import { getMonth } from '@utils/get-month';
           [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
           appReplaceBrokenImage
           class="sm:max-w-xs rounded-md"
+          loading="lazy"
         />
       </div>
     </div>

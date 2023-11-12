@@ -1,5 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+
+import { BehaviorSubject, tap } from 'rxjs';
 
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
 import PopoverComponent from '@components/popover/popover.component';
@@ -17,10 +19,16 @@ import { FlickrService } from '@services/api/flickr.service';
     PopoverComponent,
   ],
   template: `
+    <div *ngIf="loading$ | async">Loading...</div>
     <div *ngIf="photos$ | async as photos">
       <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
-          <img *ngIf="photo.url_m" [src]="photo.url_m" [alt]="photo.title" />
+          <img
+            *ngIf="photo.url_m"
+            [src]="photo.url_m"
+            [alt]="photo.title"
+            loading="lazy"
+          />
           <div class="relative">
             <div
               class="absolute -top-6 left-0 -right-2 bottom-0 flex flex-col justify-end p-4"
@@ -50,7 +58,15 @@ import { FlickrService } from '@services/api/flickr.service';
   styleUrls: ['./masonry-grid.component.css'],
 })
 export class MasonryGridComponent {
+  private changeDetectorRef = inject(ChangeDetectorRef);
   private flickrService = inject(FlickrService);
+
   public flickr = flickr;
-  public photos$ = this.flickrService.getFavoritePhotos();
+  public loading$ = new BehaviorSubject<boolean>(true);
+  public photos$ = this.flickrService.getFavoritePhotos().pipe(
+    tap(() => {
+      this.loading$.next(false);
+      this.changeDetectorRef.detectChanges();
+    }),
+  );
 }

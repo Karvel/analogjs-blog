@@ -8,7 +8,7 @@ import { siteName } from '@constants/site-name';
   standalone: true,
 })
 export class ReplaceBrokenImageDirective {
-  private el = inject(ElementRef);
+  private el: ElementRef<HTMLImageElement> = inject(ElementRef);
 
   @HostListener('error')
   public onError(): void {

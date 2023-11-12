@@ -69,6 +69,7 @@ export const metaTagList: MetaDefinition[] = [
                     [alt]="talk.title || 'Talk Cover Image'"
                     appReplaceBrokenImage
                     class="sm:max-w-xs rounded-md"
+                    loading="lazy"
                   />
                 </div>
               </div>

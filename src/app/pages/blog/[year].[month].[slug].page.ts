@@ -54,6 +54,7 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
                 [src]="post.attributes.cover_image"
                 [alt]="post.attributes.cover_image_title"
                 class="w-full max-w-full rounded-md"
+                loading="lazy"
               />
               <div [ngClass]="{ image_container: post.attributes.cover_image }">
                 <h1
