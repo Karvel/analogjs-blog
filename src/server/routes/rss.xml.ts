@@ -6,7 +6,7 @@ import fm from 'front-matter';
 
 import { BlogPost } from '@models/post';
 
-const posts = fs.readdirSync('./src/content');
+const posts = fs.readdirSync('./src/content/posts');
 async function generateRssFeed() {
   const site_url = 'https://elanna.me';
 
@@ -24,7 +24,7 @@ async function generateRssFeed() {
   posts
     .map((contentFile) => {
       const fileContents = fs.readFileSync(
-        path.resolve('src/content', contentFile),
+        path.resolve('src/content/posts', contentFile),
         'utf8',
       );
       return {
