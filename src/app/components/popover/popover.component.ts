@@ -43,29 +43,38 @@ export default class PopoverComponent implements OnInit, OnDestroy {
 
   public isActive = false;
 
-  private popoverListener!: () => void;
+  private popoverClickListener!: () => void;
+  private popoverKeyPressListener!: () => void;
   private renderer = inject(Renderer2);
 
   public ngOnInit(): void {
-    this.popoverListener = this.renderer.listen(
+    this.popoverClickListener = this.renderer.listen(
       'window',
       'click',
-      (e: Event) => {
-        if (
-          !this.popoverIcon.nativeElement.contains(e.target) &&
-          !this.popover.nativeElement.contains(e.target)
-        ) {
-          this.isActive = false;
-        }
-      },
+      (e: Event) => this.toggleOffOnEventOutsideTarget(e),
+    );
+    this.popoverKeyPressListener = this.renderer.listen(
+      'window',
+      'keypress',
+      (e: Event) => this.toggleOffOnEventOutsideTarget(e),
     );
   }
 
   public ngOnDestroy(): void {
-    this.popoverListener();
+    this.popoverClickListener();
+    this.popoverKeyPressListener();
   }
 
   public toggle(): void {
     this.isActive = !this.isActive;
+  }
+
+  private toggleOffOnEventOutsideTarget(e: Event): void {
+    if (
+      !this.popoverIcon.nativeElement.contains(e.target) &&
+      !this.popover.nativeElement.contains(e.target)
+    ) {
+      this.isActive = false;
+    }
   }
 }
