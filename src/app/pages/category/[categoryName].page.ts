@@ -69,7 +69,7 @@ export default class CategoryNamePageComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.categoryName = this.route.snapshot.paramMap.get('categoryName') || '';
+    this.categoryName = this.route.snapshot.paramMap.get('categoryName') ?? '';
     this.setPageTitle(this.categoryName);
     this.setMetadata(this.categoryName);
     this.filteredPosts = this.filterBlogPostsByCategory(

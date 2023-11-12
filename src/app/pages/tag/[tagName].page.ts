@@ -67,7 +67,7 @@ export default class TagNamePageComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.tagName = this.route.snapshot.paramMap.get('tagName') || '';
+    this.tagName = this.route.snapshot.paramMap.get('tagName') ?? '';
     this.setPageTitle(this.tagName);
     this.setMetadata(this.tagName);
     this.filteredPosts = this.filterBlogPostsByTag(this.posts, this.tagName);

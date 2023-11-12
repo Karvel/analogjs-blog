@@ -1,7 +1,7 @@
 import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import {
   ContentFile,
@@ -9,12 +9,13 @@ import {
   injectContentFiles,
   MarkdownComponent,
 } from '@analogjs/content';
-import { filter } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
 import PillComponent from '@components/pill/pill.component';
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
 import PopoverComponent from '@components/popover/popover.component';
+import { PostNavigationComponent } from '@components/post-navigation/post-navigation.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
@@ -37,8 +38,8 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     NgIf,
     PillComponent,
     PopoverComponent,
+    PostNavigationComponent,
     ReplaceBrokenImageDirective,
-    RouterLink,
   ],
   styleUrls: ['./[year].[month].[slug].page.css'],
   template: `
@@ -144,32 +145,12 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
               </ng-container>
             </div>
           </div>
-          <div class="flex justify-between text-sm mt-2 gap-2">
-            <button
-              *ngIf="prevPost"
-              [routerLink]="['/blog', prevPost.slug]"
-              attr.alt="Click to go to the previous post: {{
-                prevPost.attributes.title
-              }}"
-              type="button"
-              class="inline-flex focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
-            >
-              <span>&laquo; &nbsp;</span
-              ><span class="truncate">{{ prevPost.attributes.title }}</span>
-            </button>
-            <button
-              *ngIf="nextPost"
-              [routerLink]="['/blog', nextPost.slug]"
-              attr.alt="Click to go to the next post: {{
-                nextPost.attributes.title
-              }}"
-              type="button"
-              class="inline-flex ml-auto focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
-            >
-              <span class="truncate">{{ nextPost.attributes.title }}</span
-              ><span>&nbsp; &raquo;</span>
-            </button>
-          </div>
+          <app-post-navigation
+            [nextPost]="nextPost"
+            [post]="post"
+            [posts]="posts"
+            [prevPost]="prevPost"
+          />
         </div>
       </div>
       <ng-template #emptyResult>
@@ -184,22 +165,11 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
   `,
 })
 export default class BlogPostPageComponent {
-  private route = inject(ActivatedRoute);
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
-  }).pipe(
-    filter((post) => {
-      return (
-        new Date(post.attributes.date || '').getFullYear()?.toString() ===
-          this.route.snapshot.paramMap.get('year') &&
-        (new Date(post.attributes.date || '').getMonth() + 1)
-          ?.toString()
-          ?.padStart(2, '0') === this.route.snapshot.paramMap.get('month')
-      );
-    }),
-  );
+  });
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
@@ -207,14 +177,12 @@ export default class BlogPostPageComponent {
   public splitTagStringIntoArray = splitTagStringIntoArray;
   public tagList: Tag[] = [];
 
+  private destroyRef = inject(DestroyRef);
   private metadataService = inject(MetadataService);
+  private route = inject(ActivatedRoute);
 
   constructor() {
-    this.post$.pipe(takeUntilDestroyed()).subscribe((post) => {
-      this.setPageTitle(post);
-      this.setNavigation(post, this.posts);
-      this.metadataService.setMetaTagsFromFrontMatter(post);
-    });
+    this.setRouteListener();
   }
 
   private setNavigation(
@@ -240,5 +208,19 @@ export default class BlogPostPageComponent {
       : `Post | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
+  }
+
+  private setRouteListener(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap(() => this.post$),
+        tap((post) => {
+          this.setPageTitle(post);
+          this.metadataService.setMetaTagsFromFrontMatter(post);
+          this.setNavigation(post, this.posts);
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 }

@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -13,6 +13,7 @@ import FooterComponent from '@components/footer/footer.component';
 import HeaderComponent from '@components/header/header.component';
 import { MetadataService } from '@services/metadata.service';
 import { siteName } from '@constants/site-name';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ import { siteName } from '@constants/site-name';
   `,
 })
 export class AppComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
   private document = inject(DOCUMENT);
   private metadataService = inject(MetadataService);
   private route = inject(ActivatedRoute);
@@ -54,6 +56,7 @@ export class AppComponent implements OnInit {
         }),
         filter((route) => route.outlet === 'primary'),
         mergeMap((route) => route.data),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
         const pageUrl = this.router.url

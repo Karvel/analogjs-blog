@@ -1,15 +1,19 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
+import { tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
+import { getYear } from '@utils/get-year';
+import { getMonth } from '@utils/get-month';
 import { getMonthName } from '@utils/get-month-name';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
@@ -44,7 +48,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     </div>
   `,
 })
-export default class monthPageComponent implements OnInit {
+export default class MonthPageComponent {
   public filteredPosts!: ContentFile<BlogPost>[];
   public month!: string;
   public monthName!: string;
@@ -53,6 +57,7 @@ export default class monthPageComponent implements OnInit {
   ).sort(sortByUpdatedOrOriginalDate);
   public year!: string;
 
+  private destroyRef = inject(DestroyRef);
   private metadataService = inject(MetadataService);
   private metaTagList: MetaDefinition[] = [
     {
@@ -74,17 +79,8 @@ export default class monthPageComponent implements OnInit {
   ];
   private route = inject(ActivatedRoute);
 
-  public ngOnInit(): void {
-    this.month = this.route.snapshot.paramMap.get('month') || '';
-    this.year = this.route.snapshot.paramMap.get('year') || '';
-    this.monthName = getMonthName(parseInt(this.month));
-    this.setPageTitle(this.monthName, this.year);
-    this.setMetadata(this.monthName, this.year);
-    this.filteredPosts = this.filterBlogPostsByMonth(
-      this.posts,
-      this.year,
-      this.month,
-    );
+  constructor() {
+    this.setRouteListener();
   }
 
   private filterBlogPostsByMonth(
@@ -94,11 +90,8 @@ export default class monthPageComponent implements OnInit {
   ): ContentFile<BlogPost>[] {
     return posts.filter(
       (post) =>
-        new Date(post.attributes.date || '').getFullYear()?.toString() ===
-          filterByYear &&
-        (new Date(post.attributes.date || '').getMonth() + 1)
-          ?.toString()
-          ?.padStart(2, '0') === filterByMonth,
+        getYear(post.attributes.date) === filterByYear &&
+        getMonth(post.attributes.date) === filterByMonth,
     );
   }
 
@@ -122,5 +115,25 @@ export default class monthPageComponent implements OnInit {
       : `Month | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
+  }
+
+  private setRouteListener(): void {
+    this.route.paramMap
+      .pipe(
+        tap((params) => {
+          this.month = params.get('month') ?? '';
+          this.year = params.get('year') ?? '';
+          this.monthName = getMonthName(parseInt(this.month));
+          this.setPageTitle(this.monthName, this.year);
+          this.setMetadata(this.monthName, this.year);
+          this.filteredPosts = this.filterBlogPostsByMonth(
+            this.posts,
+            this.year,
+            this.month,
+          );
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 }

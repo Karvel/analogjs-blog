@@ -7,6 +7,8 @@ import { ContentFile } from '@analogjs/content';
 import PillComponent from '@components/pill/pill.component';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
+import { getYear } from '@utils/get-year';
+import { getMonth } from '@utils/get-month';
 
 @Component({
   selector: 'app-blog-card',
@@ -57,7 +59,7 @@ import { BlogPost } from '@models/post';
       <div *ngIf="post?.attributes?.cover_image">
         <img
           [src]="post.attributes.cover_image"
-          [alt]="post.attributes.cover_image_title || 'Post Cover Image'"
+          [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
           appReplaceBrokenImage
           class="sm:max-w-xs rounded-md"
         />
@@ -72,11 +74,7 @@ export class BlogCardComponent implements OnInit {
   public year = '';
 
   public ngOnInit(): void {
-    this.year = new Date(this.post.attributes.date || '')
-      .getFullYear()
-      ?.toString();
-    this.month = (new Date(this.post.attributes.date || '').getMonth() + 1)
-      ?.toString()
-      ?.padStart(2, '0');
+    this.year = getYear(this.post.attributes.date);
+    this.month = getMonth(this.post.attributes.date);
   }
 }
