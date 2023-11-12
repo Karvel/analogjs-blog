@@ -46,6 +46,7 @@ export const metaTagList: MetaDefinition[] = [
             src="me.jpg"
             class="rounded max-h-[32rem] mx-auto"
             alt="Me in Norway"
+            loading="lazy"
           />
           <div *ngIf="about$ | async as about">
             <analog-markdown

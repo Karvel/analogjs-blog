@@ -31,6 +31,7 @@ export const routeMeta: RouteMeta = pageTitle;
             src="me-sq.jpg"
             class="rounded-full max-h-80 mx-auto"
             alt="Me in Norway"
+            loading="lazy"
           />
           <div class="py-4">
             My name is Elanna. I have been a full-stack developer for over seven

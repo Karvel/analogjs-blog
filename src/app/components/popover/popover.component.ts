@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
       [src]="icon"
       [alt]="altText"
       class="cursor-pointer drop-shadow-lg"
+      loading="lazy"
       tabindex="0"
       width="20"
     />

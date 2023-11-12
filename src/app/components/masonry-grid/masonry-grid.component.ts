@@ -23,7 +23,12 @@ import { FlickrService } from '@services/api/flickr.service';
     <div *ngIf="photos$ | async as photos">
       <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
-          <img *ngIf="photo.url_m" [src]="photo.url_m" [alt]="photo.title" />
+          <img
+            *ngIf="photo.url_m"
+            [src]="photo.url_m"
+            [alt]="photo.title"
+            loading="lazy"
+          />
           <div class="relative">
             <div
               class="absolute -top-6 left-0 -right-2 bottom-0 flex flex-col justify-end p-4"
