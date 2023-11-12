@@ -81,6 +81,10 @@ export default class HeaderComponent {
       path: 'blog',
     },
     {
+      label: 'About',
+      path: 'about',
+    },
+    {
       label: 'Photos',
       path: 'photos',
     },
