@@ -195,6 +195,10 @@ export default class BlogPostPageComponent {
     this.setRouteListener();
   }
 
+  /**
+   * Filter posts by year and month in addition to slug to prevent
+   * displaying the slug with the incorrect year or month
+   */
   private filterSlugByYearAndMonth(
     post: ContentFile<BlogPost | Record<string, never>>,
     filterByYear: string,
