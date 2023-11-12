@@ -1,42 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { Renderer2, Type } from '@angular/core';
 
 import PopoverComponent from './popover.component';
 
-@Component({
-  template: `
-    <app-popover [icon]="icon" [altText]="altText">
-      <div class="popover-content">Popover Content</div>
-    </app-popover>
-  `,
-})
-class TestHostComponent {
-  icon: string | undefined = 'path/to/icon.png';
-  altText: string | undefined = 'Alt Text';
-}
-
 describe('PopoverComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let hostComponent: TestHostComponent;
   let popoverComponent: PopoverComponent;
+  let fixture: ComponentFixture<PopoverComponent>;
+  let renderer2: Renderer2;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent],
       imports: [PopoverComponent],
+      providers: [Renderer2],
     });
 
-    fixture = TestBed.createComponent(TestHostComponent);
-    hostComponent = fixture.componentInstance;
-    popoverComponent = fixture.debugElement.query(
-      By.directive(PopoverComponent),
-    ).componentInstance;
+    fixture = TestBed.createComponent(PopoverComponent);
+    popoverComponent = fixture.componentInstance;
+    fixture.detectChanges();
+    renderer2 = fixture.componentRef.injector.get<Renderer2>(
+      Renderer2 as Type<Renderer2>,
+    );
+    vi.spyOn(renderer2, 'listen');
   });
 
   it('should create', () => {
     expect(popoverComponent).toBeTruthy();
+  });
+
+  it('should initialize event listeners on ngOnInit', () => {
+    popoverComponent.ngOnInit();
+    expect(renderer2.listen).toHaveBeenCalledTimes(2);
+  });
+
+  it('should remove event listeners on ngOnDestroy', () => {
+    popoverComponent.ngOnDestroy();
+    expect(renderer2.listen).not.toHaveBeenCalled();
+  });
+
+  it('toggle() should toggle isActive state', () => {
+    expect(popoverComponent.isActive).toBe(false);
+    popoverComponent.toggle();
+    expect(popoverComponent.isActive).toBe(true);
+    popoverComponent.toggle();
+    expect(popoverComponent.isActive).toBe(false);
   });
 
   it('should toggle isActive when clicked', () => {

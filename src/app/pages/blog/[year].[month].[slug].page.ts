@@ -9,7 +9,7 @@ import {
   injectContentFiles,
   MarkdownComponent,
 } from '@analogjs/content';
-import { switchMap, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
 import PillComponent from '@components/pill/pill.component';
@@ -21,6 +21,8 @@ import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.di
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
+import { getYear } from '@utils/get-year';
+import { getMonth } from '@utils/get-month';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 
@@ -170,7 +172,14 @@ export default class BlogPostPageComponent {
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
-  });
+  }).pipe(
+    map((post) => {
+      const month = this.route.snapshot.paramMap.get('month') ?? '';
+      const year = this.route.snapshot.paramMap.get('year') ?? '';
+
+      return this.filterSlugByYearAndMonth(post, year, month);
+    }),
+  );
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
@@ -184,6 +193,21 @@ export default class BlogPostPageComponent {
 
   constructor() {
     this.setRouteListener();
+  }
+
+  /**
+   * Filter posts by year and month in addition to slug to prevent
+   * displaying the slug with the incorrect year or month
+   */
+  private filterSlugByYearAndMonth(
+    post: ContentFile<BlogPost | Record<string, never>>,
+    filterByYear: string,
+    filterByMonth: string,
+  ): ContentFile<BlogPost | Record<string, never>> | null {
+    return getYear(post.attributes.date) === filterByYear &&
+      getMonth(post.attributes.date) === filterByMonth
+      ? post
+      : null;
   }
 
   private setNavigation(
@@ -215,10 +239,12 @@ export default class BlogPostPageComponent {
     this.route.paramMap
       .pipe(
         switchMap(() => this.post$),
-        tap((post) => {
-          this.setPageTitle(post);
-          this.metadataService.setMetaTagsFromFrontMatter(post);
-          this.setNavigation(post, this.posts);
+        tap((post: ContentFile<BlogPost | Record<string, never>> | null) => {
+          if (post) {
+            this.setPageTitle(post);
+            this.metadataService.setMetaTagsFromFrontMatter(post);
+            this.setNavigation(post, this.posts);
+          }
         }),
         takeUntilDestroyed(this.destroyRef),
       )
