@@ -118,11 +118,11 @@ export default class monthPageComponent implements OnInit {
   }
 
   private setRouteListener(): void {
-    this.route.params
+    this.route.paramMap
       .pipe(
-        tap(() => {
-          this.month = this.route.snapshot.paramMap.get('month') || '';
-          this.year = this.route.snapshot.paramMap.get('year') || '';
+        tap((params) => {
+          this.month = params.get('month') || '';
+          this.year = params.get('year') || '';
           this.monthName = getMonthName(parseInt(this.month));
           this.setPageTitle(this.monthName, this.year);
           this.setMetadata(this.monthName, this.year);
