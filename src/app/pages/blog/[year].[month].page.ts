@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -48,7 +48,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
     </div>
   `,
 })
-export default class monthPageComponent implements OnInit {
+export default class MonthPageComponent {
   public filteredPosts!: ContentFile<BlogPost>[];
   public month!: string;
   public monthName!: string;
@@ -79,7 +79,7 @@ export default class monthPageComponent implements OnInit {
   ];
   private route = inject(ActivatedRoute);
 
-  public ngOnInit(): void {
+  constructor() {
     this.setRouteListener();
   }
 
