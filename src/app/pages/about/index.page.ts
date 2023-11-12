@@ -7,9 +7,10 @@ import { RouteMeta } from '@analogjs/router';
 
 import { siteName } from '@constants/site-name';
 import { MetadataService } from '@services/metadata.service';
+import { version } from '../../../../package.json';
 
 export const pageTitle = {
-  title: `About Me | ${siteName}`,
+  title: `About | ${siteName}`,
 };
 
 export const routeMeta: RouteMeta = pageTitle;
@@ -54,12 +55,14 @@ export const metaTagList: MetaDefinition[] = [
               [content]="about.content"
             />
           </div>
+          <div *ngIf="version">Site Version: v{{ version }}</div>
         </div>
       </div>
     </div>
   `,
 })
 export default class IndexPageComponent {
+  public version = version;
   private metadataService = inject(MetadataService);
   readonly about$ = injectContent<{ content: string }>({
     customFilename: 'about/about',

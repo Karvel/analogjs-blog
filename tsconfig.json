@@ -29,6 +29,7 @@
       "@svg/*": ["app/svg/*"],
       "@utils/*": ["app/utils/*"],
     },
+    "resolveJsonModule": true,
     "useDefineForClassFields": false,
     "skipLibCheck": true
   },

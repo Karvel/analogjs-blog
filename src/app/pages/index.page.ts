@@ -27,38 +27,29 @@ export const routeMeta: RouteMeta = pageTitle;
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="sr-only">Home</h1>
-          <img
-            src="me-sq.jpg"
-            class="rounded-full max-h-80 mx-auto"
-            alt="Me in Norway"
-            loading="lazy"
-          />
-          <div class="py-4">
-            My name is Elanna. I have been a full-stack developer for over seven
-            years, primarily focused on Angular and .NET. I have a BA in
-            Linguistics from UCSC and made my way into the software industry
-            after first taking computer science community college courses and
-            then joining a paid internship in 2016. I have been delving into
-            Angular since 2017, ever since writing the first line of code for my
-            then employer's product front-end overhaul. I now work for
-            <a
-              href="https://www.crexi.com"
-              class=""
-              target="_blank"
-              rel="noopener"
-              >Crexi</a
-            >
-            as a front end lead software engineer. I enjoy mentoring in code and
-            helping dismantle some of the built-in barriers found in the coding
-            world. I was also on the non-profit
-            <a
-              href="(https://59daysofcode.org"
-              class=""
-              target="_blank"
-              rel="noopener"
-              >59DaysOfCode</a
-            >
-            Grand Council for a two year term.
+          <div
+            class="flex flex-col sm:flex-row justify-evenly items-center pb-4 sm:flex-nowrap"
+          >
+            <img
+              src="me-sq.jpg"
+              class="rounded-xl max-h-32 sm:max-h-36"
+              alt="Me in Norway"
+            />
+            <div class="pt-4 sm:pl-4 sm:pt-0">
+              My name is Elanna Grossman. I am a full-stack developer, primarily
+              focused on Angular and .NET. I work at
+              <a
+                href="https://www.crexi.com"
+                class=""
+                target="_blank"
+                rel="noopener"
+                >Crexi</a
+              >
+              as a front end lead software engineer. I enjoy mentoring in code
+              and helping dismantle some of the built-in barriers found in the
+              coding world. There is more about me
+              <a routerLink="/about">here</a>.
+            </div>
           </div>
           <h2 class="text-xl">Latest Blog Posts:</h2>
           <ul>
