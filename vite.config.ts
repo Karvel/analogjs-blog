@@ -22,6 +22,9 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
+      nitro: {
+        preset: 'github_pages',
+      },
       prerender: {
         routes: async () => [
           '/',
