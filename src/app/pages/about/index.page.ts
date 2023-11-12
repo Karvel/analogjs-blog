@@ -9,7 +9,7 @@ import { siteName } from '@constants/site-name';
 import { MetadataService } from '@services/metadata.service';
 
 export const pageTitle = {
-  title: `About Me | ${siteName}`,
+  title: `About | ${siteName}`,
 };
 
 export const routeMeta: RouteMeta = pageTitle;
