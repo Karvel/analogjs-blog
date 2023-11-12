@@ -1,9 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
+import { tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
@@ -55,6 +57,7 @@ export default class monthPageComponent implements OnInit {
   ).sort(sortByUpdatedOrOriginalDate);
   public year!: string;
 
+  private destroyRef = inject(DestroyRef);
   private metadataService = inject(MetadataService);
   private metaTagList: MetaDefinition[] = [
     {
@@ -77,16 +80,7 @@ export default class monthPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.month = this.route.snapshot.paramMap.get('month') || '';
-    this.year = this.route.snapshot.paramMap.get('year') || '';
-    this.monthName = getMonthName(parseInt(this.month));
-    this.setPageTitle(this.monthName, this.year);
-    this.setMetadata(this.monthName, this.year);
-    this.filteredPosts = this.filterBlogPostsByMonth(
-      this.posts,
-      this.year,
-      this.month,
-    );
+    this.setRouteListener();
   }
 
   private filterBlogPostsByMonth(
@@ -121,5 +115,25 @@ export default class monthPageComponent implements OnInit {
       : `Month | ${siteName}`;
     this.metadataService.setTitle(title);
     this.metadataService.setPageURLMetaTitle(title);
+  }
+
+  private setRouteListener(): void {
+    this.route.params
+      .pipe(
+        tap(() => {
+          this.month = this.route.snapshot.paramMap.get('month') || '';
+          this.year = this.route.snapshot.paramMap.get('year') || '';
+          this.monthName = getMonthName(parseInt(this.month));
+          this.setPageTitle(this.monthName, this.year);
+          this.setMetadata(this.monthName, this.year);
+          this.filteredPosts = this.filterBlogPostsByMonth(
+            this.posts,
+            this.year,
+            this.month,
+          );
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 }
