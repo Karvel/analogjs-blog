@@ -63,12 +63,15 @@ export const metaTagList: MetaDefinition[] = [
                     </li>
                   </ul>
                 </div>
-                <div *ngIf="talk?.imageLink">
+                <div
+                  *ngIf="talk?.imageLink"
+                  class="sm:w-80 sm:min-w-[20rem] sm:h-52"
+                >
                   <img
                     [src]="talk.imageLink"
                     [alt]="talk.title || 'Talk Cover Image'"
                     appReplaceBrokenImage
-                    class="sm:max-w-xs rounded-md"
+                    class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
                     loading="lazy"
                   />
                 </div>
