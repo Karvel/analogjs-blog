@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => ({
           '/category',
           '/photos',
           '/tag',
+          '/talks',
           ...getBlogPosts(),
           ...getBlogCategories(),
           ...getBlogTags(),
