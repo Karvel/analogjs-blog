@@ -4,7 +4,12 @@ import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-import { getBlogPosts } from './vite.prerender.utils';
+import {
+  getBlogArchives,
+  getBlogCategories,
+  getBlogPosts,
+  getBlogTags,
+} from './vite.prerender.utils';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -26,6 +31,9 @@ export default defineConfig(({ mode }) => ({
           '/photos',
           '/tag',
           ...getBlogPosts(),
+          ...getBlogCategories(),
+          ...getBlogTags(),
+          ...getBlogArchives(),
         ],
         sitemap: {
           host: 'https://elanna.me/',
