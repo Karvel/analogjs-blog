@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 
 import { injectContentFiles } from '@analogjs/content';
@@ -21,7 +21,13 @@ export const routeMeta: RouteMeta = pageTitle;
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [BlogCardComponent, NgFor, RecentPhotoAlbumsComponent, RouterLink],
+  imports: [
+    BlogCardComponent,
+    NgIf,
+    NgFor,
+    RecentPhotoAlbumsComponent,
+    RouterLink,
+  ],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
@@ -52,11 +58,16 @@ export const routeMeta: RouteMeta = pageTitle;
             </div>
           </div>
           <h2 class="text-xl">Latest Blog Posts:</h2>
-          <ul>
-            <li *ngFor="let post of posts">
-              <app-blog-card [post]="post" />
-            </li>
-          </ul>
+          <ng-container *ngIf="posts?.length; else emptyResult">
+            <ul>
+              <li *ngFor="let post of posts">
+                <app-blog-card [post]="post" />
+              </li>
+            </ul>
+          </ng-container>
+          <ng-template #emptyResult
+            ><div class="py-4">There are no posts yet.</div></ng-template
+          >
           <app-recent-photo-albums />
         </div>
       </div>
