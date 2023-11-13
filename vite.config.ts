@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
+      static: true,
       nitro: {
         preset: 'github_pages',
       },
