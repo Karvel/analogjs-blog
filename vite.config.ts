@@ -4,6 +4,13 @@ import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+import {
+  getBlogArchives,
+  getBlogCategories,
+  getBlogPosts,
+  getBlogTags,
+} from './vite.prerender.utils';
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   publicDir: 'src/assets',
@@ -15,14 +22,23 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
+      nitro: {
+        preset: 'github_pages',
+      },
       prerender: {
         routes: async () => [
           '/',
           '/api/rss.xml',
+          '/about',
           '/blog',
           '/category',
           '/photos',
           '/tag',
+          '/talks',
+          ...getBlogPosts(),
+          ...getBlogCategories(),
+          ...getBlogTags(),
+          ...getBlogArchives(),
         ],
         sitemap: {
           host: 'https://elanna.me/',
