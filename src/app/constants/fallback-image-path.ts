@@ -1,1 +1,1 @@
-export const fallbackImagePath = 'fallback_cover_image.png';
+export const fallbackImagePath = 'images/self/fallback_cover_image.png';

@@ -37,7 +37,7 @@ export const routeMeta: RouteMeta = pageTitle;
             class="flex flex-col sm:flex-row justify-evenly items-center pb-4 sm:flex-nowrap"
           >
             <img
-              src="me-sq.jpg"
+              src="images/self/me-sq.jpg"
               class="rounded-xl max-h-32 sm:max-h-36"
               alt="Me in Norway"
             />

@@ -17,7 +17,7 @@ import { Navigation } from '@models/navigation';
         <div class="flex">
           <a routerLink="/" class="flex items-center no-underline">
             <img
-              src="logo.png"
+              src="images/self/logo.png"
               width="50"
               alt="Hapax Legomenon logo"
               loading="lazy"
