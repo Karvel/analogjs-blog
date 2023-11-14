@@ -3,7 +3,7 @@ title: Making a Password Strength Component in Angular
 author: Elanna Grossman
 date: 2021-06-09T00:28:38-07:00
 description: In this post I show how to use Angular's Reactive Forms and RxJS to make a password strength component and requirement checker.
-canonical_url: https://hapax-legomenon.net/2021/06/making-a-password-strength-component-in-angular/?utm_source=rss&utm_medium=rss&utm_campaign=making-a-password-strength-component-in-angular
+canonical_url: https://hapax-legomenon.net/2021/06/making-a-password-strength-component-in-angular
 cover_image: https://live.staticflickr.com/3672/10356922586_7a62f75bfb_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/10356922586

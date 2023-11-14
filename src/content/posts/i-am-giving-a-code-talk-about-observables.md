@@ -3,7 +3,7 @@ title: I am giving a code talk on observables!
 author: Elanna Grossman
 date: 2018-10-10T01:06:04-07:00
 description: I am giving a talk at Valley DevFest about Observables It covers common use cases and pitfalls, and how to move away from promise-based data flow.
-canonical_url: https://hapax-legomenon.net/2018/10/valley-devfest-observables-talk/?utm_source=rss&utm_medium=rss&utm_campaign=valley-devfest-observables-talk
+canonical_url: https://hapax-legomenon.net/2018/10/valley-devfest-observables-talk
 cover_image: https://live.staticflickr.com/5649/25379653969_84c364ab37_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/25379653969

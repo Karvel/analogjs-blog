@@ -3,7 +3,7 @@ title: Recommended Development Tools in Linux, MacOS, and Windows
 author: Elanna Grossman
 date: 2023-02-17T18:39:42-08:00
 description: In this article I list my recommended development tools in Linux, MacOS, and Windows as a web developer.
-canonical_url: https://hapax-legomenon.net/2023/02/recommended-development-tools-in-linux-macos-and-windows/?utm_source=rss&utm_medium=rss&utm_campaign=recommended-development-tools-in-linux-macos-and-windows
+canonical_url: https://hapax-legomenon.net/2023/02/recommended-development-tools-in-linux-macos-and-windows
 cover_image: https://live.staticflickr.com/626/21245815482_6015e70d8a_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/21245815482/
@@ -72,7 +72,7 @@ My personal computer is a desktop that runs Windows 10 and [Manjaro](https://man
   - Linux
   - MacOS
   - Windows
-  - I most frequently use Postgres and MSSQL. DBeaver does not work as well for non-relational databases. 
+  - I most frequently use Postgres and MSSQL. DBeaver does not work as well for non-relational databases.
 - [SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
   - Windows
 

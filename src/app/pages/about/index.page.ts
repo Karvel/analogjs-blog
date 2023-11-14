@@ -44,7 +44,7 @@ export const metaTagList: MetaDefinition[] = [
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <img
-            src="me.jpg"
+            src="images/self/me.jpg"
             class="rounded max-h-[32rem] mx-auto"
             alt="Me in Norway"
             loading="lazy"

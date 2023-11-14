@@ -2,7 +2,7 @@
 title: Hirepalooza!
 author: Elanna Grossman
 date: 2015-06-04T23:45:11-07:00
-canonical_url: https://hapax-legomenon.net/2015/06/hirepalooza/?utm_source=rss&utm_medium=rss&utm_campaign=hirepalooza
+canonical_url: https://hapax-legomenon.net/2015/06/hirepalooza
 cover_image: https://hapax-legomenon.net/wp-content/uploads/2015/06/hirepalooza-300x186.png
 cover_image_author: Hirepalooza
 cover_image_title: Hirepalooza
