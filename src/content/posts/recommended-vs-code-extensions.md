@@ -3,7 +3,7 @@ title: Recommended VS Code Extensions
 author: Elanna Grossman
 date: 2023-01-06T18:10:54-08:00
 description: In this article I share my recommended VS Code Extensions and settings for development with Typescript, .NET, and Angular.
-canonical_url: https://hapax-legomenon.net/2023/01/recommended-vs-code-extensions/?utm_source=rss&utm_medium=rss&utm_campaign=recommended-vs-code-extensions
+canonical_url: https://hapax-legomenon.net/2023/01/recommended-vs-code-extensions
 cover_image: https://live.staticflickr.com/2458/3776870085_fe285e9698_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3776870085

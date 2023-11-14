@@ -3,7 +3,7 @@ title: Creating a Multi-Control Custom Validator in Angular
 author: Elanna Grossman
 date: 2021-06-22T20:56:30-07:00
 description: In this post I make a multi-control custom validator that compares if two fields match to show what is possible with forms in Angular.
-canonical_url: https://hapax-legomenon.net/2021/06/creating-a-multi-control-custom-validator-in-angular/?utm_source=rss&utm_medium=rss&utm_campaign=creating-a-multi-control-custom-validator-in-angular
+canonical_url: https://hapax-legomenon.net/2021/06/creating-a-multi-control-custom-validator-in-angular
 cover_image: https://live.staticflickr.com/2504/3760365901_ccbfae1188_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3760365901

@@ -3,7 +3,7 @@ title: Making a LocaleUpperCasePipe for Angular
 author: Elanna Grossman
 date: 2021-03-22T04:57:04-07:00
 description: In Angular, I recently realized the UpperCasePipe is not locale aware. Since it is easy to create custom pipes in Angular, I made a LocaleUpperCasePipe.
-canonical_url: https://hapax-legomenon.net/2021/03/making-a-localeuppercasepipe-for-angular/?utm_source=rss&utm_medium=rss&utm_campaign=making-a-localeuppercasepipe-for-angular
+canonical_url: https://hapax-legomenon.net/2021/03/making-a-localeuppercasepipe-for-angular
 cover_image: https://live.staticflickr.com/2262/2290027938_268e2f34c4_z.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/2290027938/
