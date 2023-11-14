@@ -4,7 +4,7 @@ author: Elanna Grossman
 date: 2021-08-09T19:18:41-07:00
 last_updated: 2021-10-20T19:18:41-07:00
 description: In this article I share a curated list of Angular resources, with topics ranging from simple to advanced.
-canonical_url: https://hapax-legomenon.net/2021/08/a-curated-list-of-angular-resources/?utm_source=rss&utm_medium=rss&utm_campaign=a-curated-list-of-angular-resources
+canonical_url: https://hapax-legomenon.net/2021/08/a-curated-list-of-angular-resources
 cover_image: https://live.staticflickr.com/7029/6811030363_456a9347db_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/6811030363/

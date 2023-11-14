@@ -2,7 +2,7 @@
 title: It’s about time
 author: Elanna Grossman
 date: 2015-06-05T00:09:51-07:00
-canonical_url: https://hapax-legomenon.net/2015/06/its-about-time/?utm_source=rss&utm_medium=rss&utm_campaign=its-about-time
+canonical_url: https://hapax-legomenon.net/2015/06/its-about-time
 cover_image: https://live.staticflickr.com/7063/13942708096_718b6dadac_h.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/13942708096

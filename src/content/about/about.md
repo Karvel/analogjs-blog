@@ -23,4 +23,4 @@ English, French, Spanish, Hebrew, Russian
 
 ## About The Site
 
-In 2023, I decided to rebuild my blog in <a href="https://analogjs.org" target="_blank" rel="noopener">Analog</a>, moving away from Wordpress. I am already familiar with Angular, and Analog provides some niceties like SSG, file-based routing, and XML generation for the sitemap and RSS.
+In 2023, I decided to rebuild my blog in <a href="https://analogjs.org" target="_blank" rel="noopener">Analog</a>, moving away from Wordpress. I am already familiar with Angular, and Analog provides some niceties like markdown rendering, SSG, file-based routing, and XML generation for the sitemap and RSS.
