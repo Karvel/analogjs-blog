@@ -57,6 +57,7 @@ describe('MetadataService', () => {
         cover_image: 'Test cover image',
         date: '2023-09-28T00:00:00Z',
         last_updated: '2023-09-29T00:00:00Z',
+        tags: 'test1, test2, test3',
       },
       filename: 'test.md',
       slug: 'test',
@@ -77,6 +78,7 @@ describe('MetadataService', () => {
         cover_image: '',
         date: '',
         last_updated: '',
+        tags: '',
       },
       filename: '',
       slug: '',
@@ -86,7 +88,7 @@ describe('MetadataService', () => {
 
     service.setMetaTagsFromFrontMatter(frontMatter);
 
-    expect(meta.updateTag).toHaveBeenCalledTimes(1);
+    expect(meta.updateTag).toHaveBeenCalledTimes(0);
   });
 
   it('should set page URL meta tags', () => {
