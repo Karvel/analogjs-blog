@@ -73,6 +73,14 @@ export class AppComponent implements OnInit {
           property: 'og:locale',
           content: 'en_US',
         });
+        this.metadataService.updateTag({
+          property: 'og:image',
+          content: `${this.document.location.origin}/images/self/logo.png`,
+        });
+        this.metadataService.updateTag({
+          property: 'twitter:image',
+          content: `${this.document.location.origin}/images/self/logo.png`,
+        });
       });
   }
 }
