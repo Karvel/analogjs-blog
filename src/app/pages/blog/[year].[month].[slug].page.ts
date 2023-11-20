@@ -215,8 +215,8 @@ export default class BlogPostPageComponent {
     posts: ContentFile<BlogPost>[],
   ): void {
     const index = posts.findIndex((p) => p.slug === post.slug);
-    const nextPost = posts[index + 1];
-    const previousPost = posts[index - 1];
+    const nextPost = posts[index - 1];
+    const previousPost = posts[index + 1];
 
     this.nextPost = nextPost;
     this.prevPost = previousPost;
