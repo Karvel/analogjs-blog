@@ -81,6 +81,10 @@ export class AppComponent implements OnInit {
           property: 'twitter:image',
           content: `${this.document.location.origin}/images/self/logo.png`,
         });
+        this.metadataService.updateTag({
+          property: 'twitter:card',
+          content: 'summary_large_image',
+        });
       });
   }
 }
