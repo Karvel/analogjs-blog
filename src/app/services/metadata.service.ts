@@ -77,10 +77,12 @@ export class MetadataService {
         content: frontMatter.attributes.last_updated,
       });
     }
-    this.updateTag({
-      property: 'twitter:card',
-      content: 'summary_large_image',
-    });
+    if (frontMatter.attributes.tags?.length) {
+      this.updateTag({
+        name: 'keywords',
+        content: frontMatter.attributes.tags.replaceAll(',', ', '),
+      });
+    }
   }
 
   public setPageURLMetaTags(pageUrl?: string): void {

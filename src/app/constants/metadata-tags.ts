@@ -2,6 +2,7 @@ export const metadataTags: string[] = [
   'name="title"',
   'name="description"',
   'name="author"',
+  'name="keywords"',
   'property="article:modified_time"',
   'property="article:published_time"',
   'property="og:description"',

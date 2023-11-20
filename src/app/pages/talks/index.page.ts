@@ -1,5 +1,5 @@
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
@@ -17,7 +17,7 @@ export const routeMeta: RouteMeta = pageTitle;
 export const metaTagList: MetaDefinition[] = [
   {
     name: 'description',
-    content: 'A list of the talks I had given.',
+    content: 'A list of the talks I have given.',
   },
   {
     name: 'author',
@@ -25,11 +25,11 @@ export const metaTagList: MetaDefinition[] = [
   },
   {
     property: 'og:description',
-    content: 'A list of the talks I had given.',
+    content: 'A list of the talks I have given.',
   },
   {
     property: 'twitter:description',
-    content: 'A list of the talks I had given.',
+    content: 'A list of the talks I have given.',
   },
 ];
 
@@ -83,12 +83,12 @@ export const metaTagList: MetaDefinition[] = [
     </div>
   `,
 })
-export default class IndexPageComponent implements OnInit {
+export default class IndexPageComponent {
   private metadataService = inject(MetadataService);
 
   public talks = talks;
 
-  public ngOnInit(): void {
+  constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
   }
