@@ -1,5 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
 
 import { injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
@@ -15,6 +16,25 @@ export const pageTitle = {
 };
 
 export const routeMeta: RouteMeta = pageTitle;
+
+export const metaTagList: MetaDefinition[] = [
+  {
+    name: 'description',
+    content: 'A collection of all of my blog posts.',
+  },
+  {
+    name: 'author',
+    content: 'Elanna Grossman',
+  },
+  {
+    property: 'og:description',
+    content: 'A collection of all of my blog posts.',
+  },
+  {
+    property: 'twitter:description',
+    content: 'A collection of all of my blog posts.',
+  },
+];
 
 @Component({
   selector: 'app-blog-index',
@@ -53,5 +73,6 @@ export default class IndexPageComponent {
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
+    this.metadataService.updateTags(metaTagList);
   }
 }

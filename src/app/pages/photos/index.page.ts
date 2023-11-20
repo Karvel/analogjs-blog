@@ -1,5 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
 
@@ -13,6 +14,28 @@ export const pageTitle = {
 };
 
 export const routeMeta: RouteMeta = pageTitle;
+
+export const metaTagList: MetaDefinition[] = [
+  {
+    name: 'description',
+    content:
+      'Information about my photography and a collection of my favorite photos.',
+  },
+  {
+    name: 'author',
+    content: 'Elanna Grossman',
+  },
+  {
+    property: 'og:description',
+    content:
+      'Information about my photography and a collection of my favorite photos.',
+  },
+  {
+    property: 'twitter:description',
+    content:
+      'Information about my photography and a collection of my favorite photos.',
+  },
+];
 
 @Component({
   selector: 'app-photos-index',
@@ -59,5 +82,6 @@ export default class IndexPageComponent {
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
+    this.metadataService.updateTags(metaTagList);
   }
 }

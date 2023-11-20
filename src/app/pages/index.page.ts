@@ -1,5 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { MetaDefinition } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 import { injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
@@ -10,13 +12,36 @@ import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { RouterLink } from '@angular/router';
 
 export const pageTitle = {
   title: `${siteName}`,
 };
 
 export const routeMeta: RouteMeta = pageTitle;
+
+export const metaTagList: MetaDefinition[] = [
+  {
+    name: 'description',
+    content: 'Elanna Grossman - Web Developer, Photographer, Linguist.',
+  },
+  {
+    name: 'author',
+    content: 'Elanna Grossman',
+  },
+  {
+    property: 'og:description',
+    content: 'Elanna Grossman - Web Developer, Photographer, Linguist.',
+  },
+  {
+    property: 'twitter:description',
+    content: 'Elanna Grossman - Web Developer, Photographer, Linguist.',
+  },
+  {
+    name: 'keywords',
+    content:
+      'Elanna Grossman, Blog, Web Development, Angular, TypeScript, Photography',
+  },
+];
 
 @Component({
   selector: 'app-home',
@@ -85,5 +110,6 @@ export default class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
+    this.metadataService.updateTags(metaTagList);
   }
 }
