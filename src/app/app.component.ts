@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   private metadataService = inject(MetadataService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private url = 'https://elanna.me';
 
   public ngOnInit(): void {
     this.setMetaOnRouteLoad();
@@ -59,9 +60,10 @@ export class AppComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
+        const rootUrl = this.document.location.origin ?? this.url;
         const pageUrl = this.router.url
-          ? `${this.document.location.origin}${this.router.url}`
-          : '';
+          ? `${rootUrl}${this.router.url}`
+          : `${rootUrl}`;
         this.metadataService.removeTags();
         this.metadataService.setCanonicalUrl(pageUrl);
         this.metadataService.setPageURLMetaTags(pageUrl);
@@ -75,11 +77,11 @@ export class AppComponent implements OnInit {
         });
         this.metadataService.updateTag({
           property: 'og:image',
-          content: `${this.document.location.origin}/images/self/logo.png`,
+          content: `${rootUrl}/images/self/logo.png`,
         });
         this.metadataService.updateTag({
           property: 'twitter:image',
-          content: `${this.document.location.origin}/images/self/logo.png`,
+          content: `${rootUrl}/images/self/logo.png`,
         });
         this.metadataService.updateTag({
           property: 'twitter:card',
