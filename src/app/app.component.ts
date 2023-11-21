@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
   private metadataService = inject(MetadataService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private url = 'https://elanna.me';
 
   public ngOnInit(): void {
     this.setMetaOnRouteLoad();
