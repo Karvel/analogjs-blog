@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -11,9 +11,9 @@ import { filter, map, mergeMap } from 'rxjs';
 
 import FooterComponent from '@components/footer/footer.component';
 import HeaderComponent from '@components/header/header.component';
-import { MetadataService } from '@services/metadata.service';
 import { siteName } from '@constants/site-name';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { url } from '@constants/site-url';
+import { MetadataService } from '@services/metadata.service';
 
 @Component({
   selector: 'app-root',
@@ -31,11 +31,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class AppComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
-  private document = inject(DOCUMENT);
   private metadataService = inject(MetadataService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private url = 'https://elanna.me';
 
   public ngOnInit(): void {
     this.setMetaOnRouteLoad();
@@ -60,10 +58,7 @@ export class AppComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
-        const rootUrl = this.document.location.origin ?? this.url;
-        const pageUrl = this.router.url
-          ? `${rootUrl}${this.router.url}`
-          : `${rootUrl}`;
+        const pageUrl = this.router.url ? `${url}${this.router.url}` : `${url}`;
         this.metadataService.removeTags();
         this.metadataService.setCanonicalUrl(pageUrl);
         this.metadataService.setPageURLMetaTags(pageUrl);
@@ -77,11 +72,11 @@ export class AppComponent implements OnInit {
         });
         this.metadataService.updateTag({
           property: 'og:image',
-          content: `${rootUrl}/images/self/logo.png`,
+          content: `${url}/images/self/logo.png`,
         });
         this.metadataService.updateTag({
           property: 'twitter:image',
-          content: `${rootUrl}/images/self/logo.png`,
+          content: `${url}/images/self/logo.png`,
         });
         this.metadataService.updateTag({
           property: 'twitter:card',
