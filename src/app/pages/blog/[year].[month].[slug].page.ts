@@ -49,6 +49,14 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
       <div class="md:w-[48rem] p-4">
         <div *ngIf="post$ | async as post; else emptyResult" class="flex-1">
           <div class="max-w mx-auto">
+            <ng-container *ngIf="isDraft">
+              <div
+                class="border-2 border-black dark:border-white border-dashed rounded-md p-4 mb-4"
+              >
+                This post is not yet published. Any new categories or tags will
+                not be visible outside of this post.
+              </div>
+            </ng-container>
             <div [ngClass]="{ relative: post.attributes.cover_image }">
               <img
                 *ngIf="post.attributes.cover_image"
@@ -168,11 +176,15 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
   `,
 })
 export default class BlogPostPageComponent {
+  public isDraft!: boolean;
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
   }).pipe(
+    tap((post) => {
+      this.isDraft = !post.attributes.published;
+    }),
     map((post) => {
       const month = this.route.snapshot.paramMap.get('month') ?? '';
       const year = this.route.snapshot.paramMap.get('year') ?? '';
