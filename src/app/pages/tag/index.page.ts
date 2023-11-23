@@ -60,7 +60,9 @@ export const metaTagList: MetaDefinition[] = [
 export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
+  )
+    .filter((post) => post.attributes.published)
+    .sort(sortByUpdatedOrOriginalDate);
   public tags = this.extractUniqueTags(this.posts);
 
   private metadataService = inject(MetadataService);
@@ -74,7 +76,7 @@ export default class IndexPageComponent implements OnInit {
     const uniqueTags = new Set<string>();
 
     for (const post of blogPosts) {
-      if (post.attributes.tags?.length) {
+      if (post.attributes.tags?.length && post.attributes.published) {
         const tags = splitTagStringIntoArray(post.attributes.tags);
         tags.forEach((tag) => uniqueTags.add(tag?.name.toLowerCase()));
       }

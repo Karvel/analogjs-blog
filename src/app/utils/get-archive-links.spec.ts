@@ -12,22 +12,34 @@ describe('getArchiveLinks', () => {
   it('should generate ArchiveLinks for valid posts', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
-        attributes: { date: '2021-06-16 04:42:07 UTC' },
+        attributes: {
+          date: '2021-06-16 04:42:07 UTC',
+          published: true,
+        },
         filename: 'test-1.md',
         slug: 'test-1',
       },
       {
-        attributes: { date: '2021-06-14 04:42:07 UTC' },
+        attributes: {
+          date: '2021-06-14 04:42:07 UTC',
+          published: true,
+        },
         filename: 'test-1.md',
         slug: 'test-1',
       },
       {
-        attributes: { date: '2021-07-22T20:56:30-07:00' },
+        attributes: {
+          date: '2021-07-22T20:56:30-07:00',
+          published: true,
+        },
         filename: 'test-2.md',
         slug: 'test-2',
       },
       {
-        attributes: { date: '2022-08-15T12:34:56Z' },
+        attributes: {
+          date: '2022-08-15T12:34:56Z',
+          published: true,
+        },
         filename: 'test-3.md',
         slug: 'test-3',
       },
@@ -45,19 +57,52 @@ describe('getArchiveLinks', () => {
   it('should ignore posts with missing or invalid dates', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
-        attributes: { date: '2021-06-16 04:42:07 UTC' },
+        attributes: {
+          date: '2021-06-16 04:42:07 UTC',
+          published: true,
+        },
         filename: 'test-4.md',
         slug: 'test-4',
       },
       {
-        attributes: { date: '' }, // Missing date
+        attributes: {
+          date: '',
+        }, // Missing date
         filename: 'test-5.md',
         slug: 'test-5',
       },
       {
-        attributes: { date: 'invalid-date' }, // Invalid date
+        attributes: {
+          date: 'invalid-date',
+        }, // Invalid date
         filename: 'test-6.md',
         slug: 'test-6',
+      },
+    ];
+
+    const archiveLinks = getArchiveLinks(posts);
+
+    expect(archiveLinks).toEqual([
+      { label: 'June 2021', month: '06', year: '2021' },
+    ]);
+  });
+
+  it('should ignore posts without published: true', () => {
+    const posts: ContentFile<BlogPost>[] = [
+      {
+        attributes: {
+          date: '2021-06-16 04:42:07 UTC',
+          published: true,
+        },
+        filename: 'test-4.md',
+        slug: 'test-4',
+      },
+      {
+        attributes: {
+          date: '2022-05-16 04:42:07 UTC',
+        }, // Missing published: true
+        filename: 'test-5.md',
+        slug: 'test-5',
       },
     ];
 
