@@ -55,7 +55,15 @@ export const metaTagList: MetaDefinition[] = [
               [content]="about.content"
             />
           </div>
-          <div *ngIf="version">Site Version: v{{ version }}</div>
+          <div *ngIf="version">
+            Site Version:
+            <a
+              href="https://github.com/Karvel/analogjs-blog/tags"
+              target="_blank"
+              rel="noopener"
+              >v{{ version }}</a
+            >
+          </div>
         </div>
       </div>
     </div>
