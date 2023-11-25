@@ -63,7 +63,9 @@ export default class TagNamePageComponent implements OnInit {
   ];
   private posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
+  )
+    .filter((post) => post.attributes.published)
+    .sort(sortByUpdatedOrOriginalDate);
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {

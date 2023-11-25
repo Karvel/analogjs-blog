@@ -12,7 +12,7 @@ export const getArchiveLinks = (
   const archiveMap = new Map<string, ArchiveLink>();
 
   for (const post of posts) {
-    if (post.attributes.date) {
+    if (post.attributes.published && post.attributes.date) {
       const date = new Date(post.attributes.date);
       const year = date.getUTCFullYear().toString();
       const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');

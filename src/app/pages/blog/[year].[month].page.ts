@@ -88,11 +88,13 @@ export default class MonthPageComponent {
     filterByYear: string,
     filterByMonth: string,
   ): ContentFile<BlogPost>[] {
-    return posts.filter(
-      (post) =>
-        getYear(post.attributes.date) === filterByYear &&
-        getMonth(post.attributes.date) === filterByMonth,
-    );
+    return posts
+      .filter((post) => post.attributes.published)
+      .filter(
+        (post) =>
+          getYear(post.attributes.date) === filterByYear &&
+          getMonth(post.attributes.date) === filterByMonth,
+      );
   }
 
   private setMetadata(month: string, year: string): void {

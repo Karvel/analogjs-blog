@@ -83,7 +83,9 @@ export default class YearPageComponent implements OnInit {
     posts: ContentFile<BlogPost>[],
     filterBy: string,
   ): ContentFile<BlogPost>[] {
-    return posts.filter((post) => getYear(post.attributes.date) === filterBy);
+    return posts
+      .filter((post) => post.attributes.published)
+      .filter((post) => getYear(post.attributes.date) === filterBy);
   }
 
   private setMetadata(year: string): void {
