@@ -1,7 +1,7 @@
 ---
 title: "Time for a Change: Switching to Analog"
 author: Elanna Grossman
-date: 2023-11-23T03:23:49.238Z
+date: 2023-11-25T21:07:53.149Z
 description: I recently decided to switch my website from WordPress to Analog, a meta framework for Angular.
 canonical_url: https://elanna.me/2023/11/time-for-a-change-switching-to-analog
 cover_image: https://live.staticflickr.com/65535/52270701195_32302b3ede_c.jpg
