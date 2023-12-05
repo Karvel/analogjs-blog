@@ -6,7 +6,7 @@ import HeaderComponent from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
-  template: '<app-header></app-header>',
+  template: '<app-header />',
 })
 class TestHostComponent {
   showMenu = false;

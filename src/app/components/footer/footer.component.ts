@@ -29,7 +29,7 @@ import { Navigation } from '@models/navigation';
             rel="noopener"
           >
             <ng-container *ngIf="link?.icon">
-              <svg-icon [key]="link?.icon" [attr.alt]="link?.label"></svg-icon>
+              <svg-icon [key]="link?.icon" [attr.alt]="link?.label" />
             </ng-container>
             <ng-container *ngIf="!link?.icon">
               {{ link?.label }}
@@ -44,7 +44,7 @@ import { Navigation } from '@models/navigation';
             target="_blank"
             rel="noopener"
           >
-            <svg-icon key="email" alt="Email"></svg-icon>
+            <svg-icon key="email" alt="Email" />
             <span class="sr-only">Email me</span>
           </a>
         </div>
