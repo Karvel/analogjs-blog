@@ -7,6 +7,7 @@ import { FlickrService } from './flickr.service';
 
 describe('FlickrService', () => {
   let service: FlickrService;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mockApiService: any;
 
   beforeEach(() => {
@@ -21,6 +22,7 @@ describe('FlickrService', () => {
 
     // Initializing the FlickrService with mockApiService
     service = TestBed.inject(FlickrService);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (service as any).apiService = mockApiService; // We typecast to any to bypass TypeScript's type checks temporarily.
   });
 

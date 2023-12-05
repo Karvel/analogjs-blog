@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { withInMemoryScrolling } from '@angular/router';
@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideFileRouter(
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
     ),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideClientHydration(),
     provideContent(withMarkdownRenderer()),
     provideSvgIcons(svgIcons),
