@@ -10,7 +10,7 @@ import ImageInfoPopoverContentComponent from './image-info-popover-content.compo
       [cover_image_author]="coverImageAuthor"
       [cover_image_source]="coverImageSource"
       [cover_image_title]="coverImageTitle"
-    ></app-image-info-popover-content>
+    />
   `,
 })
 class TestHostComponent {

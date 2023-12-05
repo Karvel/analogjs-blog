@@ -61,7 +61,7 @@ export const metaTagList: MetaDefinition[] = [
             </div>
             <div class="pt-6">
               Here is random sampling some of my favorite photos:
-              <app-masonry-grid></app-masonry-grid>
+              <app-masonry-grid />
             </div>
           </div>
           <ng-template #emptyResponse>

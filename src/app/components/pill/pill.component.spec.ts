@@ -7,7 +7,7 @@ import PillComponent from './pill.component';
 
 @Component({
   template:
-    '<app-pill [label]="label" [route]="route" [slug]="slug"></app-pill>',
+    '<app-pill [label]="label" [route]="route" [slug]="slug" />',
 })
 class TestHostComponent {
   label: string | undefined;
