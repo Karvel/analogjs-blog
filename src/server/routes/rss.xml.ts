@@ -33,7 +33,9 @@ async function generateRssFeed() {
         attributes: fm(fileContents).attributes as BlogPost,
       };
     })
+    .filter(({ attributes }) => attributes.published)
     .sort((a1, a2) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
     )
     .forEach(({ attributes }) => {
