@@ -207,40 +207,6 @@ export default class BlogPostPageComponent {
     this.setRouteListener();
   }
 
-  private findNextPublishedIndex(
-    posts: ContentFile<BlogPost>[],
-    index: number,
-  ): number {
-    if (index < 0 || index >= posts.length) {
-      throw new Error('Index out of bounds');
-    }
-
-    for (let i = index - 1; i >= 0; i--) {
-      if (posts[i].attributes.published) {
-        return i;
-      }
-    }
-
-    return index - Math.min(2, index + 1);
-  }
-
-  private findPreviousPublishedIndex(
-    posts: ContentFile<BlogPost>[],
-    index: number,
-  ): number {
-    if (index < 0 || index >= posts.length) {
-      throw new Error('Index out of bounds');
-    }
-
-    for (let i = index + 1; i < posts.length; i++) {
-      if (posts[i].attributes.published) {
-        return i;
-      }
-    }
-
-    return index + Math.min(2, posts.length - index - 1);
-  }
-
   /**
    * Filter posts by year and month in addition to slug to prevent
    * displaying the slug with the incorrect year or month
@@ -261,8 +227,14 @@ export default class BlogPostPageComponent {
     posts: ContentFile<BlogPost>[],
   ): void {
     const index = posts.findIndex((p) => p.slug === post.slug);
-    const nextPost = posts[this.findNextPublishedIndex(posts, index)];
-    const previousPost = posts[this.findPreviousPublishedIndex(posts, index)];
+    const nextPublishedIndex = posts.findIndex(
+      (post, i) => i < index && post.attributes.published,
+    );
+    const previousPublishedIndex = posts.findIndex(
+      (post, i) => i > index && post.attributes.published,
+    );
+    const nextPost = posts[nextPublishedIndex];
+    const previousPost = posts[previousPublishedIndex];
 
     this.nextPost = nextPost;
     this.prevPost = previousPost;
