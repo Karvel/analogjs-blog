@@ -80,7 +80,7 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class IndexPageComponent {
   public displayedPosts: ContentFile<BlogPost>[] = [];
-  public itemsPerPage = 10;
+  public itemsPerPage = 5;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   )
