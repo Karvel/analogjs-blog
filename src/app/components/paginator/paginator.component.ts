@@ -88,10 +88,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   public changePage(page: number): void {
-    if (this.currentPage !== page) {
-      this.currentPage = page;
-      this.pageChanged.emit(this.currentPage);
-    }
+    this.currentPage = page;
 
     // Update the query parameter
     this.router.navigate([], {
