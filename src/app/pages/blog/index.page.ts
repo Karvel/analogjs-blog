@@ -5,6 +5,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
+import { ArchiveComponent } from '@components/archive/archive.component';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { PaginatorComponent } from '@components/paginator/paginator.component';
 import { siteName } from '@constants/site-name';
@@ -41,6 +42,7 @@ export const metaTagList: MetaDefinition[] = [
   selector: 'app-blog-index',
   standalone: true,
   imports: [
+    ArchiveComponent,
     BlogCardComponent,
     NgFor,
     NgIf,
@@ -70,6 +72,7 @@ export const metaTagList: MetaDefinition[] = [
               </li></ng-template
             >
           </ul>
+          <app-archive [posts]="posts" />
         </div>
       </div>
     </div>
