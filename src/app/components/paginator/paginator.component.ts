@@ -121,12 +121,12 @@ export class PaginatorComponent implements OnInit {
         this.currentPage = parseInt(page, 10);
         this.pageChanged.emit(this.currentPage);
       } else {
-        this.setPageOnBareRoute();
+        this.setPageQueryParamOnBareRoute();
       }
     });
   }
 
-  private setPageOnBareRoute(): void {
+  private setPageQueryParamOnBareRoute(): void {
     this.changePage(this.currentPage);
   }
 }
