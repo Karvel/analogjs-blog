@@ -21,13 +21,15 @@ import { ActivatedRoute, Router } from '@angular/router';
       <a
         class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
         (click)="previousPage()"
+        (keypress)="previousPage()"
+        tabindex="0"
       >
         <span class="sr-only">Next Page</span>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           class="h-3 w-3"
-          viewBox="0 0 20 20"
           fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             fill-rule="evenodd"
@@ -46,13 +48,15 @@ import { ActivatedRoute, Router } from '@angular/router';
       <a
         class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
         (click)="nextPage()"
+        (keypress)="nextPage()"
+        tabindex="0"
       >
         <span class="sr-only">Next Page</span>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           class="h-3 w-3"
           viewBox="0 0 20 20"
           fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             fill-rule="evenodd"
