@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       textShadow: {
-        sm: '0 1px 2px var(--tw-shadow-color)',
+        sm: '1px 1px 0 var(--tw-shadow-color), -1px 1px 0 var(--tw-shadow-color), -1px -1px 0 var(--tw-shadow-color), 1px -1px 0 var(--tw-shadow-color);',
         DEFAULT: '0 2px 4px var(--tw-shadow-color)',
         lg: '0 8px 16px var(--tw-shadow-color)',
       },
@@ -20,8 +20,8 @@ module.exports = {
             textShadow: value,
           }),
         },
-        { values: theme('textShadow') }
-      )
+        { values: theme('textShadow') },
+      );
     }),
     require('@tailwindcss/typography'),
   ],
