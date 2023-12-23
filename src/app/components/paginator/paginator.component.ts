@@ -14,18 +14,53 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [NgFor, NgIf],
   template: `
-    <nav aria-label="Page navigation">
-      <ul>
-        <li [class.disabled]="currentPage === 1">
-          <a (click)="previousPage()">Previous</a>
-        </li>
-        <li *ngFor="let page of getPagesArray(); let i = index">
-          <a (click)="changePage(i + 1)">{{ i + 1 }}</a>
-        </li>
-        <li [class.disabled]="currentPage === totalPages">
-          <a (click)="nextPage()">Next</a>
-        </li>
-      </ul>
+    <nav
+      aria-label="Page navigation"
+      class="flex items-center justify-center gap-3 mb-3"
+    >
+      <a
+        class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
+        (click)="previousPage()"
+      >
+        <span class="sr-only">Next Page</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-3 w-3"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
+
+      <p class="text-xs">
+        {{ currentPage }}
+        <span class="mx-0.25">/</span>
+        {{ totalPages }}
+      </p>
+
+      <a
+        class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
+        (click)="nextPage()"
+      >
+        <span class="sr-only">Next Page</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-3 w-3"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
     </nav>
   `,
 })
