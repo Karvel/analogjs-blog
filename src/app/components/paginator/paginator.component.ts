@@ -7,12 +7,12 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-paginator',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, RouterLink],
   template: `
     <nav
       aria-label="Page navigation"
@@ -20,8 +20,9 @@ import { ActivatedRoute, Router } from '@angular/router';
     >
       <a
         class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
-        (click)="previousPage()"
-        (keypress)="previousPage()"
+        [routerLink]="'/blog'"
+        [queryParams]="{ page: previousPage() }"
+        queryParamsHandling="merge"
         tabindex="0"
       >
         <span class="sr-only">Next Page</span>
@@ -47,8 +48,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
       <a
         class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
-        (click)="nextPage()"
-        (keypress)="nextPage()"
+        [routerLink]="'/blog'"
+        [queryParams]="{ page: nextPage() }"
+        queryParamsHandling="merge"
         tabindex="0"
       >
         <span class="sr-only">Next Page</span>
@@ -92,26 +94,19 @@ export class PaginatorComponent implements OnInit {
 
     // Update the query parameter
     this.router.navigate([], {
-      relativeTo: this.route,
       queryParams: { page: this.currentPage },
       queryParamsHandling: 'merge',
     });
   }
 
-  public getPagesArray(): number[] {
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  public nextPage(): number {
+    return this.currentPage < this.totalPages
+      ? this.currentPage + 1
+      : this.currentPage;
   }
 
-  public nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.changePage(this.currentPage + 1);
-    }
-  }
-
-  public previousPage(): void {
-    if (this.currentPage > 1) {
-      this.changePage(this.currentPage - 1);
-    }
+  public previousPage(): number {
+    return this.currentPage > 1 ? this.currentPage - 1 : this.currentPage;
   }
 
   private addRouteListener(): void {
@@ -121,12 +116,8 @@ export class PaginatorComponent implements OnInit {
         this.currentPage = parseInt(page, 10);
         this.pageChanged.emit(this.currentPage);
       } else {
-        this.setPageQueryParamOnBareRoute();
+        this.changePage(1);
       }
     });
-  }
-
-  private setPageQueryParamOnBareRoute(): void {
-    this.changePage(this.currentPage);
   }
 }

@@ -7,12 +7,12 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink, TitleCasePipe],
   template: `
-    <button
-      class="my-1 py-1 px-3 no-underline rounded-full bg-neutral-500 dark:bg-neutral-700 text-white font-semibold text-xs hover:text-white hover:bg-neutral-700 dark:hover:bg-neutral-500"
+    <a
+      class="my-1 py-1 px-3 no-underline rounded-full inline-block bg-neutral-500 dark:bg-neutral-700 text-white font-semibold text-xs hover:text-white hover:bg-neutral-700 dark:hover:bg-neutral-500"
       [routerLink]="[route, slug]"
     >
       {{ label | titlecase }}
-    </button>
+    </a>
   `,
 })
 export default class PillComponent {
