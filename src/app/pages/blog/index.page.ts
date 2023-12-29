@@ -99,7 +99,8 @@ export default class IndexPageComponent {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
     this.itemsPerPage =
-      this.localStorageService.getItem('blogPageSize') ?? pageSizeDefault;
+      parseInt(this.localStorageService.getItem('blogPageSize') ?? '', 10) ??
+      pageSizeDefault;
   }
 
   public onPageChanged(page: number = 1): void {
