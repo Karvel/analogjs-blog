@@ -78,8 +78,8 @@ export const metaTagList: MetaDefinition[] = [
               >
               as a front end lead software engineer. I enjoy mentoring in code
               and helping dismantle some of the built-in barriers found in the
-              coding world. There is more about me
-              <a routerLink="/about">here</a>.
+              coding world. There is more about me on my
+              <a routerLink="/about">about page</a>.
             </div>
           </div>
           <h2 class="text-xl">Latest Blog Posts:</h2>
