@@ -56,8 +56,9 @@ import { getMonth } from '@utils/get-month';
           />
         </div>
       </div>
-      <div
+      <a
         *ngIf="post?.attributes?.cover_image"
+        [routerLink]="['/blog', year, month, post.slug]"
         class="sm:w-80 sm:min-w-[20rem] sm:h-52"
       >
         <img
@@ -67,7 +68,7 @@ import { getMonth } from '@utils/get-month';
           class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
           loading="lazy"
         />
-      </div>
+      </a>
     </div>
   `,
 })
