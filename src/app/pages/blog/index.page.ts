@@ -8,6 +8,7 @@ import { RouteMeta } from '@analogjs/router';
 import { ArchiveComponent } from '@components/archive/archive.component';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { PaginatorComponent } from '@components/paginator/paginator.component';
+import { pageSizeDefault } from '@constants/page-size-default';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
@@ -82,7 +83,7 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class IndexPageComponent {
   public displayedPosts: ContentFile<BlogPost>[] = [];
-  public itemsPerPage = 5;
+  public itemsPerPage = pageSizeDefault;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   )
@@ -97,7 +98,8 @@ export default class IndexPageComponent {
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
-    this.itemsPerPage = this.localStorageService.getItem('blogPageSize') ?? 5;
+    this.itemsPerPage =
+      this.localStorageService.getItem('blogPageSize') ?? pageSizeDefault;
   }
 
   public onPageChanged(page: number = 1): void {
