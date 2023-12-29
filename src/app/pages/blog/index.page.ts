@@ -8,9 +8,11 @@ import { RouteMeta } from '@analogjs/router';
 import { ArchiveComponent } from '@components/archive/archive.component';
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { PaginatorComponent } from '@components/paginator/paginator.component';
+import { pageSizeDefault } from '@constants/page-size-default';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
+import { LocalStorageService } from '@services/local-storage.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 export const pageTitle = {
@@ -62,6 +64,7 @@ export const metaTagList: MetaDefinition[] = [
                 [itemsPerPage]="itemsPerPage"
                 [totalItems]="totalItems"
                 (pageChanged)="onPageChanged($event)"
+                (pageSizeChanged)="onPageSizeChanged($event)"
               />
             </ng-container>
             <ng-template #emptyList
@@ -80,7 +83,7 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class IndexPageComponent {
   public displayedPosts: ContentFile<BlogPost>[] = [];
-  public itemsPerPage = 5;
+  public itemsPerPage = pageSizeDefault;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   )
@@ -89,11 +92,14 @@ export default class IndexPageComponent {
   public totalItems = this.posts.length;
 
   private cd = inject(ChangeDetectorRef);
+  private localStorageService = inject(LocalStorageService);
   private metadataService = inject(MetadataService);
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
+    this.itemsPerPage =
+      this.localStorageService.getItem('blogPageSize') ?? pageSizeDefault;
   }
 
   public onPageChanged(page: number = 1): void {
@@ -101,5 +107,11 @@ export default class IndexPageComponent {
     const endIndex = startIndex + this.itemsPerPage;
     this.displayedPosts = this.posts.slice(startIndex, endIndex);
     this.cd.detectChanges();
+  }
+
+  public onPageSizeChanged(pageSize: number): void {
+    this.itemsPerPage = pageSize;
+    this.localStorageService.setItem('blogPageSize', pageSize);
+    this.onPageChanged();
   }
 }
