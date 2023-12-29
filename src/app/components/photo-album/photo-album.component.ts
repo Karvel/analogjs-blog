@@ -27,7 +27,7 @@ import { PhotosetListItem } from '@models/flickr';
             photo.secret +
             '_w.jpg'
           "
-          [alt]="photo.title._content"
+          alt=""
           appReplaceBrokenImage
           class="w-full rounded-md"
           loading="lazy"
