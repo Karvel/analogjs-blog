@@ -12,6 +12,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
+import {
+  defaultPageOptions,
+  setPageSizeOptions,
+} from '@utils/get-page-options';
+
 @Component({
   selector: 'app-paginator',
   standalone: true,
@@ -79,10 +84,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
         class="mb-3 border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
         dark:border-neutral-400 dark:text-white"
       >
-        <option [value]="5">5</option>
-        <option [value]="10">10</option>
-        <option [value]="20">20</option>
-        <option [value]="50">50</option>
+        <ng-container *ngFor="let option of options">
+          <option [value]="option.value">{{ option.label }}</option>
+        </ng-container>
       </select>
     </nav>
   `,
@@ -95,6 +99,7 @@ export class PaginatorComponent implements OnInit {
   @Output() pageSizeChanged = new EventEmitter<number>();
 
   public currentPage = 1;
+  public options = defaultPageOptions;
   public pageSizeControl!: FormControl;
 
   private destroyRef = inject(DestroyRef);
@@ -107,6 +112,7 @@ export class PaginatorComponent implements OnInit {
 
   ngOnInit() {
     this.addRouteListener();
+    this.options = setPageSizeOptions(this.totalItems) ?? defaultPageOptions;
     this.addPageSizeListener();
   }
 
