@@ -81,7 +81,7 @@ import {
         *ngIf="pageSizeControl"
         [formControl]="pageSizeControl"
         aria-label="Page Size Selector"
-        class="mb-3 border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
+        class="mb-3 cursor-pointer border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
         dark:border-neutral-400 dark:text-white"
       >
         <ng-container *ngFor="let option of options">
