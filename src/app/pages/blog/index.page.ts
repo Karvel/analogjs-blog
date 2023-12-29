@@ -62,6 +62,7 @@ export const metaTagList: MetaDefinition[] = [
                 [itemsPerPage]="itemsPerPage"
                 [totalItems]="totalItems"
                 (pageChanged)="onPageChanged($event)"
+                (pageSizeChanged)="onPageSizeChanged($event)"
               />
             </ng-container>
             <ng-template #emptyList
@@ -101,5 +102,10 @@ export default class IndexPageComponent {
     const endIndex = startIndex + this.itemsPerPage;
     this.displayedPosts = this.posts.slice(startIndex, endIndex);
     this.cd.detectChanges();
+  }
+
+  public onPageSizeChanged(pageSize: number): void {
+    this.itemsPerPage = pageSize;
+    this.onPageChanged();
   }
 }
