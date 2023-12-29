@@ -110,7 +110,7 @@ export class PaginatorComponent implements OnInit {
     return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.addRouteListener();
     this.options = setPageSizeOptions(this.totalItems) ?? defaultPageOptions;
     this.addPageSizeListener();
