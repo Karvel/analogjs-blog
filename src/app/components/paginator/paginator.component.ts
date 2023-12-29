@@ -1,12 +1,14 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -95,6 +97,7 @@ export class PaginatorComponent implements OnInit {
   public currentPage = 1;
   public pageSizeControl!: FormControl;
 
+  private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -141,10 +144,12 @@ export class PaginatorComponent implements OnInit {
 
   private addPageSizeListener(): void {
     this.pageSizeControl = new FormControl(this.itemsPerPage);
-    this.pageSizeControl.valueChanges.subscribe((newSize) => {
-      this.itemsPerPage = newSize;
-      this.pageSizeChanged.emit(this.itemsPerPage);
-      this.changePage(1); // Reset to page 1 whenever page size changes
-    });
+    this.pageSizeControl.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((newSize) => {
+        this.itemsPerPage = newSize;
+        this.pageSizeChanged.emit(this.itemsPerPage);
+        this.changePage(1); // Reset to page 1 whenever page size changes
+      });
   }
 }
