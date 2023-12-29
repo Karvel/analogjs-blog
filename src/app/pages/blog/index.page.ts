@@ -11,6 +11,7 @@ import { PaginatorComponent } from '@components/paginator/paginator.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
+import { LocalStorageService } from '@services/local-storage.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 export const pageTitle = {
@@ -90,11 +91,13 @@ export default class IndexPageComponent {
   public totalItems = this.posts.length;
 
   private cd = inject(ChangeDetectorRef);
+  private localStorageService = inject(LocalStorageService);
   private metadataService = inject(MetadataService);
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
+    this.itemsPerPage = this.localStorageService.getItem('blogPageSize') ?? 5;
   }
 
   public onPageChanged(page: number = 1): void {
@@ -106,6 +109,7 @@ export default class IndexPageComponent {
 
   public onPageSizeChanged(pageSize: number): void {
     this.itemsPerPage = pageSize;
+    this.localStorageService.setItem('blogPageSize', pageSize);
     this.onPageChanged();
   }
 }
