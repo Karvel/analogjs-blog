@@ -6,8 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import PillComponent from './pill.component';
 
 @Component({
-  template:
-    '<app-pill [label]="label" [route]="route" [slug]="slug" />',
+  template: '<app-pill [label]="label" [route]="route" [slug]="slug" />',
 })
 class TestHostComponent {
   label: string | undefined;
@@ -38,7 +37,7 @@ describe('PillComponent', () => {
     testHost.label = label;
     fixture.detectChanges();
 
-    const buttonElement = fixture.debugElement.query(By.css('button'));
+    const buttonElement = fixture.debugElement.query(By.css('a'));
     const buttonInnerText = buttonElement.nativeElement.textContent.trim();
 
     expect(buttonInnerText).toBe('Sample Label');
