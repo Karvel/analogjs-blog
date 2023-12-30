@@ -42,12 +42,19 @@ async function generateRssFeed() {
     .forEach(({ attributes }) => {
       const month = getMonth(attributes.date);
       const year = getYear(attributes.date);
+      const description = attributes.description ?? '';
+      const imageMarkup = attributes.cover_image
+        ? `<img src="${attributes.cover_image}" /><br />`
+        : `<img src="${site_url}/images/self/fallback_cover_image.png" /><br />`;
+      const descriptionWithMarkup = imageMarkup
+        ? `${imageMarkup}${description}`
+        : description;
       feed.item({
-        title: attributes.title,
-        author: attributes.author,
-        description: attributes.description,
-        url: `${site_url}/blog/${year}/${month}/${attributes.slug}`,
-        date: attributes.date,
+        title: attributes.title ?? '',
+        author: attributes.author ?? '',
+        description: descriptionWithMarkup ?? '',
+        url: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
+        date: attributes.date ?? '',
         categories: [splitTagStringIntoStringArray(attributes.tags) ?? []],
       });
     });
