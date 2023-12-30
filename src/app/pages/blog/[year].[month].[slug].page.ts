@@ -24,7 +24,7 @@ import { MetadataService } from '@services/metadata.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
+import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
 
 @Component({
   selector: 'app-blog-slug',
@@ -196,7 +196,7 @@ export default class BlogPostPageComponent {
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public prevPost!: ContentFile<BlogPost>;
-  public splitTagStringIntoArray = splitTagStringIntoArray;
+  public splitTagStringIntoArray = splitTagStringIntoTagArray;
   public tagList: Tag[] = [];
 
   private destroyRef = inject(DestroyRef);

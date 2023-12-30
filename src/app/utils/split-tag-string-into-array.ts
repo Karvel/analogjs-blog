@@ -1,6 +1,6 @@
 import { Tag } from '@models/tag';
 
-export const splitTagStringIntoArray = (
+export const splitTagStringIntoTagArray = (
   tagString: string | undefined | null,
 ): Tag[] => {
   if (tagString === undefined || tagString === null) {

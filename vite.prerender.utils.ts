@@ -8,7 +8,7 @@ import { getMonth } from './src/app/utils/get-month';
 import { getMonthName } from './src/app/utils/get-month-name';
 import { getYear } from './src/app/utils/get-year';
 import { isValidDate } from './src/app/utils/is-valid-date';
-import { splitTagStringIntoArray } from './src/app/utils/split-tag-string-into-array';
+import { splitTagStringIntoTagArray } from './src/app/utils/split-tag-string-into-array';
 
 export function getBlogPosts(): string[] {
   const posts = fs.readdirSync('./src/content/posts').map((file: string) => {
@@ -52,7 +52,7 @@ export function getBlogTags(): string[] {
     );
     const attributes = fm(fileContents).attributes as BlogPost;
     if (attributes.tags?.length) {
-      const tags = splitTagStringIntoArray(attributes.tags);
+      const tags = splitTagStringIntoTagArray(attributes.tags);
       tags.forEach((tag) => uniqueTags.add(tag?.name.toLowerCase()));
     }
   });
