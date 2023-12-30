@@ -7,6 +7,7 @@ import fm from 'front-matter';
 import { BlogPost } from '@models/post';
 import { getMonth } from '../../app/utils/get-month';
 import { getYear } from '../../app/utils/get-year';
+import { splitTagStringIntoStringArray } from '../../app/utils/split-tag-string-into-array';
 
 const posts = fs.readdirSync('./src/content/posts');
 async function generateRssFeed() {
@@ -47,6 +48,7 @@ async function generateRssFeed() {
         description: attributes.description,
         url: `${site_url}/blog/${year}/${month}/${attributes.slug}`,
         date: attributes.date,
+        categories: [splitTagStringIntoStringArray(attributes.tags) ?? []],
       });
     });
 
