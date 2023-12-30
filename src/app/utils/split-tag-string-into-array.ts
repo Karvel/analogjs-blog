@@ -15,3 +15,18 @@ export const splitTagStringIntoTagArray = (
 
   return tagArray;
 };
+
+export const splitTagStringIntoStringArray = (
+  tagString: string | undefined | null,
+): string[] => {
+  if (tagString === undefined || tagString === null) {
+    return [];
+  }
+
+  const tagNameArray = tagString.split(',');
+  const tagArray = tagNameArray
+    .map((tagName) => tagName.trim())
+    .filter((tagName) => tagName !== ''); // Filter out empty tag names
+
+  return tagArray;
+};
