@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
       prerender: {
         routes: async () => [
           '/',
-          '/api/rss.xml',
+          '/api/feed.xml',
           '/about',
           '/blog',
           '/category',

@@ -78,7 +78,7 @@ export default class FooterComponent {
     {
       icon: 'rss',
       label: 'RSS',
-      path: 'api/rss.xml',
+      path: 'api/feed.xml',
     },
   ];
   public readonly startYear = 2015;

@@ -164,7 +164,7 @@ I wanted to be able to support draft functionality, where a post would be hidden
 
 ### RSS
 
-One of the nice features that Analog supports is RSS. I wanted to continue to provide an RSS feed, which is something that comes with WordPress sites by default. Right now, I have a rough implementation that I plan on expanding in the future: <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/server/routes/rss.xml.ts" target="_blank" rel="noopener">`rss.xml.ts`</a>.
+One of the nice features that Analog supports is RSS. I wanted to continue to provide an RSS feed, which is something that comes with WordPress sites by default. Right now, I have a rough implementation that I plan on expanding in the future: <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/server/routes/feed.xml.ts" target="_blank" rel="noopener">`feed.xml.ts`</a>.
 
 ## Static Site
 
