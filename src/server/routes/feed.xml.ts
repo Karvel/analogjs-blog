@@ -18,7 +18,7 @@ async function generateRssFeed() {
     title: 'Hapax Legomenon | RSS Feed',
     description: 'Hapax Legomenon Blog Posts',
     id: site_url,
-    link: `${site_url}/api/rss.xml`,
+    link: `${site_url}/api/feed.xml`,
     updated: new Date(),
     copyright: `All rights reserved ${new Date().getFullYear()}`,
   };
