@@ -1,5 +1,5 @@
 import { defineEventHandler } from 'h3';
-import RSS from 'rss';
+import { Feed } from 'feed';
 import * as fs from 'fs';
 import * as path from 'path';
 import fm from 'front-matter';
@@ -8,22 +8,21 @@ import { marked } from 'marked';
 import { BlogPost } from '@models/post';
 import { getMonth } from '../../app/utils/get-month';
 import { getYear } from '../../app/utils/get-year';
-import { splitTagStringIntoStringArray } from '../../app/utils/split-tag-string-into-array';
+import { splitTagStringIntoTagArray } from '../../app/utils/split-tag-string-into-array';
 
 const posts = fs.readdirSync('./src/content/posts');
 async function generateRssFeed() {
   const site_url = 'https://elanna.me';
-
   const feedOptions = {
     title: 'Hapax Legomenon | RSS Feed',
     description: 'Hapax Legomenon Blog Posts',
-    site_url: site_url,
-    feed_url: `${site_url}/api/rss.xml`,
-    pubDate: new Date(),
+    id: site_url,
+    link: `${site_url}/api/rss.xml`,
+    updated: new Date(),
     copyright: `All rights reserved ${new Date().getFullYear()}`,
   };
 
-  const feed = new RSS(feedOptions);
+  const feed = new Feed(feedOptions);
 
   posts
     .map((contentFile) => {
@@ -47,24 +46,34 @@ async function generateRssFeed() {
       );
       const month = getMonth(attributes.date);
       const year = getYear(attributes.date);
-      const description = html ?? '';
+      const content = html ?? '';
+      const description = attributes.description ?? '';
       const imageMarkup = attributes.cover_image
         ? `<img src="${attributes.cover_image}" /><br />`
         : `<img src="${site_url}/images/self/fallback_cover_image.png" /><br />`;
+      const contentWithMarkup = imageMarkup
+        ? `${imageMarkup}${content}`
+        : content;
       const descriptionWithMarkup = imageMarkup
         ? `${imageMarkup}${description}`
-        : description;
-      feed.item({
+        : content;
+      feed.addItem({
+        id: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
         title: attributes.title ?? '',
-        author: attributes.author ?? '',
+        author: [
+          {
+            name: attributes.author ?? '',
+          },
+        ],
         description: descriptionWithMarkup ?? '',
-        url: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
-        date: attributes.date ?? '',
-        categories: [splitTagStringIntoStringArray(attributes.tags) ?? []],
+        content: contentWithMarkup ?? '',
+        link: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
+        date: new Date(attributes.date || ''),
+        category: splitTagStringIntoTagArray(attributes.tags) ?? [],
       });
     });
 
-  return feed.xml({ indent: true });
+  return feed.rss2();
 }
 
 export default defineEventHandler(async (event) => {
