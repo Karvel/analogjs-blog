@@ -11,7 +11,7 @@ import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
+import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
 
 export const pageTitle = {
   title: `Tags | ${siteName}`,
@@ -77,7 +77,7 @@ export default class IndexPageComponent implements OnInit {
 
     for (const post of blogPosts) {
       if (post.attributes.tags?.length && post.attributes.published) {
-        const tags = splitTagStringIntoArray(post.attributes.tags);
+        const tags = splitTagStringIntoTagArray(post.attributes.tags);
         tags.forEach((tag) => uniqueTags.add(tag?.name.toLowerCase()));
       }
     }
