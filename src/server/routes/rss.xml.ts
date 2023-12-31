@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import fm from 'front-matter';
 import { marked } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
 
 import { BlogPost } from '@models/post';
 import { getMonth } from '../../app/utils/get-month';
@@ -41,12 +42,13 @@ async function generateRssFeed() {
       (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
     )
     .forEach(({ attributes, body }) => {
-      const html = marked.parse(
-        body.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, ''),
+      const dirtyHTML = marked.parse(
+        body.replace(/^(\u200B|\u200C|\u200D|\u200E|\u200F|\uFEFF)/, ''),
       );
+      const cleanHTML = DOMPurify.sanitize(dirtyHTML);
       const month = getMonth(attributes.date);
       const year = getYear(attributes.date);
-      const content = html ?? '';
+      const content = cleanHTML ?? '';
       const description = attributes.description ?? '';
       const imageMarkup = attributes.cover_image
         ? `<img src="${attributes.cover_image}" /><br />`
