@@ -32,7 +32,7 @@ import {
       <ng-content />
     </div>
   `,
-  styleUrls: ['./popover.component.css'],
+  styleUrls: ['./popover.component.scss'],
 })
 export default class PopoverComponent implements OnInit, OnDestroy {
   @Input() public altText!: string | undefined;
