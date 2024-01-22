@@ -43,7 +43,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
     PostNavigationComponent,
     ReplaceBrokenImageDirective,
   ],
-  styleUrls: ['./[year].[month].[slug].page.css'],
+  styleUrls: ['./[year].[month].[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
@@ -226,14 +226,16 @@ export default class BlogPostPageComponent {
     post: ContentFile<BlogPost | Record<string, never>>,
     posts: ContentFile<BlogPost>[],
   ): void {
+    const reversedPosts = [...posts].reverse();
     const index = posts.findIndex((p) => p.slug === post.slug);
-    const nextPublishedIndex = posts.findIndex(
-      (post, i) => i < index && post.attributes.published,
-    );
+    const reversedIndex = reversedPosts.findIndex((p) => p.slug === post.slug);
+    const nextPublishedIndex = reversedPosts.findIndex((post, i) => {
+      return i > reversedIndex && post.attributes.published;
+    });
     const previousPublishedIndex = posts.findIndex(
       (post, i) => i > index && post.attributes.published,
     );
-    const nextPost = posts[nextPublishedIndex];
+    const nextPost = reversedPosts[nextPublishedIndex];
     const previousPost = posts[previousPublishedIndex];
 
     this.nextPost = nextPost;

@@ -25,7 +25,7 @@ import { getYear } from '@utils/get-year';
         attr.alt="Click to go to the previous post: {{
           prevPost.attributes.title
         }}"
-        class="hover:text-inherit no-underline inline-flex bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+        class="hover:text-inherit dark:hover:text-white no-underline inline-flex bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
       >
         <span>&laquo; &nbsp;</span
         ><span class="truncate">{{ prevPost.attributes.title }}</span>
@@ -39,7 +39,7 @@ import { getYear } from '@utils/get-year';
           nextPost.slug
         ]"
         attr.alt="Click to go to the next post: {{ nextPost.attributes.title }}"
-        class="hover:text-inherit no-underline inline-flex ml-auto bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+        class="hover:text-inherit dark:hover:text-white no-underline inline-flex ml-auto bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
       >
         <span class="truncate">{{ nextPost.attributes.title }}</span
         ><span>&nbsp; &raquo;</span>
