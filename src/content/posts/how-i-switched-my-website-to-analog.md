@@ -148,7 +148,7 @@ For the post cover images, I wanted to provide an easy way to show the photo nam
 
 #### Masonry Grid
 
-I have used Flickr for many years, and I have always liked the way that masonry grids look. I wanted to put some of my favorite photos on a page, where they would randomly load from a list into a masonry grid. My initial approach involved a directive, which felt too heavy for what I needed. I looked around for a CSS only solution, and found <a href="https://blog.logrocket.com/responsive-image-gallery-css-flexbox/" target="_blank" rel="noopener">this very useful article</a>. I tweaked the styling and ended up with <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/masonry-grid/masonry-grid.component.css" target="_blank" rel="noopener">these rules</a>.
+I have used Flickr for many years, and I have always liked the way that masonry grids look. I wanted to put some of my favorite photos on a page, where they would randomly load from a list into a masonry grid. My initial approach involved a directive, which felt too heavy for what I needed. I looked around for a CSS only solution, and found <a href="https://blog.logrocket.com/responsive-image-gallery-css-flexbox/" target="_blank" rel="noopener">this very useful article</a>. I tweaked the styling and ended up with <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/masonry-grid/masonry-grid.component.scss" target="_blank" rel="noopener">these rules</a>.
 
 #### Object Fit
 

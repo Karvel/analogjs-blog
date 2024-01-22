@@ -43,7 +43,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
     PostNavigationComponent,
     ReplaceBrokenImageDirective,
   ],
-  styleUrls: ['./[year].[month].[slug].page.css'],
+  styleUrls: ['./[year].[month].[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">

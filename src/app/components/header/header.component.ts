@@ -11,7 +11,7 @@ import { ThemeService } from '@services/theme.service';
   selector: 'app-header',
   standalone: true,
   imports: [AsyncPipe, FormsModule, NgClass, NgIf, NgFor, RouterLink],
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
   template: `
     <nav class="bg-[#829ab3] border-gray-300 dark:bg-sky-800">
       <div

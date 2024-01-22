@@ -55,7 +55,7 @@ import { FlickrService } from '@services/api/flickr.service';
       </ul>
     </div>
   `,
-  styleUrls: ['./masonry-grid.component.css'],
+  styleUrls: ['./masonry-grid.component.scss'],
 })
 export class MasonryGridComponent {
   private changeDetectorRef = inject(ChangeDetectorRef);
