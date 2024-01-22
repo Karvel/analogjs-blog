@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -71,19 +71,6 @@ import { ThemeService } from '@services/theme.service';
                 >{{ link?.label }}</a
               >
             </li>
-            <!-- <li>
-              <button
-                (click)="toggleTheme()"
-                class="block py-2 pl-3 text-gray-900 rounded bg-transparent hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-black md:hover:underline md:p-0 dark:text-white md:dark:hover:text-white dark:bg-transparent dark:hover:bg-sky-900 dark:hover:text-white md:dark:hover:bg-transparent no-underline"
-              >
-                <ng-container *ngIf="theme$ | async as theme">
-                  <span *ngIf="theme === 'dark'; else light">Dark</span>
-                  <ng-template #light>
-                    <span>Light</span>
-                  </ng-template>
-                </ng-container>
-              </button>
-            </li> -->
             <li>
               <label
                 class="switch"
@@ -125,7 +112,7 @@ import { ThemeService } from '@services/theme.service';
     </nav>
   `,
 })
-export default class HeaderComponent implements OnInit {
+export default class HeaderComponent {
   public isChecked!: boolean;
   public linkList: Navigation[] = [
     {
@@ -153,13 +140,8 @@ export default class HeaderComponent implements OnInit {
 
   constructor() {
     this.theme$.subscribe((theme) => {
-      console.log('theme', theme);
       this.isChecked = theme === 'light';
     });
-  }
-
-  public ngOnInit(): void {
-    console.log('ngOnInit');
   }
 
   public toggleNavbar(): void {
