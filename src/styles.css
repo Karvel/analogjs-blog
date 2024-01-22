@@ -22,11 +22,6 @@ a {
   text-decoration: underline;
 }
 
-code[class*="language-"] {
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
 /* light mode */
 :root {
   color: black;
@@ -164,6 +159,11 @@ button {
  .token.entity {
    cursor: help;
  }
+
+ code[class*="language-"] {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
 
  /*
   Plugin support
@@ -367,6 +367,11 @@ button {
 
   .token.entity {
     cursor: help;
+  }
+
+  code[class*="language-"] {
+    white-space: pre-wrap;
+    word-break: break-all;
   }
 
 
