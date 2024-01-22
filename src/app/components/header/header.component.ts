@@ -85,7 +85,13 @@ import { ThemeService } from '@services/theme.service';
               </button>
             </li> -->
             <li>
-              <label class="switch">
+              <label
+                class="switch"
+                for="theme-toggle"
+                [attr.aria-label]="'Toggle theme'"
+                tabindex="0"
+                (keypress)="toggleTheme()"
+              >
                 <span class="sun"
                   ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <circle r="5" cy="12" cx="12" />
@@ -103,8 +109,10 @@ import { ThemeService } from '@services/theme.service';
                     /></svg
                 ></span>
                 <input
-                  type="checkbox"
                   class="input"
+                  id="theme-toggle"
+                  tabindex="-1"
+                  type="checkbox"
                   (change)="toggleTheme()"
                   [(ngModel)]="isChecked"
                 />
