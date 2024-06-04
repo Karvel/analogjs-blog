@@ -68,7 +68,7 @@ export const metaTagList: MetaDefinition[] = [
             />
             <div class="pt-4 sm:pl-4 sm:pt-0">
               My name is Elanna Grossman. I am a full-stack developer, primarily
-              focused on Angular and .NET. I work at
+              focused on Angular and .NET. I most recently worked at
               <a
                 href="https://www.crexi.com"
                 class=""
