@@ -3,10 +3,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { distinctUntilChanged } from 'rxjs';
+
 import { siteName } from '@constants/site-name';
 import { Navigation } from '@models/navigation';
 import { ThemeService } from '@services/theme.service';
-import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-header',
