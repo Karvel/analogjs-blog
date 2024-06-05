@@ -154,7 +154,7 @@ export default class HeaderComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form
       ?.get('isChecked')
       ?.valueChanges.pipe(distinctUntilChanged())
