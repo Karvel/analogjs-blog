@@ -25,57 +25,66 @@ async function generateRssFeed() {
 
   const feed = new Feed(feedOptions);
 
-  posts
-    .map((contentFile) => {
-      const fileContents = fs.readFileSync(
-        path.resolve('src/content/posts', contentFile),
-        'utf8',
-      );
-      return {
-        attributes: fm(fileContents).attributes as BlogPost,
-        body: fm(fileContents).body,
-      };
-    })
-    .filter(({ attributes }) => attributes.published)
-    .sort((a1, a2) =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
-    )
-    .forEach(({ attributes, body }) => {
-      const dirtyHTML = marked.parse(
-        body.replace(/^(\u200B|\u200C|\u200D|\u200E|\u200F|\uFEFF)/, ''),
-      );
-      const cleanHTML = DOMPurify.sanitize(dirtyHTML);
-      const month = getMonth(attributes.date);
-      const year = getYear(attributes.date);
-      const content = cleanHTML ?? '';
-      const description = attributes.description ?? '';
-      const imageMarkup = attributes.cover_image
-        ? `<img src="${attributes.cover_image}" /><br />`
-        : `<img src="${site_url}/images/self/fallback_cover_image.png" /><br />`;
-      const contentWithMarkup = imageMarkup
-        ? `${imageMarkup}${content}`
-        : content;
-      const descriptionWithMarkup = imageMarkup
-        ? `${imageMarkup}${description}`
-        : content;
-      feed.addItem({
-        id: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
-        title: attributes.title ?? '',
-        author: [
-          {
-            name: attributes.author ?? '',
-          },
-        ],
-        description: descriptionWithMarkup ?? '',
-        content: contentWithMarkup ?? '',
-        link: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
-        date: new Date(attributes.date || ''),
-        category: splitTagStringIntoTagArray(attributes.tags) ?? [],
-      });
-    });
+  const processPosts = async () => {
+    const processedPosts = await Promise.all(
+      posts.map(async (contentFile) => {
+        const fileContents = await fs.promises.readFile(
+          path.resolve('src/content/posts', contentFile),
+          'utf8',
+        );
+        return {
+          attributes: fm(fileContents).attributes as BlogPost,
+          body: fm(fileContents).body,
+        };
+      }),
+    );
 
-  return feed.rss2();
+    await Promise.all(
+      processedPosts
+        .filter(({ attributes }) => attributes.published)
+        .sort((a1, a2) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (a1.attributes as any).date > (a2.attributes as any).date ? -1 : 1,
+        )
+        .map(async ({ attributes, body }) => {
+          const dirtyHTML = await marked.parse(
+            body.replace(/^(\u200B|\u200C|\u200D|\u200E|\u200F|\uFEFF)/, ''),
+          );
+          const cleanHTML = DOMPurify.sanitize(dirtyHTML);
+          const month = getMonth(attributes.date);
+          const year = getYear(attributes.date);
+          const content = cleanHTML ?? '';
+          const description = attributes.description ?? '';
+          const imageMarkup = attributes.cover_image
+            ? `<img src="${attributes.cover_image}" /><br />`
+            : `<img src="${site_url}/images/self/fallback_cover_image.png" /><br />`;
+          const contentWithMarkup = imageMarkup
+            ? `${imageMarkup}${content}`
+            : content;
+          const descriptionWithMarkup = imageMarkup
+            ? `${imageMarkup}${description}`
+            : content;
+          feed.addItem({
+            id: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
+            title: attributes.title ?? '',
+            author: [
+              {
+                name: attributes.author ?? '',
+              },
+            ],
+            description: descriptionWithMarkup ?? '',
+            content: contentWithMarkup ?? '',
+            link: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
+            date: new Date(attributes.date || ''),
+            category: splitTagStringIntoTagArray(attributes.tags) ?? [],
+          });
+        }),
+    );
+
+    return feed.rss2();
+  };
+
+  return await processPosts();
 }
 
 export default defineEventHandler(async (event) => {
