@@ -60,7 +60,7 @@ import { getMonth } from '@utils/get-month';
             post.attributes.title
           }}</a>
         </div>
-        <div class="sm:max-w-prose text-sm">
+        <div class="sm:max-w-prose text-sm" data-testid="description">
           {{ post.attributes.description }}
         </div>
         <div *ngIf="post?.attributes?.category" class="pt-1">
@@ -82,13 +82,11 @@ import { getMonth } from '@utils/get-month';
           maxWidth="100%"
           [width]="isSmallScreen ? '' : '320px'"
         />
-        <a
-          [routerLink]="['/blog', year, month, post.slug]"
-          [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
-        >
+        <a [routerLink]="['/blog', year, month, post.slug]">
           <img
             [src]="post.attributes.cover_image"
             [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
+            [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
             (load)="onLoad()"
             appReplaceBrokenImage
             class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
