@@ -12,27 +12,30 @@ describe('aggregateAndWeighTags', () => {
 
   it('should return an empty array if no tags are present in the posts', () => {
     const posts: ContentFile<BlogPost>[] = [
-      { attributes: { tags: '' }, filename: '', slug: '' },
-      { attributes: { tags: '' }, filename: '', slug: '' },
+      { attributes: { tags: '', published: true }, filename: '', slug: '' },
+      { attributes: { tags: '', published: true }, filename: '', slug: '' },
     ];
     const result = aggregateAndWeighTags(posts);
     expect(result).toEqual([]);
   });
 
-  it('should correctly aggregate and weigh tags', () => {
+  it('should correctly aggregate and weigh tags for published posts', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
-        attributes: { tags: 'typescript, javascript, programming' },
+        attributes: {
+          tags: 'typescript, javascript, programming',
+          published: true,
+        },
         filename: '',
         slug: '',
       },
       {
-        attributes: { tags: 'typescript, web development' },
+        attributes: { tags: 'typescript, web development', published: true },
         filename: '',
         slug: '',
       },
       {
-        attributes: { tags: 'javascript, programming' },
+        attributes: { tags: 'javascript, programming', published: true },
         filename: '',
         slug: '',
       },
@@ -47,20 +50,52 @@ describe('aggregateAndWeighTags', () => {
     ]);
   });
 
-  it('should ignore empty tags and trim whitespaces', () => {
+  it('should ignore tags from unpublished posts', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
-        attributes: { tags: 'typescript, , javascript , programming' },
+        attributes: {
+          tags: 'typescript, javascript, programming',
+          published: false,
+        },
         filename: '',
         slug: '',
       },
       {
-        attributes: { tags: 'typescript, web development, ' },
+        attributes: { tags: 'typescript, web development', published: true },
         filename: '',
         slug: '',
       },
       {
-        attributes: { tags: ' javascript,  programming  ' },
+        attributes: { tags: 'javascript, programming', published: false },
+        filename: '',
+        slug: '',
+      },
+    ];
+
+    const result = aggregateAndWeighTags(posts);
+    expect(result).toEqual([
+      { name: 'typescript', weight: 1 },
+      { name: 'web development', weight: 1 },
+    ]);
+  });
+
+  it('should ignore empty tags and trim whitespace for published posts', () => {
+    const posts: ContentFile<BlogPost>[] = [
+      {
+        attributes: {
+          tags: 'typescript, , javascript , programming',
+          published: true,
+        },
+        filename: '',
+        slug: '',
+      },
+      {
+        attributes: { tags: 'typescript, web development, ', published: true },
+        filename: '',
+        slug: '',
+      },
+      {
+        attributes: { tags: ' javascript,  programming  ', published: true },
         filename: '',
         slug: '',
       },
@@ -79,7 +114,7 @@ describe('aggregateAndWeighTags', () => {
     const posts: ContentFile<BlogPost>[] = [
       { attributes: {}, filename: '', slug: '' },
       {
-        attributes: { tags: 'typescript, javascript' },
+        attributes: { tags: 'typescript, javascript', published: true },
         filename: '',
         slug: '',
       },

@@ -9,7 +9,7 @@ export const aggregateAndWeighTags = (
   const tagMap: { [key: string]: Tag } = {};
 
   posts.forEach((post) => {
-    if (post.attributes.tags) {
+    if (post.attributes.tags?.length && post.attributes.published) {
       const tags = post.attributes.tags
         .split(',')
         .map((tag) => tag.trim())
