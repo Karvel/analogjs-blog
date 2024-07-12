@@ -9,9 +9,10 @@ import { RouteMeta } from '@analogjs/router';
 import PillComponent from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
+import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
+import { aggregateAndWeighTags } from '@utils/aggregate-and-weigh-tags';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
 
 export const pageTitle = {
   title: `Tags | ${siteName}`,
@@ -42,14 +43,24 @@ export const metaTagList: MetaDefinition[] = [
   selector: 'app-tag-index',
   standalone: true,
   imports: [NgFor, PillComponent, RouterLink],
+  styleUrls: ['./index.page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">Tags:</h1>
-          <ul class="pt-5 flex flex-wrap justify-evenly">
-            <li *ngFor="let tag of tags" class="flex m-1">
-              <app-pill [label]="tag" [route]="'/tag'" [slug]="tag" />
+          <ul
+            class="pt-5 flex flex-wrap justify-evenly items-center cloud"
+            role="navigation"
+            aria-label="Article tag cloud"
+          >
+            <li *ngFor="let tag of tagsWithWeights" class="flex m-1">
+              <app-pill
+                [attr.data-weight]="tag.weight"
+                [label]="tag.name"
+                [route]="'/tag'"
+                [slug]="tag.name"
+              />
             </li>
           </ul>
         </div>
@@ -63,7 +74,7 @@ export default class IndexPageComponent implements OnInit {
   )
     .filter((post) => post.attributes.published)
     .sort(sortByUpdatedOrOriginalDate);
-  public tags = this.extractUniqueTags(this.posts);
+  public tagsWithWeights = this.setUpTagCloud(this.posts);
 
   private metadataService = inject(MetadataService);
 
@@ -72,18 +83,11 @@ export default class IndexPageComponent implements OnInit {
     this.metadataService.updateTags(metaTagList);
   }
 
-  private extractUniqueTags(blogPosts: ContentFile<BlogPost>[]): string[] {
-    const uniqueTags = new Set<string>();
+  private setUpTagCloud(blogPosts: ContentFile<BlogPost>[]): Tag[] {
+    const tagCloud = aggregateAndWeighTags(blogPosts).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
 
-    for (const post of blogPosts) {
-      if (post.attributes.tags?.length && post.attributes.published) {
-        const tags = splitTagStringIntoTagArray(post.attributes.tags);
-        tags.forEach((tag) => uniqueTags.add(tag?.name.toLowerCase()));
-      }
-    }
-
-    const uniqueCategoriesArray = Array.from(uniqueTags).sort();
-
-    return uniqueCategoriesArray;
+    return tagCloud;
   }
 }
