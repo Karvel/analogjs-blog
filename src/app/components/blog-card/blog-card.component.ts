@@ -1,19 +1,24 @@
 import { DatePipe, NgIf, NgStyle } from '@angular/common';
 import {
   Component,
+  DestroyRef,
+  inject,
   Input,
   OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
 import { ContentFile } from '@analogjs/content';
+import { debounceTime, Observable } from 'rxjs';
 
 import PillComponent from '@components/pill/pill.component';
 import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
+import { ScreenSizeService } from '@services/screen-size.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 
@@ -74,7 +79,7 @@ import { getMonth } from '@utils/get-month';
           class="rounded-md absolute min-w-full h-full"
           height="100%"
           maxWidth="100%"
-          width="320px"
+          [width]="isSmallScreen ? '' : '320px'"
         />
         <a
           [routerLink]="['/blog', year, month, post.slug]"
@@ -96,13 +101,24 @@ import { getMonth } from '@utils/get-month';
 export class BlogCardComponent implements OnInit {
   @Input() post!: ContentFile<BlogPost>;
 
+  public isSmallScreen: boolean = false;
   public month: string = '';
+  public screenWidth$!: Observable<number>;
   public showSkeleton: WritableSignal<boolean> = signal(true);
   public year: string = '';
+
+  private destroyRef = inject(DestroyRef);
+  private screenSizeService = inject(ScreenSizeService);
 
   public ngOnInit(): void {
     this.year = getYear(this.post.attributes.date);
     this.month = getMonth(this.post.attributes.date);
+    this.screenWidth$ = this.screenSizeService.screenWidth;
+    this.screenWidth$
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((width) => {
+        this.isSmallScreen = width < 640;
+      });
   }
 
   public onLoad(): void {
