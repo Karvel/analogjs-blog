@@ -16,6 +16,7 @@ import { debounceTime, Observable } from 'rxjs';
 
 import PillComponent from '@components/pill/pill.component';
 import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
 import { ScreenSizeService } from '@services/screen-size.service';
@@ -117,7 +118,7 @@ export class BlogCardComponent implements OnInit {
     this.screenWidth$
       .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
       .subscribe((width) => {
-        this.isSmallScreen = width < 640;
+        this.isSmallScreen = width < smallBreakpointSize;
       });
   }
 
