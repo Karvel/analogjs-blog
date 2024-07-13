@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 
-import { BehaviorSubject, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 import { PhotoAlbumComponent } from '@components/photo-album/photo-album.component';
 import { FlickrService } from '@services/api/flickr.service';
@@ -11,7 +11,7 @@ import { FlickrService } from '@services/api/flickr.service';
   standalone: true,
   imports: [AsyncPipe, NgFor, NgIf, PhotoAlbumComponent],
   template: `
-    <div *ngIf="loading$ | async" role="status" class="flex justify-center">
+    <div *ngIf="loading()" role="status" class="flex justify-center">
       <svg
         aria-hidden="true"
         class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -41,15 +41,11 @@ import { FlickrService } from '@services/api/flickr.service';
   `,
 })
 export class RecentPhotoAlbumsComponent {
-  private changeDetectorRef = inject(ChangeDetectorRef);
   private flickrService = inject(FlickrService);
 
-  public loading$ = new BehaviorSubject<boolean>(true);
+  public loading: WritableSignal<boolean> = signal(true);
 
-  public photos$ = this.flickrService.getRecentPhotosets().pipe(
-    tap(() => {
-      this.loading$.next(false);
-      this.changeDetectorRef.detectChanges();
-    }),
-  );
+  public photos$ = this.flickrService
+    .getRecentPhotosets()
+    .pipe(tap(() => this.loading.set(false)));
 }

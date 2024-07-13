@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 
-import { BehaviorSubject, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
 import PopoverComponent from '@components/popover/popover.component';
@@ -20,11 +20,7 @@ import { FlickrService } from '@services/api/flickr.service';
     PopoverComponent,
   ],
   template: `
-    <div
-      *ngIf="loading$ | async"
-      role="status"
-      class="flex justify-center py-3"
-    >
+    <div *ngIf="loading()" role="status" class="flex justify-center py-3">
       <svg
         aria-hidden="true"
         class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -82,15 +78,11 @@ import { FlickrService } from '@services/api/flickr.service';
   styleUrls: ['./masonry-grid.component.scss'],
 })
 export class MasonryGridComponent {
-  private changeDetectorRef = inject(ChangeDetectorRef);
   private flickrService = inject(FlickrService);
 
   public flickr = flickr;
-  public loading$ = new BehaviorSubject<boolean>(true);
-  public photos$ = this.flickrService.getFavoritePhotos().pipe(
-    tap(() => {
-      this.loading$.next(false);
-      this.changeDetectorRef.detectChanges();
-    }),
-  );
+  public loading: WritableSignal<boolean> = signal(true);
+  public photos$ = this.flickrService
+    .getFavoritePhotos()
+    .pipe(tap(() => this.loading.set(false)));
 }
