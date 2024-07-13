@@ -1,4 +1,4 @@
-import { DatePipe, NgIf, NgStyle } from '@angular/common';
+import { DatePipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -29,6 +29,7 @@ import { getMonth } from '@utils/get-month';
   imports: [
     DatePipe,
     NgIf,
+    NgOptimizedImage,
     NgStyle,
     PillComponent,
     ReplaceBrokenImageDirective,
@@ -83,15 +84,29 @@ import { getMonth } from '@utils/get-month';
           [width]="isSmallScreen ? '' : '320px'"
         />
         <a [routerLink]="['/blog', year, month, post.slug]">
-          <img
-            [src]="post.attributes.cover_image"
-            [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
-            [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
-            (load)="onLoad()"
-            appReplaceBrokenImage
-            class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-            loading="lazy"
-          />
+          <ng-container *ngIf="isLCP; else nonPriority">
+            <img
+              [ngSrc]="post.attributes.cover_image || ''"
+              [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
+              [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
+              (load)="onLoad()"
+              appReplaceBrokenImage
+              class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
+              priority
+              fill
+            />
+          </ng-container>
+          <ng-template #nonPriority>
+            <img
+              [ngSrc]="post.attributes.cover_image || ''"
+              [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
+              [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
+              (load)="onLoad()"
+              appReplaceBrokenImage
+              class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
+              fill
+            />
+          </ng-template>
         </a>
       </div>
     </div>
@@ -99,6 +114,7 @@ import { getMonth } from '@utils/get-month';
 })
 export class BlogCardComponent implements OnInit {
   @Input() post!: ContentFile<BlogPost>;
+  @Input() isLCP: boolean = false;
 
   public isSmallScreen: boolean = false;
   public month: string = '';
