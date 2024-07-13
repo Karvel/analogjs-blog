@@ -22,7 +22,7 @@ import { FlickrService } from '@services/api/flickr.service';
     SpinnerComponent,
   ],
   template: `
-    <app-spinner *ngIf="loading()" />
+    <app-spinner *ngIf="loading()" class="py-3 block" />
     <div *ngIf="photos$ | async as photos">
       <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
