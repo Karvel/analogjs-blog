@@ -6,7 +6,13 @@ import {
   NgIf,
   NgOptimizedImage,
 } from '@angular/common';
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
@@ -32,6 +38,7 @@ import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
   selector: 'app-blog-slug',
@@ -50,11 +57,13 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
     PopoverComponent,
     PostNavigationComponent,
     ReplaceBrokenImageDirective,
+    SpinnerComponent,
   ],
   styleUrls: ['./[year].[month].[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
+        <app-spinner *ngIf="loading()" />
         <div *ngIf="post$ | async as post; else emptyResult" class="flex-1">
           <div class="max-w mx-auto">
             <ng-container *ngIf="isDraft">
@@ -187,12 +196,14 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
 })
 export default class BlogPostPageComponent {
   public isDraft!: boolean;
+  public loading: WritableSignal<boolean> = signal(true);
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
   }).pipe(
     tap((post) => {
+      this.loading.set(false);
       this.isDraft = !post.attributes.published;
     }),
     map((post) => {
