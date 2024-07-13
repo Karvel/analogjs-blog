@@ -1,16 +1,36 @@
-import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgIf, NgStyle } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { Observable, debounceTime } from 'rxjs';
+
+import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
 import { flickr } from '@constants/flickr';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { PhotosetListItem } from '@models/flickr';
+import { ScreenSizeService } from '@services/screen-size.service';
 
 @Component({
   selector: 'app-photo-album',
   standalone: true,
-  imports: [NgIf, ReplaceBrokenImageDirective],
+  imports: [NgIf, NgStyle, ReplaceBrokenImageDirective, SkeletonCardComponent],
   template: `
     <div *ngIf="photo.id" class="relative">
+      <app-skeleton-card
+        *ngIf="showSkeleton()"
+        class="rounded-md absolute min-w-full h-full"
+        height="100%"
+        maxWidth="100%"
+        [width]="isSmallScreen ? '' : '736px'"
+      />
       <a
         [href]="flickr.albumUrl + '/' + photo.id"
         target="_blank"
@@ -27,6 +47,8 @@ import { PhotosetListItem } from '@models/flickr';
             photo.secret +
             '_w.jpg'
           "
+          [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
+          (load)="onLoad()"
           alt=""
           appReplaceBrokenImage
           class="w-full rounded-md"
@@ -49,8 +71,28 @@ import { PhotosetListItem } from '@models/flickr';
     </div>
   `,
 })
-export class PhotoAlbumComponent {
+export class PhotoAlbumComponent implements OnInit {
   @Input() public photo!: PhotosetListItem;
 
   public flickr = flickr;
+  public isSmallScreen: boolean = false;
+  public screenWidth$!: Observable<number>;
+  public showSkeleton: WritableSignal<boolean> = signal(true);
+
+  private destroyRef = inject(DestroyRef);
+  private screenSizeService = inject(ScreenSizeService);
+
+  public ngOnInit(): void {
+    const smallScreenSize = 768;
+    this.screenWidth$ = this.screenSizeService.screenWidth;
+    this.screenWidth$
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((width) => {
+        this.isSmallScreen = width < smallScreenSize;
+      });
+  }
+
+  public onLoad(): void {
+    this.showSkeleton.set(false);
+  }
 }
