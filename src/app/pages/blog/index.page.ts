@@ -57,8 +57,8 @@ export const metaTagList: MetaDefinition[] = [
           <h1 class="text-xl">Blog Posts:</h1>
           <ul>
             <ng-container *ngIf="posts?.length; else emptyList">
-              <li *ngFor="let post of displayedPosts">
-                <app-blog-card [post]="post" />
+              <li *ngFor="let post of displayedPosts; let i = index">
+                <app-blog-card [post]="post" [isLCP]="i === 0" />
               </li>
               <app-paginator
                 [itemsPerPage]="itemsPerPage"

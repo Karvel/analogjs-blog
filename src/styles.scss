@@ -49,126 +49,125 @@ button {
 /*
  Theme
  */
- code[class*="language-"],
- pre[class*="language-"] {
-   color: #545454;
-   background: none;
-   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-   text-align: left;
-   white-space: pre;
-   word-spacing: normal;
-   word-break: normal;
-   word-wrap: normal;
-   line-height: 1.5;
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #545454;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
 
-   -moz-tab-size: 4;
-   -o-tab-size: 4;
-   tab-size: 4;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
 
-   -webkit-hyphens: none;
-   -moz-hyphens: none;
-   -ms-hyphens: none;
-   hyphens: none;
- }
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
 
- /* Code blocks */
- pre[class*="language-"] {
-   padding: 1em;
-   margin: 0.5em 0;
-   overflow: auto;
-   border-radius: 0.3em;
- }
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+}
 
- :not(pre) > code[class*="language-"],
- pre[class*="language-"] {
-   background: #fbfbfb;
- }
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #fbfbfb;
+}
 
- /* Inline code */
- :not(pre) > code[class*="language-"] {
-   padding: 0.1em;
-   border-radius: 0.3em;
-   white-space: normal;
- }
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
 
- .token.comment,
- .token.prolog,
- .token.doctype,
- .token.cdata {
-   color: #696969;
- }
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #696969;
+}
 
- .token.punctuation {
-   color: #545454;
- }
+.token.punctuation {
+  color: #545454;
+}
 
- .token.property,
- .token.tag,
- .token.constant,
- .token.symbol,
- .token.deleted {
-   color: #007299;
- }
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #007299;
+}
 
- .token.boolean,
- .token.number {
-   color: #008000;
- }
+.token.boolean,
+.token.number {
+  color: #008000;
+}
 
- .token.selector,
- .token.attr-name,
- .token.string,
- .token.char,
- .token.builtin,
- .token.inserted {
-   color: #aa5d00;
- }
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #aa5d00;
+}
 
- .token.operator,
- .token.entity,
- .token.url,
- .language-css .token.string,
- .style .token.string,
- .token.variable {
-   color: #008000;
- }
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #008000;
+}
 
- .token.atrule,
- .token.attr-value,
- .token.function {
-   color: #aa5d00;
- }
+.token.atrule,
+.token.attr-value,
+.token.function {
+  color: #aa5d00;
+}
 
- .token.keyword {
-   color: #d91e18;
- }
+.token.keyword {
+  color: #d91e18;
+}
 
- .token.regex,
- .token.important {
-   color: #d91e18;
- }
+.token.regex,
+.token.important {
+  color: #d91e18;
+}
 
- .token.important,
- .token.bold {
-   font-weight: bold;
- }
- .token.italic {
-   font-style: italic;
- }
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
 
- .token.entity {
-   cursor: help;
- }
+.token.entity {
+  cursor: help;
+}
 
- code[class*="language-"] {
+code[class*='language-'] {
   white-space: pre-wrap;
   word-break: break-all;
 }
 
- /*
+/*
   Plugin support
  */
-
 
 /* Line highlight */
 .line-highlight {
@@ -177,7 +176,7 @@ button {
   border-bottom: 1px solid #b8860b;
 }
 
- /* Line numbers */
+/* Line numbers */
 .line-numbers .line-numbers-rows {
   border-right: 1px solid #aa5d00;
 }
@@ -190,14 +189,14 @@ button {
  High contrast mode support
 */
 @media screen and (-ms-high-contrast: active) {
-  code[class*="language-"],
-  pre[class*="language-"] {
+  code[class*='language-'],
+  pre[class*='language-'] {
     color: windowText;
     background: window;
   }
 
-  :not(pre) > code[class*="language-"],
-  pre[class*="language-"] {
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
     background: window;
   }
 
@@ -237,8 +236,8 @@ button {
 
 /* dark mode */
 .dark {
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
   a {
     color: white;
@@ -247,9 +246,9 @@ button {
   a:hover {
     color: #2563eb;
   }
-    /* syntax highlighting */
+  /* syntax highlighting */
 
-    /**
+  /**
   * a11y-dark theme for JavaScript, CSS, and HTML
   * Based on the okaidia theme: https://github.com/PrismJS/prism/blob/gh-pages/themes/prism-okaidia.css
   * @author ericwbailey
@@ -258,8 +257,8 @@ button {
   /*
   Theme
   */
-  code[class*="language-"],
-  pre[class*="language-"] {
+  code[class*='language-'],
+  pre[class*='language-'] {
     color: #f8f8f2;
     background: none;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -281,20 +280,20 @@ button {
   }
 
   /* Code blocks */
-  pre[class*="language-"] {
+  pre[class*='language-'] {
     padding: 1em;
     margin: 0.5em 0;
     overflow: auto;
     border-radius: 0.3em;
   }
 
-  :not(pre) > code[class*="language-"],
-  pre[class*="language-"] {
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
     background: #2b2b2b;
   }
 
   /* Inline code */
-  :not(pre) > code[class*="language-"] {
+  :not(pre) > code[class*='language-'] {
     padding: 0.1em;
     border-radius: 0.3em;
     white-space: normal;
@@ -369,11 +368,10 @@ button {
     cursor: help;
   }
 
-  code[class*="language-"] {
+  code[class*='language-'] {
     white-space: pre-wrap;
     word-break: break-all;
   }
-
 
   /*
     Plugin support
@@ -381,33 +379,32 @@ button {
 
   /* Line highlight */
   .line-highlight {
-    background: rgba(255, 217, 0, 0.10);
+    background: rgba(255, 217, 0, 0.1);
     border-top: 1px solid rgba(255, 217, 0, 0.55);
     border-bottom: 1px solid rgba(255, 217, 0, 0.55);
   }
 
   /* Line numbers */
   .line-numbers .line-numbers-rows {
-    border-right: 1px solid #F8F8F2;
+    border-right: 1px solid #f8f8f2;
   }
 
   .line-numbers-rows > span:before {
-    color: #D4D0AB;
+    color: #d4d0ab;
   }
-
 
   /*
     High contrast mode support
   */
   @media screen and (-ms-high-contrast: active) {
-    code[class*="language-"],
-    pre[class*="language-"] {
+    code[class*='language-'],
+    pre[class*='language-'] {
       color: windowText;
       background: window;
     }
 
-    :not(pre) > code[class*="language-"],
-    pre[class*="language-"] {
+    :not(pre) > code[class*='language-'],
+    pre[class*='language-'] {
       background: window;
     }
 
@@ -443,5 +440,3 @@ button {
     }
   }
 }
-
-
