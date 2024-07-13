@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 
 import { BehaviorSubject, tap } from 'rxjs';
@@ -16,6 +16,7 @@ import { FlickrService } from '@services/api/flickr.service';
     ImageInfoPopoverContentComponent,
     NgFor,
     NgIf,
+    NgOptimizedImage,
     PopoverComponent,
   ],
   template: `
@@ -25,9 +26,10 @@ import { FlickrService } from '@services/api/flickr.service';
         <li *ngFor="let photo of photos">
           <img
             *ngIf="photo.url_m"
-            [src]="photo.url_m"
+            [ngSrc]="photo.url_m"
             [alt]="photo.title"
-            loading="lazy"
+            height="500"
+            width="500"
           />
           <div class="relative">
             <div

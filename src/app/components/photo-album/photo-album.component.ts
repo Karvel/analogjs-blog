@@ -1,4 +1,4 @@
-import { NgIf, NgStyle } from '@angular/common';
+import { NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -21,7 +21,13 @@ import { ScreenSizeService } from '@services/screen-size.service';
 @Component({
   selector: 'app-photo-album',
   standalone: true,
-  imports: [NgIf, NgStyle, ReplaceBrokenImageDirective, SkeletonCardComponent],
+  imports: [
+    NgIf,
+    NgOptimizedImage,
+    NgStyle,
+    ReplaceBrokenImageDirective,
+    SkeletonCardComponent,
+  ],
   template: `
     <div *ngIf="photo.id" class="relative">
       <app-skeleton-card
@@ -37,7 +43,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
         rel="noopener"
       >
         <img
-          [src]="
+          [ngSrc]="
             flickr.albumPhotoUrl +
             '/' +
             photo.server +
@@ -52,7 +58,8 @@ import { ScreenSizeService } from '@services/screen-size.service';
           alt=""
           appReplaceBrokenImage
           class="w-full rounded-md"
-          loading="lazy"
+          height="491"
+          width="736"
         />
         <div
           class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"
