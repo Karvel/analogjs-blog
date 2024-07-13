@@ -65,6 +65,8 @@ export const metaTagList: MetaDefinition[] = [
               src="images/self/me-sq.jpg"
               class="rounded-xl max-h-32 sm:max-h-36"
               alt="Me in Norway"
+              height="612"
+              width="612"
             />
             <div class="pt-4 sm:pl-4 sm:pt-0">
               My name is Elanna Grossman. I am a full-stack developer, primarily
