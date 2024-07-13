@@ -43,7 +43,7 @@ export const metaTagList: MetaDefinition[] = [
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">Talks:</h1>
           <ng-container *ngIf="talks">
-            <div *ngFor="let talk of talks">
+            <div *ngFor="let talk of talks; let i = index">
               <div class="py-5 flex flex-col-reverse sm:flex-row">
                 <div class="sm:pr-2 sm:max-w grow">
                   <div class="flex items-center">
@@ -67,13 +67,24 @@ export const metaTagList: MetaDefinition[] = [
                   *ngIf="talk?.imageLink"
                   class="sm:w-80 sm:min-w-[20rem] sm:h-52"
                 >
-                  <img
-                    [src]="talk.imageLink"
-                    [alt]="talk.title || 'Talk Cover Image'"
-                    appReplaceBrokenImage
-                    class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-                    loading="lazy"
-                  />
+                  <ng-container *ngIf="i === 0; else nonPriority">
+                    <img
+                      [src]="talk.imageLink"
+                      [alt]="talk.title || 'Talk Cover Image'"
+                      appReplaceBrokenImage
+                      class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
+                      priority
+                    />
+                  </ng-container>
+                  <ng-template #nonPriority>
+                    <img
+                      [src]="talk.imageLink"
+                      [alt]="talk.title || 'Talk Cover Image'"
+                      appReplaceBrokenImage
+                      class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
+                      loading="lazy"
+                    />
+                  </ng-template>
                 </div>
               </div>
             </div>
