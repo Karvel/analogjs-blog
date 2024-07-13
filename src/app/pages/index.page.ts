@@ -85,8 +85,9 @@ export const metaTagList: MetaDefinition[] = [
           <h2 class="text-xl">Latest Blog Posts:</h2>
           <ng-container *ngIf="posts?.length; else emptyResult">
             <ul>
-              <li *ngFor="let post of posts">
-                <app-blog-card [post]="post" />
+              <li *ngFor="let post of posts; let i = index">
+                index: {{ i }}
+                <app-blog-card [post]="post" [isLCP]="i === 0" />
               </li>
             </ul>
           </ng-container>

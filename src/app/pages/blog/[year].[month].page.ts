@@ -29,8 +29,8 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
             Posts filtered by month and year: {{ monthName }} {{ year }}
           </h1>
           <ul *ngIf="filteredPosts?.length; else emptyResult">
-            <li *ngFor="let post of filteredPosts">
-              <app-blog-card [post]="post" />
+            <li *ngFor="let post of filteredPosts; let i = index">
+              <app-blog-card [post]="post" [isLCP]="i === 0" />
             </li>
           </ul>
         </div>
