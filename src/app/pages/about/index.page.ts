@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -37,17 +37,19 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-about-index',
   standalone: true,
-  imports: [AsyncPipe, NgIf, MarkdownComponent],
+  imports: [AsyncPipe, NgIf, NgOptimizedImage, MarkdownComponent],
   template: `
     <h1 class="sr-only">About</h1>
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <img
-            src="images/self/me.jpg"
+            ngSrc="images/self/me.jpg"
             class="rounded max-h-[32rem] mx-auto"
             alt="Me in Norway"
-            loading="lazy"
+            priority
+            height="816"
+            width="384"
           />
           <div *ngIf="about$ | async as about">
             <analog-markdown

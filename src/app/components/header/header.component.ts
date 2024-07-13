@@ -26,7 +26,8 @@ import { ThemeService } from '@services/theme.service';
                 src="images/self/logo.png"
                 width="50"
                 alt="Hapax Legomenon logo"
-                loading="lazy"
+                height="38"
+                width="50"
               />
             </div>
             <span

@@ -1,17 +1,18 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 
-import { BehaviorSubject, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 import { PhotoAlbumComponent } from '@components/photo-album/photo-album.component';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 import { FlickrService } from '@services/api/flickr.service';
 
 @Component({
   selector: 'app-recent-photo-albums',
   standalone: true,
-  imports: [AsyncPipe, NgFor, NgIf, PhotoAlbumComponent],
+  imports: [AsyncPipe, NgFor, NgIf, PhotoAlbumComponent, SpinnerComponent],
   template: `
-    <div *ngIf="loading$ | async">Loading...</div>
+    <app-spinner *ngIf="loading()" />
     <div *ngIf="photos$ | async as photos">
       <h2 class="text-xl">Latest Photo Albums:</h2>
       <div class="flex gap-4 flex-wrap justify-center xl:justify-normal">
@@ -23,15 +24,11 @@ import { FlickrService } from '@services/api/flickr.service';
   `,
 })
 export class RecentPhotoAlbumsComponent {
-  private changeDetectorRef = inject(ChangeDetectorRef);
   private flickrService = inject(FlickrService);
 
-  public loading$ = new BehaviorSubject<boolean>(true);
+  public loading: WritableSignal<boolean> = signal(true);
 
-  public photos$ = this.flickrService.getRecentPhotosets().pipe(
-    tap(() => {
-      this.loading$.next(false);
-      this.changeDetectorRef.detectChanges();
-    }),
-  );
+  public photos$ = this.flickrService
+    .getRecentPhotosets()
+    .pipe(tap(() => this.loading.set(false)));
 }

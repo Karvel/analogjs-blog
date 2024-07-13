@@ -22,6 +22,7 @@ import {
       class="cursor-pointer drop-shadow-lg"
       loading="lazy"
       tabindex="0"
+      height="20"
       width="20"
     />
     <div
