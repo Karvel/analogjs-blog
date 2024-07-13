@@ -86,7 +86,6 @@ export const metaTagList: MetaDefinition[] = [
           <ng-container *ngIf="posts?.length; else emptyResult">
             <ul>
               <li *ngFor="let post of posts; let i = index">
-                index: {{ i }}
                 <app-blog-card [post]="post" [isLCP]="i === 0" />
               </li>
             </ul>
