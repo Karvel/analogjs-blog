@@ -1,4 +1,11 @@
-import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import {
+  AsyncPipe,
+  DatePipe,
+  NgClass,
+  NgFor,
+  NgIf,
+  NgOptimizedImage,
+} from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -38,6 +45,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
     NgClass,
     NgFor,
     NgIf,
+    NgOptimizedImage,
     PillComponent,
     PopoverComponent,
     PostNavigationComponent,
@@ -61,10 +69,12 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
               <img
                 *ngIf="post.attributes.cover_image"
                 appReplaceBrokenImage
-                [src]="post.attributes.cover_image"
+                [ngSrc]="post.attributes.cover_image"
                 [alt]="post.attributes.cover_image_title"
                 class="w-full max-w-full rounded-md"
-                loading="lazy"
+                height="615"
+                width="800"
+                priority
               />
               <div [ngClass]="{ image_container: post.attributes.cover_image }">
                 <h1
