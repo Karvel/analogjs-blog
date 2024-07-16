@@ -86,25 +86,23 @@ import { getMonth } from '@utils/get-month';
         <a [routerLink]="['/blog', year, month, post.slug]">
           <ng-container *ngIf="isLCP; else nonPriority">
             <img
-              [ngSrc]="post.attributes.cover_image || ''"
+              [src]="post.attributes.cover_image || ''"
               [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
               [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
               (load)="onLoad()"
               appReplaceBrokenImage
               class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
               priority
-              fill
             />
           </ng-container>
           <ng-template #nonPriority>
             <img
-              [ngSrc]="post.attributes.cover_image || ''"
+              [src]="post.attributes.cover_image || ''"
               [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
               [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
               (load)="onLoad()"
               appReplaceBrokenImage
               class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-              fill
             />
           </ng-template>
         </a>
