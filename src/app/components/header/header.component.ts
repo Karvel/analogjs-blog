@@ -121,7 +121,7 @@ import { ThemeService } from '@services/theme.service';
     </nav>
   `,
 })
-export default class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit {
   public form: FormGroup = new FormGroup({});
   public linkList: Navigation[] = [
     {

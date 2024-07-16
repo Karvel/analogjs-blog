@@ -3,8 +3,8 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 
 import { tap } from 'rxjs';
 
-import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
-import PopoverComponent from '@components/popover/popover.component';
+import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
+import { PopoverComponent } from '@components/popover/popover.component';
 import { SpinnerComponent } from '@components/spinner/spinner.component';
 import { flickr } from '@constants/flickr';
 import { FlickrService } from '@services/api/flickr.service';

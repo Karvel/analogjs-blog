@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import PillComponent from '@components/pill/pill.component';
+import { PillComponent } from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';

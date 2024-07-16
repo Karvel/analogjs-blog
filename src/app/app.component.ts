@@ -9,8 +9,8 @@ import {
 
 import { filter, map, mergeMap } from 'rxjs';
 
-import FooterComponent from '@components/footer/footer.component';
-import HeaderComponent from '@components/header/header.component';
+import { FooterComponent } from '@components/footer/footer.component';
+import { HeaderComponent } from '@components/header/header.component';
 import { siteName } from '@constants/site-name';
 import { url } from '@constants/site-url';
 import { MetadataService } from '@services/metadata.service';

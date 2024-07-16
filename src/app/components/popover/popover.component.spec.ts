@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Renderer2, Type } from '@angular/core';
 
-import PopoverComponent from './popover.component';
+import { PopoverComponent } from './popover.component';
 
 describe('PopoverComponent', () => {
   let popoverComponent: PopoverComponent;

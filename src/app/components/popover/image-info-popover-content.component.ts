@@ -16,7 +16,7 @@ import { Component, Input } from '@angular/core';
     </div>
   `,
 })
-export default class ImageInfoPopoverContentComponent {
+export class ImageInfoPopoverContentComponent {
   @Input() public cover_image_author!: string | undefined;
   @Input() public cover_image_source!: string | undefined;
   @Input() public cover_image_title!: string | undefined;
