@@ -20,7 +20,7 @@ As I mentioned in my [previous article about custom validators](https://hapax-le
 
 ## Creating a Multi-Control Custom Validator
 
-![Animated image demonstrating the multi-control custom validator](https://hapax-legomenon.net/wp-content/uploads/2021/06/match-field-validator-1.gif)
+![Animated image demonstrating the multi-control custom validator](https://elanna.me/images/upload/match-field-validator-1.gif)
 
 Creating a multi-control custom validator is very similar to creating a single-control one. The validator needs a passed in [`AbstractControl`](https://angular.io/api/forms/AbstractControl) parameter. In single-control validators, the control is normally a [`FormControl`](https://angular.io/api/forms/FormControl). However, for multi-control validators, I need to pass in the parent [`FormGroup`](https://angular.io/api/forms/FormGroup) as the control. Doing this gives me the scope of all of the children controls inside of the `FormGroup`. To make this validator more reusable, I also pass in the names of the controls I want to compare. I also can pass in the name of the kind of values I am comparing to make the error messages more dynamic.
 

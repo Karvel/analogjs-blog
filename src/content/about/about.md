@@ -15,7 +15,7 @@ TypeScript, Javascript, C#, Python, HTML, CSS, PHP, MSSQL, PostgreSQL, MongoDB
 
 ### Programming Frameworks/Libraries
 
-Angular, .NET (Core), RxJS, NgRx, Redux, EF Core, Analog, Azure, AngularJS, Node.js, Express.js, Django, NestJS, Jasmine, Jest, Vitest, Mocha, Chai Tailwind, Material Design, Bootstrap
+Angular, .NET (Core), RxJS, NgRx, Redux, EF Core, Analog, Azure, AngularJS, Node.js, Express.js, Django, NestJS, Jasmine, Jest, Vitest, Mocha, Chai, Tailwind, Material Design, Bootstrap
 
 ### Human languages
 

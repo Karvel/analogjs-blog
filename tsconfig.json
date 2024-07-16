@@ -24,6 +24,7 @@
       "@components/*": ["app/components/*"],
       "@constants/*": ["app/constants/*"],
       "@directives/*": ["app/directives/*"],
+      "@guards/*": ["app/guards/*"],
       "@models/*": ["app/models/*"],
       "@pages/*": ["app/pages/*"],
       "@services/*": ["app/services/*"],
