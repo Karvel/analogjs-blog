@@ -4,9 +4,11 @@ import { RouterLink } from '@angular/router';
 import { RouteMeta } from '@analogjs/router';
 
 import { siteName } from '@constants/site-name';
+import { redirectOldSlugGuard } from '@guards/redirect-old-slug.guard';
 
 export const routeMeta: RouteMeta = {
   title: `Not Found | ${siteName}`,
+  canActivate: [redirectOldSlugGuard],
 };
 
 @Component({
