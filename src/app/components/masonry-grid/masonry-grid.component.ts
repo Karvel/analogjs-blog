@@ -1,10 +1,11 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 
-import { BehaviorSubject, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
-import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
-import PopoverComponent from '@components/popover/popover.component';
+import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
+import { PopoverComponent } from '@components/popover/popover.component';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 import { flickr } from '@constants/flickr';
 import { FlickrService } from '@services/api/flickr.service';
 
@@ -16,18 +17,21 @@ import { FlickrService } from '@services/api/flickr.service';
     ImageInfoPopoverContentComponent,
     NgFor,
     NgIf,
+    NgOptimizedImage,
     PopoverComponent,
+    SpinnerComponent,
   ],
   template: `
-    <div *ngIf="loading$ | async">Loading...</div>
+    <app-spinner *ngIf="loading()" class="py-3 block" />
     <div *ngIf="photos$ | async as photos">
       <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
           <img
             *ngIf="photo.url_m"
-            [src]="photo.url_m"
+            [ngSrc]="photo.url_m"
             [alt]="photo.title"
-            loading="lazy"
+            height="500"
+            width="500"
           />
           <div class="relative">
             <div
@@ -55,18 +59,14 @@ import { FlickrService } from '@services/api/flickr.service';
       </ul>
     </div>
   `,
-  styleUrls: ['./masonry-grid.component.css'],
+  styleUrls: ['./masonry-grid.component.scss'],
 })
 export class MasonryGridComponent {
-  private changeDetectorRef = inject(ChangeDetectorRef);
   private flickrService = inject(FlickrService);
 
   public flickr = flickr;
-  public loading$ = new BehaviorSubject<boolean>(true);
-  public photos$ = this.flickrService.getFavoritePhotos().pipe(
-    tap(() => {
-      this.loading$.next(false);
-      this.changeDetectorRef.detectChanges();
-    }),
-  );
+  public loading: WritableSignal<boolean> = signal(true);
+  public photos$ = this.flickrService
+    .getFavoritePhotos()
+    .pipe(tap(() => this.loading.set(false)));
 }

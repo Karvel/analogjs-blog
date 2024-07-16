@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
-import PillComponent from './pill.component';
+import { PillComponent } from './pill.component';
 
 @Component({
-  template:
-    '<app-pill [label]="label" [route]="route" [slug]="slug"></app-pill>',
+  template: '<app-pill [label]="label" [route]="route" [slug]="slug" />',
 })
 class TestHostComponent {
   label: string | undefined;
@@ -22,7 +21,8 @@ describe('PillComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent],
-      imports: [PillComponent, RouterTestingModule],
+      imports: [PillComponent],
+      providers: [provideRouter([])],
     });
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -38,7 +38,7 @@ describe('PillComponent', () => {
     testHost.label = label;
     fixture.detectChanges();
 
-    const buttonElement = fixture.debugElement.query(By.css('button'));
+    const buttonElement = fixture.debugElement.query(By.css('a'));
     const buttonInnerText = buttonElement.nativeElement.textContent.trim();
 
     expect(buttonInnerText).toBe('Sample Label');

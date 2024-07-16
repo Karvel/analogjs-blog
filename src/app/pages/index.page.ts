@@ -68,7 +68,7 @@ export const metaTagList: MetaDefinition[] = [
             />
             <div class="pt-4 sm:pl-4 sm:pt-0">
               My name is Elanna Grossman. I am a full-stack developer, primarily
-              focused on Angular and .NET. I work at
+              focused on Angular and .NET. I most recently worked at
               <a
                 href="https://www.crexi.com"
                 class=""
@@ -78,15 +78,15 @@ export const metaTagList: MetaDefinition[] = [
               >
               as a front end lead software engineer. I enjoy mentoring in code
               and helping dismantle some of the built-in barriers found in the
-              coding world. There is more about me
-              <a routerLink="/about">here</a>.
+              coding world. There is more about me on my
+              <a routerLink="/about">about page</a>.
             </div>
           </div>
           <h2 class="text-xl">Latest Blog Posts:</h2>
           <ng-container *ngIf="posts?.length; else emptyResult">
             <ul>
-              <li *ngFor="let post of posts">
-                <app-blog-card [post]="post" />
+              <li *ngFor="let post of posts; let i = index">
+                <app-blog-card [post]="post" [isLCP]="i === 0" />
               </li>
             </ul>
           </ng-container>

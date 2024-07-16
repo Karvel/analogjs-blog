@@ -1,5 +1,18 @@
-import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  AsyncPipe,
+  DatePipe,
+  NgClass,
+  NgFor,
+  NgIf,
+  NgOptimizedImage,
+} from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,9 +25,9 @@ import {
 import { map, switchMap, tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
-import PillComponent from '@components/pill/pill.component';
-import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
-import PopoverComponent from '@components/popover/popover.component';
+import { PillComponent } from '@components/pill/pill.component';
+import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
+import { PopoverComponent } from '@components/popover/popover.component';
 import { PostNavigationComponent } from '@components/post-navigation/post-navigation.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
@@ -24,7 +37,8 @@ import { MetadataService } from '@services/metadata.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
+import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
   selector: 'app-blog-slug',
@@ -38,15 +52,18 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
     NgClass,
     NgFor,
     NgIf,
+    NgOptimizedImage,
     PillComponent,
     PopoverComponent,
     PostNavigationComponent,
     ReplaceBrokenImageDirective,
+    SpinnerComponent,
   ],
-  styleUrls: ['./[year].[month].[slug].page.css'],
+  styleUrls: ['./[year].[month].[slug].page.scss'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
+        <app-spinner *ngIf="loading()" />
         <div *ngIf="post$ | async as post; else emptyResult" class="flex-1">
           <div class="max-w mx-auto">
             <ng-container *ngIf="isDraft">
@@ -61,10 +78,12 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
               <img
                 *ngIf="post.attributes.cover_image"
                 appReplaceBrokenImage
-                [src]="post.attributes.cover_image"
+                [ngSrc]="post.attributes.cover_image"
                 [alt]="post.attributes.cover_image_title"
                 class="w-full max-w-full rounded-md"
-                loading="lazy"
+                height="615"
+                width="800"
+                priority
               />
               <div [ngClass]="{ image_container: post.attributes.cover_image }">
                 <h1
@@ -177,12 +196,14 @@ import { splitTagStringIntoArray } from '@utils/split-tag-string-into-array';
 })
 export default class BlogPostPageComponent {
   public isDraft!: boolean;
+  public loading: WritableSignal<boolean> = signal(true);
   public nextPost!: ContentFile<BlogPost>;
   public post$ = injectContent<BlogPost>({
     param: 'slug',
     subdirectory: 'posts',
   }).pipe(
     tap((post) => {
+      this.loading.set(false);
       this.isDraft = !post.attributes.published;
     }),
     map((post) => {
@@ -196,7 +217,7 @@ export default class BlogPostPageComponent {
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public prevPost!: ContentFile<BlogPost>;
-  public splitTagStringIntoArray = splitTagStringIntoArray;
+  public splitTagStringIntoArray = splitTagStringIntoTagArray;
   public tagList: Tag[] = [];
 
   private destroyRef = inject(DestroyRef);
@@ -226,9 +247,17 @@ export default class BlogPostPageComponent {
     post: ContentFile<BlogPost | Record<string, never>>,
     posts: ContentFile<BlogPost>[],
   ): void {
+    const reversedPosts = [...posts].reverse();
     const index = posts.findIndex((p) => p.slug === post.slug);
-    const nextPost = posts[index - 1];
-    const previousPost = posts[index + 1];
+    const reversedIndex = reversedPosts.findIndex((p) => p.slug === post.slug);
+    const nextPublishedIndex = reversedPosts.findIndex((post, i) => {
+      return i > reversedIndex && post.attributes.published;
+    });
+    const previousPublishedIndex = posts.findIndex(
+      (post, i) => i > index && post.attributes.published,
+    );
+    const nextPost = reversedPosts[nextPublishedIndex];
+    const previousPost = posts[previousPublishedIndex];
 
     this.nextPost = nextPost;
     this.prevPost = previousPost;

@@ -14,7 +14,7 @@ import { getYear } from '@utils/get-year';
   imports: [NgFor, NgIf, RouterLink],
   template: `
     <div class="flex justify-between text-sm mt-2 gap-2">
-      <button
+      <a
         *ngIf="prevPost"
         [routerLink]="[
           '/blog',
@@ -25,13 +25,12 @@ import { getYear } from '@utils/get-year';
         attr.alt="Click to go to the previous post: {{
           prevPost.attributes.title
         }}"
-        type="button"
-        class="inline-flex focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+        class="hover:text-inherit dark:hover:text-white no-underline inline-flex bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
       >
         <span>&laquo; &nbsp;</span
         ><span class="truncate">{{ prevPost.attributes.title }}</span>
-      </button>
-      <button
+      </a>
+      <a
         *ngIf="nextPost"
         [routerLink]="[
           '/blog',
@@ -40,12 +39,11 @@ import { getYear } from '@utils/get-year';
           nextPost.slug
         ]"
         attr.alt="Click to go to the next post: {{ nextPost.attributes.title }}"
-        type="button"
-        class="inline-flex ml-auto focus:outline-none bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+        class="hover:text-inherit dark:hover:text-white no-underline inline-flex ml-auto bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
       >
         <span class="truncate">{{ nextPost.attributes.title }}</span
         ><span>&nbsp; &raquo;</span>
-      </button>
+      </a>
     </div>
   `,
 })

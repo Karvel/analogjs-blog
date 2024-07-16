@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
-import HeaderComponent from './header.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { HeaderComponent } from './header.component';
 
 @Component({
-  template: '<app-header></app-header>',
+  template: '<app-header />',
 })
 class TestHostComponent {
   showMenu = false;
@@ -19,7 +19,8 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent],
-      imports: [HeaderComponent, RouterTestingModule],
+      imports: [HeaderComponent],
+      providers: [provideRouter([])],
     });
     fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;

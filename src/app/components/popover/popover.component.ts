@@ -22,6 +22,7 @@ import {
       class="cursor-pointer drop-shadow-lg"
       loading="lazy"
       tabindex="0"
+      height="20"
       width="20"
     />
     <div
@@ -32,9 +33,9 @@ import {
       <ng-content />
     </div>
   `,
-  styleUrls: ['./popover.component.css'],
+  styleUrls: ['./popover.component.scss'],
 })
-export default class PopoverComponent implements OnInit, OnDestroy {
+export class PopoverComponent implements OnInit, OnDestroy {
   @Input() public altText!: string | undefined;
   @Input() public icon!: string | undefined;
 

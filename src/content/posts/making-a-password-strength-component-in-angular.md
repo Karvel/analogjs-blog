@@ -18,7 +18,7 @@ published: true
 
 Reactive Forms in Angular are incredibly powerful and let developers design experiences that provide immediate feedback to users. In this post I show how to use RxJS in a reactive form to provide useful UI feedback for a common use case: creating a password strength component to show password indicators to users creating passwords.
 
-![Password Strength Component animation](https://hapax-legomenon.net/wp-content/uploads/2021/06/Peek-2021-06-15-01-43.gif)
+![Password Strength Component animation](https://elanna.me/images/upload/Peek-2021-06-15-01-43.gif)
 
 ## The Register Form
 

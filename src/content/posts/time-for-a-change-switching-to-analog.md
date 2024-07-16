@@ -34,4 +34,4 @@ It's a new framework, and not fully finished, so I spent some time making a sand
 
 While I wish that the main support infrastructure used something like a forum instead of Discord (since Discord is a closed ecosystem and can't be searched externally), I find the community very welcoming and helpful. As Analog is quite new, it doesn't have a large template or plugin ecosystem yet.
 
-I plan on writing a follow-up article going into more technical detail about how I set up this site, but I wanted to write a more general overview of my experience with switching to Analog so far. I'm looking forward to seeing how it evolves.
+I wrote a follow-up post on <a href="https://elanna.me/blog/2023/12/how-i-switched-my-website-to-analog">how I made the switch</a>, but I wanted to write a more general overview of my experience with switching to Analog so far and why I chose it. I'm looking forward to seeing how it evolves.
