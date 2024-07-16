@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 import { ContentFile } from '@analogjs/content';
 import { debounceTime, Observable } from 'rxjs';
 
-import PillComponent from '@components/pill/pill.component';
+import { PillComponent } from '@components/pill/pill.component';
 import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
 import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';

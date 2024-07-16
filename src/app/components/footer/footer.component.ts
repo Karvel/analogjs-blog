@@ -52,7 +52,7 @@ import { Navigation } from '@models/navigation';
     </footer>
   `,
 })
-export default class FooterComponent {
+export class FooterComponent {
   public readonly currentYear = new Date().getFullYear();
   public linkList: Navigation[] = [
     {
