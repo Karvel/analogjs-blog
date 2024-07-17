@@ -16,11 +16,12 @@ import { SearchResultSection } from '@models/search';
 import { SearchService } from '@services/search.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { RouterLink } from '@angular/router';
+import { HighlightPipe } from 'app/pipes/highlight.pipe';
 
 @Component({
   selector: 'app-search-popover',
   standalone: true,
-  imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink],
+  imports: [HighlightPipe, NgFor, NgIf, ReactiveFormsModule, RouterLink],
   template: `
     <div
       class="container absolute top-7 right-0 w-80 z-50 bg-white dark:bg-[#242424] rounded-md p-3 text-slate-900 dark:text-neutral-100 border-2 dark:border-white border-slate-900"
@@ -41,8 +42,11 @@ import { RouterLink } from '@angular/router';
               <ul>
                 <li *ngFor="let post of section.results" class="list-disc ml-4">
                   <ng-container *ngIf="post.slug && post.title">
-                    <a [routerLink]="'/blog/' + post.slug" class="no-underline">
-                      {{ post.title }}
+                    <a
+                      [routerLink]="'/blog/' + post.slug"
+                      [innerHTML]="post.title | highlight : searchValue"
+                      class="no-underline"
+                    >
                     </a>
                   </ng-container>
                 </li>
@@ -69,6 +73,10 @@ export class SearchPopoverComponent implements OnInit {
     this.form = new FormBuilder().nonNullable.group({
       search: new FormControl(''),
     });
+  }
+
+  public get searchValue(): string {
+    return this.form.get('search')?.value;
   }
 
   public ngOnInit(): void {
