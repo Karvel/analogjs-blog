@@ -46,30 +46,30 @@ describe('PopoverComponent', () => {
   });
 
   it('should toggle isActive when clicked', () => {
-    const imgElement: HTMLImageElement =
-      fixture.nativeElement.querySelector('img');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const svgElement: any = fixture.nativeElement.querySelector('svg-icon');
     expect(popoverComponent.isActive).toBe(false);
 
-    imgElement.click();
+    svgElement.click();
     fixture.detectChanges();
     expect(popoverComponent.isActive).toBe(true);
 
-    imgElement.click();
+    svgElement.click();
     fixture.detectChanges();
     expect(popoverComponent.isActive).toBe(false);
   });
 
   it('should toggle isActive when Enter key pressed', () => {
-    const imgElement: HTMLImageElement =
-      fixture.nativeElement.querySelector('img');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const svgElement: any = fixture.nativeElement.querySelector('svg-icon');
     expect(popoverComponent.isActive).toBe(false);
 
     const event = new KeyboardEvent('keypress', { key: 'Enter' });
-    imgElement.dispatchEvent(event);
+    svgElement.dispatchEvent(event);
     fixture.detectChanges();
     expect(popoverComponent.isActive).toBe(true);
 
-    imgElement.dispatchEvent(event);
+    svgElement.dispatchEvent(event);
     fixture.detectChanges();
     expect(popoverComponent.isActive).toBe(false);
   });
