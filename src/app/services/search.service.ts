@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ContentFile } from '@analogjs/content';
 
 import { BlogPost } from '@models/post';
-import { SearchResult, SearchResultSection } from '@models/search';
+import { SearchResult } from '@models/search';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 
@@ -11,24 +11,8 @@ import { getMonth } from '@utils/get-month';
   providedIn: 'root',
 })
 export class SearchService {
-  public search(
-    posts: ContentFile<BlogPost>[],
-    query: string,
-  ): SearchResultSection[] {
-    const searchResult = new Array<SearchResultSection>();
-    this.searchPosts(posts, searchResult, query);
-
-    return searchResult;
-  }
-
-  private searchPosts(
-    posts: ContentFile<BlogPost>[],
-    resultList: SearchResultSection[],
-    query: string,
-  ): SearchResultSection[] {
-    const section: SearchResultSection = {
-      results: [],
-    };
+  public search(posts: ContentFile<BlogPost>[], query: string): SearchResult[] {
+    const resultList = new Array<SearchResult>();
 
     posts.forEach((post) => {
       const postProperties = Object.values(post);
@@ -49,17 +33,13 @@ export class SearchService {
           const month = getMonth(post.attributes.date);
           result.slug = `${year}/${month}/${post.attributes.slug}` ?? '';
           result.matchResult = property;
-          section.results.push(result);
+          resultList.push(result);
           return;
         }
       }
 
       return undefined;
     });
-
-    if (section.results.length > 0) {
-      resultList.push(section);
-    }
 
     return resultList;
   }

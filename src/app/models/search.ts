@@ -1,9 +1,5 @@
-export interface SearchResultData {
+export interface SearchResult {
   title: string;
   matchResult: string;
   slug: string;
-}
-
-export interface SearchResult {
-  results: SearchResultData[];
 }

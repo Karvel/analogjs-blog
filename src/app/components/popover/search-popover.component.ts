@@ -37,20 +37,14 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
       <div *ngIf="searchResults?.length; else empty" class="pt-3">
         Results:
         <ul>
-          <li *ngFor="let section of searchResults">
-            <ng-container *ngIf="section?.results?.length">
-              <ul>
-                <li *ngFor="let post of section.results" class="list-disc ml-4">
-                  <ng-container *ngIf="post.slug && post.title">
-                    <a
-                      [routerLink]="'/blog/' + post.slug"
-                      [innerHTML]="post.title | highlight : searchValue"
-                      class="no-underline"
-                    >
-                    </a>
-                  </ng-container>
-                </li>
-              </ul>
+          <li *ngFor="let result of searchResults" class="list-disc ml-4">
+            <ng-container *ngIf="result.slug && result.title">
+              <a
+                [routerLink]="'/blog/' + result.slug"
+                [innerHTML]="result.title | highlight : searchValue"
+                class="no-underline"
+              >
+              </a>
             </ng-container>
           </li>
         </ul>
