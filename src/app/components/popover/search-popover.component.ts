@@ -12,7 +12,7 @@ import {
 import { debounceTime } from 'rxjs';
 
 import { BlogPost } from '@models/post';
-import { SearchResultSection } from '@models/search';
+import { SearchResult } from '@models/search';
 import { SearchService } from '@services/search.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { RouterLink } from '@angular/router';
@@ -64,7 +64,7 @@ export class SearchPopoverComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
-  public searchResults!: SearchResultSection[];
+  public searchResults!: SearchResult[];
 
   private destroyRef = inject(DestroyRef);
   private searchService = inject(SearchService);
