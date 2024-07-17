@@ -13,12 +13,14 @@ import { debounceTime } from 'rxjs';
 
 import { BlogPost } from '@models/post';
 import { SearchResultSection } from '@models/search';
+import { SearchService } from '@services/search.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search-popover',
   standalone: true,
-  imports: [NgFor, NgIf, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink],
   template: `
     <div
       class="container absolute top-7 right-0 w-80 z-50 bg-white dark:bg-[#242424] rounded-md p-3 text-slate-900 dark:text-neutral-100 border-2 dark:border-white border-slate-900"
@@ -37,15 +39,19 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           <li *ngFor="let section of searchResults">
             <ng-container *ngIf="section?.results?.length">
               <ul>
-                <li *ngFor="let post of section.results">
-                  {{ post.title }}
+                <li *ngFor="let post of section.results" class="list-disc ml-4">
+                  <ng-container *ngIf="post.slug && post.title">
+                    <a [routerLink]="'/blog/' + post.slug" class="no-underline">
+                      {{ post.title }}
+                    </a>
+                  </ng-container>
                 </li>
               </ul>
             </ng-container>
           </li>
         </ul>
       </div>
-      <ng-template #empty><p class="pt-4">No Results</p></ng-template>
+      <ng-template #empty><p class="pt-3">No Results</p></ng-template>
     </div>
   `,
 })
@@ -57,6 +63,7 @@ export class SearchPopoverComponent implements OnInit {
   public searchResults!: SearchResultSection[];
 
   private destroyRef = inject(DestroyRef);
+  private searchService = inject(SearchService);
 
   constructor() {
     this.form = new FormBuilder().nonNullable.group({
@@ -71,8 +78,8 @@ export class SearchPopoverComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
         debounceTime(300),
       )
-      .subscribe(() => {
-        // send to search service
+      .subscribe((value) => {
+        this.searchResults = this.searchService.search(this.posts, value);
       });
   }
 }
