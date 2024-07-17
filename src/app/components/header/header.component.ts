@@ -5,6 +5,8 @@ import { RouterLink } from '@angular/router';
 
 import { distinctUntilChanged } from 'rxjs';
 
+import { PopoverComponent } from '@components/popover/popover.component';
+import { SearchPopoverComponent } from '@components/popover/search-popover.component';
 import { siteName } from '@constants/site-name';
 import { Navigation } from '@models/navigation';
 import { ThemeService } from '@services/theme.service';
@@ -12,7 +14,16 @@ import { ThemeService } from '@services/theme.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [AsyncPipe, NgClass, NgIf, NgFor, ReactiveFormsModule, RouterLink],
+  imports: [
+    AsyncPipe,
+    NgClass,
+    NgIf,
+    NgFor,
+    PopoverComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    SearchPopoverComponent,
+  ],
   styleUrls: ['./header.component.scss'],
   template: `
     <nav class="bg-[#829ab3] border-gray-300 dark:bg-sky-800">
@@ -72,12 +83,22 @@ import { ThemeService } from '@services/theme.service';
             <li *ngFor="let link of linkList">
               <a
                 [routerLink]="link?.path"
-                class="block py-2 pl-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-black md:hover:underline md:p-0 dark:text-white md:dark:hover:text-white dark:hover:bg-sky-900 dark:hover:text-white md:dark:hover:bg-transparent no-underline"
+                class="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-black md:hover:underline md:p-0 dark:text-white md:dark:hover:text-white dark:hover:bg-sky-900 dark:hover:text-white md:dark:hover:bg-transparent no-underline"
                 >{{ link?.label }}</a
               >
             </li>
+            <li class="flex relative">
+              <app-popover
+                [altText]="'Search'"
+                [icon]="'search'"
+                [hasDropShadow]="false"
+                class="flex px-3 py-2 md:px-0 md:py-0"
+              >
+                <app-search-popover />
+              </app-popover>
+            </li>
             <li>
-              <form [formGroup]="form">
+              <form [formGroup]="form" class="px-3 py-2 md:px-0 md:py-0">
                 <label
                   class="switch"
                   for="theme-toggle"
