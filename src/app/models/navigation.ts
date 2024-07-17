@@ -1,5 +1,7 @@
+import { SvgIcons } from '@ngneat/svg-icon';
+
 export interface Navigation {
-  icon?: string;
+  icon?: SvgIcons;
   label: string;
   path: string;
 }

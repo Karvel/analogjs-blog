@@ -126,7 +126,8 @@ import { SpinnerComponent } from '@components/spinner/spinner.component';
                   >
                     <app-popover
                       [altText]="'Image information'"
-                      [icon]="'svg/info.svg'"
+                      [icon]="'info'"
+                      [hasTransition]="true"
                     >
                       <app-image-info-popover-content
                         [cover_image_author]="
