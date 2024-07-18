@@ -21,7 +21,6 @@ export class SearchService {
         const result: SearchResult = {
           title: '',
           slug: '',
-          matchResult: '',
         };
         if (
           query &&
@@ -32,13 +31,10 @@ export class SearchService {
           const year = getYear(post.attributes.date);
           const month = getMonth(post.attributes.date);
           result.slug = `${year}/${month}/${post.attributes.slug}` ?? '';
-          result.matchResult = property;
           resultList.push(result);
           return;
         }
       }
-
-      return undefined;
     });
 
     return resultList;
