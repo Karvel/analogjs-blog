@@ -27,12 +27,15 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
       class="container absolute top-7 right-0 w-80 z-50 bg-white dark:bg-[#242424] rounded-md p-3 text-slate-900 dark:text-neutral-100 border-2 dark:border-white border-slate-900"
     >
       <div [formGroup]="form">
-        <input
-          class="w-full rounded-sm bg-neutral-200 dark:bg-neutral-700 px-2"
-          type="text"
-          formControlName="search"
-          placeholder="Search here"
-        />
+        <label for="search" [attr.aria-label]="'Search'" tabindex="0">
+          <input
+            class="w-full rounded-sm bg-neutral-200 dark:bg-neutral-700 px-2"
+            id="search"
+            formControlName="search"
+            placeholder="Search here"
+            type="text"
+          />
+        </label>
       </div>
       <div *ngIf="searchResults?.length; else empty" class="pt-3">
         Results:
