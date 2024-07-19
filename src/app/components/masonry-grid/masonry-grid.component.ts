@@ -37,11 +37,12 @@ import { FlickrService } from '@services/api/flickr.service';
             <div
               class="absolute -top-6 left-0 -right-2 bottom-0 flex flex-col justify-end p-4"
             >
-              <div class="flex justify-end items-center">
+              <div class="flex justify-end items-center text-white">
                 <div *ngIf="photo.url_m && photo.title" class="flex">
                   <app-popover
                     [altText]="'Image information'"
-                    [icon]="'svg/info.svg'"
+                    [icon]="'info'"
+                    [hasTransition]="true"
                   >
                     <app-image-info-popover-content
                       [cover_image_author]="'Elanna Grossman'"

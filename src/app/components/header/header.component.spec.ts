@@ -3,7 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
+import { MockComponent } from 'ng-mocks';
+
 import { HeaderComponent } from './header.component';
+import { PopoverComponent } from '@components/popover/popover.component';
+import { SearchPopoverComponent } from '@components/popover/search-popover.component';
 
 @Component({
   template: '<app-header />',
@@ -19,7 +23,11 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent],
-      imports: [HeaderComponent],
+      imports: [
+        HeaderComponent,
+        MockComponent(PopoverComponent),
+        MockComponent(SearchPopoverComponent),
+      ],
       providers: [provideRouter([])],
     });
     fixture = TestBed.createComponent(TestHostComponent);
