@@ -29,7 +29,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
     SkeletonCardComponent,
   ],
   template: `
-    <div *ngIf="photo.id" class="relative">
+    <div *ngIf="photo?.id" class="relative">
       <app-skeleton-card
         *ngIf="showSkeleton()"
         class="rounded-md absolute min-w-full h-full"
