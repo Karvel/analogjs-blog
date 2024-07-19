@@ -28,8 +28,8 @@ describe('SearchService', () => {
       },
     ];
 
-    const expectedValue = service.search(posts, '');
-    expect(expectedValue).toEqual([]);
+    const actualValue = service.search(posts, '');
+    expect(actualValue).toEqual([]);
   });
 
   it('should return an empty array if no posts match the query', () => {
@@ -46,8 +46,8 @@ describe('SearchService', () => {
       },
     ];
 
-    const expectedValue = service.search(posts, 'no-match');
-    expect(expectedValue).toEqual([]);
+    const actualValue = service.search(posts, 'no-match');
+    expect(actualValue).toEqual([]);
   });
 
   it('should return posts that match the query', () => {
@@ -74,14 +74,14 @@ describe('SearchService', () => {
       },
     ];
 
-    const expectedValue = service.search(posts, 'test');
-    const actualValue = [
+    const actualValue = service.search(posts, 'test');
+    const expectedValue = [
       {
         title: 'Test Post',
         slug: '2024/07/test-post',
       },
     ];
-    expect(expectedValue).toEqual(actualValue);
+    expect(actualValue).toEqual(expectedValue);
   });
 
   it('should return multiple posts that match the query', () => {
@@ -108,9 +108,8 @@ describe('SearchService', () => {
       },
     ];
 
-    const expectedValue = service.search(posts, 'test');
-    console.log('expectedValue', expectedValue);
-    const actualValue = [
+    const actualValue = service.search(posts, 'test');
+    const expectedValue = [
       {
         title: 'Test Post',
         slug: '2024/07/test-post',
@@ -120,8 +119,7 @@ describe('SearchService', () => {
         slug: '2024/07/another-test-post',
       },
     ];
-    console.log('actualValue', actualValue);
-    expect(expectedValue).toEqual(actualValue);
+    expect(actualValue).toEqual(expectedValue);
   });
 
   it('should should ignore case sensitivity when matching', () => {
@@ -138,13 +136,13 @@ describe('SearchService', () => {
       },
     ];
 
-    const expectedValue = service.search(posts, 'TEST');
-    const actualValue = [
+    const actualValue = service.search(posts, 'TEST');
+    const expectedValue = [
       {
         title: 'Test Post',
         slug: '2024/07/test-post',
       },
     ];
-    expect(expectedValue).toEqual(actualValue);
+    expect(actualValue).toEqual(expectedValue);
   });
 });
