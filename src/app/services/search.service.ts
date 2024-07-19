@@ -12,11 +12,12 @@ import { getMonth } from '@utils/get-month';
 })
 export class SearchService {
   public search(posts: ContentFile<BlogPost>[], query: string): SearchResult {
+    const queryMinimumLength = 3;
     const searchResult: SearchResult = {
       isSearchTooShort: true,
       results: [],
     };
-    if (query?.length > 3) {
+    if (query?.length > queryMinimumLength) {
       searchResult.isSearchTooShort = false;
 
       posts.forEach((post) => {
@@ -43,7 +44,6 @@ export class SearchService {
       });
     }
 
-    console.log('search searchResult', searchResult);
     return searchResult;
   }
 }
