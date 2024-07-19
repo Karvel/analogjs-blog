@@ -37,22 +37,37 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
           />
         </label>
       </div>
-      <div *ngIf="searchResults?.length; else empty" class="pt-3">
-        Results:
-        <ul>
-          <li *ngFor="let result of searchResults" class="list-disc ml-4">
-            <ng-container *ngIf="result.slug && result.title">
-              <a
-                [routerLink]="'/blog/' + result.slug"
-                [innerHTML]="result.title | highlight : searchValue"
-                class="no-underline"
-              >
-              </a>
-            </ng-container>
-          </li>
-        </ul>
-      </div>
-      <ng-template #empty><p class="pt-3">No Results</p></ng-template>
+      <ng-container
+        *ngIf="
+          searchValue.length && searchResults?.isSearchTooShort;
+          else canSearch
+        "
+        ><p class="pt-3">Search query is too short</p></ng-container
+      >
+      <ng-template #canSearch>
+        <div
+          *ngIf="searchResults?.results?.length; else noResults"
+          class="pt-3"
+        >
+          Results:
+          <ul>
+            <li
+              *ngFor="let result of searchResults.results"
+              class="list-disc ml-4"
+            >
+              <ng-container *ngIf="result.slug && result.title">
+                <a
+                  [routerLink]="'/blog/' + result.slug"
+                  [innerHTML]="result.title | highlight : searchValue"
+                  class="no-underline"
+                >
+                </a>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+      <ng-template #noResults><p class="pt-3">No results</p></ng-template>
     </div>
   `,
 })
@@ -61,7 +76,7 @@ export class SearchPopoverComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
-  public searchResults!: SearchResult[];
+  public searchResults!: SearchResult;
 
   private destroyRef = inject(DestroyRef);
   private searchService = inject(SearchService);

@@ -14,7 +14,7 @@ describe('SearchService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an empty array if query is empty', () => {
+  it('should return an empty array and isSearchTooShort = true if query is empty', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
         attributes: {
@@ -29,10 +29,36 @@ describe('SearchService', () => {
     ];
 
     const actualValue = service.search(posts, '');
-    expect(actualValue).toEqual([]);
+    const expectedValue = {
+      isSearchTooShort: true,
+      results: [],
+    };
+    expect(actualValue).toEqual(expectedValue);
   });
 
-  it('should return an empty array if no posts match the query', () => {
+  it('should return an empty array and isSearchTooShort = true if no posts match the query', () => {
+    const posts: ContentFile<BlogPost>[] = [
+      {
+        attributes: {
+          title: 'Test Post',
+          date: '2024-07-18',
+          slug: 'test-post',
+        },
+        content: 'This is test post content.',
+        filename: '',
+        slug: '',
+      },
+    ];
+
+    const actualValue = service.search(posts, 'no');
+    const expectedValue = {
+      isSearchTooShort: true,
+      results: [],
+    };
+    expect(actualValue).toEqual(expectedValue);
+  });
+
+  it('should return an empty array and isSearchTooShort = false if no posts match the query', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
         attributes: {
@@ -47,10 +73,14 @@ describe('SearchService', () => {
     ];
 
     const actualValue = service.search(posts, 'no-match');
-    expect(actualValue).toEqual([]);
+    const expectedValue = {
+      isSearchTooShort: false,
+      results: [],
+    };
+    expect(actualValue).toEqual(expectedValue);
   });
 
-  it('should return posts that match the query', () => {
+  it('should return posts and isSearchTooShort = false when a post matches the query', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
         attributes: {
@@ -75,16 +105,19 @@ describe('SearchService', () => {
     ];
 
     const actualValue = service.search(posts, 'test');
-    const expectedValue = [
-      {
-        title: 'Test Post',
-        slug: '2024/07/test-post',
-      },
-    ];
+    const expectedValue = {
+      isSearchTooShort: false,
+      results: [
+        {
+          title: 'Test Post',
+          slug: '2024/07/test-post',
+        },
+      ],
+    };
     expect(actualValue).toEqual(expectedValue);
   });
 
-  it('should return multiple posts that match the query', () => {
+  it('should return multiple posts and isSearchTooShort = false when multiple posts match the query', () => {
     const posts: ContentFile<BlogPost>[] = [
       {
         attributes: {
@@ -109,16 +142,19 @@ describe('SearchService', () => {
     ];
 
     const actualValue = service.search(posts, 'test');
-    const expectedValue = [
-      {
-        title: 'Test Post',
-        slug: '2024/07/test-post',
-      },
-      {
-        title: 'Another Test Post',
-        slug: '2024/07/another-test-post',
-      },
-    ];
+    const expectedValue = {
+      isSearchTooShort: false,
+      results: [
+        {
+          title: 'Test Post',
+          slug: '2024/07/test-post',
+        },
+        {
+          title: 'Another Test Post',
+          slug: '2024/07/another-test-post',
+        },
+      ],
+    };
     expect(actualValue).toEqual(expectedValue);
   });
 
@@ -137,12 +173,15 @@ describe('SearchService', () => {
     ];
 
     const actualValue = service.search(posts, 'TEST');
-    const expectedValue = [
-      {
-        title: 'Test Post',
-        slug: '2024/07/test-post',
-      },
-    ];
+    const expectedValue = {
+      isSearchTooShort: false,
+      results: [
+        {
+          title: 'Test Post',
+          slug: '2024/07/test-post',
+        },
+      ],
+    };
     expect(actualValue).toEqual(expectedValue);
   });
 });
