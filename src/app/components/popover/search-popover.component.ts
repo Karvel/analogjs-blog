@@ -67,7 +67,7 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
           </ul>
         </div>
       </ng-template>
-      <ng-template #noResults><p class="pt-3">No Results</p></ng-template>
+      <ng-template #noResults><p class="pt-3">No results</p></ng-template>
     </div>
   `,
 })
