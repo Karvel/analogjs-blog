@@ -38,39 +38,36 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
         </label>
       </div>
       <ng-container
-        *ngIf="searchValue.length && searchResults?.isSearchTooShort"
+        *ngIf="
+          searchValue.length && searchResults?.isSearchTooShort;
+          else canSearch
+        "
         ><p class="pt-3">Search query is too short</p></ng-container
       >
-      <div
-        *ngIf="
-          !searchResults?.isSearchTooShort && searchResults?.results?.length
-        "
-        class="pt-3"
-      >
-        Results:
-        <ul>
-          <li
-            *ngFor="let result of searchResults.results"
-            class="list-disc ml-4"
-          >
-            <ng-container *ngIf="result.slug && result.title">
-              <a
-                [routerLink]="'/blog/' + result.slug"
-                [innerHTML]="result.title | highlight : searchValue"
-                class="no-underline"
-              >
-              </a>
-            </ng-container>
-          </li>
-        </ul>
-      </div>
-      <ng-container
-        *ngIf="
-          !searchValue.length ||
-          (!searchResults?.isSearchTooShort && !searchResults?.results?.length)
-        "
-        ><p class="pt-3">No Results</p></ng-container
-      >
+      <ng-template #canSearch>
+        <div
+          *ngIf="searchResults?.results?.length; else noResults"
+          class="pt-3"
+        >
+          Results:
+          <ul>
+            <li
+              *ngFor="let result of searchResults.results"
+              class="list-disc ml-4"
+            >
+              <ng-container *ngIf="result.slug && result.title">
+                <a
+                  [routerLink]="'/blog/' + result.slug"
+                  [innerHTML]="result.title | highlight : searchValue"
+                  class="no-underline"
+                >
+                </a>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+      <ng-template #noResults><p class="pt-3">No Results</p></ng-template>
     </div>
   `,
 })
