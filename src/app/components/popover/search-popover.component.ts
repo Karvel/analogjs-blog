@@ -37,10 +37,22 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
           />
         </label>
       </div>
-      <div *ngIf="searchResults?.length; else empty" class="pt-3">
+      <ng-container
+        *ngIf="searchValue.length && searchResults?.isSearchTooShort"
+        ><p class="pt-3">Search query is too short</p></ng-container
+      >
+      <div
+        *ngIf="
+          !searchResults?.isSearchTooShort && searchResults?.results?.length
+        "
+        class="pt-3"
+      >
         Results:
         <ul>
-          <li *ngFor="let result of searchResults" class="list-disc ml-4">
+          <li
+            *ngFor="let result of searchResults.results"
+            class="list-disc ml-4"
+          >
             <ng-container *ngIf="result.slug && result.title">
               <a
                 [routerLink]="'/blog/' + result.slug"
@@ -52,7 +64,13 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
           </li>
         </ul>
       </div>
-      <ng-template #empty><p class="pt-3">No Results</p></ng-template>
+      <ng-container
+        *ngIf="
+          !searchValue.length ||
+          (!searchResults?.isSearchTooShort && !searchResults?.results?.length)
+        "
+        ><p class="pt-3">No Results</p></ng-container
+      >
     </div>
   `,
 })
@@ -61,7 +79,7 @@ export class SearchPopoverComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
-  public searchResults!: SearchResult[];
+  public searchResults!: SearchResult;
 
   private destroyRef = inject(DestroyRef);
   private searchService = inject(SearchService);
