@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { of } from 'rxjs';
@@ -16,8 +16,7 @@ describe('FlickrService', () => {
       get: vi.fn(),
     };
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [FlickrService],
+      providers: [FlickrService, provideHttpClient()],
     });
 
     // Initializing the FlickrService with mockApiService
