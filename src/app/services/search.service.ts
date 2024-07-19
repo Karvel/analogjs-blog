@@ -15,17 +15,17 @@ export class SearchService {
     const resultList = new Array<SearchResult>();
 
     posts.forEach((post) => {
-      const postProperties = Object.values(post);
+      const postValues = Object.values(post?.attributes);
 
-      for (const property of postProperties) {
+      for (const value of postValues) {
         const result: SearchResult = {
           title: '',
           slug: '',
         };
         if (
           query &&
-          typeof property === 'string' &&
-          property.toLowerCase().includes(query.toLowerCase())
+          typeof value === 'string' &&
+          value.toLowerCase().includes(query.toLowerCase())
         ) {
           result.title = post.attributes.title ?? '';
           const year = getYear(post.attributes.date);
