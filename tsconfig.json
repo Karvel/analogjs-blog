@@ -27,6 +27,7 @@
       "@guards/*": ["app/guards/*"],
       "@models/*": ["app/models/*"],
       "@pages/*": ["app/pages/*"],
+      "@pipes/*": ["app/pipes/*"],
       "@services/*": ["app/services/*"],
       "@svg/*": ["app/svg/*"],
       "@utils/*": ["app/utils/*"],

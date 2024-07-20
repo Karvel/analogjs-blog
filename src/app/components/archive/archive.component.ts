@@ -22,7 +22,7 @@ import { getArchiveLinks } from '@utils/get-archive-links';
   `,
 })
 export class ArchiveComponent implements OnInit {
-  @Input() public posts!: ContentFile<BlogPost>[];
+  @Input() public posts: ContentFile<BlogPost>[] = [];
 
   archiveLinks!: ArchiveLink[];
 
