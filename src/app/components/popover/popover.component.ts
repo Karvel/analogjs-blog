@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -9,37 +10,48 @@ import {
   inject,
 } from '@angular/core';
 
+import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
+
 @Component({
   selector: 'app-popover',
   standalone: true,
+  imports: [NgClass, SvgIconComponent],
   template: `
-    <img
+    <svg-icon
       #popoverIcon
       (click)="toggle()"
       (keypress)="toggle()"
-      [src]="icon"
-      [alt]="altText"
-      class="cursor-pointer drop-shadow-lg"
-      loading="lazy"
+      [key]="icon"
+      [attr.alt]="altText"
+      [ngClass]="{
+        'drop-shadow-lg': hasDropShadow,
+      }"
+      class="cursor-pointer"
       tabindex="0"
-      height="20"
-      width="20"
+      height="20px"
+      width="20px"
     />
     <div
       #popover
-      class="popover absolute right-4 bottom-12 pointer-events-none transition duration-500 ease-in-out"
+      class="popover pointer-events-none"
       [class.active]="isActive"
+      [ngClass]="{
+        'transition duration-500 ease-in-out': hasTransition,
+      }"
     >
       <ng-content />
     </div>
   `,
   styleUrls: ['./popover.component.scss'],
 })
-export default class PopoverComponent implements OnInit, OnDestroy {
+export class PopoverComponent implements OnInit, OnDestroy {
   @Input() public altText!: string | undefined;
-  @Input() public icon!: string | undefined;
+  @Input() public icon!: SvgIcons;
+  @Input() public hasDropShadow: boolean = true;
+  @Input() public hasTransition: boolean = false;
 
-  @ViewChild('popoverIcon') popoverIcon!: ElementRef;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('popoverIcon') popoverIcon!: any;
   @ViewChild('popover') popover!: ElementRef;
 
   public isActive = false;
@@ -65,7 +77,7 @@ export default class PopoverComponent implements OnInit, OnDestroy {
   private initializeListener(target: string, eventName: string): () => void {
     return this.renderer.listen(target, eventName, (e: Event) => {
       if (
-        !this.popoverIcon.nativeElement.contains(e.target) &&
+        !this.popoverIcon.host.nativeElement.contains(e.target) &&
         !this.popover.nativeElement.contains(e.target)
       ) {
         this.isActive = false;

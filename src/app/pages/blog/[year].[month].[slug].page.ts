@@ -25,9 +25,9 @@ import {
 import { map, switchMap, tap } from 'rxjs';
 
 import { ArchiveComponent } from '@components/archive/archive.component';
-import PillComponent from '@components/pill/pill.component';
-import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
-import PopoverComponent from '@components/popover/popover.component';
+import { PillComponent } from '@components/pill/pill.component';
+import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
+import { PopoverComponent } from '@components/popover/popover.component';
 import { PostNavigationComponent } from '@components/post-navigation/post-navigation.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
@@ -126,7 +126,8 @@ import { SpinnerComponent } from '@components/spinner/spinner.component';
                   >
                     <app-popover
                       [altText]="'Image information'"
-                      [icon]="'svg/info.svg'"
+                      [icon]="'info'"
+                      [hasTransition]="true"
                     >
                       <app-image-info-popover-content
                         [cover_image_author]="
