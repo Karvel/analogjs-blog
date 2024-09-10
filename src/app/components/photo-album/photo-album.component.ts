@@ -39,6 +39,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
       />
       <a
         [href]="flickr.albumUrl + '/' + photo.id"
+        class="flex aspect-[1/0.65]"
         target="_blank"
         rel="noopener"
       >
@@ -57,7 +58,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
           (load)="onLoad()"
           alt=""
           appReplaceBrokenImage
-          class="w-full rounded-md"
+          class="w-full rounded-md object-cover"
           height="491"
           width="736"
         />
