@@ -85,25 +85,33 @@ import { getMonth } from '@utils/get-month';
         />
         <a [routerLink]="['/blog', year, month, post.slug]">
           <ng-container *ngIf="isLCP; else nonPriority">
-            <img
-              [src]="post.attributes.cover_image || ''"
-              [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
-              [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
-              (load)="onLoad()"
-              appReplaceBrokenImage
-              class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-              priority
-            />
+            <span class="flex aspect-[1/0.65]">
+              <img
+                [src]="post.attributes.cover_image || ''"
+                [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
+                [ngStyle]="{
+                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                }"
+                (load)="onLoad()"
+                appReplaceBrokenImage
+                class="sm:max-w-xs rounded-md w-full h-full object-cover object-center"
+                priority
+              />
+            </span>
           </ng-container>
           <ng-template #nonPriority>
-            <img
-              [src]="post.attributes.cover_image || ''"
-              [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
-              [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
-              (load)="onLoad()"
-              appReplaceBrokenImage
-              class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-            />
+            <span class="flex aspect-[1/0.65]">
+              <img
+                [src]="post.attributes.cover_image || ''"
+                [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
+                [ngStyle]="{
+                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                }"
+                (load)="onLoad()"
+                appReplaceBrokenImage
+                class="sm:max-w-xs rounded-md w-full h-full object-cover object-center"
+              />
+            </span>
           </ng-template>
         </a>
       </div>
