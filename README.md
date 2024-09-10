@@ -1,4 +1,4 @@
-# Analog App
+# AnalogJS Blog
 
 | Branch  | Status                                                                                              |
 | ------- | --------------------------------------------------------------------------------------------------- |
@@ -22,9 +22,16 @@ Run `npm run build` to build the client/server project. The client build artifac
 
 Run `npm run test` to run unit tests with [Vitest](https://vitest.dev).
 
-## Community
+## CI
 
-- Visit and Star the [GitHub Repo](https://github.com/analogjs/analog)
-- Join the [Discord](https://chat.analogjs.org)
-- Follow us on [Twitter](https://twitter.com/analogjs)
-- Become a [Sponsor](https://github.com/sponsors/brandonroberts)
+This repo is configured for CI via a [Github Action Workflow](.github\workflows\build-and-test.yml). It builds the app, runs the linter, runs the tests, and outputs code coverage when the `develop` or `main` branches are updated.
+
+## Deploy
+
+There is a [Github Action Workflow](.github\workflows\deploy-to-github-pages.yml) that is configured to deploy the contents of `./dist/analog/public` to GitHub Pages when the `main` branch is updated.
+
+### Prettier
+
+This project uses [Prettier](https://prettier.io/) to enforce code style. There are [`.prettierrc`](.prettierrc) and [`.prettierignore`](.prettierignore) configuration files to adjust some options. Prettier is also wired up to a [pre-commit hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). This DOES slightly slow down git, as it runs the hook on staged files every time `git commit` is executed.
+
+Prettier can be configured within [editors](https://prettier.io/docs/en/editors.html) so that it formats files on save, which helps minimize any changes the pre-commit hook would need to make.

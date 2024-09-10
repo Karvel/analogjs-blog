@@ -2,6 +2,7 @@
 title: "How I Switched My Website to Analog"
 author: Elanna Grossman
 date: 2023-12-23T02:08:59.101Z
+last_updated: 2024-09-09T20:55:24-07:00
 description: In this article I share technical exploration of how I switched my website to Analog.
 canonical_url: https://elanna.me/2023/11/how-i-switched-my-website-to-analog
 cover_image: https://live.staticFlickr.com/65535/52270210933_b2f9572e2f_c.jpg
@@ -13,6 +14,8 @@ tags: development,angular,analogjs, wordpress,markdown,rxjs
 slug: how-i-switched-my-website-to-analog
 published: true
 ---
+
+*Updated Sep 09, 2024* - added information about more recently implemented features, like search, skeleton loader, and tag cloud.
 
 ## Introduction
 
@@ -38,7 +41,7 @@ Once I knew what content I wanted to bring over and that I would have to build a
   * Accounts
   * Comments
 * Nice to haves for later
-  * Search (decided to implement a simple client side only version later)
+  * Search (decided to implement a simple client side only version)
 
 This site is the canonical source for posts, but I currently repost them to <a href="https://dev.to/karvel" target="_blank" rel="noopener">dev.to</a>, which has account and comment support.
 
@@ -53,7 +56,8 @@ In addition, I thought of new features I would want to have:
   * Place to list any talks I have given
 * Light/dark mode
   * Set by system preference initially
-  * User toggle for light/dark mode - NYI
+  * User toggle for light/dark mode
+  * Mode updates syntax highlighing theme also
 
 ## Styling
 
@@ -123,6 +127,10 @@ I created a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/ap
 
 The site supports both categories and tags for organizing content. I decided to create a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/pill/pill.component.ts" target="_blank" rel="noopener">generic pills component</a> for both. The tags are saved as a comma separated string, so I <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/utils/split-tag-string-into-array.ts" target="_blank" rel="noopener">split the string into an array</a>.
 
+### Search
+
+I added a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/services/search.service.ts" target="_blank" rel="noopener">simple search feature</a> to the header. It is client-side only for now. If I write enough articles that it does not scale well, I can create a back-end to host posts and perform searches. At the moment, it only searches the post front matter.
+
 ### Images
 
 Between wanting to support cover images for blog posts, and showcase some of my photos, I knew I would need to support a lot of functionality for images.
@@ -146,13 +154,17 @@ I used a version of this for the recent photo album component that I added to th
 
 For the post cover images, I wanted to provide an easy way to show the photo name, author, and link. I decided to use a popover for this. Since I needed to make one by hand, I decided to use content projection. I made a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/popover/popover.component.ts" target="_blank" rel="noopener">component with the responsibility of having the popover icon</a>, that would open a passed in <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/popover/image-info-popover-content.component.ts" target="_blank" rel="noopener">additional component as projected content</a>. I set the tab index on the popover icon so keyboards could navigate to it. This worked out nicely, and so I added it to the photos in the masonry grid also.
 
+#### Skeleton Loader
+
+After the site had been live for a little while, I wanted to improve the loading experience by adding skeleton loaders. With the way that the site is constructed, image skeleton loaders made the most sense. I made a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/skeleton-card/skeleton-card.component.ts" target="_blank" rel="noopener">skeleton card component</a> that accepts `height`, `maxWidth`, and `width` as bindings. I also added a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/services/screen-size.service.ts" target="_blank" rel="noopener">screen size service</a> so I could listen to resize events to make the skeleton cards responsive.
+
 #### Masonry Grid
 
 I have used Flickr for many years, and I have always liked the way that masonry grids look. I wanted to put some of my favorite photos on a page, where they would randomly load from a list into a masonry grid. My initial approach involved a directive, which felt too heavy for what I needed. I looked around for a CSS only solution, and found <a href="https://blog.logrocket.com/responsive-image-gallery-css-flexbox/" target="_blank" rel="noopener">this very useful article</a>. I tweaked the styling and ended up with <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/components/masonry-grid/masonry-grid.component.scss" target="_blank" rel="noopener">these rules</a>.
 
 #### Object Fit
 
-After implementing the masonry grid, I styed the post and talk thumbnail images with `object-fit: cover` to <a href="https://github.com/Karvel/analogjs-blog/pull/92/files" target="_blank" rel="noopener">improve the flow of the cards</a>.
+After implementing the masonry grid, I styled the post and talk thumbnail images with `object-fit: cover` to <a href="https://github.com/Karvel/analogjs-blog/pull/92/files" target="_blank" rel="noopener">improve the flow of the cards</a>.
 
 #### Broken Image Directive
 
@@ -164,7 +176,11 @@ I wanted to be able to support draft functionality, where a post would be hidden
 
 ### RSS
 
-One of the nice features that Analog supports is RSS. I wanted to continue to provide an RSS feed, which is something that comes with WordPress sites by default. Right now, I have a rough implementation that I plan on expanding in the future: <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/server/routes/feed.xml.ts" target="_blank" rel="noopener">`feed.xml.ts`</a>.
+One of the nice features that Analog supports is RSS. I wanted to continue to provide an RSS feed, which is something that comes with WordPress sites by default. I personally prefer making the entire post text available and not just a blurb. The implementation can be found here: <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/server/routes/feed.xml.ts" target="_blank" rel="noopener">`feed.xml.ts`</a>.
+
+### Tag Cloud
+
+Initially, I implemented a tag list page that aggregates all of the tags I use. Later on, I added tag cloud functionality, where I <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/utils/aggregate-and-weigh-tags.ts" target="_blank" rel="noopener">assign weights </a> based on how many times I use a tag and resize the tag text so that more frequently used tags are larger.
 
 ## Static Site
 
