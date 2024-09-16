@@ -52,7 +52,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
             photo.primary +
             '_' +
             photo.secret +
-            '_w.jpg'
+            '_c.jpg'
           "
           [ngStyle]="{ visibility: showSkeleton() ? 'hidden' : 'visible' }"
           (load)="onLoad()"
