@@ -30,7 +30,7 @@ This repo is configured for CI via a [Github Action Workflow](.github\workflows\
 
 There is a [Github Action Workflow](.github\workflows\deploy-to-github-pages.yml) that is configured to deploy the contents of `./dist/analog/public` to GitHub Pages when the `main` branch is updated.
 
-### Prettier
+## Prettier
 
 This project uses [Prettier](https://prettier.io/) to enforce code style. There are [`.prettierrc`](.prettierrc) and [`.prettierignore`](.prettierignore) configuration files to adjust some options. Prettier is also wired up to a [pre-commit hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). This DOES slightly slow down git, as it runs the hook on staged files every time `git commit` is executed.
 
