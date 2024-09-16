@@ -6,6 +6,7 @@ import { MarkdownComponent, injectContent } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
 import { siteName } from '@constants/site-name';
+import { url } from '@constants/site-url';
 import { MetadataService } from '@services/metadata.service';
 import { version } from '../../../../package.json';
 
@@ -44,7 +45,7 @@ export const metaTagList: MetaDefinition[] = [
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <img
-            ngSrc="images/self/me.jpg"
+            ngSrc="${url}/images/self/me.jpg"
             class="rounded max-h-[32rem] mx-auto"
             alt="Me in Norway"
             priority
