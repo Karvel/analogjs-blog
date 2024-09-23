@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
@@ -73,7 +73,6 @@ export default class IndexPageComponent {
   private flickrService = inject(FlickrService);
   private metadataService = inject(MetadataService);
 
-  public loading: WritableSignal<boolean> = signal(true);
   public profile$ = this.flickrService.getProfile();
 
   constructor() {
