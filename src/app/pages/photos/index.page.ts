@@ -1,10 +1,12 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
+import { catchError, of, tap } from 'rxjs';
 
 import { MasonryGridComponent } from '@components/masonry-grid/masonry-grid.component';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 import { siteName } from '@constants/site-name';
 import { FlickrService } from '@services/api/flickr.service';
 import { MetadataService } from '@services/metadata.service';
@@ -40,35 +42,31 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-photos-index',
   standalone: true,
-  imports: [AsyncPipe, NgIf, MasonryGridComponent],
+  imports: [AsyncPipe, NgIf, MasonryGridComponent, SpinnerComponent, JsonPipe],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="text-xl">Photos:</h1>
-          <div *ngIf="profile$ | async as profile; else emptyResponse">
-            <div class="py-5">
-              I host my photos on
-              <a
-                [href]="profile?.photosurl?._content"
-                target="_blank"
-                rel="noopener"
-                >Flickr</a
-              >.
-            </div>
-            <div class="whitespace-pre-line">
+          <div class="pt-5">
+            I host my photos on
+            <a
+              href="https://www.flickr.com/photos/jadeilyn/"
+              target="_blank"
+              rel="noopener"
+              >Flickr</a
+            >.
+          </div>
+          <app-spinner *ngIf="loading()" class="py-3 block" />
+          <div *ngIf="profile$ | async as profile">
+            <div
+              *ngIf="profile?.description?._content"
+              class="whitespace-pre-line pt-5"
+            >
               {{ profile?.description?._content }}
             </div>
-            <div class="pt-6">
-              Here is random sampling some of my favorite photos:
-              <app-masonry-grid />
-            </div>
+            <app-masonry-grid />
           </div>
-          <ng-template #emptyResponse>
-            <div class="pt-5">
-              No photos are available from Flickr. Try again later?
-            </div>
-          </ng-template>
         </div>
       </div>
     </div>
@@ -78,7 +76,15 @@ export default class IndexPageComponent {
   private flickrService = inject(FlickrService);
   private metadataService = inject(MetadataService);
 
-  public profile$ = this.flickrService.getProfile();
+  public loading: WritableSignal<boolean> = signal(true);
+  public profile$ = this.flickrService.getProfile().pipe(
+    tap(() => this.loading.set(false)),
+    catchError((error) => {
+      this.loading.set(false);
+
+      return of(error);
+    }),
+  );
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
