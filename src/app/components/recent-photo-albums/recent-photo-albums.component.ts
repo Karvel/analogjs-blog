@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 import { PhotoAlbumComponent } from '@components/photo-album/photo-album.component';
 import { SpinnerComponent } from '@components/spinner/spinner.component';
@@ -13,7 +13,7 @@ import { FlickrService } from '@services/api/flickr.service';
   imports: [AsyncPipe, NgFor, NgIf, PhotoAlbumComponent, SpinnerComponent],
   template: `
     <app-spinner *ngIf="loading()" />
-    <div *ngIf="photos$ | async as photos">
+    <div *ngIf="photos$ | async as photos; else emptyResponse">
       <h2 class="text-xl">Latest Photo Albums:</h2>
       <div class="flex gap-4 flex-wrap justify-center xl:justify-normal">
         <ng-container *ngFor="let photo of photos">
@@ -21,6 +21,11 @@ import { FlickrService } from '@services/api/flickr.service';
         </ng-container>
       </div>
     </div>
+    <ng-template #emptyResponse>
+      <div *ngIf="!loading()">
+        No photos are available from Flickr. Try again later?
+      </div>
+    </ng-template>
   `,
 })
 export class RecentPhotoAlbumsComponent {
@@ -28,7 +33,12 @@ export class RecentPhotoAlbumsComponent {
 
   public loading: WritableSignal<boolean> = signal(true);
 
-  public photos$ = this.flickrService
-    .getRecentPhotosets()
-    .pipe(tap(() => this.loading.set(false)));
+  public photos$ = this.flickrService.getRecentPhotosets().pipe(
+    tap(() => this.loading.set(false)),
+    catchError(() => {
+      this.loading.set(false);
+
+      return of(null);
+    }),
+  );
 }
