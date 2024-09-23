@@ -58,7 +58,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
           (load)="onLoad()"
           alt=""
           appReplaceBrokenImage
-          class="w-full rounded-md object-cover"
+          class="w-full h-full rounded-md object-cover"
           height="491"
           width="736"
         />
