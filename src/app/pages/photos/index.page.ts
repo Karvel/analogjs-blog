@@ -65,9 +65,9 @@ export const metaTagList: MetaDefinition[] = [
             >
               {{ profile?.description?._content }}
             </div>
-            <app-masonry-grid />
           </div>
         </div>
+        <app-masonry-grid />
       </div>
     </div>
   `,
