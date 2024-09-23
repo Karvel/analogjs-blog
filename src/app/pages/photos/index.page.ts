@@ -46,30 +46,25 @@ export const metaTagList: MetaDefinition[] = [
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="text-xl">Photos:</h1>
-          <div *ngIf="profile$ | async as profile; else emptyResponse">
-            <div class="py-5">
-              I host my photos on
-              <a
-                [href]="profile?.photosurl?._content"
-                target="_blank"
-                rel="noopener"
-                >Flickr</a
-              >.
-            </div>
-            <div class="whitespace-pre-line">
+          <div class="pt-5">
+            I host my photos on
+            <a
+              href="https://www.flickr.com/photos/jadeilyn/"
+              target="_blank"
+              rel="noopener"
+              >Flickr</a
+            >.
+          </div>
+          <div *ngIf="profile$ | async as profile">
+            <div
+              *ngIf="profile?.description?._content"
+              class="whitespace-pre-line pt-5"
+            >
               {{ profile?.description?._content }}
             </div>
-            <div class="pt-6">
-              Here is random sampling some of my favorite photos:
-              <app-masonry-grid />
-            </div>
           </div>
-          <ng-template #emptyResponse>
-            <div class="pt-5">
-              No photos are available from Flickr. Try again later?
-            </div>
-          </ng-template>
         </div>
+        <app-masonry-grid />
       </div>
     </div>
   `,

@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
 import { PopoverComponent } from '@components/popover/popover.component';
@@ -23,7 +23,10 @@ import { FlickrService } from '@services/api/flickr.service';
   ],
   template: `
     <app-spinner *ngIf="loading()" class="py-3 block" />
-    <div *ngIf="photos$ | async as photos">
+    <div *ngIf="photos$ | async as photos; else emptyResponse">
+      <div class="pt-5">
+        Here is random sampling some of my favorite photos:
+      </div>
       <ul class="image-gallery list-none">
         <li *ngFor="let photo of photos">
           <img
@@ -59,6 +62,11 @@ import { FlickrService } from '@services/api/flickr.service';
         </li>
       </ul>
     </div>
+    <ng-template #emptyResponse>
+      <div *ngIf="!loading()" class="pt-5">
+        No photos are available from Flickr. Try again later?
+      </div>
+    </ng-template>
   `,
   styleUrls: ['./masonry-grid.component.scss'],
 })
@@ -67,7 +75,12 @@ export class MasonryGridComponent {
 
   public flickr = flickr;
   public loading: WritableSignal<boolean> = signal(true);
-  public photos$ = this.flickrService
-    .getFavoritePhotos()
-    .pipe(tap(() => this.loading.set(false)));
+  public photos$ = this.flickrService.getFavoritePhotos().pipe(
+    tap(() => this.loading.set(false)),
+    catchError(() => {
+      this.loading.set(false);
+
+      return of(null);
+    }),
+  );
 }
