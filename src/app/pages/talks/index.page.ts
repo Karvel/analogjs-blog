@@ -1,12 +1,24 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { JsonPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
+import { debounceTime, Observable } from 'rxjs';
 
+import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { siteName } from '@constants/site-name';
-import { MetadataService } from '@services/metadata.service';
 import { talks } from '@constants/talks';
+import { MetadataService } from '@services/metadata.service';
+import { ScreenSizeService } from '@services/screen-size.service';
 
 export const pageTitle = {
   title: `Talks | ${siteName}`,
@@ -36,7 +48,7 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-talks-index',
   standalone: true,
-  imports: [JsonPipe, NgFor, NgIf],
+  imports: [JsonPipe, NgFor, NgIf, NgStyle, SkeletonCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -65,12 +77,23 @@ export const metaTagList: MetaDefinition[] = [
                 </div>
                 <div
                   *ngIf="talk?.imageLink"
-                  class="sm:w-80 sm:min-w-[20rem] sm:h-52"
+                  class="relative sm:w-80 sm:min-w-[20rem] sm:h-52"
                 >
+                  <app-skeleton-card
+                    *ngIf="showSkeleton()"
+                    class="rounded-md absolute min-w-full h-full"
+                    height="100%"
+                    maxWidth="100%"
+                    [width]="isSmallScreen ? '' : '320px'"
+                  />
                   <ng-container *ngIf="i === 0; else nonPriority">
                     <img
                       [src]="talk.imageLink"
                       [alt]="talk.title || 'Talk Cover Image'"
+                      [ngStyle]="{
+                        visibility: showSkeleton() ? 'hidden' : 'visible'
+                      }"
+                      (load)="onLoad()"
                       appReplaceBrokenImage
                       class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
                       priority
@@ -80,6 +103,10 @@ export const metaTagList: MetaDefinition[] = [
                     <img
                       [src]="talk.imageLink"
                       [alt]="talk.title || 'Talk Cover Image'"
+                      [ngStyle]="{
+                        visibility: showSkeleton() ? 'hidden' : 'visible'
+                      }"
+                      (load)="onLoad()"
                       appReplaceBrokenImage
                       class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
                       loading="lazy"
@@ -94,13 +121,32 @@ export const metaTagList: MetaDefinition[] = [
     </div>
   `,
 })
-export default class IndexPageComponent {
+export default class IndexPageComponent implements OnInit {
+  public isSmallScreen: boolean = false;
+  public screenWidth$!: Observable<number>;
+  public showSkeleton: WritableSignal<boolean> = signal(true);
+
+  private destroyRef = inject(DestroyRef);
   private metadataService = inject(MetadataService);
+  private screenSizeService = inject(ScreenSizeService);
 
   public talks = talks;
 
   constructor() {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
+  }
+
+  public ngOnInit(): void {
+    this.screenWidth$ = this.screenSizeService.screenWidth;
+    this.screenWidth$
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((width) => {
+        this.isSmallScreen = width < smallBreakpointSize;
+      });
+  }
+
+  public onLoad(): void {
+    this.showSkeleton.set(false);
   }
 }
