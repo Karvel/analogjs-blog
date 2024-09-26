@@ -71,7 +71,7 @@ export const metaTagList: MetaDefinition[] = [
             class="flex flex-col sm:flex-row justify-evenly items-center pb-4 sm:flex-nowrap"
           >
             <div
-              class="relative flex justify-center rounded-xl max-h-32 sm:max-h-36 max-w-32 sm:max-w-36"
+              class="relative flex justify-center rounded-xl max-h-32 max-w-32 sm:max-h-36 sm:max-w-36"
             >
               <app-skeleton-card
                 *ngIf="showSkeleton()"
