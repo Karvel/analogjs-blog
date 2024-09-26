@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -48,7 +48,7 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-talks-index',
   standalone: true,
-  imports: [JsonPipe, NgFor, NgIf, NgStyle, SkeletonCardComponent],
+  imports: [NgFor, NgIf, NgStyle, SkeletonCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
