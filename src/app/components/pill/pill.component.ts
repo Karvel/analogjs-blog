@@ -1,6 +1,7 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Category } from '@constants/category';
 
 @Component({
   selector: 'app-pill',
@@ -16,7 +17,7 @@ import { RouterLink } from '@angular/router';
   `,
 })
 export class PillComponent {
-  @Input() public label!: string | undefined;
+  @Input() public label!: Category | undefined;
   @Input() public route!: string | undefined;
   @Input() public slug!: string | undefined;
 }

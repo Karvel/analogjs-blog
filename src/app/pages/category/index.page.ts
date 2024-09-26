@@ -7,6 +7,7 @@ import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
 import { PillComponent } from '@components/pill/pill.component';
+import { Category } from '@constants/category';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
@@ -77,12 +78,14 @@ export default class IndexPageComponent implements OnInit {
 
   private extractUniqueCategories(
     blogPosts: ContentFile<BlogPost>[],
-  ): string[] {
-    const uniqueCategories = new Set<string>();
+  ): Category[] {
+    const uniqueCategories = new Set<Category>();
 
     for (const post of blogPosts) {
       if (post.attributes.category && post.attributes.published) {
-        uniqueCategories.add(post.attributes.category.toLowerCase());
+        uniqueCategories.add(
+          post.attributes.category.toLowerCase() as Category,
+        );
       }
     }
 
