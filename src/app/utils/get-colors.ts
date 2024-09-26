@@ -1,5 +1,6 @@
 import { Category } from '@constants/category';
 import { Theme } from '@models/theme';
+import { getCategoryByTag } from './get-category-by-tag';
 
 export const getColors = (
   categoryOrTag: Category | string | undefined,
@@ -29,51 +30,4 @@ export const getColors = (
         text: 'white',
       };
   }
-};
-
-const categoryToTagsMap: { [category in Category]: string[] } = {
-  development: [
-    'analogjs',
-    'angular',
-    'angular pipe',
-    'cms',
-    'codeeditor',
-    'custom validator',
-    'developer group',
-    'form validation',
-    'git',
-    'google',
-    'hirepalooza',
-    'ide',
-    'iwdc',
-    'linux',
-    'lithium hosting',
-    'macos',
-    'markdown',
-    'osx',
-    'pipe',
-    'reactive forms',
-    'rxjs',
-    'tolocaleuppercase',
-    'valley devfest',
-    'wordpress',
-  ],
-  photography: ['portrait', 'landscape', 'wildlife'],
-  miscellaneous: ['hello world', 'imposter syndrome'],
-  '': [],
-};
-
-export const getCategoryByTag = (tag: string = ''): Category => {
-  const lowerCaseTag = tag.toLowerCase();
-
-  for (const category in categoryToTagsMap) {
-    if (
-      categoryToTagsMap[category as Category].includes(lowerCaseTag) ||
-      lowerCaseTag === category
-    ) {
-      return category as Category;
-    }
-  }
-
-  return '';
 };

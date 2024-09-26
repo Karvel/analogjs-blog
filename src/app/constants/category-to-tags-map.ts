@@ -1,0 +1,33 @@
+import { Category } from './category';
+
+export const categoryToTagsMap: { [category in Category]: string[] } = {
+  development: [
+    'analogjs',
+    'angular',
+    'angular pipe',
+    'cms',
+    'codeeditor',
+    'custom validator',
+    'developer group',
+    'form validation',
+    'git',
+    'google',
+    'hirepalooza',
+    'ide',
+    'iwdc',
+    'linux',
+    'lithium hosting',
+    'macos',
+    'markdown',
+    'osx',
+    'pipe',
+    'reactive forms',
+    'rxjs',
+    'tolocaleuppercase',
+    'valley devfest',
+    'wordpress',
+  ],
+  photography: ['portrait', 'landscape', 'wildlife'],
+  miscellaneous: ['hello world', 'imposter syndrome'],
+  '': [],
+};
