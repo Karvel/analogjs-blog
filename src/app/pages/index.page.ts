@@ -1,5 +1,11 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
+import {
+  Component,
+  OnInit,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
@@ -8,6 +14,7 @@ import { RouteMeta } from '@analogjs/router';
 
 import { BlogCardComponent } from '@components/blog-card/blog-card.component';
 import { RecentPhotoAlbumsComponent } from '@components/recent-photo-albums/recent-photo-albums.component';
+import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
@@ -50,8 +57,10 @@ export const metaTagList: MetaDefinition[] = [
     BlogCardComponent,
     NgIf,
     NgFor,
+    NgStyle,
     RecentPhotoAlbumsComponent,
     RouterLink,
+    SkeletonCardComponent,
   ],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
@@ -61,11 +70,26 @@ export const metaTagList: MetaDefinition[] = [
           <div
             class="flex flex-col sm:flex-row justify-evenly items-center pb-4 sm:flex-nowrap"
           >
-            <img
-              src="images/self/me-sq.jpg"
-              class="rounded-xl max-h-32 sm:max-h-36"
-              alt="Me in Norway"
-            />
+            <div
+              class="relative flex justify-center rounded-xl max-h-32 sm:max-h-36 max-w-32 sm:max-w-36"
+            >
+              <app-skeleton-card
+                *ngIf="showSkeleton()"
+                class="rounded-md absolute min-w-full h-full"
+                height="100%"
+                maxWidth="100%"
+                width="100%"
+              />
+              <img
+                [ngStyle]="{
+                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                }"
+                (load)="onLoad()"
+                src="images/self/me-sq.jpg"
+                class="rounded-xl"
+                alt="Me in Norway"
+              />
+            </div>
             <div class="pt-4 sm:pl-4 sm:pt-0">
               My name is Elanna Grossman. I am a full-stack developer, primarily
               focused on Angular and .NET. I most recently worked at
@@ -106,11 +130,16 @@ export default class HomeComponent implements OnInit {
     .filter((post) => post.attributes.published)
     .sort(sortByUpdatedOrOriginalDate)
     .slice(0, 3);
+  public showSkeleton: WritableSignal<boolean> = signal(true);
 
   private metadataService = inject(MetadataService);
 
   ngOnInit(): void {
     this.metadataService.setPageURLMetaTitle(pageTitle.title);
     this.metadataService.updateTags(metaTagList);
+  }
+
+  public onLoad(): void {
+    this.showSkeleton.set(false);
   }
 }
