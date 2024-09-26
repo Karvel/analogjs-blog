@@ -35,7 +35,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
         class="rounded-md absolute min-w-full h-full"
         height="100%"
         maxWidth="100%"
-        [width]="isSmallScreen ? '' : '736px'"
+        width=""
       />
       <a
         [href]="flickr.albumUrl + '/' + photo.id"
@@ -44,7 +44,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
         rel="noopener"
       >
         <img
-          [ngSrc]="
+          [src]="
             flickr.albumPhotoUrl +
             '/' +
             photo.server +
@@ -59,8 +59,6 @@ import { ScreenSizeService } from '@services/screen-size.service';
           alt=""
           appReplaceBrokenImage
           class="w-full h-full rounded-md object-cover"
-          height="491"
-          width="736"
         />
         <div
           class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"
