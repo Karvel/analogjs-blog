@@ -1,11 +1,11 @@
 import { Category } from '@constants/category';
 import { Theme } from '@models/theme';
-import { getCategoryByTag } from './get-category-by-tag';
+import { getCategoryFromLabel } from './get-category-from-label';
 
 export const getColors = (
   categoryOrTag: Category | string | undefined,
 ): Theme => {
-  const category = getCategoryByTag(categoryOrTag);
+  const category = getCategoryFromLabel(categoryOrTag);
   switch (category) {
     case 'development':
       return {
