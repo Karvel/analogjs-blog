@@ -2,10 +2,8 @@ import { Category } from '@constants/category';
 import { Theme } from '@models/theme';
 import { getCategoryFromLabel } from './get-category-from-label';
 
-export const getColors = (
-  categoryOrTag: Category | string | undefined,
-): Theme => {
-  const category = getCategoryFromLabel(categoryOrTag);
+export const getColors = (label: Category | string | undefined): Theme => {
+  const category = getCategoryFromLabel(label);
   switch (category) {
     case 'development':
       return {

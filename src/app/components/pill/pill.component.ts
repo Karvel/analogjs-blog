@@ -2,7 +2,6 @@ import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { Category } from '@constants/category';
 import { Theme } from '@models/theme';
 import { getColors } from '@utils/get-colors';
 
@@ -32,7 +31,7 @@ import { getColors } from '@utils/get-colors';
   `,
 })
 export class PillComponent implements OnInit {
-  @Input() public label!: Category | undefined;
+  @Input() public label!: string | undefined;
   @Input() public route!: string | undefined;
   @Input() public slug!: string | undefined;
 
