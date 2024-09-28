@@ -1,13 +1,13 @@
 import { Category } from '@constants/category';
 import { categoryToTagsMap } from '@constants/category-to-tags-map';
 
-export const getCategoryByTag = (tag: string = ''): Category => {
-  const lowerCaseTag = tag.toLowerCase();
+export const getCategoryFromLabel = (label: string = ''): Category => {
+  const lowerCaseLabel = label.toLowerCase();
 
   for (const category in categoryToTagsMap) {
     if (
-      categoryToTagsMap[category as Category].includes(lowerCaseTag) ||
-      lowerCaseTag === category
+      categoryToTagsMap[category as Category].includes(lowerCaseLabel) ||
+      lowerCaseLabel === category
     ) {
       return category as Category;
     }
