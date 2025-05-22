@@ -138,13 +138,13 @@ export class PaginatorComponent implements OnInit {
 
   private addRouteListener(): void {
     this.route.queryParamMap.subscribe((params) => {
-      const page = params.get('page');
-      if (page) {
-        this.currentPage = parseInt(page, 10);
-        this.pageChanged.emit(this.currentPage);
-      } else {
-        this.changePage(1);
+      let page = params.get('page');
+      if (!page) {
+        // Set page to 1 without triggering query param or navigation
+        page = '1';
       }
+      this.currentPage = parseInt(page, 10);
+      this.pageChanged.emit(this.currentPage);
     });
   }
 

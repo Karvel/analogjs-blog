@@ -4,7 +4,7 @@ author: Elanna Grossman
 date: 2023-02-17T18:39:42-08:00
 description: In this article I list my recommended development tools in Linux, MacOS, and Windows as a web developer.
 canonical_url: https://hapax-legomenon.net/2023/02/recommended-development-tools-in-linux-macos-and-windows
-cover_image: https://live.staticflickr.com/626/21245815482_6015e70d8a_c.jpg
+cover_image: https://live.staticflickr.com/2458/21245815482_6431167871_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/21245815482/
 cover_image_title: Kendrick Peak
