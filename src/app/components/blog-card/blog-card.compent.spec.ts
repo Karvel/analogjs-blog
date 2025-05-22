@@ -14,6 +14,7 @@ import { ScreenSizeService } from '@services/screen-size.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { provideLocationMocks } from '@angular/common/testing';
+import { getTitleCase } from '@utils/get-title-case';
 
 describe('BlogCardComponent', () => {
   let component: BlogCardComponent;
@@ -26,7 +27,7 @@ describe('BlogCardComponent', () => {
       date: '2023-01-01',
       last_updated: '2023-01-10',
       description: 'Test Description',
-      category: 'Test Category',
+      category: 'development',
       cover_image: 'test-image.jpg',
       cover_image_title: 'Test Image Title',
     },
@@ -118,7 +119,9 @@ describe('BlogCardComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     const appPillElement = fixture.nativeElement.querySelector('app-pill');
-    expect(appPillElement.textContent).toContain(mockPost.attributes.category);
+    expect(appPillElement.textContent).toContain(
+      getTitleCase(mockPost.attributes.category),
+    );
   });
 
   it('should hide the image if showSkeleton is true', () => {
