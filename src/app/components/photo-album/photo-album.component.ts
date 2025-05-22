@@ -54,12 +54,6 @@ import { PhotosetListItem } from '@models/flickr';
           <h2 class="text-white text-xl font-bold text-shadow-sm shadow-black">
             {{ photo.title._content }}
           </h2>
-          <div
-            *ngIf="photo.username"
-            class="text-white text-xs text-shadow-sm shadow-black"
-          >
-            By: {{ photo.username }}
-          </div>
         </div>
       </a>
     </div>

@@ -174,7 +174,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.theme$.subscribe((theme) =>
-      this.form.setValue({ isChecked: theme === 'light' }),
+      this.form.setValue({ isChecked: theme === 'dark' }),
     );
   }
 
