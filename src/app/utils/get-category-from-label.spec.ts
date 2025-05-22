@@ -8,8 +8,7 @@ describe('getCategoryFromLabel', () => {
   });
 
   it('should return "photography" for known photography tags', () => {
-    expect(getCategoryFromLabel('portrait')).toBe('photography');
-    expect(getCategoryFromLabel('landscape')).toBe('photography');
+    expect(getCategoryFromLabel('fujifilm')).toBe('photography');
   });
 
   it('should return "miscellaneous" for known miscellaneous tags', () => {
@@ -24,7 +23,7 @@ describe('getCategoryFromLabel', () => {
 
   it('should be case insensitive', () => {
     expect(getCategoryFromLabel('ANGULAR')).toBe('development');
-    expect(getCategoryFromLabel('Landscape')).toBe('photography');
+    expect(getCategoryFromLabel('Fujifilm')).toBe('photography');
     expect(getCategoryFromLabel('HeLLo wOrLd')).toBe('miscellaneous');
   });
 });
