@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Category } from '@constants/category';
 
-import { Theme } from '@models/theme';
 import { getCategoryFromLabel } from '@utils/get-category-from-label';
 
 @Component({
@@ -24,8 +23,6 @@ export class PillComponent {
   @Input() public label!: string | undefined;
   @Input() public route!: string | undefined;
   @Input() public slug!: string | undefined;
-
-  public color!: Theme;
 
   public getColors = (label: Category | string | undefined): string => {
     const category = getCategoryFromLabel(label);
