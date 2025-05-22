@@ -27,7 +27,7 @@ export const categoryToTagsMap: { [category in Category]: string[] } = {
     'valley devfest',
     'wordpress',
   ],
-  photography: ['portrait', 'landscape', 'wildlife'],
+  photography: ['fujifilm'],
   miscellaneous: ['hello world', 'imposter syndrome'],
   '': [],
 };
