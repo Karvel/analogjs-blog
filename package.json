@@ -67,9 +67,9 @@
   },
   "devDependencies": {
     "@analogjs/platform": "^1.6.1",
-    "@analogjs/vite-plugin-angular": "^1.6.1",
+    "@analogjs/vite-plugin-angular": "^1.17.1",
     "@analogjs/vitest-angular": "^1.6.1",
-    "@angular-devkit/build-angular": "^18.1.0",
+    "@angular-devkit/build-angular": "^20.0.1",
     "@angular-eslint/builder": "^18.0.0",
     "@angular-eslint/eslint-plugin": "^18.0.0",
     "@angular-eslint/eslint-plugin-template": "^18.0.0",
