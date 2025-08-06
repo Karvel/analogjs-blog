@@ -75,7 +75,7 @@
     "@angular-eslint/eslint-plugin-template": "^18.0.0",
     "@angular-eslint/schematics": "^18.0.0",
     "@angular-eslint/template-parser": "^18.0.0",
-    "@angular/cli": "^18.0.0",
+    "@angular/cli": "^18.1.0",
     "@angular/compiler-cli": "^18.0.0",
     "@ngneat/svg-generator": "^7.0.2",
     "@tailwindcss/typography": "^0.5.10",
