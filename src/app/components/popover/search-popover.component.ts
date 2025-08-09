@@ -28,7 +28,7 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
       <div [formGroup]="form">
         <label for="search" [attr.aria-label]="'Search'" tabindex="0">
           <input
-            class="w-full rounded-sm bg-neutral-200 dark:bg-neutral-700 px-2"
+            class="w-full rounded-xs bg-neutral-200 dark:bg-neutral-700 px-2"
             id="search"
             formControlName="search"
             placeholder="Search here"

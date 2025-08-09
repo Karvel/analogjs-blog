@@ -87,20 +87,20 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
               />
               <div [ngClass]="{ image_container: post.attributes.cover_image }">
                 <h1
-                  class="text-white text-xl font-bold text-shadow-sm shadow-black"
+                  class="text-white text-xl font-bold text-shadow-xs shadow-black"
                 >
                   {{ post.attributes.title }}
                 </h1>
                 <div
                   *ngIf="post.attributes.author"
-                  class="text-white text-xs text-shadow-sm shadow-black"
+                  class="text-white text-xs text-shadow-xs shadow-black"
                 >
                   By: {{ post.attributes.author }}
                 </div>
                 <div
                   class="flex justify-between items-center text-white text-xs"
                 >
-                  <div class="flex text-shadow-sm shadow-black">
+                  <div class="flex text-shadow-xs shadow-black">
                     <div *ngIf="post?.attributes?.last_updated">
                       Updated {{ post.attributes.last_updated | date }}
                     </div>
