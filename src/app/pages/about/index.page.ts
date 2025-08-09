@@ -66,7 +66,7 @@ export const metaTagList: MetaDefinition[] = [
                 visibility: showSkeleton() ? 'hidden' : 'visible'
               }"
               (load)="onLoad()"
-              src="${url}/images/self/me.jpg"
+              src="images/self/me.jpg"
               class="rounded-md"
               alt="Me in Norway"
               priority
