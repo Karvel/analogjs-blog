@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { getYear } from '@utils/get-year';
 @Component({
   selector: 'app-post-navigation',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink],
+  imports: [NgIf, RouterLink],
   template: `
     <div class="flex justify-between text-sm mt-2 gap-2">
       <a

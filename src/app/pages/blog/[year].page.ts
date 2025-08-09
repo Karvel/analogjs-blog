@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 
@@ -16,7 +16,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 @Component({
   selector: 'app-year-page',
   standalone: true,
-  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf, RouterLink],
+  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">

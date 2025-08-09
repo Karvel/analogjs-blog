@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -14,9 +14,7 @@ import { ThemeService } from '@services/theme.service';
 @Component({
   selector: 'app-header',
   imports: [
-    AsyncPipe,
     NgClass,
-    NgIf,
     NgFor,
     PopoverComponent,
     ReactiveFormsModule,
