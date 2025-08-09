@@ -20,7 +20,6 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
 
 @Component({
   selector: 'app-search-popover',
-  standalone: true,
   imports: [HighlightPipe, NgFor, NgIf, ReactiveFormsModule, RouterLink],
   template: `
     <div

@@ -52,7 +52,6 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [
     BlogCardComponent,
     NgIf,

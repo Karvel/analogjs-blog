@@ -6,6 +6,7 @@ import { FooterComponent } from './footer.component';
 
 @Component({
   template: '<app-footer />',
+  standalone: false,
 })
 class TestHostComponent {}
 

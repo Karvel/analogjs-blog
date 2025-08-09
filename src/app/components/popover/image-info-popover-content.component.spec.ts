@@ -12,6 +12,7 @@ import { ImageInfoPopoverContentComponent } from './image-info-popover-content.c
       [cover_image_title]="coverImageTitle"
     />
   `,
+  standalone: false,
 })
 class TestHostComponent {
   coverImageAuthor: string | undefined = 'Author';

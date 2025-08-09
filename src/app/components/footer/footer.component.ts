@@ -7,7 +7,6 @@ import { Navigation } from '@models/navigation';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,
   imports: [NgFor, NgIf, SvgIconComponent],
   template: `
     <footer class="bg-[#838db6] dark:bg-sky-950 dark:text-white py-8">

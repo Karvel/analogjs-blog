@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-image-info-popover-content',
-  standalone: true,
   imports: [NgIf],
   template: `
     <div

@@ -11,7 +11,6 @@ import { FlickrService } from '@services/api/flickr.service';
 
 @Component({
   selector: 'app-masonry-grid',
-  standalone: true,
   imports: [
     AsyncPipe,
     ImageInfoPopoverContentComponent,

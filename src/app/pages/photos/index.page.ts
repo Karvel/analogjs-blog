@@ -39,7 +39,6 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-photos-index',
-  standalone: true,
   imports: [AsyncPipe, NgIf, MasonryGridComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">

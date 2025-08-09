@@ -9,7 +9,6 @@ import { FlickrService } from '@services/api/flickr.service';
 
 @Component({
   selector: 'app-recent-photo-albums',
-  standalone: true,
   imports: [AsyncPipe, NgFor, NgIf, PhotoAlbumComponent, SpinnerComponent],
   template: `
     <app-spinner *ngIf="loading()" />

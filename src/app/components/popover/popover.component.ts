@@ -14,7 +14,7 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
 
 @Component({
   selector: 'app-popover',
-  standalone: true,
+  imports: [NgClass, NgIf, SvgIconComponent],
   imports: [NgClass, SvgIconComponent],
   template: `
     <svg-icon

@@ -17,7 +17,6 @@ import { MetadataService } from '@services/metadata.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [FooterComponent, HeaderComponent, RouterOutlet],
   template: `
     <div class="flex flex-col h-screen">

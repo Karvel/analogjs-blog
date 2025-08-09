@@ -47,7 +47,6 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-talks-index',
-  standalone: true,
   imports: [NgFor, NgIf, NgStyle, SkeletonCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">

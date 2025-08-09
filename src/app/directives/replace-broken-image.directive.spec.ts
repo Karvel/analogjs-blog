@@ -8,6 +8,7 @@ import { ReplaceBrokenImageDirective } from './replace-broken-image.directive';
 
 @Component({
   template: ` <img src="test" alt="test" appReplaceBrokenImage /> `,
+  standalone: false,
 })
 class TestComponent {}
 

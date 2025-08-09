@@ -38,7 +38,6 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-about-index',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgIf,

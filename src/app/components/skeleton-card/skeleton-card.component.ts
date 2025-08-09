@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-skeleton-card',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div
