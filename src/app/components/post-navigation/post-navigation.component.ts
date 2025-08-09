@@ -47,7 +47,7 @@ import { getYear } from '@utils/get-year';
     </div>
   `,
 })
-export class PostNavigationComponent {
+export default class PostNavigationComponent {
   @Input() public nextPost!: ContentFile<BlogPost>;
   @Input() public post!: ContentFile<BlogPost | Record<string, never>>;
   @Input() public posts!: ContentFile<BlogPost>[];

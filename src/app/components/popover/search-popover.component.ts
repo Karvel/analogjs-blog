@@ -70,7 +70,7 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
     </div>
   `,
 })
-export class SearchPopoverComponent implements OnInit {
+export default class SearchPopoverComponent implements OnInit {
   public form!: FormGroup;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),

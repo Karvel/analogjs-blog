@@ -9,8 +9,8 @@ import {
 
 import { filter, map, mergeMap } from 'rxjs';
 
-import { FooterComponent } from '@components/footer/footer.component';
-import { HeaderComponent } from '@components/header/header.component';
+import FooterComponent from '@components/footer/footer.component';
+import HeaderComponent from '@components/header/header.component';
 import { siteName } from '@constants/site-name';
 import { url } from '@constants/site-url';
 import { MetadataService } from '@services/metadata.service';
@@ -28,7 +28,7 @@ import { MetadataService } from '@services/metadata.service';
     </div>
   `,
 })
-export class AppComponent implements OnInit {
+export default class AppComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private metadataService = inject(MetadataService);
   private route = inject(ActivatedRoute);

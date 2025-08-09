@@ -7,8 +7,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { tap } from 'rxjs';
 
-import { ArchiveComponent } from '@components/archive/archive.component';
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
+import ArchiveComponent from '@components/archive/archive.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';

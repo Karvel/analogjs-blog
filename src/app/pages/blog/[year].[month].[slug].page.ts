@@ -24,11 +24,12 @@ import {
 } from '@analogjs/content';
 import { map, switchMap, tap } from 'rxjs';
 
-import { ArchiveComponent } from '@components/archive/archive.component';
-import { PillComponent } from '@components/pill/pill.component';
-import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
-import { PopoverComponent } from '@components/popover/popover.component';
-import { PostNavigationComponent } from '@components/post-navigation/post-navigation.component';
+import ArchiveComponent from '@components/archive/archive.component';
+import PillComponent from '@components/pill/pill.component';
+import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
+import PopoverComponent from '@components/popover/popover.component';
+import PostNavigationComponent from '@components/post-navigation/post-navigation.component';
+import SpinnerComponent from '@components/spinner/spinner.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
@@ -38,7 +39,6 @@ import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
-import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
   selector: 'app-blog-slug',

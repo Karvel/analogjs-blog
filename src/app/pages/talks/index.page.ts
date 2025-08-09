@@ -13,7 +13,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { RouteMeta } from '@analogjs/router';
 import { debounceTime, Observable } from 'rxjs';
 
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { siteName } from '@constants/site-name';
 import { talks } from '@constants/talks';

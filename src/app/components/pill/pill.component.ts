@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
     </a>
   `,
 })
-export class PillComponent {
+export default class PillComponent {
   @Input() public label!: string | undefined;
   @Input() public route!: string | undefined;
   @Input() public slug!: string | undefined;

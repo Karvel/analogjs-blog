@@ -7,7 +7,7 @@ import { ContentFile } from '@analogjs/content';
 import { of } from 'rxjs';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 
-import { BlogCardComponent } from './blog-card.component';
+import BlogCardComponent from './blog-card.component';
 import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { BlogPost } from '@models/post';
 import { ScreenSizeService } from '@services/screen-size.service';

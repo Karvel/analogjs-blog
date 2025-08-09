@@ -3,9 +3,9 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 
 import { catchError, of, tap } from 'rxjs';
 
-import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
-import { PopoverComponent } from '@components/popover/popover.component';
-import { SpinnerComponent } from '@components/spinner/spinner.component';
+import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
+import PopoverComponent from '@components/popover/popover.component';
+import SpinnerComponent from '@components/spinner/spinner.component';
 import { flickr } from '@constants/flickr';
 import { FlickrService } from '@services/api/flickr.service';
 
@@ -69,7 +69,7 @@ import { FlickrService } from '@services/api/flickr.service';
   `,
   styleUrls: ['./masonry-grid.component.scss'],
 })
-export class MasonryGridComponent {
+export default class MasonryGridComponent {
   private flickrService = inject(FlickrService);
 
   public flickr = flickr;

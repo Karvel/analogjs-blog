@@ -3,8 +3,8 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 
 import { catchError, of, tap } from 'rxjs';
 
-import { PhotoAlbumComponent } from '@components/photo-album/photo-album.component';
-import { SpinnerComponent } from '@components/spinner/spinner.component';
+import PhotoAlbumComponent from '@components/photo-album/photo-album.component';
+import SpinnerComponent from '@components/spinner/spinner.component';
 import { FlickrService } from '@services/api/flickr.service';
 
 @Component({
@@ -27,7 +27,7 @@ import { FlickrService } from '@services/api/flickr.service';
     </ng-template>
   `,
 })
-export class RecentPhotoAlbumsComponent {
+export default class RecentPhotoAlbumsComponent {
   private flickrService = inject(FlickrService);
 
   public loading: WritableSignal<boolean> = signal(true);

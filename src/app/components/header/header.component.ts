@@ -5,8 +5,8 @@ import { RouterLink } from '@angular/router';
 
 import { distinctUntilChanged } from 'rxjs';
 
-import { PopoverComponent } from '@components/popover/popover.component';
-import { SearchPopoverComponent } from '@components/popover/search-popover.component';
+import PopoverComponent from '@components/popover/popover.component';
+import SearchPopoverComponent from '@components/popover/search-popover.component';
 import { siteName } from '@constants/site-name';
 import { Navigation } from '@models/navigation';
 import { ThemeService } from '@services/theme.service';
@@ -141,7 +141,7 @@ import { ThemeService } from '@services/theme.service';
     </nav>
   `,
 })
-export class HeaderComponent implements OnInit {
+export default class HeaderComponent implements OnInit {
   public form: FormGroup = new FormGroup({});
   public linkList: Navigation[] = [
     {

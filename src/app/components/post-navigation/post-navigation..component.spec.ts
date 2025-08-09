@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostNavigationComponent } from './post-navigation.component';
+import PostNavigationComponent from './post-navigation.component';
 
 describe('PostNavigationComponent', () => {
   let component: PostNavigationComponent;

@@ -12,7 +12,7 @@ import { Component, Input } from '@angular/core';
     ></div>
   `,
 })
-export class SkeletonCardComponent {
+export default class SkeletonCardComponent {
   @Input() public height: string = '';
   @Input() public maxWidth: string = '';
   @Input() public width: string = '';

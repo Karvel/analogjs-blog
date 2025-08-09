@@ -4,7 +4,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
 
-import { MasonryGridComponent } from '@components/masonry-grid/masonry-grid.component';
+import MasonryGridComponent from '@components/masonry-grid/masonry-grid.component';
 import { siteName } from '@constants/site-name';
 import { FlickrService } from '@services/api/flickr.service';
 import { MetadataService } from '@services/metadata.service';

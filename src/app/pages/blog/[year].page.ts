@@ -5,13 +5,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
+import ArchiveComponent from '@components/archive/archive.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { ArchiveComponent } from '@components/archive/archive.component';
 import { getYear } from '@utils/get-year';
+import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 
 @Component({
   selector: 'app-year-page',

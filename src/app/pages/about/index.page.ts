@@ -5,7 +5,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { MarkdownComponent, injectContent } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { siteName } from '@constants/site-name';
 import { url } from '@constants/site-url';
 import { MetadataService } from '@services/metadata.service';

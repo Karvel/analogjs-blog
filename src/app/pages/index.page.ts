@@ -12,9 +12,9 @@ import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
-import { RecentPhotoAlbumsComponent } from '@components/recent-photo-albums/recent-photo-albums.component';
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
+import RecentPhotoAlbumsComponent from '@components/recent-photo-albums/recent-photo-albums.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
