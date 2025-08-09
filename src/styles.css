@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  .text-shadow-sm {
+    --tw-shadow-color: rgb(0, 0, 0);
+    text-shadow: 0 2px 4px var(--tw-shadow-color);
+  }
+
+  .text-shadow-xs {
+    --tw-shadow-color: rgb(0, 0, 0);
+    text-shadow:
+      1px 1px 0 var(--tw-shadow-color),
+      -1px 1px 0 var(--tw-shadow-color),
+      -1px -1px 0 var(--tw-shadow-color),
+      1px -1px 0 var(--tw-shadow-color);
+  }
+
+  .text-shadow-lg {
+    --tw-shadow-color: rgb(0, 0, 0);
+    text-shadow: 0 8px 16px var(--tw-shadow-color);
+  }
+}
+
+/* You can add global styles to this file, and also import other style files */
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* light mode */
+:root {
+  color: black;
+  background-color: #ffffff;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: #4b5563;
+}
+
+button {
+  background-color: #f9f9f9;
+}
+
+/* dark mode */
+.dark {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  a {
+    color: white;
+  }
+
+  a:hover {
+    color: #2563eb;
+  }
+}
+
+/* shiki */
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 1rem;
+  margin-right: 1.5rem;
+  display: inline-block;
+  text-align: right;
+  color: rgba(115,138,148,.4)
+}

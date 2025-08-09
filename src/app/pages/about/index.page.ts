@@ -1,13 +1,12 @@
-import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
 import { MarkdownComponent, injectContent } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { siteName } from '@constants/site-name';
-import { url } from '@constants/site-url';
 import { MetadataService } from '@services/metadata.service';
 import { version } from '../../../../package.json';
 
@@ -38,11 +37,11 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-about-index',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgIf,
     NgOptimizedImage,
+    NgStyle,
     MarkdownComponent,
     SkeletonCardComponent,
   ],
@@ -63,10 +62,10 @@ export const metaTagList: MetaDefinition[] = [
             />
             <img
               [ngStyle]="{
-                visibility: showSkeleton() ? 'hidden' : 'visible'
+                visibility: showSkeleton() ? 'hidden' : 'visible',
               }"
               (load)="onLoad()"
-              src="${url}/images/self/me.jpg"
+              src="images/self/me.jpg"
               class="rounded-md"
               alt="Me in Norway"
               priority

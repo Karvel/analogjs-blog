@@ -1,37 +1,34 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import { distinctUntilChanged } from 'rxjs';
 
-import { PopoverComponent } from '@components/popover/popover.component';
-import { SearchPopoverComponent } from '@components/popover/search-popover.component';
+import PopoverComponent from '@components/popover/popover.component';
+import SearchPopoverComponent from '@components/popover/search-popover.component';
 import { siteName } from '@constants/site-name';
 import { Navigation } from '@models/navigation';
 import { ThemeService } from '@services/theme.service';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [
-    AsyncPipe,
     NgClass,
-    NgIf,
     NgFor,
     PopoverComponent,
     ReactiveFormsModule,
     RouterLink,
     SearchPopoverComponent,
   ],
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.css'],
   template: `
-    <nav class="bg-[#829ab3] border-gray-300 dark:bg-sky-800">
+    <nav class="!bg-[#829ab3] !border-gray-300 dark:!bg-sky-800">
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
         <div class="flex">
-          <a routerLink="/" class="flex items-center no-underline">
+          <a routerLink="/" class="flex items-center !no-underline">
             <div class="h-[38px]">
               <img
                 src="images/self/logo.png"
@@ -50,7 +47,7 @@ import { ThemeService } from '@services/theme.service';
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-sky-200 focus:outline-none focus:ring-2 bg-transparent focus:ring-gray-400 dark:text-gray-400 dark:hover:bg-sky-900 dark:focus:ring-gray-600"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm !border-gray-300 dark:!bg-sky-800 !text-gray-500 rounded-lg md:!hidden hover:!bg-sky-200 focus:!bg-sky-200 !focus:!outline-hidden focus:!ring-2 !bg-transparent focus:!ring-gray-400 dark:!text-gray-400 dark:hover:!bg-sky-900 dark:focus:!bg-sky-900 dark:focus:!ring-gray-600"
           aria-controls="navbar-default"
           aria-expanded="false"
           (click)="toggleNavbar()"
@@ -78,12 +75,12 @@ import { ThemeService } from '@services/theme.service';
           id="navbar-default"
         >
           <ul
-            class="font-medium flex flex-col md:p-0 mt-4 items-end rounded-lg md:flex-row md:items-center md:space-x-8 md:mt-0 md:bg-[#829ab3] dark:bg-sky-800 md:dark:bg-sky-800 dark:border-sky-800"
+            class="font-medium flex flex-col md:p-0 mt-4 items-end !rounded-lg md:flex-row md:items-center md:space-x-8 md:mt-0 md:!bg-[#829ab3] dark:!bg-sky-800 md:dark:!bg-sky-800 dark:!border-sky-800"
           >
             <li *ngFor="let link of linkList">
               <a
                 [routerLink]="link?.path"
-                class="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-black md:hover:underline md:p-0 dark:text-white md:dark:hover:text-white dark:hover:bg-sky-900 dark:hover:text-white md:dark:hover:bg-transparent no-underline"
+                class="block px-3 py-2 !text-gray-900 !rounded-sm hover:!bg-gray-100 focus:!bg-gray-100 md:hover:!bg-transparent md:!border-0 md:hover:!text-black md:hover:!underline md:p-0 dark:!text-white md:dark:hover:!text-white dark:hover:!bg-sky-900 dark:focus:!bg-sky-900 dark:hover:!text-white md:dark:hover:!bg-transparent md:dark:focus:!bg-transparent !no-underline"
                 >{{ link?.label }}</a
               >
             </li>
@@ -142,7 +139,7 @@ import { ThemeService } from '@services/theme.service';
     </nav>
   `,
 })
-export class HeaderComponent implements OnInit {
+export default class HeaderComponent implements OnInit {
   public form: FormGroup = new FormGroup({});
   public linkList: Navigation[] = [
     {

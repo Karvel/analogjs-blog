@@ -5,9 +5,9 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { ArchiveComponent } from '@components/archive/archive.component';
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
-import { PaginatorComponent } from '@components/paginator/paginator.component';
+import ArchiveComponent from '@components/archive/archive.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
+import PaginatorComponent from '@components/paginator/paginator.component';
 import { pageSizeDefault } from '@constants/page-size-default';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';

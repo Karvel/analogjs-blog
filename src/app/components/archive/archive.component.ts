@@ -21,7 +21,7 @@ import { getArchiveLinks } from '@utils/get-archive-links';
     </ng-container>
   `,
 })
-export class ArchiveComponent implements OnInit {
+export default class ArchiveComponent implements OnInit {
   @Input() public posts: ContentFile<BlogPost>[] = [];
 
   archiveLinks!: ArchiveLink[];

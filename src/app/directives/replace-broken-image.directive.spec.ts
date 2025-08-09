@@ -8,6 +8,8 @@ import { ReplaceBrokenImageDirective } from './replace-broken-image.directive';
 
 @Component({
   template: ` <img src="test" alt="test" appReplaceBrokenImage /> `,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false,
 })
 class TestComponent {}
 

@@ -14,8 +14,8 @@ import { RouterLink } from '@angular/router';
 import { ContentFile } from '@analogjs/content';
 import { debounceTime, Observable } from 'rxjs';
 
-import { PillComponent } from '@components/pill/pill.component';
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import PillComponent from '@components/pill/pill.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
@@ -118,7 +118,7 @@ import { getMonth } from '@utils/get-month';
     </div>
   `,
 })
-export class BlogCardComponent implements OnInit {
+export default class BlogCardComponent implements OnInit {
   @Input() post!: ContentFile<BlogPost>;
   @Input() isLCP: boolean = false;
 

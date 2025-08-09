@@ -2,13 +2,13 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { tap } from 'rxjs';
 
-import { ArchiveComponent } from '@components/archive/archive.component';
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
+import ArchiveComponent from '@components/archive/archive.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
@@ -20,7 +20,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 @Component({
   selector: 'app-month-page',
   standalone: true,
-  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf, RouterLink],
+  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">

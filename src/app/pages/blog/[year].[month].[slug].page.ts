@@ -24,11 +24,12 @@ import {
 } from '@analogjs/content';
 import { map, switchMap, tap } from 'rxjs';
 
-import { ArchiveComponent } from '@components/archive/archive.component';
-import { PillComponent } from '@components/pill/pill.component';
-import { ImageInfoPopoverContentComponent } from '@components/popover/image-info-popover-content.component';
-import { PopoverComponent } from '@components/popover/popover.component';
-import { PostNavigationComponent } from '@components/post-navigation/post-navigation.component';
+import ArchiveComponent from '@components/archive/archive.component';
+import PillComponent from '@components/pill/pill.component';
+import ImageInfoPopoverContentComponent from '@components/popover/image-info-popover-content.component';
+import PopoverComponent from '@components/popover/popover.component';
+import PostNavigationComponent from '@components/post-navigation/post-navigation.component';
+import SpinnerComponent from '@components/spinner/spinner.component';
 import { siteName } from '@constants/site-name';
 import { ReplaceBrokenImageDirective } from '@directives/replace-broken-image.directive';
 import { BlogPost } from '@models/post';
@@ -38,7 +39,6 @@ import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
 import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
-import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
   selector: 'app-blog-slug',
@@ -59,7 +59,7 @@ import { SpinnerComponent } from '@components/spinner/spinner.component';
     ReplaceBrokenImageDirective,
     SpinnerComponent,
   ],
-  styleUrls: ['./[year].[month].[slug].page.scss'],
+  styleUrls: ['./[year].[month].[slug].page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
@@ -87,20 +87,20 @@ import { SpinnerComponent } from '@components/spinner/spinner.component';
               />
               <div [ngClass]="{ image_container: post.attributes.cover_image }">
                 <h1
-                  class="text-white text-xl font-bold text-shadow-sm shadow-black"
+                  class="text-white text-xl font-bold text-shadow-xs shadow-black"
                 >
                   {{ post.attributes.title }}
                 </h1>
                 <div
                   *ngIf="post.attributes.author"
-                  class="text-white text-xs text-shadow-sm shadow-black"
+                  class="text-white text-xs text-shadow-xs shadow-black"
                 >
                   By: {{ post.attributes.author }}
                 </div>
                 <div
                   class="flex justify-between items-center text-white text-xs"
                 >
-                  <div class="flex text-shadow-sm shadow-black">
+                  <div class="flex text-shadow-xs shadow-black">
                     <div *ngIf="post?.attributes?.last_updated">
                       Updated {{ post.attributes.last_updated | date }}
                     </div>

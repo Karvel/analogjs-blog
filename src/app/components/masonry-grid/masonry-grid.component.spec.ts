@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MasonryGridComponent } from './masonry-grid.component';
+import MasonryGridComponent from './masonry-grid.component';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('MasonryGridComponent', () => {

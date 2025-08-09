@@ -91,7 +91,7 @@ import {
     </nav>
   `,
 })
-export class PaginatorComponent implements OnInit {
+export default class PaginatorComponent implements OnInit {
   @Input() itemsPerPage = 10;
   @Input() totalItems = 0;
 

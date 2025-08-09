@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { PillComponent } from '@components/pill/pill.component';
+import PillComponent from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
@@ -43,7 +43,7 @@ export const metaTagList: MetaDefinition[] = [
   selector: 'app-tag-index',
   standalone: true,
   imports: [NgFor, PillComponent, RouterLink],
-  styleUrls: ['./index.page.scss'],
+  styleUrls: ['./index.page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">

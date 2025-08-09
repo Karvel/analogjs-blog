@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-image-info-popover-content',
-  standalone: true,
   imports: [NgIf],
   template: `
     <div
@@ -16,7 +15,7 @@ import { Component, Input } from '@angular/core';
     </div>
   `,
 })
-export class ImageInfoPopoverContentComponent {
+export default class ImageInfoPopoverContentComponent {
   @Input() public cover_image_author!: string | undefined;
   @Input() public cover_image_source!: string | undefined;
   @Input() public cover_image_title!: string | undefined;

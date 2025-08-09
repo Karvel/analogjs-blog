@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
+
 import { ContentFile } from '@analogjs/content';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, DOCUMENT } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 
 import { metadataTags } from '@constants/metadata-tags';

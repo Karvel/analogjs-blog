@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { getYear } from '@utils/get-year';
 @Component({
   selector: 'app-post-navigation',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink],
+  imports: [NgIf, RouterLink],
   template: `
     <div class="flex justify-between text-sm mt-2 gap-2">
       <a
@@ -25,7 +25,7 @@ import { getYear } from '@utils/get-year';
         attr.alt="Click to go to the previous post: {{
           prevPost.attributes.title
         }}"
-        class="hover:text-inherit dark:hover:text-white no-underline inline-flex bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+        class="hover:!text-inherit focus:!text-inherit dark:hover:!text-white dark:focus:!text-white !no-underline inline-flex !bg-indigo-200 hover:!bg-indigo-300 focus:!bg-indigo-300 focus:!ring-2 focus:!ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:!bg-indigo-600 dark:hover:!bg-indigo-700 dark:focus:!bg-indigo-700 dark:focus:!ring-indigo-800 truncate"
       >
         <span>&laquo; &nbsp;</span
         ><span class="truncate">{{ prevPost.attributes.title }}</span>
@@ -39,7 +39,7 @@ import { getYear } from '@utils/get-year';
           nextPost.slug
         ]"
         attr.alt="Click to go to the next post: {{ nextPost.attributes.title }}"
-        class="hover:text-inherit dark:hover:text-white no-underline inline-flex ml-auto bg-indigo-200 hover:bg-indigo-300 focus:ring-2 focus:ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 truncate"
+        class="hover:!text-inherit focus:!text-inherit dark:hover:!text-white dark:focus:!text-white !no-underline inline-flex ml-auto !bg-indigo-200 hover:!bg-indigo-300 focus:!bg-indigo-300 focus:!ring-2 focus:!ring-indigo-300 font-medium rounded-lg text-sm px-3 py-1 mr-2 mb-2 dark:!bg-indigo-600 dark:hover:!bg-indigo-700 dark:focus:!bg-indigo-700 dark:focus:!ring-indigo-800 truncate"
       >
         <span class="truncate">{{ nextPost.attributes.title }}</span
         ><span>&nbsp; &raquo;</span>
@@ -47,7 +47,7 @@ import { getYear } from '@utils/get-year';
     </div>
   `,
 })
-export class PostNavigationComponent {
+export default class PostNavigationComponent {
   @Input() public nextPost!: ContentFile<BlogPost>;
   @Input() public post!: ContentFile<BlogPost | Record<string, never>>;
   @Input() public posts!: ContentFile<BlogPost>[];

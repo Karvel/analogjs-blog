@@ -8,6 +8,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { debounceTime } from 'rxjs';
 
@@ -15,12 +16,10 @@ import { BlogPost } from '@models/post';
 import { SearchResult } from '@models/search';
 import { SearchService } from '@services/search.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { RouterLink } from '@angular/router';
-import { HighlightPipe } from 'app/pipes/highlight.pipe';
+import { HighlightPipe } from '@pipes/highlight.pipe';
 
 @Component({
   selector: 'app-search-popover',
-  standalone: true,
   imports: [HighlightPipe, NgFor, NgIf, ReactiveFormsModule, RouterLink],
   template: `
     <div
@@ -29,7 +28,7 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
       <div [formGroup]="form">
         <label for="search" [attr.aria-label]="'Search'" tabindex="0">
           <input
-            class="w-full rounded-sm bg-neutral-200 dark:bg-neutral-700 px-2"
+            class="w-full rounded-xs bg-neutral-200 dark:bg-neutral-700 px-2"
             id="search"
             formControlName="search"
             placeholder="Search here"
@@ -59,7 +58,7 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
                 <a
                   [routerLink]="'/blog/' + result.slug"
                   [innerHTML]="result.title | highlight : searchValue"
-                  class="no-underline"
+                  class="!no-underline"
                 >
                 </a>
               </ng-container>
@@ -71,7 +70,7 @@ import { HighlightPipe } from 'app/pipes/highlight.pipe';
     </div>
   `,
 })
-export class SearchPopoverComponent implements OnInit {
+export default class SearchPopoverComponent implements OnInit {
   public form!: FormGroup;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('/src/content/posts'),

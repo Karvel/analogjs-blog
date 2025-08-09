@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { provideLocationMocks } from '@angular/common/testing';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
@@ -7,13 +8,12 @@ import { ContentFile } from '@analogjs/content';
 import { of } from 'rxjs';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 
-import { BlogCardComponent } from './blog-card.component';
+import BlogCardComponent from './blog-card.component';
 import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { BlogPost } from '@models/post';
 import { ScreenSizeService } from '@services/screen-size.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
-import { provideLocationMocks } from '@angular/common/testing';
 
 describe('BlogCardComponent', () => {
   let component: BlogCardComponent;

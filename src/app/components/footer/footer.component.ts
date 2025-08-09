@@ -7,7 +7,6 @@ import { Navigation } from '@models/navigation';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,
   imports: [NgFor, NgIf, SvgIconComponent],
   template: `
     <footer class="bg-[#838db6] dark:bg-sky-950 dark:text-white py-8">
@@ -24,12 +23,12 @@ import { Navigation } from '@models/navigation';
         <div *ngFor="let link of linkList" class="pt-2">
           <a
             [href]="link?.path"
-            class="dark:text-white hover:text-gray-200 dark:hover:text-gray-400 transition duration-300 ease-in-out"
+            class="dark:!text-white hover:!text-gray-200 focus:!text-gray-200 dark:hover:!text-gray-400 dark:focus:!text-gray-400 transition duration-300 ease-in-out"
             target="_blank"
             rel="noopener"
           >
             <ng-container *ngIf="link?.icon">
-              <svg-icon [key]="link?.icon" [attr.alt]="link?.label" />
+              <svg-icon [key]="link?.icon || ''" [attr.alt]="link?.label" />
             </ng-container>
             <ng-container *ngIf="!link?.icon">
               {{ link?.label }}
@@ -40,7 +39,7 @@ import { Navigation } from '@models/navigation';
         <div class="pt-2">
           <a
             href="mailto:elanna.grossman@gmail.com"
-            class="dark:text-white hover:text-gray-200 dark:hover:text-gray-400 transition duration-300 ease-in-out"
+            class="dark:!text-white hover:!text-gray-200 focus:!text-gray-200 dark:hover:!text-gray-400 dark:focus:!text-gray-400 transition duration-300 ease-in-out"
             target="_blank"
             rel="noopener"
           >
@@ -52,7 +51,7 @@ import { Navigation } from '@models/navigation';
     </footer>
   `,
 })
-export class FooterComponent {
+export default class FooterComponent {
   public readonly currentYear = new Date().getFullYear();
   public linkList: Navigation[] = [
     {

@@ -4,7 +4,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 
 import { RouteMeta } from '@analogjs/router';
 
-import { MasonryGridComponent } from '@components/masonry-grid/masonry-grid.component';
+import MasonryGridComponent from '@components/masonry-grid/masonry-grid.component';
 import { siteName } from '@constants/site-name';
 import { FlickrService } from '@services/api/flickr.service';
 import { MetadataService } from '@services/metadata.service';
@@ -39,7 +39,6 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-photos-index',
-  standalone: true,
   imports: [AsyncPipe, NgIf, MasonryGridComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">

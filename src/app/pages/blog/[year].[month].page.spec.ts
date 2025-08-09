@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+
 import MonthPageComponent from './[year].[month].page';
 
 vi.mock('@analogjs/content', () => ({

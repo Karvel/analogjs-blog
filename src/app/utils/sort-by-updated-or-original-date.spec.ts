@@ -1,7 +1,7 @@
 import { ContentFile } from '@analogjs/content';
 
 import { BlogPost } from '@models/post';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByUpdatedOrOriginalDate } from './sort-by-updated-or-original-date';
 
 describe('sortByUpdatedOrOriginalDate', () => {
   it('should consider both null or undefined parameters as equal', () => {

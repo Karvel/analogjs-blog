@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -14,8 +14,7 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
 
 @Component({
   selector: 'app-popover',
-  standalone: true,
-  imports: [NgClass, SvgIconComponent],
+  imports: [NgClass, NgIf, SvgIconComponent],
   template: `
     <svg-icon
       #popoverIcon
@@ -39,12 +38,14 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
         'transition duration-500 ease-in-out': hasTransition,
       }"
     >
-      <ng-content />
+      <ng-container *ngIf="isActive">
+        <ng-content />
+      </ng-container>
     </div>
   `,
-  styleUrls: ['./popover.component.scss'],
+  styleUrls: ['./popover.component.css'],
 })
-export class PopoverComponent implements OnInit, OnDestroy {
+export default class PopoverComponent implements OnInit, OnDestroy {
   @Input() public altText!: string | undefined;
   @Input() public icon!: SvgIcons;
   @Input() public hasDropShadow: boolean = true;
@@ -66,8 +67,12 @@ export class PopoverComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.clickListener();
-    this.keyPressListener();
+    if (this.clickListener) {
+      this.clickListener();
+    }
+    if (this.keyPressListener) {
+      this.keyPressListener();
+    }
   }
 
   public toggle(): void {

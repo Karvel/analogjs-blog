@@ -13,7 +13,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { RouteMeta } from '@analogjs/router';
 import { debounceTime, Observable } from 'rxjs';
 
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { smallBreakpointSize } from '@constants/breakpoint-size';
 import { siteName } from '@constants/site-name';
 import { talks } from '@constants/talks';
@@ -47,7 +47,6 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-talks-index',
-  standalone: true,
   imports: [NgFor, NgIf, NgStyle, SkeletonCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
