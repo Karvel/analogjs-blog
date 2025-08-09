@@ -7,7 +7,6 @@ import { RouteMeta } from '@analogjs/router';
 
 import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { siteName } from '@constants/site-name';
-import { url } from '@constants/site-url';
 import { MetadataService } from '@services/metadata.service';
 import { version } from '../../../../package.json';
 
@@ -63,7 +62,7 @@ export const metaTagList: MetaDefinition[] = [
             />
             <img
               [ngStyle]="{
-                visibility: showSkeleton() ? 'hidden' : 'visible'
+                visibility: showSkeleton() ? 'hidden' : 'visible',
               }"
               (load)="onLoad()"
               src="images/self/me.jpg"

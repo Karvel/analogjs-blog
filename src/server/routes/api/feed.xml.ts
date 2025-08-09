@@ -66,7 +66,7 @@ async function generateRssFeed() {
             : content;
 
           feed.addItem({
-            id: `${site_url}/blog/${year}/${month}/${attributes.slug}` || '',
+            id: `${site_url}/blog/${year}/${month}/${attributes.slug}`,
             title: attributes.title ?? '',
             author: [
               {
@@ -75,7 +75,7 @@ async function generateRssFeed() {
             ],
             description: descriptionWithMarkup ?? '',
             content: contentWithMarkup ?? '',
-            link: `${site_url}/blog/${year}/${month}/${attributes.slug}` || '',
+            link: `${site_url}/blog/${year}/${month}/${attributes.slug}`,
             date: new Date(attributes.date || ''),
             category: splitTagStringIntoTagArray(attributes.tags) ?? [],
           });

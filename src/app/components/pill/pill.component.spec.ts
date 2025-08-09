@@ -7,6 +7,7 @@ import PillComponent from './pill.component';
 
 @Component({
   template: '<app-pill [label]="label" [route]="route" [slug]="slug" />',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 class TestHostComponent {

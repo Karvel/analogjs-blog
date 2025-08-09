@@ -12,6 +12,7 @@ import ImageInfoPopoverContentComponent from './image-info-popover-content.compo
       [cover_image_title]="coverImageTitle"
     />
   `,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 class TestHostComponent {

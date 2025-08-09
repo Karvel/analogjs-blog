@@ -6,6 +6,7 @@ import FooterComponent from './footer.component';
 
 @Component({
   template: '<app-footer />',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 class TestHostComponent {}
