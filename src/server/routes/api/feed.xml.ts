@@ -7,9 +7,9 @@ import { marked } from 'marked';
 import DOMPurify from 'isomorphic-dompurify';
 
 import { BlogPost } from '@models/post';
-import { getMonth } from '../../app/utils/get-month';
-import { getYear } from '../../app/utils/get-year';
-import { splitTagStringIntoTagArray } from '../../app/utils/split-tag-string-into-array';
+import { getMonth } from '../../../app/utils/get-month';
+import { getYear } from '../../../app/utils/get-year';
+import { splitTagStringIntoTagArray } from '../../../app/utils/split-tag-string-into-array';
 
 const posts = fs.readdirSync('./src/content/posts');
 async function generateRssFeed() {
@@ -64,8 +64,9 @@ async function generateRssFeed() {
           const descriptionWithMarkup = imageMarkup
             ? `${imageMarkup}${description}`
             : content;
+
           feed.addItem({
-            id: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
+            id: `${site_url}/blog/${year}/${month}/${attributes.slug}` || '',
             title: attributes.title ?? '',
             author: [
               {
@@ -74,7 +75,7 @@ async function generateRssFeed() {
             ],
             description: descriptionWithMarkup ?? '',
             content: contentWithMarkup ?? '',
-            link: `${site_url}/blog/${year}/${month}/${attributes.slug}` ?? '',
+            link: `${site_url}/blog/${year}/${month}/${attributes.slug}` || '',
             date: new Date(attributes.date || ''),
             category: splitTagStringIntoTagArray(attributes.tags) ?? [],
           });
