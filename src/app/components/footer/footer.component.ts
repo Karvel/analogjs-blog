@@ -23,12 +23,12 @@ import { Navigation } from '@models/navigation';
         <div *ngFor="let link of linkList" class="pt-2">
           <a
             [href]="link?.path"
-            class="dark:text-white hover:text-gray-200 dark:hover:text-gray-400 transition duration-300 ease-in-out"
+            class="dark:!text-white hover:!text-gray-200 focus:!text-gray-200 dark:hover:!text-gray-400 dark:focus:!text-gray-400 transition duration-300 ease-in-out"
             target="_blank"
             rel="noopener"
           >
             <ng-container *ngIf="link?.icon">
-              <svg-icon [key]="link?.icon" [attr.alt]="link?.label" />
+              <svg-icon [key]="link?.icon || ''" [attr.alt]="link?.label" />
             </ng-container>
             <ng-container *ngIf="!link?.icon">
               {{ link?.label }}
@@ -39,7 +39,7 @@ import { Navigation } from '@models/navigation';
         <div class="pt-2">
           <a
             href="mailto:elanna.grossman@gmail.com"
-            class="dark:text-white hover:text-gray-200 dark:hover:text-gray-400 transition duration-300 ease-in-out"
+            class="dark:!text-white hover:!text-gray-200 focus:!text-gray-200 dark:hover:!text-gray-400 dark:focus:!text-gray-400 transition duration-300 ease-in-out"
             target="_blank"
             rel="noopener"
           >

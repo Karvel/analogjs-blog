@@ -58,7 +58,7 @@ import { HighlightPipe } from '@pipes/highlight.pipe';
                 <a
                   [routerLink]="'/blog/' + result.slug"
                   [innerHTML]="result.title | highlight : searchValue"
-                  class="no-underline"
+                  class="!no-underline"
                 >
                 </a>
               </ng-container>

@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink, TitleCasePipe],
   template: `
     <a
-      class="my-1 py-1 px-3 no-underline rounded-full inline-block bg-neutral-500 dark:bg-neutral-700 text-white font-semibold text-xs hover:text-white dark:hover:text-white hover:bg-neutral-700 dark:hover:bg-neutral-500"
+      class="my-1 py-1 px-3 !no-underline rounded-full inline-block !bg-neutral-500 dark:!bg-neutral-700 !text-white !font-semibold text-xs hover:!text-white focus:!text-white dark:hover:!text-white dark:focus:!text-white hover:!bg-neutral-700 focus:!bg-neutral-700 dark:hover:!bg-neutral-500 dark:focus:!bg-neutral-500"
       [routerLink]="[route, slug]"
     >
       {{ label | titlecase }}
