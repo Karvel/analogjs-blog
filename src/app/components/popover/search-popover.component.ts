@@ -8,6 +8,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { debounceTime } from 'rxjs';
 
@@ -15,8 +16,7 @@ import { BlogPost } from '@models/post';
 import { SearchResult } from '@models/search';
 import { SearchService } from '@services/search.service';
 import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
-import { RouterLink } from '@angular/router';
-import { HighlightPipe } from 'app/pipes/highlight.pipe';
+import { HighlightPipe } from '@pipes/highlight.pipe';
 
 @Component({
   selector: 'app-search-popover',

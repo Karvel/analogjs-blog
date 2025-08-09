@@ -81,7 +81,7 @@ export const metaTagList: MetaDefinition[] = [
               />
               <img
                 [ngStyle]="{
-                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                  visibility: showSkeleton() ? 'hidden' : 'visible',
                 }"
                 (load)="onLoad()"
                 src="images/self/me-sq.jpg"
