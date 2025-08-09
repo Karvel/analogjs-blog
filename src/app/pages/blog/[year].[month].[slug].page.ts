@@ -59,7 +59,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
     ReplaceBrokenImageDirective,
     SpinnerComponent,
   ],
-  styleUrls: ['./[year].[month].[slug].page.scss'],
+  styleUrls: ['./[year].[month].[slug].page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">

@@ -23,7 +23,7 @@ import { ThemeService } from '@services/theme.service';
     RouterLink,
     SearchPopoverComponent,
   ],
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.css'],
   template: `
     <nav class="bg-[#829ab3] border-gray-300 dark:bg-sky-800">
       <div

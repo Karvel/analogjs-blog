@@ -42,9 +42,9 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
       <ng-content />
     </div>
   `,
-  styleUrls: ['./popover.component.scss'],
+  styleUrls: ['./popover.component.css'],
 })
-export class PopoverComponent implements OnInit, OnDestroy {
+export default class PopoverComponent implements OnInit, OnDestroy {
   @Input() public altText!: string | undefined;
   @Input() public icon!: SvgIcons;
   @Input() public hasDropShadow: boolean = true;

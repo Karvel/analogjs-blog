@@ -67,7 +67,7 @@ import { FlickrService } from '@services/api/flickr.service';
       </div>
     </ng-template>
   `,
-  styleUrls: ['./masonry-grid.component.scss'],
+  styleUrls: ['./masonry-grid.component.css'],
 })
 export default class MasonryGridComponent {
   private flickrService = inject(FlickrService);

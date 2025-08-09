@@ -43,7 +43,7 @@ export const metaTagList: MetaDefinition[] = [
   selector: 'app-tag-index',
   standalone: true,
   imports: [NgFor, PillComponent, RouterLink],
-  styleUrls: ['./index.page.scss'],
+  styleUrls: ['./index.page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
