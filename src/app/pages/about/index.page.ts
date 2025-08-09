@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -42,6 +42,7 @@ export const metaTagList: MetaDefinition[] = [
     AsyncPipe,
     NgIf,
     NgOptimizedImage,
+    NgStyle,
     MarkdownComponent,
     SkeletonCardComponent,
   ],
