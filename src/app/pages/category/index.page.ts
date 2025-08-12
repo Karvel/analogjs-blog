@@ -1,7 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
@@ -40,7 +39,7 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-category-index',
   standalone: true,
-  imports: [NgFor, PillComponent, RouterLink],
+  imports: [NgFor, PillComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">

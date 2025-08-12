@@ -1,4 +1,4 @@
-import { NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 import { Component, Input, signal, WritableSignal } from '@angular/core';
 
 import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
@@ -8,13 +8,7 @@ import { PhotosetListItem } from '@models/flickr';
 
 @Component({
   selector: 'app-photo-album',
-  imports: [
-    NgIf,
-    NgOptimizedImage,
-    NgStyle,
-    ReplaceBrokenImageDirective,
-    SkeletonCardComponent,
-  ],
+  imports: [NgIf, NgStyle, ReplaceBrokenImageDirective, SkeletonCardComponent],
   template: `
     <div *ngIf="photo?.id" class="relative">
       <app-skeleton-card

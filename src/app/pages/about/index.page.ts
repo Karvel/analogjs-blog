@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
+import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -37,14 +37,7 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-about-index',
-  imports: [
-    AsyncPipe,
-    NgIf,
-    NgOptimizedImage,
-    NgStyle,
-    MarkdownComponent,
-    SkeletonCardComponent,
-  ],
+  imports: [AsyncPipe, NgIf, NgStyle, MarkdownComponent, SkeletonCardComponent],
   template: `
     <h1 class="sr-only">About</h1>
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
