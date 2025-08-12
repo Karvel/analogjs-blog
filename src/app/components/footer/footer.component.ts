@@ -27,10 +27,10 @@ import { Navigation } from '@models/navigation';
             target="_blank"
             rel="noopener"
           >
-            <ng-container *ngIf="link?.icon">
-              <svg-icon [key]="link?.icon || ''" [attr.alt]="link?.label" />
+            <ng-container *ngIf="link.icon">
+              <svg-icon [key]="link.icon" [attr.alt]="link?.label" />
             </ng-container>
-            <ng-container *ngIf="!link?.icon">
+            <ng-container *ngIf="!link.icon">
               {{ link?.label }}
             </ng-container>
             <span class="sr-only">{{ link?.label }}</span>
