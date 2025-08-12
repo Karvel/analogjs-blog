@@ -1,4 +1,4 @@
-import { DatePipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
+import { DatePipe, NgIf, NgStyle } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -29,7 +29,6 @@ import { getMonth } from '@utils/get-month';
   imports: [
     DatePipe,
     NgIf,
-    NgOptimizedImage,
     NgStyle,
     PillComponent,
     ReplaceBrokenImageDirective,
@@ -90,7 +89,7 @@ import { getMonth } from '@utils/get-month';
                 [src]="post.attributes.cover_image || ''"
                 [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
                 [ngStyle]="{
-                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                  visibility: showSkeleton() ? 'hidden' : 'visible',
                 }"
                 (load)="onLoad()"
                 appReplaceBrokenImage
@@ -105,7 +104,7 @@ import { getMonth } from '@utils/get-month';
                 [src]="post.attributes.cover_image || ''"
                 [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
                 [ngStyle]="{
-                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                  visibility: showSkeleton() ? 'hidden' : 'visible',
                 }"
                 (load)="onLoad()"
                 appReplaceBrokenImage
