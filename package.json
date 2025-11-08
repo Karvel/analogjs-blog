@@ -40,8 +40,8 @@
     }
   },
   "dependencies": {
-    "@analogjs/content": "^1.19.3",
-    "@analogjs/router": "^1.19.3",
+    "@analogjs/content": "^2.0.3",
+    "@analogjs/router": "^2.0.3",
     "@angular/animations": "^20.1.4",
     "@angular/common": "^20.1.4",
     "@angular/compiler": "^20.1.4",
@@ -71,9 +71,9 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@analogjs/platform": "^1.19.3",
-    "@analogjs/vite-plugin-angular": "^1.19.3",
-    "@analogjs/vitest-angular": "^1.19.3",
+    "@analogjs/platform": "^2.0.3",
+    "@analogjs/vite-plugin-angular": "^2.0.3",
+    "@analogjs/vitest-angular": "^2.0.3",
     "@angular-eslint/builder": "^19.0.0",
     "@angular-eslint/eslint-plugin": "^19.0.0",
     "@angular-eslint/eslint-plugin-template": "^19.0.0",
