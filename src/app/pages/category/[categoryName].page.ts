@@ -1,4 +1,3 @@
-
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -41,7 +40,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
         </div>
       </div>
     </div>
-    `,
+  `,
 })
 export default class CategoryNamePageComponent implements OnInit {
   public categoryName!: string;

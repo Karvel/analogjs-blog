@@ -1,4 +1,3 @@
-
 import {
   Component,
   DestroyRef,
@@ -25,7 +24,7 @@ import {
     <nav
       aria-label="Page navigation"
       class="flex items-center justify-center gap-3 mb-3"
-      >
+    >
       <div class="flex items-center justify-center gap-3 mb-3">
         <a
           class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
@@ -33,47 +32,47 @@ import {
           [queryParams]="{ page: previousPage() }"
           queryParamsHandling="merge"
           tabindex="0"
-          >
+        >
           <span class="sr-only">Next Page</span>
           <svg
             class="h-3 w-3"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
-            >
+          >
             <path
               fill-rule="evenodd"
               d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
               clip-rule="evenodd"
-              />
+            />
           </svg>
         </a>
-    
+
         <p class="text-xs">
           {{ currentPage }}
           <span class="mx-0.25">/</span>
           {{ totalPages }}
         </p>
-    
+
         <a
           class="inline-flex h-8 w-8 items-center justify-center cursor-pointer rounded border border-gray-300 bg-white text-neutral-900 dark:border-neutral-400 dark:bg-neutral-900 dark:text-white rtl:rotate-180"
           [routerLink]="'/blog'"
           [queryParams]="{ page: nextPage() }"
           queryParamsHandling="merge"
           tabindex="0"
-          >
+        >
           <span class="sr-only">Next Page</span>
           <svg
             class="h-3 w-3"
             viewBox="0 0 20 20"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
-            >
+          >
             <path
               fill-rule="evenodd"
               d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
               clip-rule="evenodd"
-              />
+            />
           </svg>
         </a>
       </div>
@@ -81,16 +80,16 @@ import {
         <select
           [formControl]="pageSizeControl"
           aria-label="Page Size Selector"
-        class="mb-3 cursor-pointer border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
+          class="mb-3 cursor-pointer border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
         dark:border-neutral-400 dark:text-white"
-          >
+        >
           @for (option of options; track option.label) {
             <option [value]="option.value">{{ option.label }}</option>
           }
         </select>
       }
     </nav>
-    `,
+  `,
 })
 export default class PaginatorComponent implements OnInit {
   @Input() itemsPerPage = 10;

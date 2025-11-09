@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 
 import { SvgIconComponent } from '@ngneat/svg-icon';
@@ -12,7 +11,7 @@ import { Navigation } from '@models/navigation';
     <footer class="bg-[#838db6] dark:bg-sky-950 dark:text-white py-8">
       <div
         class="container mx-auto flex flex-col items-center sm:flex-row sm:justify-center text-sm"
-        >
+      >
         <div class="flex">
           &copy; Elanna Grossman {{ startYear }}-{{ currentYear }}.&nbsp;
         </div>
@@ -27,7 +26,7 @@ import { Navigation } from '@models/navigation';
               class="dark:!text-white hover:!text-gray-200 focus:!text-gray-200 dark:hover:!text-gray-400 dark:focus:!text-gray-400 transition duration-300 ease-in-out"
               target="_blank"
               rel="noopener"
-              >
+            >
               @if (link.icon) {
                 <svg-icon [key]="link.icon" [attr.alt]="link?.label" />
               }
@@ -44,14 +43,14 @@ import { Navigation } from '@models/navigation';
             class="dark:!text-white hover:!text-gray-200 focus:!text-gray-200 dark:hover:!text-gray-400 dark:focus:!text-gray-400 transition duration-300 ease-in-out"
             target="_blank"
             rel="noopener"
-            >
+          >
             <svg-icon key="email" alt="Email" />
             <span class="sr-only">Email me</span>
           </a>
         </div>
       </div>
     </footer>
-    `,
+  `,
 })
 export default class FooterComponent {
   public readonly currentYear = new Date().getFullYear();

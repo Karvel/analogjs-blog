@@ -1,4 +1,9 @@
-import { AsyncPipe, DatePipe, NgClass, NgOptimizedImage } from '@angular/common';
+import {
+  AsyncPipe,
+  DatePipe,
+  NgClass,
+  NgOptimizedImage,
+} from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -48,8 +53,8 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
     PopoverComponent,
     PostNavigationComponent,
     ReplaceBrokenImageDirective,
-    SpinnerComponent
-],
+    SpinnerComponent,
+  ],
   styleUrls: ['./[year].[month].[slug].page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
@@ -63,9 +68,9 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
               @if (isDraft) {
                 <div
                   class="border-2 border-black dark:border-white border-dashed rounded-md p-4 mb-4"
-                  >
-                  This post is not yet published. Any new categories or tags will
-                  not be visible outside of this post.
+                >
+                  This post is not yet published. Any new categories or tags
+                  will not be visible outside of this post.
                 </div>
               }
               <div [ngClass]="{ relative: post.attributes.cover_image }">
@@ -78,24 +83,24 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
                     height="615"
                     width="800"
                     priority
-                    />
+                  />
                 }
-                <div [ngClass]="{ image_container: post.attributes.cover_image }">
+                <div
+                  [ngClass]="{ image_container: post.attributes.cover_image }"
+                >
                   <h1
                     class="text-white text-xl font-bold text-shadow-xs shadow-black"
-                    >
+                  >
                     {{ post.attributes.title }}
                   </h1>
                   @if (post.attributes.author) {
-                    <div
-                      class="text-white text-xs text-shadow-xs shadow-black"
-                      >
+                    <div class="text-white text-xs text-shadow-xs shadow-black">
                       By: {{ post.attributes.author }}
                     </div>
                   }
                   <div
                     class="flex justify-between items-center text-white text-xs"
-                    >
+                  >
                     <div class="flex text-shadow-xs shadow-black">
                       @if (post?.attributes?.last_updated) {
                         <div>
@@ -104,43 +109,35 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
                       }
                       @if (
                         post?.attributes?.date && post?.attributes?.last_updated
-                        ) {
-                        <div
-                          class="pl-2"
-                          >
-                          | &nbsp;
-                        </div>
+                      ) {
+                        <div class="pl-2">| &nbsp;</div>
                       }
                       @if (post?.attributes?.date) {
-                        <div>
-                          Posted {{ post.attributes.date | date }}
-                        </div>
+                        <div>Posted {{ post.attributes.date | date }}</div>
                       }
                     </div>
                     @if (
                       post.attributes.cover_image &&
                       post?.attributes?.cover_image_source &&
                       post?.attributes?.cover_image_title
-                      ) {
-                      <div
-                        class="flex"
-                        >
+                    ) {
+                      <div class="flex">
                         <app-popover
                           [altText]="'Image information'"
                           [icon]="'info'"
                           [hasTransition]="true"
-                          >
+                        >
                           <app-image-info-popover-content
-                        [cover_image_author]="
-                          post?.attributes?.cover_image_author
-                        "
-                        [cover_image_source]="
-                          post.attributes.cover_image_source
-                        "
-                        [cover_image_title]="
-                          post?.attributes?.cover_image_title
-                        "
-                            />
+                            [cover_image_author]="
+                              post?.attributes?.cover_image_author
+                            "
+                            [cover_image_source]="
+                              post.attributes.cover_image_source
+                            "
+                            [cover_image_title]="
+                              post?.attributes?.cover_image_title
+                            "
+                          />
                         </app-popover>
                       </div>
                     }
@@ -151,9 +148,9 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
             <analog-markdown
               class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
               [content]="post.content"
-              />
+            />
             <div class="flex flex-col">
-              @if (post.attributes.category) {
+              @if (post?.attributes?.category) {
                 <div class="text-sm">
                   Category:
                   <app-pill
@@ -161,7 +158,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
                     [route]="'/category'"
                     [slug]="post.attributes.category"
                     class="m-1"
-                    />
+                  />
                 </div>
               }
               @if (post.attributes.tags?.length) {
@@ -176,7 +173,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
                       [route]="'/tag'"
                       [slug]="tag.name"
                       class="mx-1"
-                      />
+                    />
                   }
                 </div>
               }
@@ -186,7 +183,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
               [post]="post"
               [posts]="posts"
               [prevPost]="prevPost"
-              />
+            />
           </div>
         } @else {
           <div>
@@ -198,7 +195,7 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
         }
       </div>
     </div>
-    `,
+  `,
 })
 export default class BlogPostPageComponent {
   public isDraft!: boolean;

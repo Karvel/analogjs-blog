@@ -16,8 +16,8 @@ import { FlickrService } from '@services/api/flickr.service';
     ImageInfoPopoverContentComponent,
     NgOptimizedImage,
     PopoverComponent,
-    SpinnerComponent
-],
+    SpinnerComponent,
+  ],
   template: `
     @if (loading()) {
       <app-spinner class="py-3 block" />
@@ -36,12 +36,12 @@ import { FlickrService } from '@services/api/flickr.service';
                   [alt]="photo.title"
                   height="500"
                   width="500"
-                  />
+                />
               }
               <div class="relative">
                 <div
                   class="absolute -top-6 left-0 -right-2 bottom-0 flex flex-col justify-end p-4"
-                  >
+                >
                   <div class="flex justify-end items-center text-white">
                     @if (photo.url_m && photo.title) {
                       <div class="flex">
@@ -49,14 +49,18 @@ import { FlickrService } from '@services/api/flickr.service';
                           [altText]="'Image information'"
                           [icon]="'info'"
                           [hasTransition]="true"
-                          >
+                        >
                           <app-image-info-popover-content
                             [cover_image_author]="'Elanna Grossman'"
-                      [cover_image_source]="
-                        flickr.photoUrl + '/' + photo.ownername + '/' + photo.id
-                      "
+                            [cover_image_source]="
+                              flickr.photoUrl +
+                              '/' +
+                              photo.ownername +
+                              '/' +
+                              photo.id
+                            "
                             [cover_image_title]="photo.title"
-                            />
+                          />
                         </app-popover>
                       </div>
                     }
@@ -74,7 +78,7 @@ import { FlickrService } from '@services/api/flickr.service';
         </div>
       }
     }
-    `,
+  `,
   styleUrls: ['./masonry-grid.component.css'],
 })
 export default class MasonryGridComponent {

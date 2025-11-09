@@ -1,4 +1,3 @@
-
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -33,9 +32,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
               }
             </ul>
           } @else {
-            <div class="pt-5">
-              There are no posts from {{ year }}.
-            </div>
+            <div class="pt-5">There are no posts from {{ year }}.</div>
           }
         </div>
         @if (posts?.length) {
@@ -45,7 +42,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
         }
       </div>
     </div>
-    `,
+  `,
 })
 export default class YearPageComponent implements OnInit {
   public filteredPosts!: ContentFile<BlogPost>[];

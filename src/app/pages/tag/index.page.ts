@@ -1,4 +1,3 @@
-
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -52,7 +51,7 @@ export const metaTagList: MetaDefinition[] = [
             class="pt-5 flex flex-wrap justify-evenly items-center cloud"
             role="navigation"
             aria-label="Article tag cloud"
-            >
+          >
             @for (tag of tagsWithWeights; track tag.name) {
               <li class="flex m-1">
                 <app-pill
@@ -60,14 +59,14 @@ export const metaTagList: MetaDefinition[] = [
                   [label]="tag.name"
                   [route]="'/tag'"
                   [slug]="tag.name"
-                  />
+                />
               </li>
             }
           </ul>
         </div>
       </div>
     </div>
-    `,
+  `,
 })
 export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>

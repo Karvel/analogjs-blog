@@ -1,4 +1,3 @@
-
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
@@ -49,7 +48,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
         }
       </div>
     </div>
-    `,
+  `,
 })
 export default class MonthPageComponent {
   public filteredPosts!: ContentFile<BlogPost>[];

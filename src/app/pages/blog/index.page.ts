@@ -1,4 +1,3 @@
-
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -43,11 +42,7 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-blog-index',
   standalone: true,
-  imports: [
-    ArchiveComponent,
-    BlogCardComponent,
-    PaginatorComponent
-],
+  imports: [ArchiveComponent, BlogCardComponent, PaginatorComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -65,11 +60,11 @@ export const metaTagList: MetaDefinition[] = [
                 [totalItems]="totalItems"
                 (pageChanged)="onPageChanged($event)"
                 (pageSizeChanged)="onPageSizeChanged($event)"
-                />
+              />
             } @else {
               <li
                 class="py-5 flex flex-col-reverse sm:flex-row text-lg font-bold"
-                >
+              >
                 No posts yet!
               </li>
             }
@@ -78,7 +73,7 @@ export const metaTagList: MetaDefinition[] = [
         </div>
       </div>
     </div>
-    `,
+  `,
 })
 export default class IndexPageComponent {
   public displayedPosts: ContentFile<BlogPost>[] = [];

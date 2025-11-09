@@ -1,4 +1,3 @@
-
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -39,7 +38,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
         <div class="pt-5"><a [routerLink]="['/tag']">All Tags</a></div>
       </div>
     </div>
-    `,
+  `,
 })
 export default class TagNamePageComponent implements OnInit {
   public tagName!: string;

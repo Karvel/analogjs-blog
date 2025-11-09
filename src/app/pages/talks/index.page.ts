@@ -75,48 +75,48 @@ export const metaTagList: MetaDefinition[] = [
                       <ul class="list-disc ml-4">
                         @for (url of talk.urlList; track url) {
                           <li>
-                            <a [href]="url.path" target="_blank">{{ url.label }}</a>
+                            <a [href]="url.path" target="_blank">{{
+                              url.label
+                            }}</a>
                           </li>
                         }
                       </ul>
                     }
                   </div>
                   @if (talk?.imageLink) {
-                    <div
-                      class="relative sm:w-80 sm:min-w-[20rem] sm:h-52"
-                      >
+                    <div class="relative sm:w-80 sm:min-w-[20rem] sm:h-52">
                       @if (showSkeleton()) {
                         <app-skeleton-card
                           class="rounded-md absolute min-w-full h-full"
                           height="100%"
                           maxWidth="100%"
                           [width]="isSmallScreen ? '' : '320px'"
-                          />
+                        />
                       }
                       @if (i === 0) {
                         <img
                           [src]="talk.imageLink"
                           [alt]="talk.title || 'Talk Cover Image'"
-                      [ngStyle]="{
-                        visibility: showSkeleton() ? 'hidden' : 'visible'
-                      }"
+                          [ngStyle]="{
+                            visibility: showSkeleton() ? 'hidden' : 'visible',
+                          }"
                           (load)="onLoad()"
                           appReplaceBrokenImage
                           class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
                           priority
-                          />
+                        />
                       } @else {
                         <img
                           [src]="talk.imageLink"
                           [alt]="talk.title || 'Talk Cover Image'"
-                      [ngStyle]="{
-                        visibility: showSkeleton() ? 'hidden' : 'visible'
-                      }"
+                          [ngStyle]="{
+                            visibility: showSkeleton() ? 'hidden' : 'visible',
+                          }"
                           (load)="onLoad()"
                           appReplaceBrokenImage
                           class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
                           loading="lazy"
-                          />
+                        />
                       }
                     </div>
                   }
@@ -127,7 +127,7 @@ export const metaTagList: MetaDefinition[] = [
         </div>
       </div>
     </div>
-    `,
+  `,
 })
 export default class IndexPageComponent implements OnInit {
   public isSmallScreen: boolean = false;

@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -17,11 +16,13 @@ import { getArchiveLinks } from '@utils/get-archive-links';
       <h2 class="text-xl pb-5">Archives:</h2>
       @for (link of archiveLinks; track link.label) {
         <div>
-          <a [routerLink]="['/blog', link.year, link.month]">{{ link.label }}</a>
+          <a [routerLink]="['/blog', link.year, link.month]">{{
+            link.label
+          }}</a>
         </div>
       }
     }
-    `,
+  `,
 })
 export default class ArchiveComponent implements OnInit {
   @Input() public posts: ContentFile<BlogPost>[] = [];

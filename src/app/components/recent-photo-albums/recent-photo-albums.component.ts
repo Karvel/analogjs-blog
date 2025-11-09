@@ -25,12 +25,10 @@ import { FlickrService } from '@services/api/flickr.service';
       </div>
     } @else {
       @if (!loading()) {
-        <div>
-          No photos are available from Flickr. Try again later?
-        </div>
+        <div>No photos are available from Flickr. Try again later?</div>
       }
     }
-    `,
+  `,
 })
 export default class RecentPhotoAlbumsComponent {
   private flickrService = inject(FlickrService);
