@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -39,7 +39,7 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-photos-index',
-  imports: [AsyncPipe, NgIf, MasonryGridComponent],
+  imports: [AsyncPipe, MasonryGridComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -52,21 +52,24 @@ export const metaTagList: MetaDefinition[] = [
               target="_blank"
               rel="noopener"
               >Flickr</a
-            >.
-          </div>
-          <div *ngIf="profile$ | async as profile">
-            <div
-              *ngIf="profile?.description?._content"
-              class="whitespace-pre-line pt-5"
-            >
-              {{ profile?.description?._content }}
+              >.
             </div>
+            @if (profile$ | async; as profile) {
+              <div>
+                @if (profile?.description?._content) {
+                  <div
+                    class="whitespace-pre-line pt-5"
+                    >
+                    {{ profile?.description?._content }}
+                  </div>
+                }
+              </div>
+            }
           </div>
+          <app-masonry-grid />
         </div>
-        <app-masonry-grid />
       </div>
-    </div>
-  `,
+    `,
 })
 export default class IndexPageComponent {
   private flickrService = inject(FlickrService);

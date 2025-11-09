@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -46,40 +46,39 @@ export const metaTagList: MetaDefinition[] = [
   imports: [
     ArchiveComponent,
     BlogCardComponent,
-    NgFor,
-    NgIf,
-    PaginatorComponent,
-  ],
+    PaginatorComponent
+],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="text-xl">Blog Posts:</h1>
           <ul>
-            <ng-container *ngIf="posts?.length; else emptyList">
-              <li *ngFor="let post of displayedPosts; let i = index">
-                <app-blog-card [post]="post" [isLCP]="i === 0" />
-              </li>
+            @if (posts?.length) {
+              @for (post of displayedPosts; track post; let i = $index) {
+                <li>
+                  <app-blog-card [post]="post" [isLCP]="i === 0" />
+                </li>
+              }
               <app-paginator
                 [itemsPerPage]="itemsPerPage"
                 [totalItems]="totalItems"
                 (pageChanged)="onPageChanged($event)"
                 (pageSizeChanged)="onPageSizeChanged($event)"
-              />
-            </ng-container>
-            <ng-template #emptyList
-              ><li
+                />
+            } @else {
+              <li
                 class="py-5 flex flex-col-reverse sm:flex-row text-lg font-bold"
-              >
+                >
                 No posts yet!
-              </li></ng-template
-            >
+              </li>
+            }
           </ul>
           <app-archive [posts]="posts" />
         </div>
       </div>
     </div>
-  `,
+    `,
 })
 export default class IndexPageComponent {
   public displayedPosts: ContentFile<BlogPost>[] = [];

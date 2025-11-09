@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetaDefinition } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 @Component({
   selector: 'app-month-page',
   standalone: true,
-  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf],
+  imports: [ArchiveComponent, BlogCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -28,25 +28,28 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           <h1 class="md:flex md:flex-col md:self-start text-xl">
             Posts filtered by month and year: {{ monthName }} {{ year }}
           </h1>
-          <ul *ngIf="filteredPosts?.length; else emptyResult">
-            <li *ngFor="let post of filteredPosts; let i = index">
-              <app-blog-card [post]="post" [isLCP]="i === 0" />
-            </li>
-          </ul>
+          @if (filteredPosts?.length) {
+            <ul>
+              @for (post of filteredPosts; track post; let i = $index) {
+                <li>
+                  <app-blog-card [post]="post" [isLCP]="i === 0" />
+                </li>
+              }
+            </ul>
+          } @else {
+            <div class="pt-5">
+              There are no posts from {{ monthName }} {{ year }}.
+            </div>
+          }
         </div>
-        <ng-template #emptyResult
-          ><div class="pt-5">
-            There are no posts from {{ monthName }} {{ year }}.
-          </div></ng-template
-        >
-        <ng-container *ngIf="posts?.length">
+        @if (posts?.length) {
           <div class="mt-5">
             <app-archive [posts]="posts" />
           </div>
-        </ng-container>
+        }
       </div>
     </div>
-  `,
+    `,
 })
 export default class MonthPageComponent {
   public filteredPosts!: ContentFile<BlogPost>[];

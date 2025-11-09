@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -54,13 +54,11 @@ export const metaTagList: MetaDefinition[] = [
   selector: 'app-home',
   imports: [
     BlogCardComponent,
-    NgIf,
-    NgFor,
     NgStyle,
     RecentPhotoAlbumsComponent,
     RouterLink,
-    SkeletonCardComponent,
-  ],
+    SkeletonCardComponent
+],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
       <div class="md:w-[48rem] p-4">
@@ -68,17 +66,18 @@ export const metaTagList: MetaDefinition[] = [
           <h1 class="sr-only">Home</h1>
           <div
             class="flex flex-col sm:flex-row justify-evenly items-center pb-4 sm:flex-nowrap"
-          >
+            >
             <div
               class="relative flex justify-center rounded-xl max-h-32 max-w-32 !w-fit"
-            >
-              <app-skeleton-card
-                *ngIf="showSkeleton()"
-                class="rounded-md absolute min-w-full h-full"
-                height="100%"
-                maxWidth="100%"
-                width="100%"
-              />
+              >
+              @if (showSkeleton()) {
+                <app-skeleton-card
+                  class="rounded-md absolute min-w-full h-full"
+                  height="100%"
+                  maxWidth="100%"
+                  width="100%"
+                  />
+              }
               <img
                 [ngStyle]="{
                   visibility: showSkeleton() ? 'hidden' : 'visible',
@@ -87,7 +86,7 @@ export const metaTagList: MetaDefinition[] = [
                 src="images/self/me-sq.jpg"
                 class="rounded-xl"
                 alt="Me in Norway"
-              />
+                />
             </div>
             <div class="pt-4 sm:pl-4 sm:pt-0">
               My name is Elanna Grossman. I am a full-stack developer, primarily
@@ -98,29 +97,30 @@ export const metaTagList: MetaDefinition[] = [
                 target="_blank"
                 rel="noopener"
                 >Crexi</a
-              >
-              as a front end lead software engineer. I enjoy mentoring in code
-              and helping dismantle some of the built-in barriers found in the
-              coding world. There is more about me on my
-              <a routerLink="/about">about page</a>.
+                >
+                as a front end lead software engineer. I enjoy mentoring in code
+                and helping dismantle some of the built-in barriers found in the
+                coding world. There is more about me on my
+                <a routerLink="/about">about page</a>.
+              </div>
             </div>
+            <h2 class="text-xl">Latest Blog Posts:</h2>
+            @if (posts?.length) {
+              <ul>
+                @for (post of posts; track post; let i = $index) {
+                  <li>
+                    <app-blog-card [post]="post" [isLCP]="i === 0" />
+                  </li>
+                }
+              </ul>
+            } @else {
+              <div class="py-4">There are no posts yet.</div>
+            }
+            <app-recent-photo-albums />
           </div>
-          <h2 class="text-xl">Latest Blog Posts:</h2>
-          <ng-container *ngIf="posts?.length; else emptyResult">
-            <ul>
-              <li *ngFor="let post of posts; let i = index">
-                <app-blog-card [post]="post" [isLCP]="i === 0" />
-              </li>
-            </ul>
-          </ng-container>
-          <ng-template #emptyResult
-            ><div class="py-4">There are no posts yet.</div></ng-template
-          >
-          <app-recent-photo-albums />
         </div>
       </div>
-    </div>
-  `,
+    `,
 })
 export default class HomeComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>

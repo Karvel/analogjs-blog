@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -41,7 +41,7 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-tag-index',
   standalone: true,
-  imports: [NgFor, PillComponent],
+  imports: [PillComponent],
   styleUrls: ['./index.page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
@@ -52,20 +52,22 @@ export const metaTagList: MetaDefinition[] = [
             class="pt-5 flex flex-wrap justify-evenly items-center cloud"
             role="navigation"
             aria-label="Article tag cloud"
-          >
-            <li *ngFor="let tag of tagsWithWeights" class="flex m-1">
-              <app-pill
-                [attr.data-weight]="tag.weight"
-                [label]="tag.name"
-                [route]="'/tag'"
-                [slug]="tag.name"
-              />
-            </li>
+            >
+            @for (tag of tagsWithWeights; track tag) {
+              <li class="flex m-1">
+                <app-pill
+                  [attr.data-weight]="tag.weight"
+                  [label]="tag.name"
+                  [route]="'/tag'"
+                  [slug]="tag.name"
+                  />
+              </li>
+            }
           </ul>
         </div>
       </div>
     </div>
-  `,
+    `,
 })
 export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>

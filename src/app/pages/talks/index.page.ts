@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -47,78 +47,87 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-talks-index',
-  imports: [NgFor, NgIf, NgStyle, SkeletonCardComponent],
+  imports: [NgStyle, SkeletonCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">Talks:</h1>
-          <ng-container *ngIf="talks">
-            <div *ngFor="let talk of talks; let i = index">
-              <div class="py-5 flex flex-col-reverse sm:flex-row">
-                <div class="sm:pr-2 sm:max-w grow">
-                  <div class="flex items-center">
-                    <div *ngIf="talk?.date" class="text-xs pt-1 sm:pt-0">
-                      {{ talk.date }}
+          @if (talks) {
+            @for (talk of talks; track talk; let i = $index) {
+              <div>
+                <div class="py-5 flex flex-col-reverse sm:flex-row">
+                  <div class="sm:pr-2 sm:max-w grow">
+                    <div class="flex items-center">
+                      @if (talk?.date) {
+                        <div class="text-xs pt-1 sm:pt-0">
+                          {{ talk.date }}
+                        </div>
+                      }
                     </div>
+                    <div class="text-lg font-bold">
+                      {{ talk.title }}
+                    </div>
+                    <div class="sm:max-w-prose text-sm">
+                      {{ talk.description }}
+                    </div>
+                    @if (talk.urlList) {
+                      <ul class="list-disc ml-4">
+                        @for (url of talk.urlList; track url) {
+                          <li>
+                            <a [href]="url.path" target="_blank">{{ url.label }}</a>
+                          </li>
+                        }
+                      </ul>
+                    }
                   </div>
-                  <div class="text-lg font-bold">
-                    {{ talk.title }}
-                  </div>
-                  <div class="sm:max-w-prose text-sm">
-                    {{ talk.description }}
-                  </div>
-                  <ul *ngIf="talk.urlList" class="list-disc ml-4">
-                    <li *ngFor="let url of talk.urlList">
-                      <a [href]="url.path" target="_blank">{{ url.label }}</a>
-                    </li>
-                  </ul>
-                </div>
-                <div
-                  *ngIf="talk?.imageLink"
-                  class="relative sm:w-80 sm:min-w-[20rem] sm:h-52"
-                >
-                  <app-skeleton-card
-                    *ngIf="showSkeleton()"
-                    class="rounded-md absolute min-w-full h-full"
-                    height="100%"
-                    maxWidth="100%"
-                    [width]="isSmallScreen ? '' : '320px'"
-                  />
-                  <ng-container *ngIf="i === 0; else nonPriority">
-                    <img
-                      [src]="talk.imageLink"
-                      [alt]="talk.title || 'Talk Cover Image'"
+                  @if (talk?.imageLink) {
+                    <div
+                      class="relative sm:w-80 sm:min-w-[20rem] sm:h-52"
+                      >
+                      @if (showSkeleton()) {
+                        <app-skeleton-card
+                          class="rounded-md absolute min-w-full h-full"
+                          height="100%"
+                          maxWidth="100%"
+                          [width]="isSmallScreen ? '' : '320px'"
+                          />
+                      }
+                      @if (i === 0) {
+                        <img
+                          [src]="talk.imageLink"
+                          [alt]="talk.title || 'Talk Cover Image'"
                       [ngStyle]="{
                         visibility: showSkeleton() ? 'hidden' : 'visible'
                       }"
-                      (load)="onLoad()"
-                      appReplaceBrokenImage
-                      class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-                      priority
-                    />
-                  </ng-container>
-                  <ng-template #nonPriority>
-                    <img
-                      [src]="talk.imageLink"
-                      [alt]="talk.title || 'Talk Cover Image'"
+                          (load)="onLoad()"
+                          appReplaceBrokenImage
+                          class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
+                          priority
+                          />
+                      } @else {
+                        <img
+                          [src]="talk.imageLink"
+                          [alt]="talk.title || 'Talk Cover Image'"
                       [ngStyle]="{
                         visibility: showSkeleton() ? 'hidden' : 'visible'
                       }"
-                      (load)="onLoad()"
-                      appReplaceBrokenImage
-                      class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
-                      loading="lazy"
-                    />
-                  </ng-template>
+                          (load)="onLoad()"
+                          appReplaceBrokenImage
+                          class="sm:max-w-xs rounded-md sm:w-full sm:h-full sm:object-cover sm:object-center"
+                          loading="lazy"
+                          />
+                      }
+                    </div>
+                  }
                 </div>
               </div>
-            </div>
-          </ng-container>
+            }
+          }
         </div>
       </div>
     </div>
-  `,
+    `,
 })
 export default class IndexPageComponent implements OnInit {
   public isSmallScreen: boolean = false;
