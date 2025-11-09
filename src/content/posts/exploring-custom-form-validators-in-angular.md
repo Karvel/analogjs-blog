@@ -3,7 +3,7 @@ title: Exploring Custom Form Validators In Angular
 author: Elanna Grossman
 date: 2021-06-15T21:42:07-07:00
 description: In this article I show how to create custom form validators in Angular's Reactive Form library and how to use them.
-canonical_url: https://hapax-legomenon.net/2021/06/exploring-custom-form-validators-in-angular
+canonical_url: https://elanna.me/blog/2021/06/exploring-custom-form-validators-in-angular
 cover_image: https://live.staticflickr.com/5635/30961256076_198998e721_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/30961256076/
@@ -190,7 +190,7 @@ it(`should return { invalidPassword: 'Password requires at least one numeric cha
 });
 ```
 
-Between creating custom validators like this and then [listening to the form state](https://hapax-legomenon.net/2021/06/making-a-password-strength-component-in-angular/), developers can create reactive and engaging content for users.
+Between creating custom validators like this and then [listening to the form state](https://elanna.me/blog/2021/06/making-a-password-strength-component-in-angular/), developers can create reactive and engaging content for users.
 
 ## Resources
 

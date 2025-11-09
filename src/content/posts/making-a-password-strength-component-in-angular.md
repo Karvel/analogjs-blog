@@ -3,7 +3,7 @@ title: Making a Password Strength Component in Angular
 author: Elanna Grossman
 date: 2021-06-09T00:28:38-07:00
 description: In this post I show how to use Angular's Reactive Forms and RxJS to make a password strength component and requirement checker.
-canonical_url: https://hapax-legomenon.net/2021/06/making-a-password-strength-component-in-angular
+canonical_url: https://elanna.me/blog/2021/06/making-a-password-strength-component-in-angular
 cover_image: https://live.staticflickr.com/3672/10356922586_7a62f75bfb_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/10356922586
@@ -24,7 +24,7 @@ Reactive Forms in Angular are incredibly powerful and let developers design expe
 
 First, I decided to create distinct check box form controls for each password requirement and strength indicator. This lets me update the control for each indicator independently. I set the controls to disabled, so that the values can only be triggered programmatically, rather than directly by the user. The requirement indicator values start as false since none of them should be checked at first. I like to set this up in the parent component where I set up my reactive form. That is because I believe the parent component should be the source of truth for the controls in a form.
 
-I go over creating custom validators like `PasswordValidator.validPassword()` in a [follow up post](https://hapax-legomenon.net/2021/06/exploring-custom-form-validators-in-angular/). For the sake of simplicity in this example, I combined using both password requirement indicators with a validator and the password strength indicator. In a real world scenario, I don’t think I would use the validator with the password strength indicator. To achieve that effect, it would be easy enough to remove `Validators.compose([PasswordValidator.validPassword(true)]),` below:
+I go over creating custom validators like `PasswordValidator.validPassword()` in a [follow up post](https://elanna.me/blog/2021/06/exploring-custom-form-validators-in-angular/). For the sake of simplicity in this example, I combined using both password requirement indicators with a validator and the password strength indicator. In a real world scenario, I don’t think I would use the validator with the password strength indicator. To achieve that effect, it would be easy enough to remove `Validators.compose([PasswordValidator.validPassword(true)]),` below:
 
 ```ts
 private createForm(): FormGroup {
