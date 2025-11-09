@@ -4,7 +4,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { PillComponent } from '@components/pill/pill.component';
+import PillComponent from '@components/pill/pill.component';
 import { Category } from '@constants/category';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
