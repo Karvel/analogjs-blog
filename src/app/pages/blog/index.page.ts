@@ -84,7 +84,7 @@ export default class IndexPageComponent {
   public displayedPosts: ContentFile<BlogPost>[] = [];
   public itemsPerPage = pageSizeDefault;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
     .sort(sortByUpdatedOrOriginalDate);

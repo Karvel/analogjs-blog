@@ -50,7 +50,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 export default class YearPageComponent implements OnInit {
   public filteredPosts!: ContentFile<BlogPost>[];
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public year!: string;
 

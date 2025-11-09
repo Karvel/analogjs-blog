@@ -67,7 +67,7 @@ export default class CategoryNamePageComponent implements OnInit {
     },
   ];
   private posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
     .sort(sortByUpdatedOrOriginalDate);

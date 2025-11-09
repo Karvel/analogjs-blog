@@ -220,7 +220,7 @@ export default class BlogPostPageComponent {
     }),
   );
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public prevPost!: ContentFile<BlogPost>;
   public splitTagStringIntoArray = splitTagStringIntoTagArray;

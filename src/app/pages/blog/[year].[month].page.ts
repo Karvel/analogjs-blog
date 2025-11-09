@@ -56,7 +56,7 @@ export default class MonthPageComponent {
   public month!: string;
   public monthName!: string;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public year!: string;
 

@@ -72,7 +72,7 @@ import { HighlightPipe } from '@pipes/highlight.pipe';
 export default class SearchPopoverComponent implements OnInit {
   public form!: FormGroup;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public searchResults!: SearchResult;
 
