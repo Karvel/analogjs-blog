@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -54,8 +54,6 @@ export const metaTagList: MetaDefinition[] = [
   selector: 'app-home',
   imports: [
     BlogCardComponent,
-    NgIf,
-    NgFor,
     NgStyle,
     RecentPhotoAlbumsComponent,
     RouterLink,
@@ -72,13 +70,14 @@ export const metaTagList: MetaDefinition[] = [
             <div
               class="relative flex justify-center rounded-xl max-h-32 max-w-32 !w-fit"
             >
-              <app-skeleton-card
-                *ngIf="showSkeleton()"
-                class="rounded-md absolute min-w-full h-full"
-                height="100%"
-                maxWidth="100%"
-                width="100%"
-              />
+              @if (showSkeleton()) {
+                <app-skeleton-card
+                  class="rounded-md absolute min-w-full h-full"
+                  height="100%"
+                  maxWidth="100%"
+                  width="100%"
+                />
+              }
               <img
                 [ngStyle]="{
                   visibility: showSkeleton() ? 'hidden' : 'visible',
@@ -106,16 +105,17 @@ export const metaTagList: MetaDefinition[] = [
             </div>
           </div>
           <h2 class="text-xl">Latest Blog Posts:</h2>
-          <ng-container *ngIf="posts?.length; else emptyResult">
+          @if (posts?.length) {
             <ul>
-              <li *ngFor="let post of posts; let i = index">
-                <app-blog-card [post]="post" [isLCP]="i === 0" />
-              </li>
+              @for (post of posts; track post.slug; let i = $index) {
+                <li>
+                  <app-blog-card [post]="post" [isLCP]="i === 0" />
+                </li>
+              }
             </ul>
-          </ng-container>
-          <ng-template #emptyResult
-            ><div class="py-4">There are no posts yet.</div></ng-template
-          >
+          } @else {
+            <div class="py-4">There are no posts yet.</div>
+          }
           <app-recent-photo-albums />
         </div>
       </div>
@@ -124,7 +124,7 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class HomeComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
     .sort(sortByUpdatedOrOriginalDate)

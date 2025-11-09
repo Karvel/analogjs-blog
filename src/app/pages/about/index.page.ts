@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
+import { AsyncPipe, NgStyle } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -37,7 +37,7 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-about-index',
-  imports: [AsyncPipe, NgIf, NgStyle, MarkdownComponent, SkeletonCardComponent],
+  imports: [AsyncPipe, NgStyle, MarkdownComponent, SkeletonCardComponent],
   template: `
     <h1 class="sr-only">About</h1>
     <div class="md:max-w md:mx-auto md:flex md:justify-center">
@@ -45,14 +45,15 @@ export const metaTagList: MetaDefinition[] = [
         <div class="flex-1">
           <div
             class="relative mx-auto [@media(min-width:430px)]:max-h-[32rem] [@media(min-width:430px)]:w-96"
-          >
-            <app-skeleton-card
-              *ngIf="showSkeleton()"
-              class="rounded-md absolute min-w-full h-full"
-              height="100%"
-              maxWidth="100%"
-              width="100%"
-            />
+            >
+            @if (showSkeleton()) {
+              <app-skeleton-card
+                class="rounded-md absolute min-w-full h-full"
+                height="100%"
+                maxWidth="100%"
+                width="100%"
+                />
+            }
             <img
               [ngStyle]="{
                 visibility: showSkeleton() ? 'hidden' : 'visible',
@@ -62,27 +63,31 @@ export const metaTagList: MetaDefinition[] = [
               class="rounded-md"
               alt="Me in Norway"
               priority
-            />
+              />
           </div>
-          <div *ngIf="about$ | async as about">
-            <analog-markdown
-              class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
-              [content]="about.content"
-            />
-          </div>
-          <div *ngIf="version">
-            Site Version:
-            <a
-              href="https://github.com/Karvel/analogjs-blog/releases"
-              target="_blank"
-              rel="noopener"
-              >v{{ version }}</a
-            >
+          @if (about$ | async; as about) {
+            <div>
+              <analog-markdown
+                class="prose dark:prose-invert prose-code:before:hidden prose-code:after:hidden"
+                [content]="about.content"
+                />
+            </div>
+          }
+          @if (version) {
+            <div>
+              Site Version:
+              <a
+                href="https://github.com/Karvel/analogjs-blog/releases"
+                target="_blank"
+                rel="noopener"
+                >v{{ version }}</a
+                >
+              </div>
+            }
           </div>
         </div>
       </div>
-    </div>
-  `,
+    `,
 })
 export default class IndexPageComponent {
   public showSkeleton: WritableSignal<boolean> = signal(true);

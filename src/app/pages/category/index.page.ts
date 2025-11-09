@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 
@@ -39,20 +38,22 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-category-index',
   standalone: true,
-  imports: [NgFor, PillComponent],
+  imports: [PillComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">Categories:</h1>
           <ul class="pt-5 flex flex-wrap justify-evenly">
-            <li *ngFor="let category of categories" class="flex m-1">
-              <app-pill
-                [label]="category"
-                [route]="'/category'"
-                [slug]="category"
-              />
-            </li>
+            @for (category of categories; track category) {
+              <li class="flex m-1">
+                <app-pill
+                  [label]="category"
+                  [route]="'/category'"
+                  [slug]="category"
+                />
+              </li>
+            }
           </ul>
         </div>
       </div>
@@ -61,7 +62,7 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
     .sort(sortByUpdatedOrOriginalDate);

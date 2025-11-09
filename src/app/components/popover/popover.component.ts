@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -14,7 +14,7 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
 
 @Component({
   selector: 'app-popover',
-  imports: [NgClass, NgIf, SvgIconComponent],
+  imports: [NgClass, SvgIconComponent],
   template: `
     <svg-icon
       #popoverIcon
@@ -29,7 +29,7 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
       tabindex="0"
       height="20px"
       width="20px"
-    />
+      />
     <div
       #popover
       class="popover pointer-events-none"
@@ -37,12 +37,12 @@ import { SvgIconComponent, SvgIcons } from '@ngneat/svg-icon';
       [ngClass]="{
         'transition duration-500 ease-in-out': hasTransition,
       }"
-    >
-      <ng-container *ngIf="isActive">
+      >
+      @if (isActive) {
         <ng-content />
-      </ng-container>
+      }
     </div>
-  `,
+    `,
   styleUrls: ['./popover.component.css'],
 })
 export default class PopoverComponent implements OnInit, OnDestroy {

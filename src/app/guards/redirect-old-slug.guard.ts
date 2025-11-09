@@ -29,7 +29,7 @@ export const redirectOldSlugGuard: CanActivateFn = (
     ) {
       const [year, month, slug] = pathFragments;
       const posts = injectContentFiles<BlogPost>((mdFile) =>
-        mdFile.filename.includes('/src/content/posts'),
+        mdFile.filename.includes('src/content/posts'),
       );
       const matchingPost = posts.find(
         (post) =>

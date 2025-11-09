@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +15,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 @Component({
   selector: 'app-year-page',
   standalone: true,
-  imports: [ArchiveComponent, BlogCardComponent, NgFor, NgIf],
+  imports: [ArchiveComponent, BlogCardComponent],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -24,22 +23,23 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           <h1 class="md:flex md:flex-col md:self-start text-xl">
             Posts filtered by year: {{ year }}
           </h1>
-          <ul *ngIf="filteredPosts?.length; else emptyResult">
-            <li *ngFor="let post of filteredPosts; let i = index">
-              <app-blog-card [post]="post" [isLCP]="i === 0" />
-            </li>
-          </ul>
+          @if (filteredPosts?.length) {
+            <ul>
+              @for (post of filteredPosts; track post.slug; let i = $index) {
+                <li>
+                  <app-blog-card [post]="post" [isLCP]="i === 0" />
+                </li>
+              }
+            </ul>
+          } @else {
+            <div class="pt-5">There are no posts from {{ year }}.</div>
+          }
         </div>
-        <ng-template #emptyResult
-          ><div class="pt-5">
-            There are no posts from {{ year }}.
-          </div></ng-template
-        >
-        <ng-container *ngIf="posts?.length">
+        @if (posts?.length) {
           <div class="mt-5">
             <app-archive [posts]="posts" />
           </div>
-        </ng-container>
+        }
       </div>
     </div>
   `,
@@ -47,7 +47,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
 export default class YearPageComponent implements OnInit {
   public filteredPosts!: ContentFile<BlogPost>[];
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   ).sort(sortByUpdatedOrOriginalDate);
   public year!: string;
 
