@@ -46,10 +46,11 @@ import { ThemeService } from '@services/theme.service';
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm !border-gray-300 dark:!bg-sky-800 !text-gray-500 rounded-lg md:!hidden hover:!bg-sky-200 focus:!bg-sky-200 !focus:!outline-hidden focus:!ring-2 !bg-transparent focus:!ring-gray-400 dark:!text-gray-400 dark:hover:!bg-sky-900 dark:focus:!bg-sky-900 dark:focus:!ring-gray-600"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm !border-gray-300 dark:!bg-sky-800 !text-gray-500 rounded-lg md:!hidden hover:!bg-sky-200 focus:!bg-sky-200 active:!bg-sky-200 !focus:!outline-hidden focus:!ring-2 !bg-transparent focus:!ring-gray-400 dark:!text-gray-400 dark:hover:!bg-sky-900 dark:focus:!bg-sky-900 dark:active:!bg-sky-900 dark:focus:!ring-gray-600"
           aria-controls="navbar-default"
           aria-expanded="false"
           (click)="toggleNavbar()"
+          (touchstart)="nonOp()"
         >
           <span class="sr-only">Open main menu</span>
           <svg
@@ -80,7 +81,8 @@ import { ThemeService } from '@services/theme.service';
               <li>
                 <a
                   [routerLink]="link?.path"
-                  class="block px-3 py-2 !text-gray-900 !rounded-sm hover:!bg-gray-100 focus:!bg-gray-100 md:hover:!bg-transparent md:!border-0 md:hover:!text-black md:hover:!underline md:p-0 dark:!text-white md:dark:hover:!text-white dark:hover:!bg-sky-900 dark:focus:!bg-sky-900 dark:hover:!text-white md:dark:hover:!bg-transparent md:dark:focus:!bg-transparent !no-underline"
+                  (touchstart)="nonOp()"
+                  class="block px-3 py-2 !text-gray-900 !rounded-sm hover:!bg-gray-100 focus:!bg-gray-100 active:!bg-gray-100 md:hover:!bg-transparent md:!border-0 md:hover:!text-black md:hover:!underline md:p-0 dark:!text-white md:dark:hover:!text-white dark:hover:!bg-sky-900 dark:focus:!bg-sky-900 dark:active:!bg-sky-900 dark:hover:!text-white md:dark:hover:!bg-transparent md:dark:focus:!bg-transparent !no-underline"
                   >{{ link?.label }}</a
                 >
               </li>
@@ -182,6 +184,9 @@ export default class HeaderComponent implements OnInit {
       ?.valueChanges.pipe(distinctUntilChanged())
       .subscribe(() => this.toggleTheme());
   }
+
+  // Added to have iOS reliably update styles based on touch events
+  public nonOp(): void {}
 
   public toggleNavbar(): void {
     this.showMenu = !this.showMenu;
