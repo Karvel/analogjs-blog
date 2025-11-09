@@ -190,7 +190,7 @@ it(`should return { invalidPassword: 'Password requires at least one numeric cha
 });
 ```
 
-Between creating custom validators like this and then [listening to the form state](https://hapax-legomenon.net/2021/06/making-a-password-strength-component-in-angular/), developers can create reactive and engaging content for users.
+Between creating custom validators like this and then [listening to the form state](https://elanna.me/blog/2021/06/making-a-password-strength-component-in-angular/), developers can create reactive and engaging content for users.
 
 ## Resources
 

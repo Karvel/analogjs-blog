@@ -14,7 +14,7 @@ slug: recommended-vs-code-extensions
 published: true
 ---
 
-[Visual Studio Code](https://code.visualstudio.com/) is my code editor of choice. I regularly use Linux, MacOS, and Windows, and it is very nice to have a consistent tool between each operating system. I have listed my recommended VS Code extensions below. [In this post](https://hapax-legomenon.net/2023/02/recommended-development-tools-in-linux-macos-and-windows/), I talk about general development tools I like to use in each operating system.
+[Visual Studio Code](https://code.visualstudio.com/) is my code editor of choice. I regularly use Linux, MacOS, and Windows, and it is very nice to have a consistent tool between each operating system. I have listed my recommended VS Code extensions below. [In this post](https://elanna.me/blog/2023/02/recommended-development-tools-in-linux-macos-and-windows/), I talk about general development tools I like to use in each operating system.
 
 ## General
 

@@ -13,4 +13,4 @@ published: true
 
 I gave another talk! This time it was at IWDC Fresno 2020. The talk is titled Imposter Syndrome: No One Belongs Here More Than You!, and the content is available [here](https://github.com/Karvel/iwdc-2020-imposter-syndrome-talk).
 
-It has been over two years since I gave my [last talk](https://hapax-legomenon.net/2018/10/valley-devfest-observables-talk/) at a conference.
+It has been over two years since I gave my [last talk](https://elanna.me/blog/2018/10/i-am-giving-a-code-talk-about-observables/) at a conference.

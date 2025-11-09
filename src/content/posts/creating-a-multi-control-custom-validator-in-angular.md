@@ -16,7 +16,7 @@ published: true
 
 Custom validators in Angular’s reactive form library are one of the most powerful (and in my opinion overlooked) tools a developer has to create better form UI/UX. Custom validators aren’t just limited to a single control. It is easy to evaluate an entire group. This is great for comparing multiple controls. In this article I create a multi-control custom validator that validates two fields if their values match to show an example of what is possible.
 
-As I mentioned in my [previous article about custom validators](https://hapax-legomenon.net/2021/06/exploring-custom-form-validators-in-angular/), I like using them to both handle custom logic that the built-in validators don’t, and to be able to create the validation error messages in one spot. This makes custom validators powerful and very reusable.
+As I mentioned in my [previous article about custom validators](https://elanna.me/blog/2021/06/exploring-custom-form-validators-in-angular/), I like using them to both handle custom logic that the built-in validators don’t, and to be able to create the validation error messages in one spot. This makes custom validators powerful and very reusable.
 
 ## Creating a Multi-Control Custom Validator
 

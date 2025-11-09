@@ -56,7 +56,7 @@ My personal computer is a desktop that runs Windows 10 and [Manjaro](https://man
   - Linux
   - MacOS
   - Windows
-  - I listed my recommended extensions [here](https://hapax-legomenon.net/2023/01/recommended-vs-code-extensions/).
+  - I listed my recommended extensions [here](https://elanna.me/blog/2023/01/recommended-vs-code-extensions/).
 
 ### Git Client
 
