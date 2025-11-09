@@ -3,10 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
-import { PillComponent } from './pill.component';
+import PillComponent from './pill.component';
 
 @Component({
   template: '<app-pill [label]="label" [route]="route" [slug]="slug" />',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false,
 })
 class TestHostComponent {
   label: string | undefined;

@@ -11,7 +11,7 @@ import { getCategoryFromLabel } from '@utils/get-category-from-label';
   imports: [NgClass, RouterLink, TitleCasePipe],
   template: `
     <a
-      class="my-1 py-1 px-3 no-underline rounded-full inline-block font-semibold text-xs"
+      class="my-1 py-1 px-3 !no-underline rounded-full inline-block !bg-neutral-500 dark:!bg-neutral-700 !text-white !font-semibold text-xs hover:!text-white focus:!text-white dark:hover:!text-white dark:focus:!text-white hover:!bg-neutral-700 focus:!bg-neutral-700 dark:hover:!bg-neutral-500 dark:focus:!bg-neutral-500"
       [ngClass]="getColors(this.label)"
       [routerLink]="[route, slug]"
     >
@@ -19,7 +19,7 @@ import { getCategoryFromLabel } from '@utils/get-category-from-label';
     </a>
   `,
 })
-export class PillComponent {
+export default class PillComponent {
   @Input() public label!: string | undefined;
   @Input() public route!: string | undefined;
   @Input() public slug!: string | undefined;

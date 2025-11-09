@@ -2,6 +2,7 @@
 
 import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
+import tailwindcss from '@tailwindcss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 import {
@@ -13,10 +14,10 @@ import {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  publicDir: 'src/assets',
   build: {
     target: ['es2020'],
   },
+  publicDir: 'src/assets',
   resolve: {
     mainFields: ['module'],
   },
@@ -45,7 +46,19 @@ export default defineConfig(({ mode }) => ({
           host: 'https://elanna.me/',
         },
       },
+      content: {
+        highlighter: 'shiki',
+        shikiOptions: {
+          highlight: {
+            themes: {
+              light: 'github-light-high-contrast',
+              dark: 'github-dark-high-contrast'
+            }
+          },
+        }
+      },
     }),
+    tailwindcss(),
     tsconfigPaths(),
   ],
   test: {

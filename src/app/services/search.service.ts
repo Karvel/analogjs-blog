@@ -36,7 +36,7 @@ export class SearchService {
             result.title = post.attributes.title ?? '';
             const year = getYear(post.attributes.date);
             const month = getMonth(post.attributes.date);
-            result.slug = `${year}/${month}/${post.attributes.slug}` ?? '';
+            result.slug = `${year}/${month}/${post.attributes.slug}`;
             searchResult.results.push(result);
             return;
           }

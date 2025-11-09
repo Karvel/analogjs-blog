@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -11,17 +10,21 @@ import { getArchiveLinks } from '@utils/get-archive-links';
 @Component({
   selector: 'app-archive',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink],
+  imports: [RouterLink],
   template: `
-    <ng-container *ngIf="posts?.length">
+    @if (posts?.length) {
       <h2 class="text-xl pb-5">Archives:</h2>
-      <div *ngFor="let link of archiveLinks">
-        <a [routerLink]="['/blog', link.year, link.month]">{{ link.label }}</a>
-      </div>
-    </ng-container>
+      @for (link of archiveLinks; track link.label) {
+        <div>
+          <a [routerLink]="['/blog', link.year, link.month]">{{
+            link.label
+          }}</a>
+        </div>
+      }
+    }
   `,
 })
-export class ArchiveComponent implements OnInit {
+export default class ArchiveComponent implements OnInit {
   @Input() public posts: ContentFile<BlogPost>[] = [];
 
   archiveLinks!: ArchiveLink[];

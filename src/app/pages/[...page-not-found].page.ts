@@ -13,7 +13,6 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   selector: 'app-page-not-found',
-  standalone: true,
   imports: [RouterLink],
   template: `
     <div class="max-w-3xl p-4 mx-auto flex flex-col self-center pt-10">

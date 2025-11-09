@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+
 import { defaultPageOptions, setPageSizeOptions } from './get-page-options';
 
 describe('setPageSizeOptions', () => {

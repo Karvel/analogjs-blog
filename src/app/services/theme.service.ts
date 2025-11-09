@@ -1,10 +1,11 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Injectable,
   OnDestroy,
   inject,
   PLATFORM_ID,
   RendererFactory2,
+  DOCUMENT
 } from '@angular/core';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 

@@ -1,7 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { SearchPopoverComponent } from './search-popover.component';
+
+import SearchPopoverComponent from './search-popover.component';
 
 vi.mock('@analogjs/content', () => ({
   injectContentFiles: vi.fn(() => [
