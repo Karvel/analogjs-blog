@@ -14,7 +14,6 @@ import { BlogPost } from '@models/post';
 import { ScreenSizeService } from '@services/screen-size.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
-import { provideLocationMocks } from '@angular/common/testing';
 import { getTitleCase } from '@utils/get-title-case';
 
 describe('BlogCardComponent', () => {
