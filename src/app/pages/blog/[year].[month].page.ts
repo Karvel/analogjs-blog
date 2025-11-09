@@ -30,7 +30,7 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           </h1>
           @if (filteredPosts?.length) {
             <ul>
-              @for (post of filteredPosts; track post; let i = $index) {
+              @for (post of filteredPosts; track post.slug; let i = $index) {
                 <li>
                   <app-blog-card [post]="post" [isLCP]="i === 0" />
                 </li>

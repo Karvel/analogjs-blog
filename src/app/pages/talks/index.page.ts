@@ -54,7 +54,7 @@ export const metaTagList: MetaDefinition[] = [
         <div class="flex-1">
           <h1 class="md:flex md:flex-col md:self-start text-xl">Talks:</h1>
           @if (talks) {
-            @for (talk of talks; track talk; let i = $index) {
+            @for (talk of talks; track talk.title; let i = $index) {
               <div>
                 <div class="py-5 flex flex-col-reverse sm:flex-row">
                   <div class="sm:pr-2 sm:max-w grow">

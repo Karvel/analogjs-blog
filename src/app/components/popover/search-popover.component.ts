@@ -24,7 +24,7 @@ import { HighlightPipe } from '@pipes/highlight.pipe';
   template: `
     <div
       class="container absolute top-7 right-0 w-80 z-50 bg-white dark:bg-[#242424] rounded-md p-3 text-slate-900 dark:text-neutral-100 border-2 dark:border-white border-slate-900"
-      >
+    >
       <div [formGroup]="form">
         <label for="search" [attr.aria-label]="'Search'" tabindex="0">
           <input
@@ -33,29 +33,24 @@ import { HighlightPipe } from '@pipes/highlight.pipe';
             formControlName="search"
             placeholder="Search here"
             type="text"
-            />
+          />
         </label>
       </div>
-      @if (
-        searchValue.length && searchResults?.isSearchTooShort) {
+      @if (searchValue.length && searchResults?.isSearchTooShort) {
         <p class="pt-3">Search query is too short</p>
       } @else {
         @if (searchResults?.results?.length) {
-          <div
-            class="pt-3"
-            >
+          <div class="pt-3">
             Results:
             <ul>
-              @for (result of searchResults.results; track result) {
-                <li
-                  class="list-disc ml-4"
-                  >
+              @for (result of searchResults.results; track result.slug) {
+                <li class="list-disc ml-4">
                   @if (result.slug && result.title) {
                     <a
                       [routerLink]="'/blog/' + result.slug"
-                      [innerHTML]="result.title | highlight : searchValue"
+                      [innerHTML]="result.title | highlight: searchValue"
                       class="!no-underline"
-                      >
+                    >
                     </a>
                   }
                 </li>
@@ -67,7 +62,7 @@ import { HighlightPipe } from '@pipes/highlight.pipe';
         }
       }
     </div>
-    `,
+  `,
 })
 export default class SearchPopoverComponent implements OnInit {
   public form!: FormGroup;

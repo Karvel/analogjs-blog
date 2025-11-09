@@ -107,7 +107,7 @@ export const metaTagList: MetaDefinition[] = [
             <h2 class="text-xl">Latest Blog Posts:</h2>
             @if (posts?.length) {
               <ul>
-                @for (post of posts; track post; let i = $index) {
+              @for (post of posts; track post.slug; let i = $index) {
                   <li>
                     <app-blog-card [post]="post" [isLCP]="i === 0" />
                   </li>

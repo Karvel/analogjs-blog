@@ -18,7 +18,7 @@ import { FlickrService } from '@services/api/flickr.service';
       <div>
         <h2 class="text-xl">Latest Photo Albums:</h2>
         <div class="flex gap-4 flex-wrap justify-center xl:justify-normal">
-          @for (photo of photos; track photo) {
+          @for (photo of photos; track photo.id) {
             <app-photo-album [photo]="photo" class="w-full max-w-full" />
           }
         </div>

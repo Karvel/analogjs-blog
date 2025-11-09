@@ -76,7 +76,7 @@ import { ThemeService } from '@services/theme.service';
             <ul
               class="font-medium flex flex-col md:p-0 mt-4 items-end !rounded-lg md:flex-row md:items-center md:space-x-8 md:mt-0 md:!bg-[#829ab3] dark:!bg-sky-800 md:dark:!bg-sky-800 dark:!border-sky-800"
               >
-              @for (link of linkList; track link) {
+            @for (link of linkList; track link.label) {
                 <li>
                   <a
                     [routerLink]="link?.path"

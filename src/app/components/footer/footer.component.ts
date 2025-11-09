@@ -20,7 +20,7 @@ import { Navigation } from '@models/navigation';
       </div>
       <div class="container mx-auto flex flex-wrap justify-center space-x-6">
         <!-- Social Icons -->
-        @for (link of linkList; track link) {
+        @for (link of linkList; track link.label) {
           <div class="pt-2">
             <a
               [href]="link?.path"

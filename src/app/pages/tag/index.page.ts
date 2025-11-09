@@ -53,7 +53,7 @@ export const metaTagList: MetaDefinition[] = [
             role="navigation"
             aria-label="Article tag cloud"
             >
-            @for (tag of tagsWithWeights; track tag) {
+            @for (tag of tagsWithWeights; track tag.name) {
               <li class="flex m-1">
                 <app-pill
                   [attr.data-weight]="tag.weight"

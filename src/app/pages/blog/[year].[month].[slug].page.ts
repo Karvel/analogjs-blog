@@ -168,9 +168,9 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
                 <div class="text-sm">
                   Tags:
                   @for (
-                    tag of splitTagStringIntoArray(post.attributes.tags)
-                    ; track
-                    tag) {
+                    tag of splitTagStringIntoArray(post.attributes.tags);
+                    track tag.name
+                  ) {
                     <app-pill
                       [label]="tag.name"
                       [route]="'/tag'"

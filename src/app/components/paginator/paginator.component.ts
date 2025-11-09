@@ -84,7 +84,7 @@ import {
         class="mb-3 cursor-pointer border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
         dark:border-neutral-400 dark:text-white"
           >
-          @for (option of options; track option) {
+          @for (option of options; track option.label) {
             <option [value]="option.value">{{ option.label }}</option>
           }
         </select>

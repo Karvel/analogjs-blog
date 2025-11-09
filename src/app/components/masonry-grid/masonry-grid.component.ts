@@ -28,7 +28,7 @@ import { FlickrService } from '@services/api/flickr.service';
           Here is random sampling some of my favorite photos:
         </div>
         <ul class="image-gallery list-none">
-          @for (photo of photos; track photo) {
+          @for (photo of photos; track photo.id) {
             <li>
               @if (photo.url_m) {
                 <img
