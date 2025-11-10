@@ -18,7 +18,7 @@ published: true
 
 This is the third version of this site. I started the original site in 2014, built in WordPress. I revamped the content and theme and started learning the WordPress ecosystem better in 2015. The second version was good enough to suit my needs for years. However, my end-of-life WordPress theme recently broke. That was enough of a motivator to redo this site. What follows is an exploration of why I decided that switching to Analog was the right choice.
 
-I had been thinking about redoing my website in something other than WordPress for a while. WordPress was definitely a good choice for this site originally. I was new to web development and I appreciated the batteries-included nature. However, I don't develop much in PHP or WordPress, and haven't kept up with the ecosystem much recently. I did not enjoy using Gutenberg block system for blog posts, which is the primary focus of my site.
+I had been thinking about redoing my website in something other than WordPress for a while. WordPress was definitely a good choice originally. I was new to web development and I appreciated the batteries-included nature. However, I don't develop much in PHP or WordPress, and haven't kept up with the ecosystem much recently. I did not enjoy using Gutenberg block system for blog posts, which is the primary focus of my site.
 
 ## The Use Case
 

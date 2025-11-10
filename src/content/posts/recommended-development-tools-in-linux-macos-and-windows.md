@@ -2,6 +2,7 @@
 title: Recommended Development Tools in Linux, MacOS, and Windows
 author: Elanna Grossman
 date: 2023-02-17T18:39:42-08:00
+last_updated: 2025-11-09T12:58:57-08:00
 description: In this article I list my recommended development tools in Linux, MacOS, and Windows as a web developer.
 canonical_url: https://elanna.me/blog/2023/02/recommended-development-tools-in-linux-macos-and-windows
 cover_image: https://live.staticflickr.com/2458/21245815482_6431167871_c.jpg
@@ -12,31 +13,35 @@ category: development
 tags: development,codeeditor,git,ide
 slug: recommended-development-tools-in-linux-macos-and-windows
 published: true
+ignore_update_on_sort: true
 ---
 
-I use Linux, MacOS, and Windows, and I like all three operating systems. There might be a tool I like more in one than the others, but I can write code and spin up environments regardless of which OS I’m using. In this article I have put together a list of my recommended development tools.
+*Updated Nov 09, 2025* - I updated my preferred development tools.
 
-I have a work-provided Macbook Pro that runs MacOS. It is based on Apple Silicon and I have found that the ecosystem is a lot better than it was in 2021 when I first switched. Most applications I need are now native or universal and even NodeJS runs decently well on the native architecture.
+I use Linux, MacOS, and Windows, and I like all three operating systems (I don't mind Windows 10, but I am not interesting in switching to Windows 11). There might be a tool I like more in one than the others, but I can write code and spin up environments regardless of which OS I’m using. In this article I have put together a list of my recommended development tools.
 
-My personal computer is a desktop that runs Windows 10 and [Manjaro](https://manjaro.org/) (Manjaro is an arch-derivative rolling release distro. I use the [Cinnamon DE](https://manjaro.org/download/#cinnamon) because I can keep my window-snapping muscle memory). Since the desktop is my personal machine, I have found it useful to do most of my programming there on Linux. This helps me separate coding time mentally. I deliberately did not install anything like games in Linux so it could be a focused environment.
+My personal Macbook Pro is an Intel-based model, but it still works well as a development computer.
+
+My personal computer is a desktop with system drives for both Linux and Windows 10. I have steadily been moving away from Windows, and recently switched my Linux distro from [Manjaro](https://manjaro.org/) to [CachyOS](https://cachyos.org/) with KDE Plasma (CachyOS is an Arch-derivative rolling release distro).
 
 ## Development Tools
 
 ### Package Manager
 
-- [yay](https://github.com/Jguer/yay)
+- [paru](https://github.com/Morganamilo/paru)
   - Linux
-  - yay wraps the built-in [pacman](https://wiki.archlinux.org/title/pacman). I use it to install all of the Linux software.
-  - This is only available for arch and arch-derivative distros.
+  - paru wraps the built-in [pacman](https://wiki.archlinux.org/title/pacman). I use it to install Linux software.
+  - This is only available for Arch and Arch-derivative distros.
+  - I used to use yay but CachyOS came with paru, and I prefer how it shows PKGBUILD diffs.
 - [homebrew](https://brew.sh/)
   - MacOS
   - Install most software available on homebrew with it.
   - Since I’m on Apple Silicon, I check if the homebrew packages are native or universal, and if they still point to Darwin, I install manually. In the past year, this situation has gotten a lot better.
-- I don’t use a package manager on Windows. I have been watching the development of [winget](https://github.com/microsoft/winget-cli/) and I plan to try it out now that it is out of preview.
+- I don’t use a package manager on Windows.
 
 ### Terminal
 
-- [Terminator](https://terminator-gtk3.readthedocs.io/en/latest/)
+- [Ghostty](https://ghostty.org/)
   - Linux
 - [iTerm](https://iterm2.com/)
   - MacOS
@@ -47,7 +52,7 @@ My personal computer is a desktop that runs Windows 10 and [Manjaro](https://man
 
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/)
   - Windows
-  - I like to use Visual Studio in Windows for .NET projects , but I think that for .NET Core API projects Visual Studio Code works very well. I do not use Visual Studio for front end projects.
+  - I like to use Visual Studio in Windows for .NET projects , but I think that for .NET Core API projects Visual Studio Code works very well. I do not use Visual Studio for JavaScript projects.
   - I also don’t use Visual Studio on MacOS unless I am working with Xamarin. It is not the same product under the hood as the original Visual Studio on Windows and I use Visual Studio Code instead.
 
 ### Code Editor
@@ -78,18 +83,19 @@ My personal computer is a desktop that runs Windows 10 and [Manjaro](https://man
 
 ### HTTP
 
-- [Postman](https://www.postman.com/)
+- [Yaak](https://yaak.app/)
   - Linux
   - MacOS
   - Windows
+  - I used to use Postman but I have not enjoyed their recent changes.
 
 ### Notes
 
-- [Boost Note](https://github.com/BoostIO/Boostnote)
+- [Obsidian](https://obsidian.md/)
   - Linux
   - MacOS
   - Windows
-  - There is an older and a newer version of Boost Note. I still use the older version because I prefer the feature set. The older version is in maintenance mode and might be an acquired taste at this point, but I really like it.
+  - I still prefer aspects of Boost Note more, but it is no longer maintained and I lost patience with the bugs.
 
 ### Sync
 
@@ -97,5 +103,6 @@ My personal computer is a desktop that runs Windows 10 and [Manjaro](https://man
   - Linux
   - MacOS
   - Windows
+  - Dropbox support for Linux is not great so I might be trading this for a different service, but I haven't found a satisfactory replacement yet.
 
 If I find any other recommended development tools, I will add them here.

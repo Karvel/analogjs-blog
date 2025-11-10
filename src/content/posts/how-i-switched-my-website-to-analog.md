@@ -2,7 +2,7 @@
 title: "How I Switched My Website to Analog"
 author: Elanna Grossman
 date: 2023-12-23T02:08:59.101Z
-last_updated: 2024-09-09T20:55:24-07:00
+last_updated: 2025-11-09T01:15:14-08:00
 description: In this article I share technical exploration of how I switched my website to Analog.
 canonical_url: https://elanna.me/2023/11/how-i-switched-my-website-to-analog
 cover_image: https://live.staticFlickr.com/65535/52270210933_b2f9572e2f_c.jpg
@@ -15,11 +15,13 @@ slug: how-i-switched-my-website-to-analog
 published: true
 ---
 
+*Updated Nov 09, 2025* - I reworded some sections and added some links.
+
 *Updated Sep 09, 2024* - added information about more recently implemented features, like search, skeleton loader, and tag cloud.
 
 ## Introduction
 
-As I switched my website to Analog, I had to make some decisions. I wanted to migrate every post, and most of the other text content. Analog adds some very nice quality of life features to Angular, which is already a powerful batteries-included front end framework. My previous portfolio, however, is built in WordPress, which provides a lot of template options for making sites like portfolios or blogs. Analog does not have a large template ecosystem at the moment, so that meant that I would need to build a lot of blog and portfolio functionality from scratch. I still wanted to use Analog, because the markdown and file routing support promise minimal friction if I just want to write a new post.
+As I switched my website to [Analog](https://analogjs.org/), I had to make some decisions. I wanted to migrate every post, and most of the other text content. Analog adds some very nice quality of life features to Angular, which is already a powerful batteries-included front end framework. My previous portfolio, however, is built in WordPress, which provides a lot of template options for making sites like portfolios or blogs. Analog does not have a large template ecosystem at the moment, so that meant that I would need to build a lot of blog and portfolio functionality from scratch. I still wanted to use it, because the markdown and file routing support promise minimal friction if I just want to write a new post.
 
 ## Planning
 
@@ -61,7 +63,7 @@ In addition, I thought of new features I would want to have:
 
 ## Styling
 
-I decided to use Tailwind CSS, both to become more familiar with it and because it seemed like a good fit. The Analog `create analog@latest` package template includes an option to generate a new project with Tailwind support from the start. It has been easy to build the site responsively with Tailwind, as it is designed around mobile-first layouts. I added the <a href="https://tailwindcss.com/docs/typography-plugin" target="_blank" rel="noopener">`@tailwindcss/typography`</a> plugin for some decent text styling defaults. The other default styles were useful, but I did customize the tailwind configuration slightly:
+I decided to use [Tailwind CSS](https://tailwindcss.com/), both to become more familiar with it and because it seemed like a good fit. The Analog `create analog@latest` package template includes an option to generate a new project with Tailwind support from the start. It has been easy to build the site responsively with Tailwind, as it is designed around mobile-first layouts. I added the <a href="https://tailwindcss.com/docs/typography-plugin" target="_blank" rel="noopener">`@tailwindcss/typography`</a> plugin for some decent text styling defaults. The other default styles were useful, but I did customize the tailwind configuration slightly:
 
 * Added a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/tailwind.config.js#L8" target="_blank" rel="noopener">text shadow effect</a>, which I adapted from this <a href="https://daily-dev-tips.com/posts/tailwind-css-drop-shadow-effect-for-png-images/" target="_blank" rel="noopener">article</a>
 * Removed <a href="https://github.com/tailwindlabs/tailwindcss-typography/issues/18#issuecomment-1280797041" target="_blank" rel="noopener">showing the back ticks when styling text with a monospace font</a>
@@ -96,7 +98,7 @@ I did make a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/a
 
 ### Accessibility
 
-Accessibility is really important, and like a lot of things in web development, it is much easier to implement from the beginning rather than with a complete project. Aside from the usual considerations, I made sure that the site is fully navigable from the keyboard. While styling the site, I also spent time considering the contrast for the light and dark themes, and the syntax theme for Prism. I found a <a href="https://github.com/ericwbailey/a11y-syntax-highlighting" target="_blank" rel="noopener">set of prism themes</a> that are a11y compliant. I also tweaked the wrapping on the code blocks after <a href="https://whitep4nth3r.com/blog/how-to-make-your-code-blocks-accessible-on-your-website/" target="_blank" rel="noopener">following this guide</a>.
+Accessibility is really important, and like a lot of things in web development, it is much easier to implement from the beginning rather than with a complete project. Aside from the usual considerations, I made sure that the site is fully navigable from the keyboard. While styling the site, I also spent time considering the contrast for the light and dark themes. Initially, I used [Prism](https://prismjs.com/) for the syntax highlighting but I recently switched to [Shiki](https://shiki.style/), which has slightly different accessible themes.
 
 While the best accessibility testing comes using tools like screen readers directly, I have found these plug-ins very helpful:
 
@@ -168,11 +170,11 @@ After implementing the masonry grid, I styled the post and talk thumbnail images
 
 #### Broken Image Directive
 
-I wanted a solution to help prevent image link rot. I added a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/directives/replace-broken-image.directive.ts" target="_blank" rel="noopener">directive</a> that listens to the `onerror` event for the target element, which in this case is `img`. If it fires the `onerror` event, it replaces the broken image a fallback instead, which I host locally.
+I wanted a solution to work as a fallback for image link rot. I added a <a href="https://github.com/Karvel/analogjs-blog/blob/develop/src/app/directives/replace-broken-image.directive.ts" target="_blank" rel="noopener">directive</a> that listens to the `onerror` event for the target element, which in this case is `img`. If it fires the `onerror` event, it replaces the broken image a fallback instead, which I host locally.
 
 ### Draft Functionality
 
-I wanted to be able to support draft functionality, where a post would be hidden from routing if it didn't have `published: true`. Draft posts still support direct navigation. To support this, I had to add filters to the lists of posts, tags and categories, and the post navigation buttons. I also added a banner to a draft post to make it easier to distinguish.
+I wanted to be able to support draft functionality, where a post would be hidden from routing if it didn't have `published: true`. Draft posts still support direct navigation. To support this, I had to add filters to the lists of posts, tags and categories, the post navigation buttons, the RSS feed, and the sitemap. I also added a banner to a draft post to make it easier to distinguish.
 
 ### RSS
 

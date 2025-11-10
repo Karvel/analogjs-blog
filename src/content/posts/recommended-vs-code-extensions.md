@@ -58,6 +58,7 @@ This is the official C# extension from Microsoft and handles everything includin
 In addition to the above extensions, I have some settings I configure in Visual Studio Code:
 
 - CodeLens for Javascript and Typescript. This parses projects for class, method, and property references and shows them above the class/method/property declaration. It does cause slight slowdown when loading a file, but I consider it a worthy tradeoff.
-- [Breadcrumbs](https://code.visualstudio.com/docs/editor/editingevolved#_breadcrumbs). These show file path breadcrumbs above the editor window.
+- [Breadcrumbs](https://code.visualstudio.com/docs/editor/editingevolved#_breadcrumbs)  
+These show file path breadcrumbs above the editor window.
 
 If I find any other recommended VS Code extensions, I will add them here.
