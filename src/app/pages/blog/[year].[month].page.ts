@@ -14,7 +14,7 @@ import { MetadataService } from '@services/metadata.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
 import { getMonthName } from '@utils/get-month-name';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 @Component({
   selector: 'app-month-page',
@@ -56,7 +56,7 @@ export default class MonthPageComponent {
   public monthName!: string;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
+  ).sort(sortByDate);
   public year!: string;
 
   private destroyRef = inject(DestroyRef);

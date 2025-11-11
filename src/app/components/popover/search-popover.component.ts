@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs';
 import { BlogPost } from '@models/post';
 import { SearchResult } from '@models/search';
 import { SearchService } from '@services/search.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 import { HighlightPipe } from '@pipes/highlight.pipe';
 
 @Component({
@@ -68,7 +68,7 @@ export default class SearchPopoverComponent implements OnInit {
   public form!: FormGroup;
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
+  ).sort(sortByDate);
   public searchResults!: SearchResult;
 
   private destroyRef = inject(DestroyRef);

@@ -10,7 +10,7 @@ import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
 import { getYear } from '@utils/get-year';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 @Component({
   selector: 'app-year-page',
@@ -48,7 +48,7 @@ export default class YearPageComponent implements OnInit {
   public filteredPosts!: ContentFile<BlogPost>[];
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
+  ).sort(sortByDate);
   public year!: string;
 
   private metadataService = inject(MetadataService);
