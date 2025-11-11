@@ -78,7 +78,7 @@ Then I would bind the error properties to the template, and write messages based
 </mat-form-field>
 ```
 
-This works fine, and gives the user reactive feedback on if their password meets the requirements. There are two reasons that I prefer using custom validators, however. The first is that the built-in validators only handle the most common use cases. The second is that I like to consolidate where I create validation error messages. The built-in validators provide me the tools I need to write error messages, but the properties are not readable by regular users. So I need to write the messages by hand, it makes this code hard to reuse. It would be nice to have code where I can keep the responsibility of creating human-readable error messages, and handle any complex validation logic.
+This works fine, and gives the user reactive feedback on if their password meets the requirements. There are two reasons that I prefer using custom validators, however. The first is that the built-in validators only handle the most common use cases. The second is that I like to consolidate where I create validation error messages. The built-in validators provide me the tools I need to write error messages, but the properties are not readable by regular users. So I need to write the messages by hand, which makes this code hard to reuse. It would be nice to have code where I can keep the responsibility of creating human-readable error messages, and handle any complex validation logic.
 
 ## Creating a Custom PasswordValidator
 
@@ -113,7 +113,7 @@ export class PasswordValidator {
 
 This custom password validator checks for the same four requirements that I listed separately with the built-in validators. If I know that I will want to always check for those four requirements, it is nice to have them collected in a single method.
 
-I like putting a amount of logic to handle if the field is required or not here (as seen with `if (!control.value)`) so I don’t need to bind multiple validators to a single control, but that’s personal preference. I moved the regular expressions to a constants file and named them since I can find them hard to read. The default behavior is that form validators update whenever a user changes a value on the form. However, it is possible to do something like add a debounce to tweak how often it fires.
+I like putting specific logic to handle if the field is required or not here (as seen with `if (!control.value)`) so I don’t need to bind multiple validators to a single control, but that’s personal preference. I moved the regular expressions to a constants file and named them since I can find them hard to read. The default behavior is that form validators update whenever a user changes a value on the form. However, it is possible to do something like add a debounce to tweak how often it fires.
 
 ## Using the Validator
 

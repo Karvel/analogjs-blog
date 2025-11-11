@@ -13,7 +13,6 @@ category: development
 tags: development,codeeditor,git,ide
 slug: recommended-development-tools-in-linux-macos-and-windows
 published: true
-ignore_update_on_sort: true
 ---
 
 *Updated Nov 09, 2025* - I updated my preferred development tools.
@@ -30,13 +29,11 @@ My personal computer is a desktop with system drives for both Linux and Windows 
 
 - [paru](https://github.com/Morganamilo/paru)
   - Linux
-  - paru wraps the built-in [pacman](https://wiki.archlinux.org/title/pacman). I use it to install Linux software.
   - This is only available for Arch and Arch-derivative distros.
+  - paru wraps the built-in [pacman](https://wiki.archlinux.org/title/pacman). I use it to install Linux software.
   - I used to use yay but CachyOS came with paru, and I prefer how it shows PKGBUILD diffs.
 - [homebrew](https://brew.sh/)
   - MacOS
-  - Install most software available on homebrew with it.
-  - Since I’m on Apple Silicon, I check if the homebrew packages are native or universal, and if they still point to Darwin, I install manually. In the past year, this situation has gotten a lot better.
 - I don’t use a package manager on Windows.
 
 ### Terminal
@@ -69,7 +66,7 @@ My personal computer is a desktop with system drives for both Linux and Windows 
   - Linux
   - MacOS
   - Windows
-  - I like using Git GUI clients because I have a very visual memory. GitKraken helps me commit only final code and not debug stuff. I also like to use it to commit specific lines which helps me do atomic commits.
+  - I like using Git GUI clients because I have a very visual memory. GitKraken helps me commit only final and not debug code. I also like to use it to commit specific lines which helps me do atomic commits.
 
 ### Database Tools
 

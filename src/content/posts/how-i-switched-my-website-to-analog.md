@@ -59,7 +59,7 @@ In addition, I thought of new features I would want to have:
 * Light/dark mode
   * Set by system preference initially
   * User toggle for light/dark mode
-  * Mode updates syntax highlighing theme also
+  * Mode updates syntax highlighting theme also
 
 ## Styling
 
