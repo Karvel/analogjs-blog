@@ -12,7 +12,7 @@ import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
 import { LocalStorageService } from '@services/local-storage.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 export const pageTitle = {
   title: `Blog Posts | ${siteName}`,
@@ -82,7 +82,7 @@ export default class IndexPageComponent {
     mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate);
+    .sort(sortByDate);
   public totalItems = this.posts.length;
 
   private cd = inject(ChangeDetectorRef);

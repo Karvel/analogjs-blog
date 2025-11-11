@@ -1,11 +1,11 @@
 import { ContentFile } from '@analogjs/content';
 
 import { BlogPost } from '@models/post';
-import { sortByUpdatedOrOriginalDate } from './sort-by-updated-or-original-date';
+import { sortByDate } from './sort-by-date';
 
-describe('sortByUpdatedOrOriginalDate', () => {
+describe('sortByDate', () => {
   it('should consider both null or undefined parameters as equal', () => {
-    const result = sortByUpdatedOrOriginalDate(null, undefined);
+    const result = sortByDate(null, undefined);
     expect(result).toBe(0); // Both are null or undefined, should be considered equal
   });
 
@@ -19,7 +19,7 @@ describe('sortByUpdatedOrOriginalDate', () => {
       filename: 'test2.md',
       slug: 'test2',
     };
-    const result = sortByUpdatedOrOriginalDate(fileA, fileB);
+    const result = sortByDate(fileA, fileB);
     expect(result).toBe(1); // a is null or undefined, b comes first
   });
 
@@ -33,7 +33,7 @@ describe('sortByUpdatedOrOriginalDate', () => {
       slug: 'test1',
     };
     const fileB: ContentFile<BlogPost> | null | undefined = null;
-    const result = sortByUpdatedOrOriginalDate(fileA, fileB);
+    const result = sortByDate(fileA, fileB);
     expect(result).toBe(-1); // b is null or undefined, a comes first
   });
 
@@ -54,7 +54,7 @@ describe('sortByUpdatedOrOriginalDate', () => {
       filename: 'test2.md',
       slug: 'test2',
     };
-    const result = sortByUpdatedOrOriginalDate(file1, file2);
+    const result = sortByDate(file1, file2);
     expect(result).toBeGreaterThan(0); // file2 should come before file1
   });
 
@@ -69,7 +69,7 @@ describe('sortByUpdatedOrOriginalDate', () => {
       filename: 'test2.md',
       slug: 'test2',
     };
-    const result = sortByUpdatedOrOriginalDate(file1, file2);
+    const result = sortByDate(file1, file2);
     expect(result).toBeGreaterThan(0); // file2 should come before file1
   });
 
@@ -84,7 +84,7 @@ describe('sortByUpdatedOrOriginalDate', () => {
       filename: 'test2.md',
       slug: 'test2',
     };
-    const result = sortByUpdatedOrOriginalDate(file1, file2);
+    const result = sortByDate(file1, file2);
     expect(result).toBe(0); // Both files have no date information, so they should be considered equal
   });
 });

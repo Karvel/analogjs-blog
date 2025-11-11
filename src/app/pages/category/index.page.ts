@@ -8,7 +8,7 @@ import PillComponent from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 export const pageTitle = {
   title: `Categories | ${siteName}`,
@@ -65,7 +65,7 @@ export default class IndexPageComponent implements OnInit {
     mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate);
+    .sort(sortByDate);
   public categories = this.extractUniqueCategories(this.posts);
 
   private metadataService = inject(MetadataService);

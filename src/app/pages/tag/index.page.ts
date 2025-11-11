@@ -10,7 +10,7 @@ import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
 import { aggregateAndWeighTags } from '@utils/aggregate-and-weigh-tags';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 export const pageTitle = {
   title: `Tags | ${siteName}`,
@@ -73,7 +73,7 @@ export default class IndexPageComponent implements OnInit {
     mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate);
+    .sort(sortByDate);
   public tagsWithWeights = this.setUpTagCloud(this.posts);
 
   private metadataService = inject(MetadataService);

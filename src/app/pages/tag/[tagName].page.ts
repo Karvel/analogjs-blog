@@ -8,7 +8,7 @@ import BlogCardComponent from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 @Component({
   selector: 'app-tag-name-page',
@@ -67,7 +67,7 @@ export default class TagNamePageComponent implements OnInit {
     mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate);
+    .sort(sortByDate);
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
