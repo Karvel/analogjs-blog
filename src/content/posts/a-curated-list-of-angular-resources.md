@@ -2,9 +2,9 @@
 title: A Curated List of Angular Resources
 author: Elanna Grossman
 date: 2021-08-09T19:18:41-07:00
-last_updated: 2021-10-20T19:18:41-07:00
+last_updated: 2025-11-10T20:35:50-08:00
 description: In this article I share a curated list of Angular resources, with topics ranging from simple to advanced.
-canonical_url: https://hapax-legomenon.net/2021/08/a-curated-list-of-angular-resources
+canonical_url: https://elanna.me/blog/2021/08/a-curated-list-of-angular-resources
 cover_image: https://live.staticflickr.com/7029/6811030363_456a9347db_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/6811030363/
@@ -17,20 +17,20 @@ published: true
 
 Having worked with Angular since mid-2017, I have collected many resources that I have found useful. I will keep this list up to date.
 
+*Updated Nov 10, 2025* - Fixed broken links, found replacements for some dead links, updated angular.io links to angular.dev counterparts.
+
 *Updated Oct 21, 2021* - fixed broken links.
 
 ## Angular Resources
 
 ### General Documentation
 
-- [Angular.io](https://angular.io/docs/ts/latest/) Includes good tutorials, detailed documentation, and API references along with interactive code snippets. This should be the default destination for Angular questions. Note: There are multiple versions of the “Tour of Heroes” tutorial demonstrating different concepts.
-- [Angular.io Resources](https://angular.io/resources) The official and hopefully maintained list of resources from the Angular team.
-- [John Papa style guide](https://angular.io/docs/ts/latest/guide/style-guide.html) The de facto style guide for Angular has been officially adopted by the Angular team and is now hosted on the official website. It is highly opinionated, but makes good cases for its suggestions. I follow most of it and do not disagree strongly with any of its suggestions.
-- [Netanel Basal](https://netbasal.com/) Another skilled Angular developer with useful tutorials and deep dive articles.
+- [Angular.dev](https://angular.dev/overview) Includes good tutorials, detailed documentation, and API references along with interactive code snippets. This should be the default destination for Angular questions. Note: There are multiple versions of the “Tour of Heroes” tutorial demonstrating different concepts.
+- [John Papa style guide](https://angular.dev/style-guide) The de facto style guide for Angular has been officially adopted by the Angular team and is now hosted on the official website. It is highly opinionated, but makes good cases for its suggestions. I follow most of it and do not disagree strongly with any of its suggestions.
+- [Netanel Basal](https://medium.com/netanelbasal) Another skilled Angular developer with useful tutorials and deep dive articles.
 - [Angular University](https://blog.angular-university.io/) Has multiple tutorials and deep dives for all things Angular.
-- [inDepth.dev community](https://indepth.dev/) Formerly Angular In Depth. Covers RxJS, NgRX and Angular in depth – has articles explaining how and why Angular is architected.
+- [Angular In Depth](https://angular.love/angular-in-depth) Having changed names, it is now known as Angular In Depth once again! Covers RxJS, NgRX and Angular in depth – has articles explaining how and why Angular is architected.
 - [Todd Motto](https://ultimatecourses.com/blog/) A Google Developer Expert who writes detailed articles explaining Angular functionality and convention. His writing and explanation style differ sufficiently from the official documentation that it is a good supplemental resource.
-- [Strong Brew](https://blog.strongbrew.io/) Technical high level articles for Angular, RxJS, and coding practices.
 
 ### Essential articles
 
@@ -38,7 +38,7 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 - [The 7-step process of Angular router navigation](https://www.jvandemo.com/the-7-step-process-of-angular-router-navigation/) Helps demystify the Angular routing lifecycle.
 - [Angular Architecture – Smart Components vs Presentational Components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/) This explains the thought process behind the container/presenter pattern (also referred to as smart/dumb components) very well.
 - [Container components with Angular](https://dev.to/this-is-angular/container-components-with-angular-4o05)
-- [Everything you need to know about the `ExpressionChangedAfterItHasBeenCheckedError` error](https://indepth.dev/posts/1001/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error) Here is an explanation of how to prevent an error that learning Angular developers run into a lot.
+- [Everything you need to know about the `ExpressionChangedAfterItHasBeenCheckedError` error](https://angular.love/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error) Here is an explanation of how to prevent an error that learning Angular developers run into a lot.
 - [How to architect epic Angular app in less than 10 minutes!](https://dev.to/angular/how-to-architect-epic-angular-app-in-less-than-10-minutes-35j2) Explanation of the project organization that I prefer.
 - [Choosing The Right File Structure for Angular in 2020 and Beyond !](https://itnext.io/choosing-the-right-file-structure-for-angular-in-2020-and-beyond-a53a71f7eb05)
 
@@ -51,11 +51,11 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 ### Performance
 
 - [10 Tricks to Optimize Your Angular App – Bits and Pieces](https://blog.bitsrc.io/10-tricks-to-optimize-your-angular-app-44208f616bf0)
-- [Angular – Lazy-loading feature modules](https://angular.io/guide/lazy-loading-ngmodules) Lazy loading splits the app into chunks that are only loaded on demand. This both reduces bundle size, and helps separate discrete features (e.g. the admin dashboard from the user dashboard).
+- [Angular – Lazy-loading feature modules](https://angular.io/guide/lazy-loading-ngmodules) *This is no longer necessary in Angular past version 17.* Lazy loading splits the app into chunks that are only loaded on demand. This both reduces bundle size, and helps separate discrete features (e.g. the admin dashboard from the user dashboard).
 - [Reduce Change Detection Cycles with Event Coalescing in Angular](https://netbasal.com/reduce-change-detection-cycles-with-event-coalescing-in-angular-c4037199859f)
 - [Angular OnPush Change Detection and Component Design – Avoid Common Pitfalls](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
-- [Everything you need to know about change detection in Angular](https://indepth.dev/posts/1053/everything-you-need-to-know-about-change-detection-in-angular) A deep dive into how Angular’s change detection works.
-- [The Last Guide For Angular Change Detection You’ll Ever Need – Mokkapps (Michael Hoffmann) – Freelance Angular Software Engineer](https://www.mokkapps.de/blog/the-last-guide-for-angular-change-detection-you-will-ever-need/) This is a wonderful article that explains change detection and provides a lot of visual examples and a working sandbox to test different change detection strategies.
+- [Everything you need to know about change detection in Angular](https://angular.love/everything-you-need-to-know-about-change-detection-in-angular) A deep dive into how Angular’s change detection works.
+- [The Last Guide For Angular Change Detection You’ll Ever Need – Mokkapps (Michael Hoffmann) – Freelance Angular Software Engineer](https://www.mokkapps.de/blog/the-last-guide-for-angular-change-detection-you-will-ever-need) This is a wonderful article that explains change detection and provides a lot of visual examples and a working sandbox to test different change detection strategies.
 - [Angular Change Detection Demos](https://angular-change-detection-demo.netlify.app/complex-demo) Code demo that goes with the above article.
 - [Angular ngFor – Learn All Features, Not Only For Arrays](https://blog.angular-university.io/angular-2-ngfor/) Angular’s template looping directive `*ngFor` has a lot of neat features, and one of them, `trackBy`, can help a lot with performance.
 
@@ -72,7 +72,7 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 - [Angular Unit Testing Code-Coverage Lies – ngconf – Medium](https://medium.com/ngconf/angular-unit-testing-code-coverage-lies-603c6c85f801)
 - [Unit Testing in Angular: Stubs vs Spies vs Mocks](https://www.amadousall.com/unit-testing-angular-stubs-vs-spies-vs-mocks/)
 - [Create a component harness for your tests with Angular CDK](https://dev.to/this-is-angular/create-a-component-harness-for-your-tests-with-angular-cdk-46bg)
-- [Lars Gyrup Brink Nielsen – WebDev inDepth](https://indepth.dev/author/layzee/)
+- [Lars Gyrup Brink Nielsen articles](https://dev.to/layzee)
 - [angular – Can’t seem to catch error when using Jasmine toThrowError – Stack Overflow](https://stackoverflow.com/questions/40727581/cant-seem-to-catch-error-when-using-jasmine-tothrowerror)
 - [Simplified example to demonstrate how to Mock a FileList for unit testing purposes. · GitHub](https://gist.github.com/amabes/88324d68690e0e7b8e313cd0cafaa219)
 - [jasmine – Testing file upload in Angular with HttpClient. Unable to get hold of HTTP POST body – Stack Overflow](https://stackoverflow.com/questions/54804034/testing-file-upload-in-angular-with-httpclient-unable-to-get-hold-of-http-post)
@@ -84,11 +84,11 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 
 ### Error Handling
 
-- [Expecting the Unexpected — Best practices for Error handling in Angular – Angular inDepth](https://indepth.dev/posts/1465/expecting-the-unexpected-best-practices-for-error-handling-in-angular-2)
+- [Expecting the Unexpected — Best practices for Error handling in Angular – Angular inDepth](https://medium.com/angular-in-depth/expecting-the-unexpected-best-practices-for-error-handling-in-angular-21c3662ef9e4)
 
 ### Security
 
-- [Angular.io Security](https://angular.io/guide/security) This is the official documentation on security in Angular, best practices, and how to avoid creating vulnerabilities.
+- [Angular.io Security](https://angular.dev/best-practices/security) This is the official documentation on security in Angular, best practices, and how to avoid creating vulnerabilities.
 - [6 Angular Security Best Practices – Snyk](https://snyk.io/blog/angular-security-best-practices/)
 - [Angular Security Best Practices – Ordina JWorks Tech Blog](https://ordina-jworks.github.io/angular/2018/03/30/angular-security-best-practices.html)
 
@@ -96,15 +96,15 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 
 ### Getting Started
 
-- [Official documentation](http://reactivex.io/rxjs/manual/index.html) The official guide for Observables. Easier to read than the API reference on the same site.
+- [Official documentation](https://reactivex.io/intro.html) The official guide for Observables. Easier to read than the API reference on the same site.
 - [Angular.io Observables](https://angular.io/guide/observables) Angular documentation of Observables and RxJS. All examples are within Angular, and the guide explains how Angular uses RxJS beyond http calls.
-- [RxJS Best Practices](https://blog.strongbrew.io/rxjs-best-practices-in-angular/)
+- [RxJS Best Practices](https://blog.brecht.io/rxjs-best-practices-in-angular/)
 
 ### Understanding Higher Order Observable Operators
 
 - [Comprehensive Guide to Higher-Order RxJs Mapping Operators: switchMap, mergeMap, concatMap (and exhaustMap)](https://blog.angular-university.io/rxjs-higher-order-mapping/)
 - [A Super Ninja Trick To Learn RxJS’s “switchMap”, “mergeMap”, “concatMap” and “exhaustMap”, FOREVER!](https://medium.com/@shairez/a-super-ninja-trick-to-learn-rxjss-switchmap-mergemap-concatmap-and-exhaustmap-forever-88e178a75f1b)
-- [Building a safe autocomplete operator in RxJS](https://blog.strongbrew.io/building-a-safe-autocomplete-operator-with-rxjs/)
+- [Building a safe autocomplete operator in RxJS](https://blog.brecht.io/building-a-safe-autocomplete-operator-with-rxjs/)
 
 ### Pitfalls
 
@@ -121,10 +121,9 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 ### Understanding Hot and Cold Observables
 
 - [Cold vs Hot Observables](https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html)
-- [My favorite metaphor for hot vs cold observables](https://blog.strongbrew.io/my-favorite-metaphor-for-hot-vs-cold-observables/)
+- [Netflix vs. Live Broadcast: Understanding Cold and Hot Observables in RxJS 7 ](https://dev.to/md_nafishalam_58b9fca2a5/netflix-vs-live-broadcast-understanding-cold-and-hot-observables-in-rxjs-7-21h9) The original version of the article that I liked seems to be gone but this one does a decent job of using the same metaphors.
 - [Visualizing Reactive Streams: Hot and Cold Observables](https://jaredforsyth.com/posts/visualizing-reactive-streams-hot-and-cold/)
-- [Multicasting operators in RxJS](https://blog.strongbrew.io/multicasting-operators-in-rxjs/)
-- [Getting Started With RxJS – Part 3: Hot And Cold Observables](https://codingthesmartway.com/getting-started-with-rxjs-part-3-hot-and-cold-observables/)
+- [Understanding RxJS Multicast Operators](https://medium.com/netanelbasal/understanding-rxjs-multicast-operators-77b3f60af0a2)
 
 ### RxJS Error Handling
 
@@ -133,17 +132,17 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 ### Advanced RxJS
 
 - [Rx Book](https://xgrommx.github.io/rx-book/content/guidelines/introduction/index.html) This is out of date but it is still one of the best deep dives into how ReactiveX works.
-- [What are schedulers in RxJS](https://blog.strongbrew.io/what-are-schedulers-in-rxjs/)
+- [Demystifying RxJS, Part III: Building our own Schedulers](https://medium.com/@traviskaufman/demystifying-rxjs-part-iii-building-our-own-schedulers-7cdee270215e)
 
 ## TypeScript
 
 ### Introduction
 
-- [Documentation · TypeScript](https://www.typescriptlang.org/docs/home.html) Official documentation resource for TypeScript. Regularly updated.
+- [Documentation · TypeScript](https://www.typescriptlang.org/docs/) Official documentation resource for TypeScript. Regularly updated.
 
 ### Advanced Types
 
-- [Advanced Types · TypeScript](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
+- [Advanced Types · TypeScript](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
 - [When to use `never` and `unknown` in TypeScript – LogRocket Blog](https://blog.logrocket.com/when-to-use-never-and-unknown-in-typescript-5e4d6c5799ad/)
 
 ### Generics

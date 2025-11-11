@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+
 import { removeLeadingAndTrailingSlashes } from './remove-leading-and-trailing-slashes';
 
 describe('removeLeadingAndTrailingSlashes', () => {

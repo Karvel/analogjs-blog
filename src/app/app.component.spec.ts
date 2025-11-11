@@ -1,16 +1,24 @@
+import { provideLocationMocks } from '@angular/common/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { MockComponent } from 'ng-mocks';
+import AppComponent from './app.component';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from '@components/header/header.component';
+vi.mock('@analogjs/content', () => ({
+  injectContentFiles: vi.fn(() => [
+    {
+      filename: '',
+      slug: 'sample-post',
+      attributes: { date: new Date(2023, 3, 1), published: true },
+    },
+  ]),
+}));
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, MockComponent(HeaderComponent)],
-      providers: [provideRouter([])],
+      imports: [AppComponent],
+      providers: [provideRouter([]), provideLocationMocks()],
     }).compileComponents();
   });
 

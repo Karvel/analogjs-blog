@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
+import FooterComponent from './footer.component';
 
 @Component({
   template: '<app-footer />',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false,
 })
 class TestHostComponent {}
 

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { ImageInfoPopoverContentComponent } from './image-info-popover-content.component';
+import ImageInfoPopoverContentComponent from './image-info-popover-content.component';
 
 @Component({
   template: `
@@ -12,6 +12,8 @@ import { ImageInfoPopoverContentComponent } from './image-info-popover-content.c
       [cover_image_title]="coverImageTitle"
     />
   `,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false,
 })
 class TestHostComponent {
   coverImageAuthor: string | undefined = 'Author';

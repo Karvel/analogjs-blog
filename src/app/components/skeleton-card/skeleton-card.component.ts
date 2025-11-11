@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-skeleton-card',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div
@@ -13,7 +12,7 @@ import { Component, Input } from '@angular/core';
     ></div>
   `,
 })
-export class SkeletonCardComponent {
+export default class SkeletonCardComponent {
   @Input() public height: string = '';
   @Input() public maxWidth: string = '';
   @Input() public width: string = '';

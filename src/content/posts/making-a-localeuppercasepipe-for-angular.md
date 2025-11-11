@@ -3,7 +3,7 @@ title: Making a LocaleUpperCasePipe for Angular
 author: Elanna Grossman
 date: 2021-03-22T04:57:04-07:00
 description: In Angular, I recently realized the UpperCasePipe is not locale aware. Since it is easy to create custom pipes in Angular, I made a LocaleUpperCasePipe.
-canonical_url: https://hapax-legomenon.net/2021/03/making-a-localeuppercasepipe-for-angular
+canonical_url: https://elanna.me/blog/2021/03/making-a-localeuppercasepipe-for-angular
 cover_image: https://live.staticflickr.com/2262/2290027938_268e2f34c4_z.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/2290027938/
@@ -16,7 +16,7 @@ published: true
 
 ## The Problem
 
-Angular uses pipes to help transform how data appears in the template. It provides a number of [built-in pipes](https://angular.io/api?type=pipe) like `DatePipe` and `UpperCasePipe`. However, while working on a localization feature for a work project, a coworker pointed out that `UpperCasePipe` uses [`toUpperCase()` under the hood.](https://github.com/angular/angular/blob/master/packages/common/src/pipes/case_conversion_pipes.ts#L100) `toUpperCase()` is not locale aware, and will fail at capitalizing letters for certain locales correctly, [namely Turkish](http://www.moserware.com/2008/02/does-your-code-pass-turkey-test.html). Since it is easy to create custom pipes in Angular, I decided to create one that is locale-aware. In this post, I will share the code for the LocaleUpperCasePipe, explain how to use it, and provide links to the repository and a demo.
+Angular uses pipes to help transform how data appears in the template. It provides a number of [built-in pipes](https://angular.dev/api/core/Pipe) like `DatePipe` and `UpperCasePipe`. However, while working on a localization feature for a work project, a coworker pointed out that `UpperCasePipe` uses [`toUpperCase()` under the hood.](https://github.com/angular/angular/blob/master/packages/common/src/pipes/case_conversion_pipes.ts#L100) `toUpperCase()` is not locale aware, and will fail at capitalizing letters for certain locales correctly, [namely Turkish](http://www.moserware.com/2008/02/does-your-code-pass-turkey-test.html). Since it is easy to create custom pipes in Angular, I decided to create one that is locale-aware. In this post, I will share the code for the LocaleUpperCasePipe, explain how to use it, and provide links to the repository and a demo.
 
 When given a lowercase value like “ılıman ilik”, the `UpperCasePipe` will return `ILIMAN ILIK`, which is wrong. The correct result should be `ILIMAN İLİK`. (I apologize for the silly Turkish. I am not a speaker and I was looking for an easy test value).
 

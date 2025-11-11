@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -20,7 +19,7 @@ import {
 @Component({
   selector: 'app-paginator',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   template: `
     <nav
       aria-label="Page navigation"
@@ -77,21 +76,22 @@ import {
           </svg>
         </a>
       </div>
-      <select
-        *ngIf="pageSizeControl"
-        [formControl]="pageSizeControl"
-        aria-label="Page Size Selector"
-        class="mb-3 cursor-pointer border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
+      @if (pageSizeControl) {
+        <select
+          [formControl]="pageSizeControl"
+          aria-label="Page Size Selector"
+          class="mb-3 cursor-pointer border border-gray-300 bg-white text-neutral-900 text-sm rounded block p-[.375rem] dark:bg-neutral-900
         dark:border-neutral-400 dark:text-white"
-      >
-        <ng-container *ngFor="let option of options">
-          <option [value]="option.value">{{ option.label }}</option>
-        </ng-container>
-      </select>
+        >
+          @for (option of options; track option.label) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      }
     </nav>
   `,
 })
-export class PaginatorComponent implements OnInit {
+export default class PaginatorComponent implements OnInit {
   @Input() itemsPerPage = 10;
   @Input() totalItems = 0;
 

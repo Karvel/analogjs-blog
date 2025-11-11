@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecentPhotoAlbumsComponent } from './recent-photo-albums.component';
+import RecentPhotoAlbumsComponent from './recent-photo-albums.component';
 
 describe('RecentPhotoAlbumsComponent', () => {
   let component: RecentPhotoAlbumsComponent;

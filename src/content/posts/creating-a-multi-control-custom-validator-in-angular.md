@@ -3,7 +3,7 @@ title: Creating a Multi-Control Custom Validator in Angular
 author: Elanna Grossman
 date: 2021-06-22T20:56:30-07:00
 description: In this post I make a multi-control custom validator that compares if two fields match to show what is possible with forms in Angular.
-canonical_url: https://hapax-legomenon.net/2021/06/creating-a-multi-control-custom-validator-in-angular
+canonical_url: https://elanna.me/blog/2021/06/creating-a-multi-control-custom-validator-in-angular
 cover_image: https://live.staticflickr.com/2504/3760365901_ccbfae1188_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3760365901
@@ -16,15 +16,15 @@ published: true
 
 Custom validators in Angular’s reactive form library are one of the most powerful (and in my opinion overlooked) tools a developer has to create better form UI/UX. Custom validators aren’t just limited to a single control. It is easy to evaluate an entire group. This is great for comparing multiple controls. In this article I create a multi-control custom validator that validates two fields if their values match to show an example of what is possible.
 
-As I mentioned in my [previous article about custom validators](https://hapax-legomenon.net/2021/06/exploring-custom-form-validators-in-angular/), I like using them to both handle custom logic that the built-in validators don’t, and to be able to create the validation error messages in one spot. This makes custom validators powerful and very reusable.
+As I mentioned in my [previous article about custom validators](https://elanna.me/blog/2021/06/exploring-custom-form-validators-in-angular/), I like using them to both handle custom logic that the built-in validators don’t, and to be able to create the validation error messages in one spot. This makes custom validators powerful and very reusable.
 
 ## Creating a Multi-Control Custom Validator
 
 ![Animated image demonstrating the multi-control custom validator](https://elanna.me/images/upload/match-field-validator-1.gif)
 
-Creating a multi-control custom validator is very similar to creating a single-control one. The validator needs a passed in [`AbstractControl`](https://angular.io/api/forms/AbstractControl) parameter. In single-control validators, the control is normally a [`FormControl`](https://angular.io/api/forms/FormControl). However, for multi-control validators, I need to pass in the parent [`FormGroup`](https://angular.io/api/forms/FormGroup) as the control. Doing this gives me the scope of all of the children controls inside of the `FormGroup`. To make this validator more reusable, I also pass in the names of the controls I want to compare. I also can pass in the name of the kind of values I am comparing to make the error messages more dynamic.
+Creating a multi-control custom validator is very similar to creating a single-control one. The validator needs a passed in [`AbstractControl`](https://angular.dev/api/forms/AbstractControl) parameter. In single-control validators, the control is normally a [`FormControl`](https://angular.dev/api/forms/FormControl). However, for multi-control validators, I need to pass in the parent [`FormGroup`](https://angular.dev/api/forms/FormGroup) as the control. Doing this gives me the scope of all of the children controls inside of the `FormGroup`. To make this validator more reusable, I also pass in the names of the controls I want to compare. I also can pass in the name of the kind of values I am comparing to make the error messages more dynamic.
 
-I then create variables for the values from the form controls. Once I have those, I set up some simple conditionals. Since I passed in the `FormGroup` as the `AbstractControl` instead of a specific `FormControl`, if I want to set errors on the `FormControls`, I need to call [`setErrors()`](https://angular.io/api/forms/AbstractControl#seterrors) on the specific control. Otherwise, if I just return the [`ValidationErrors`](https://angular.io/api/forms/ValidationErrors), they will apply to the `FormGroup`, which isn’t what I want here.
+I then create variables for the values from the form controls. Once I have those, I set up some simple conditionals. Since I passed in the `FormGroup` as the `AbstractControl` instead of a specific `FormControl`, if I want to set errors on the `FormControls`, I need to call [`setErrors()`](https://angular.dev/api/forms/AbstractControl#setErrors) on the specific control. Otherwise, if I just return the [`ValidationErrors`](https://angular.dev/api/forms/ValidationErrors), they will apply to the `FormGroup`, which isn’t what I want here.
 
 ```ts
 export class MatchFieldValidator {
@@ -61,7 +61,7 @@ export class MatchFieldValidator {
 }
 ```
 
-Now that I have a working validator, I need to wire it up to the component. Since I want to be to interact with multiple `FormControls`, I need to attach the validator to the parent `FormGroup`. The [`FormBuilder`](https://angular.io/api/forms/FormBuilder) takes an options argument after the control config where I can pass in validators. I add the match field validator, along with the names of the controls I want to compare, and what kind of field I’m comparing. I’ve simplified the below code to just focus on what is relevant:
+Now that I have a working validator, I need to wire it up to the component. Since I want to be to interact with multiple `FormControls`, I need to attach the validator to the parent `FormGroup`. The [`FormBuilder`](https://angular.dev/api/forms/FormBuilder) takes an options argument after the control config where I can pass in validators. I add the match field validator, along with the names of the controls I want to compare, and what kind of field I’m comparing. I’ve simplified the below code to just focus on what is relevant:
 
 ```ts
 private createForm(): FormGroup {

@@ -1,6 +1,8 @@
+import { Category } from '@constants/category';
+
 export interface BlogPost {
   author?: string;
-  category?: string;
+  category?: Category;
   cover_image?: string;
   cover_image_author?: string;
   cover_image_source?: string;

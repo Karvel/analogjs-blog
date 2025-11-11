@@ -3,7 +3,7 @@ title: Making a Password Strength Component in Angular
 author: Elanna Grossman
 date: 2021-06-09T00:28:38-07:00
 description: In this post I show how to use Angular's Reactive Forms and RxJS to make a password strength component and requirement checker.
-canonical_url: https://hapax-legomenon.net/2021/06/making-a-password-strength-component-in-angular
+canonical_url: https://elanna.me/blog/2021/06/making-a-password-strength-component-in-angular
 cover_image: https://live.staticflickr.com/3672/10356922586_7a62f75bfb_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/10356922586
@@ -24,7 +24,7 @@ Reactive Forms in Angular are incredibly powerful and let developers design expe
 
 First, I decided to create distinct check box form controls for each password requirement and strength indicator. This lets me update the control for each indicator independently. I set the controls to disabled, so that the values can only be triggered programmatically, rather than directly by the user. The requirement indicator values start as false since none of them should be checked at first. I like to set this up in the parent component where I set up my reactive form. That is because I believe the parent component should be the source of truth for the controls in a form.
 
-I go over creating custom validators like `PasswordValidator.validPassword()` in a [follow up post](https://hapax-legomenon.net/2021/06/exploring-custom-form-validators-in-angular/). For the sake of simplicity in this example, I combined using both password requirement indicators with a validator and the password strength indicator. In a real world scenario, I don’t think I would use the validator with the password strength indicator. To achieve that effect, it would be easy enough to remove `Validators.compose([PasswordValidator.validPassword(true)]),` below:
+I go over creating custom validators like `PasswordValidator.validPassword()` in a [follow up post](https://elanna.me/blog/2021/06/exploring-custom-form-validators-in-angular/). For the sake of simplicity in this example, I combined using both password requirement indicators with a validator and the password strength indicator. In a real world scenario, I don’t think I would use the validator with the password strength indicator. To achieve that effect, it would be easy enough to remove `Validators.compose([PasswordValidator.validPassword(true)]),` below:
 
 ```ts
 private createForm(): FormGroup {
@@ -89,7 +89,7 @@ The register template is very straightforward. I moved the password strength par
 
 ## The PasswordStrengthComponent
 
-In `PasswordStrengthComponent`, most of the work happens in `setupConditionalValidators()`. Reactive forms can expose observable streams for individual form controls or the form itself. There are two stream choices: [`statusChanges`](https://angular.io/api/forms/AbstractControl#statusChanges) and [`valueChanges`](https://angular.io/api/forms/AbstractControl#valueChanges). Here, I use `valueChanges` because I want to update the password requirement and strength indicators as specific values change. `setupConditionalValidators()` creates a subscription that listens to the `valueChanges` stream on the password form control. This way it can listen to the values emitted by the password field and update the requirement and strength indicators for each value.
+In `PasswordStrengthComponent`, most of the work happens in `setupConditionalValidators()`. Reactive forms can expose observable streams for individual form controls or the form itself. There are two stream choices: [`statusChanges`](https://angular.dev/api/forms/AbstractControl#statusChanges) and [`valueChanges`](https://angular.dev/api/forms/AbstractControl#valueChanges). Here, I use `valueChanges` because I want to update the password requirement and strength indicators as specific values change. `setupConditionalValidators()` creates a subscription that listens to the `valueChanges` stream on the password form control. This way it can listen to the values emitted by the password field and update the requirement and strength indicators for each value.
 
 The method then calls `setIndicatorValues()`, which sets each of the indicator values based on simple checks. As I find some regular expressions hard to read, I moved them to a constants file and gave them descriptive names. The subscription needs to be actively managed, so I added it to an array that is managed by `ngOnDestroy`. I prefer managing subscriptions this way instead of by using [`takeUntil()`](https://www.learnrxjs.io/learn-rxjs/operators/filtering/takeuntil). `takeUntil()` marks subscriptions as complete as a side effect, and I prefer not to do that. There is a little more code in the component like the control getter methods that I removed here for brevity.
 

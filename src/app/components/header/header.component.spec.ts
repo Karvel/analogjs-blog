@@ -1,41 +1,38 @@
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
-import { MockComponent } from 'ng-mocks';
+import HeaderComponent from './header.component';
 
-import { HeaderComponent } from './header.component';
-import { PopoverComponent } from '@components/popover/popover.component';
-import { SearchPopoverComponent } from '@components/popover/search-popover.component';
-
-@Component({
-  template: '<app-header />',
-})
-class TestHostComponent {
-  showMenu = false;
-}
+vi.mock('@analogjs/content', () => ({
+  injectContentFiles: vi.fn(() => [
+    {
+      filename: '',
+      slug: 'sample-post',
+      attributes: { date: new Date(2023, 3, 1), published: true },
+    },
+  ]),
+}));
 
 describe('HeaderComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
-  let testHost: TestHostComponent;
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestHostComponent],
-      imports: [
-        HeaderComponent,
-        MockComponent(PopoverComponent),
-        MockComponent(SearchPopoverComponent),
-      ],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HeaderComponent],
       providers: [provideRouter([])],
-    });
-    fixture = TestBed.createComponent(TestHostComponent);
-    testHost = fixture.componentInstance;
+    }).compileComponents();
   });
 
-  it('should create the component', () => {
-    expect(testHost).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should display site name', () => {

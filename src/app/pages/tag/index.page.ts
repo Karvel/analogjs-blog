@@ -1,18 +1,16 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { PillComponent } from '@components/pill/pill.component';
+import PillComponent from '@components/pill/pill.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
 import { aggregateAndWeighTags } from '@utils/aggregate-and-weigh-tags';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 export const pageTitle = {
   title: `Tags | ${siteName}`,
@@ -42,8 +40,8 @@ export const metaTagList: MetaDefinition[] = [
 @Component({
   selector: 'app-tag-index',
   standalone: true,
-  imports: [NgFor, PillComponent, RouterLink],
-  styleUrls: ['./index.page.scss'],
+  imports: [PillComponent],
+  styleUrls: ['./index.page.css'],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -54,14 +52,16 @@ export const metaTagList: MetaDefinition[] = [
             role="navigation"
             aria-label="Article tag cloud"
           >
-            <li *ngFor="let tag of tagsWithWeights" class="flex m-1">
-              <app-pill
-                [attr.data-weight]="tag.weight"
-                [label]="tag.name"
-                [route]="'/tag'"
-                [slug]="tag.name"
-              />
-            </li>
+            @for (tag of tagsWithWeights; track tag.name) {
+              <li class="flex m-1">
+                <app-pill
+                  [attr.data-weight]="tag.weight"
+                  [label]="tag.name"
+                  [route]="'/tag'"
+                  [slug]="tag.name"
+                />
+              </li>
+            }
           </ul>
         </div>
       </div>
@@ -70,10 +70,10 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class IndexPageComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate);
+    .sort(sortByDate);
   public tagsWithWeights = this.setUpTagCloud(this.posts);
 
   private metadataService = inject(MetadataService);

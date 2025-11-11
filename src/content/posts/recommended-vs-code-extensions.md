@@ -3,7 +3,7 @@ title: Recommended VS Code Extensions
 author: Elanna Grossman
 date: 2023-01-06T18:10:54-08:00
 description: In this article I share my recommended VS Code Extensions and settings for development with Typescript, .NET, and Angular.
-canonical_url: https://hapax-legomenon.net/2023/01/recommended-vs-code-extensions
+canonical_url: https://elanna.me/blog/2023/01/recommended-vs-code-extensions
 cover_image: https://live.staticflickr.com/2458/3776870085_fe285e9698_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3776870085
@@ -14,7 +14,7 @@ slug: recommended-vs-code-extensions
 published: true
 ---
 
-[Visual Studio Code](https://code.visualstudio.com/) is my code editor of choice. I regularly use Linux, MacOS, and Windows, and it is very nice to have a consistent tool between each operating system. I have listed my recommended VS Code extensions below. [In this post](https://hapax-legomenon.net/2023/02/recommended-development-tools-in-linux-macos-and-windows/), I talk about general development tools I like to use in each operating system.
+[Visual Studio Code](https://code.visualstudio.com/) is my code editor of choice. I regularly use Linux, MacOS, and Windows, and it is very nice to have a consistent tool between each operating system. I have listed my recommended VS Code extensions below. [In this post](https://elanna.me/blog/2023/02/recommended-development-tools-in-linux-macos-and-windows/), I talk about general development tools I like to use in each operating system.
 
 ## General
 
@@ -58,6 +58,7 @@ This is the official C# extension from Microsoft and handles everything includin
 In addition to the above extensions, I have some settings I configure in Visual Studio Code:
 
 - CodeLens for Javascript and Typescript. This parses projects for class, method, and property references and shows them above the class/method/property declaration. It does cause slight slowdown when loading a file, but I consider it a worthy tradeoff.
-- [Breadcrumbs](https://code.visualstudio.com/docs/editor/editingevolved#_breadcrumbs). These show file path breadcrumbs above the editor window.
+- [Breadcrumbs](https://code.visualstudio.com/docs/editor/editingevolved#_breadcrumbs)  
+These show file path breadcrumbs above the editor window.
 
 If I find any other recommended VS Code extensions, I will add them here.

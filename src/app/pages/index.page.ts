@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -12,13 +12,13 @@ import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
 
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
-import { RecentPhotoAlbumsComponent } from '@components/recent-photo-albums/recent-photo-albums.component';
-import { SkeletonCardComponent } from '@components/skeleton-card/skeleton-card.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
+import RecentPhotoAlbumsComponent from '@components/recent-photo-albums/recent-photo-albums.component';
+import SkeletonCardComponent from '@components/skeleton-card/skeleton-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 export const pageTitle = {
   title: `${siteName}`,
@@ -52,11 +52,8 @@ export const metaTagList: MetaDefinition[] = [
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [
     BlogCardComponent,
-    NgIf,
-    NgFor,
     NgStyle,
     RecentPhotoAlbumsComponent,
     RouterLink,
@@ -73,16 +70,17 @@ export const metaTagList: MetaDefinition[] = [
             <div
               class="relative flex justify-center rounded-xl max-h-32 max-w-32 !w-fit"
             >
-              <app-skeleton-card
-                *ngIf="showSkeleton()"
-                class="rounded-md absolute min-w-full h-full"
-                height="100%"
-                maxWidth="100%"
-                width="100%"
-              />
+              @if (showSkeleton()) {
+                <app-skeleton-card
+                  class="rounded-md absolute min-w-full h-full"
+                  height="100%"
+                  maxWidth="100%"
+                  width="100%"
+                />
+              }
               <img
                 [ngStyle]="{
-                  visibility: showSkeleton() ? 'hidden' : 'visible'
+                  visibility: showSkeleton() ? 'hidden' : 'visible',
                 }"
                 (load)="onLoad()"
                 src="images/self/me-sq.jpg"
@@ -107,16 +105,17 @@ export const metaTagList: MetaDefinition[] = [
             </div>
           </div>
           <h2 class="text-xl">Latest Blog Posts:</h2>
-          <ng-container *ngIf="posts?.length; else emptyResult">
+          @if (posts?.length) {
             <ul>
-              <li *ngFor="let post of posts; let i = index">
-                <app-blog-card [post]="post" [isLCP]="i === 0" />
-              </li>
+              @for (post of posts; track post.slug; let i = $index) {
+                <li>
+                  <app-blog-card [post]="post" [isLCP]="i === 0" />
+                </li>
+              }
             </ul>
-          </ng-container>
-          <ng-template #emptyResult
-            ><div class="py-4">There are no posts yet.</div></ng-template
-          >
+          } @else {
+            <div class="py-4">There are no posts yet.</div>
+          }
           <app-recent-photo-albums />
         </div>
       </div>
@@ -125,10 +124,10 @@ export const metaTagList: MetaDefinition[] = [
 })
 export default class HomeComponent implements OnInit {
   public posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate)
+    .sort(sortByDate)
     .slice(0, 3);
   public showSkeleton: WritableSignal<boolean> = signal(true);
 

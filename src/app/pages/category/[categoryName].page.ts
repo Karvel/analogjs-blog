@@ -1,20 +1,19 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ContentFile, injectContentFiles } from '@analogjs/content';
 
-import { BlogCardComponent } from '@components/blog-card/blog-card.component';
+import BlogCardComponent from '@components/blog-card/blog-card.component';
 import { siteName } from '@constants/site-name';
 import { BlogPost } from '@models/post';
 import { MetadataService } from '@services/metadata.service';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 
 @Component({
   selector: 'app-category-name-page',
   standalone: true,
-  imports: [BlogCardComponent, NgFor, NgIf, RouterLink],
+  imports: [BlogCardComponent, RouterLink],
   template: `
     <div class="md:max-w md:mx-auto md:flex md:flex-col md:items-center">
       <div class="md:w-[48rem] p-4">
@@ -22,17 +21,20 @@ import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-
           <h1 class="md:flex md:flex-col md:self-start text-xl">
             Category: {{ categoryName }}
           </h1>
-          <ul *ngIf="filteredPosts?.length; else emptyResult">
-            <li *ngFor="let post of filteredPosts; let i = index">
-              <app-blog-card [post]="post" [isLCP]="i === 0" />
-            </li>
-          </ul>
+          @if (filteredPosts?.length) {
+            <ul>
+              @for (post of filteredPosts; track post.slug; let i = $index) {
+                <li>
+                  <app-blog-card [post]="post" [isLCP]="i === 0" />
+                </li>
+              }
+            </ul>
+          } @else {
+            <div class="pt-5 flex grow">
+              There are no posts matching "{{ categoryName }}".
+            </div>
+          }
         </div>
-        <ng-template #emptyResult
-          ><div class="pt-5 flex grow">
-            There are no posts matching "{{ categoryName }}".
-          </div></ng-template
-        >
         <div class="pt-5">
           <a [routerLink]="['/category']">All Categories</a>
         </div>
@@ -64,10 +66,10 @@ export default class CategoryNamePageComponent implements OnInit {
     },
   ];
   private posts = injectContentFiles<BlogPost>((mdFile) =>
-    mdFile.filename.includes('/src/content/posts'),
+    mdFile.filename.includes('src/content/posts'),
   )
     .filter((post) => post.attributes.published)
-    .sort(sortByUpdatedOrOriginalDate);
+    .sort(sortByDate);
   private route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
