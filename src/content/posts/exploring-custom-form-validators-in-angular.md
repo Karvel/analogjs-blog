@@ -16,11 +16,11 @@ published: true
 
 I believe that the reactive form library in Angular is one of the most powerful tools in the framework. Developers can create performant and reactive forms that provide great UI/UX. One part of the reactive form toolkit that I think people often overlook is creating custom validators. In this article I show how to create a custom password field validator and how to use it.
 
-Reactive forms create objects that all inherit from the same [`AbstractControl`](https://angular.io/api/forms/AbstractControl). The `AbstractControl` has an [`errors`](https://angular.io/api/forms/AbstractControl#errors) object property, which is where I can get or set validation errors for the form or particular control. This `errors` object contains key value pairs. When using the default built-in validation, these key value pairs are predefined with specific (often boolean) values. That means that I would need to evaluate the error value and decide what error message to show the user. However, it is possible to create [custom validators](https://angular.io/guide/form-validation#defining-custom-validators), and they can return key value pairs with error message values instead of booleans. This means that I can set up reusable validators to both perform validation, and handle setting up their own human-readable error messages.
+Reactive forms create objects that all inherit from the same [`AbstractControl`](https://angular.dev/api/forms/AbstractControl). The `AbstractControl` has an [`errors`](https://angular.dev/api/forms/AbstractControl#errors) object property, which is where I can get or set validation errors for the form or particular control. This `errors` object contains key value pairs. When using the default built-in validation, these key value pairs are predefined with specific (often boolean) values. That means that I would need to evaluate the error value and decide what error message to show the user. However, it is possible to create [custom validators](https://angular.dev/guide/forms/form-validation#defining-custom-validators), and they can return key value pairs with error message values instead of booleans. This means that I can set up reusable validators to both perform validation, and handle setting up their own human-readable error messages.
 
 ## Using the Built-in Validators
 
-The built-in validators are powerful and easy to use. The [official documentation](https://angular.io/api/forms/Validators#validators) shows each one and how to use it. For this example, I want to add the following validation to the password field:
+The built-in validators are powerful and easy to use. The [official documentation](https://angular.dev/api/forms/Validators#validators) shows each one and how to use it. For this example, I want to add the following validation to the password field:
 
 1. Make the field required.
 2. Require a minimum of 8 characters.
@@ -82,7 +82,7 @@ This works fine, and gives the user reactive feedback on if their password meets
 
 ## Creating a Custom PasswordValidator
 
-Custom form validators are simply functions. I prefer to put them in classes, and I usually make them static because of how straightforward the logic is to write. Custom validators act on the passed in `AbstractControl`. This is where the I can evaluate whatever I want about the `AbstractControl`. Custom validators expect one of two values returned. `null` means that validation passed, and there are no errors. [`ValidationErrors`](https://angular.io/api/forms/ValidationErrors) is just a wrapping for a key value pair and is how I return error messages. These error messages can be static and hard coded, or dynamic. Below I show an example for some simple validation I could do for creating a new password:
+Custom form validators are simply functions. I prefer to put them in classes, and I usually make them static because of how straightforward the logic is to write. Custom validators act on the passed in `AbstractControl`. This is where the I can evaluate whatever I want about the `AbstractControl`. Custom validators expect one of two values returned. `null` means that validation passed, and there are no errors. [`ValidationErrors`](https://angular.dev/api/forms/ValidationErrors) is just a wrapping for a key value pair and is how I return error messages. These error messages can be static and hard coded, or dynamic. Below I show an example for some simple validation I could do for creating a new password:
 
 ```ts
 export class PasswordValidator {
@@ -117,7 +117,7 @@ I like putting a amount of logic to handle if the field is required or not here 
 
 ## Using the Validator
 
-Custom validators are easy to use. In the component where I set up my reactive form, I can use my custom validators at any level of the form. This means that I can apply the validator to a [`FormControl`](https://angular.io/api/forms/FormControl), a [`FormArray`](https://angular.io/api/forms/FormArray), or an entire [`FormGroup`](https://angular.io/api/forms/FormGroup). In a future post I will show how to create a validator that can evaluate and compare multiple control values. Here though, I just need to pass the validator to the FormControl value I am creating. I am using [`FormBuilder`](https://angular.io/api/forms/FormGroup) in this example:
+Custom validators are easy to use. In the component where I set up my reactive form, I can use my custom validators at any level of the form. This means that I can apply the validator to a [`FormControl`](https://angular.dev/api/forms/FormControl), a [`FormArray`](https://angular.dev/api/forms/FormArray), or an entire [`FormGroup`](https://angular.dev/api/forms/FormGroup). In a future post I will show how to create a validator that can evaluate and compare multiple control values. Here though, I just need to pass the validator to the FormControl value I am creating. I am using [`FormBuilder`](https://angular.dev/api/forms/FormBuilder) in this example:
 
 ```ts
 private createForm(): FormGroup {
@@ -155,7 +155,7 @@ Now that I have moved the logic of figuring out what message to show to the user
 </mat-form-field>
 ```
 
-I added the second check of `error.key !== 'required'` here to skip over the required error that Angular adds automatically when I add the `required` attribute to the input element. For non-example projects, I normally use a custom pipe to handle traversing the errors object rather than the [`keyvalue`](https://angular.io/api/common/KeyValuePipe) pipe here. I’ll explain that in more detail in a follow up article.
+I added the second check of `error.key !== 'required'` here to skip over the required error that Angular adds automatically when I add the `required` attribute to the input element. For non-example projects, I normally use a custom pipe to handle traversing the errors object rather than the [`keyvalue`](https://angular.dev/api/common/KeyValuePipe) pipe here. I’ll explain that in more detail in a follow up article.
 
 ## Testing the Validator
 
