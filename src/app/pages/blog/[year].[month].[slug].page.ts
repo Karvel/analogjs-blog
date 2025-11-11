@@ -35,7 +35,7 @@ import { Tag } from '@models/tag';
 import { MetadataService } from '@services/metadata.service';
 import { getYear } from '@utils/get-year';
 import { getMonth } from '@utils/get-month';
-import { sortByUpdatedOrOriginalDate } from '@utils/sort-by-updated-or-original-date';
+import { sortByDate } from '@utils/sort-by-date';
 import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
 
 @Component({
@@ -218,7 +218,7 @@ export default class BlogPostPageComponent {
   );
   public posts = injectContentFiles<BlogPost>((mdFile) =>
     mdFile.filename.includes('src/content/posts'),
-  ).sort(sortByUpdatedOrOriginalDate);
+  ).sort(sortByDate);
   public prevPost!: ContentFile<BlogPost>;
   public splitTagStringIntoArray = splitTagStringIntoTagArray;
   public tagList: Tag[] = [];

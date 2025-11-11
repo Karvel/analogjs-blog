@@ -2,7 +2,7 @@ import { ContentFile } from '@analogjs/content';
 
 import { BlogPost } from '@models/post';
 
-export const sortByUpdatedOrOriginalDate = (
+export const sortByDate = (
   a: ContentFile<BlogPost> | null | undefined,
   b: ContentFile<BlogPost> | null | undefined,
 ) => {
@@ -14,16 +14,8 @@ export const sortByUpdatedOrOriginalDate = (
     return -1; // b is null or undefined, a comes first
   }
 
-  const originalOrUpdatedDateA =
-    a.attributes?.last_updated ?? a.attributes?.date;
-  const originalOrUpdatedDateB =
-    b.attributes?.last_updated ?? b.attributes?.date;
-  const dateA = originalOrUpdatedDateA
-    ? new Date(originalOrUpdatedDateA)
-    : null;
-  const dateB = originalOrUpdatedDateB
-    ? new Date(originalOrUpdatedDateB)
-    : null;
+  const dateA = a.attributes?.date ? new Date(a.attributes?.date) : null;
+  const dateB = b.attributes?.date ? new Date(b.attributes?.date) : null;
 
   if (dateA && dateB) {
     return dateB.getTime() - dateA.getTime();
