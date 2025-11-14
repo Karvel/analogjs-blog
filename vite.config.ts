@@ -11,6 +11,11 @@ import {
   getBlogPosts,
   getBlogTags,
 } from './vite.prerender.utils';
+import {
+  transformerCopyButton,
+  transformerCreateCodeBlockHeader,
+  transformerMeta,
+} from './shiki.transformer.utils';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -52,10 +57,15 @@ export default defineConfig(({ mode }) => ({
           highlight: {
             themes: {
               light: 'github-light-high-contrast',
-              dark: 'github-dark-high-contrast'
-            }
+              dark: 'github-dark-high-contrast',
+            },
+            transformers: [
+              transformerMeta(),
+              transformerCreateCodeBlockHeader(),
+              transformerCopyButton(),
+            ],
           },
-        }
+        },
       },
     }),
     tailwindcss(),
