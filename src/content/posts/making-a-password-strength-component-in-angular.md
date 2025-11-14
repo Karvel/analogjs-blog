@@ -26,7 +26,7 @@ First, I decided to create distinct check box form controls for each password re
 
 I go over creating custom validators like `PasswordValidator.validPassword()` in a [follow up post](https://elanna.me/blog/2021/06/exploring-custom-form-validators-in-angular/). For the sake of simplicity in this example, I combined using both password requirement indicators with a validator and the password strength indicator. In a real world scenario, I don’t think I would use the validator with the password strength indicator. To achieve that effect, it would be easy enough to remove `Validators.compose([PasswordValidator.validPassword(true)]),` below:
 
-```ts
+```ts copy=true
 private createForm(): FormGroup {
   const form = this.fb.group({
     email: [''],
@@ -46,7 +46,7 @@ private createForm(): FormGroup {
 
 The register template is very straightforward. I moved the password strength part to its own component to make it easier to reuse. I pass the form instance with an input binding to `app-password-strength`.
 
-```html
+```html copy=true
 <form [formGroup]="form">
   <div class="register-field">
     <mat-form-field>
@@ -93,7 +93,7 @@ In `PasswordStrengthComponent`, most of the work happens in `setupConditionalVal
 
 The method then calls `setIndicatorValues()`, which sets each of the indicator values based on simple checks. As I find some regular expressions hard to read, I moved them to a constants file and gave them descriptive names. The subscription needs to be actively managed, so I added it to an array that is managed by `ngOnDestroy`. I prefer managing subscriptions this way instead of by using [`takeUntil()`](https://www.learnrxjs.io/learn-rxjs/operators/filtering/takeuntil). `takeUntil()` marks subscriptions as complete as a side effect, and I prefer not to do that. There is a little more code in the component like the control getter methods that I removed here for brevity.
 
-```ts
+```ts copy=true
 public ngOnInit(): void {
   this.setInitialIndicatorValues();
   this.setupConditionalValidators();
@@ -167,7 +167,7 @@ private setupConditionalValidators(): void {
 
 The constants file with the regular expressions looks like this:
 
-```ts
+```ts copy=true
 interface Constants {
   readonly DIGIT_REGEX: RegExp;
   readonly SYMBOL_REGEX: RegExp;
@@ -181,7 +181,7 @@ export const CONSTANTS: Constants = {
 
 The password strength template just contains the styling for the component along with the form controls:
 
-```html
+```html copy=true
 <form [formGroup]="form">
   <div class="password-container">
     <h2>Password Requirements</h2>

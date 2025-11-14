@@ -74,7 +74,7 @@ Tailwind is opinionated, but it isn't a full component framework. This site is s
 
 I decided early on that this site would only have a client. The main reasons to have a back-end would be to support things like accounts, which I don't think I need. Since the majority of the routes interact with markdown files in some manner, I decided to use <a href="https://jekyllrb.com/docs/front-matter/" target="_blank" rel="noopener">front matter</a> as a pseudo-api. The front matter on a given markdown file has the title, route slug, and date. <a href="https://analogjs.org/docs/features/routing/content#using-the-content-files-list" target="_blank" rel="noopener">`injectContentFiles()`</a> and <a href="https://analogjs.org/docs/features/routing/content#using-the-analog-markdown-component" target="_blank" rel="noopener">`injectContent()`</a>  effectively became my `get()` and `getById()` methods. I made the following interface to interact with the front matter:
 
-  ```ts
+  ```ts copy=true
   export interface BlogPost {
     author?: string;
     category?: string;
@@ -141,7 +141,7 @@ Between wanting to support cover images for blog posts, and showcase some of my 
 
 In order to support cover images for posts, I added a number of properties to the front matter:
 
-```ts
+```ts copy=true
 cover_image?: string;
 cover_image_author?: string;
 cover_image_source?: string;
