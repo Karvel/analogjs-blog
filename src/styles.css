@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @plugin "@tailwindcss/typography";
 
@@ -99,5 +99,58 @@ code .line::before {
   margin-right: 1.5rem;
   display: inline-block;
   text-align: right;
-  color: rgba(115,138,148,.4)
+  color: rgba(115, 138, 148, 0.4);
+}
+
+/* Markdown copy button styling */
+
+pre {
+  --code-block-background-color: #374151;
+  --code-block-border-radius: 0.375rem;
+  --code-block-font-size: 1rem;
+
+  align-items: flex-start;
+  border-radius: var(--code-block-border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+  & .pre-header {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0px;
+    overflow-x: scroll;
+    position: sticky;
+    top: 0px;
+    width: 100%;
+
+    & .wrapper-copy-code {
+      align-items: center;
+      flex-direction: row;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
+      & .copy-code {
+        background-color: transparent;
+        border: none;
+        border-radius: var(--code-block-border-radius);
+        color: #ffffff;
+        font-family: monospace;
+        font-size: var(--code-block-font-size);
+        line-height: 1rem;
+        margin: calc(16px * 0.25);
+        padding: calc(16px * 0.5) calc(16px * 1);
+
+        &:hover {
+          background-color: #6b7280;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
