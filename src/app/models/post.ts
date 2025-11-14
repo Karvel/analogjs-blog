@@ -4,6 +4,7 @@ export interface BlogPost {
   author?: string;
   category?: Category;
   cover_image?: string;
+  cover_image_alt?: string;
   cover_image_author?: string;
   cover_image_source?: string;
   cover_image_title?: string;
