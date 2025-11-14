@@ -16,6 +16,7 @@ export const talks: Talk[] = [
       },
     ],
     imageLink: 'images/other/iwdc_fresno_2020.png',
+    imageAlt: 'The logo for Break It 2020, the IWDC Fresno 2020 convention.',
   },
   {
     title: 'Observables Are Not Promises! A How To',
@@ -32,11 +33,15 @@ export const talks: Talk[] = [
       },
     ],
     imageLink: 'images/other/vdf_fresno_2018.jpg',
+    imageAlt:
+      'The logo for Día de los DevFest, the GDG Valley DevFest 2018 convention.',
   },
   {
     title: 'Verbal and Non-Verbal Workplace Discrimination',
     description: `I was asked to fill in as a last minute speaker at Women Techmakers Fresno International Women's Day 2017 conference. I gave a talk titled Verbal and Non-Verbal Workplace Discrimination, and as a group the audience and I discussed discrimination, how to recognize it, and how to handle it.`,
     date: 'March 19, 2017',
     imageLink: 'images/other/iwdc_fresno_2017.jpg',
+    imageAlt:
+      'The logo for Telling Our Stories the IWDC Fresno 2017 convention.',
   },
 ];
