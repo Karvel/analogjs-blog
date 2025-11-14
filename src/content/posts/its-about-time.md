@@ -7,6 +7,7 @@ cover_image: https://live.staticflickr.com/7063/13942708096_718b6dadac_h.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/13942708096
 cover_image_title: Saguaro Silhouette
+cover_image_alt: One of my photos called Saguaro Silhouette. It depicts a sahuaro cactus silhouetted by the sun.
 category: miscellaneous
 slug: its-about-time
 published: true

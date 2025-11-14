@@ -78,7 +78,11 @@ import { splitTagStringIntoTagArray } from '@utils/split-tag-string-into-array';
                   <img
                     appReplaceBrokenImage
                     [ngSrc]="post.attributes.cover_image"
-                    [alt]="post.attributes.cover_image_title"
+                    [alt]="
+                      (post.attributes.cover_image_alt ||
+                        post.attributes.cover_image_title) ??
+                      'Post Cover Image'
+                    "
                     class="w-full max-w-full rounded-md"
                     height="615"
                     width="800"

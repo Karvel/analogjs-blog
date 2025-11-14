@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/2262/2290027938_268e2f34c4_z.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/2290027938/
 cover_image_title: Métro graffiti
+cover_image_alt: One of my photos called Métro graffiti, showing graffiti on the walls of a métro stairwell in Paris.
 category: development
 tags: angular,angular pipe,toLocaleUpperCase, pipe
 slug: making-a-localeuppercasepipe-for-angular
@@ -85,4 +86,4 @@ And here is the pipe with a locale argument:
 
 The repository includes [unit tests for the pipe](https://github.com/Karvel/angular-locale-uppercase-pipe/blob/development/src/app/infrastructure/shared/pipes/locale-upper-case.pipe.spec.ts) to help dial in the desired behavior, and shows [multiple examples](https://github.com/Karvel/angular-locale-uppercase-pipe/blob/development/src/app/features/sandbox/test/test.component.html) of the pipe being used.
 
-[Here](https://github.com/Karvel/angular-locale-uppercase-pipe) is the repository on GitHub, and [here](https://stackblitz.com/github/Karvel/angular-locale-uppercase-pipe) is a working demo of the code on StackBlitz.
+[Here is the repository](https://github.com/Karvel/angular-locale-uppercase-pipe) on GitHub, and [here is a working demo](https://stackblitz.com/github/Karvel/angular-locale-uppercase-pipe) of the code on StackBlitz.

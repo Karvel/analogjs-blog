@@ -6,6 +6,7 @@ canonical_url: https://elanna.me/blog/2015/06/hirepalooza
 cover_image: https://elanna.me/images/upload/hirepalooza.png
 cover_image_author: Hirepalooza
 cover_image_title: Hirepalooza
+cover_image_alt: An image of the Hirepalooza logo, a San Francisco hiring fair that ran until 2015.
 category: miscellaneous
 tags: hirepalooza
 slug: hirepalooza

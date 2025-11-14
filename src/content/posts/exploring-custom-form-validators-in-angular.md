@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/5635/30961256076_198998e721_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/30961256076/
 cover_image_title: Lonely Road
+cover_image_alt: One of my photos called Lonely Road. It depicts a road through the desert with a Joshua tree nearby.
 category: development
 tags: angular,custom validator,form validation,reactive forms
 slug: exploring-custom-form-validators-in-angular
@@ -159,7 +160,7 @@ I added the second check of `error.key !== 'required'` here to skip over the req
 
 ## Testing the Validator
 
-It is really easy to write unit tests for these kinds of validators. This way I can write custom logic and feel confident that it does what I expect and that I am handling edge cases. Below are some example test snippets, and the rest are [here](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/password-validator.spec.ts):
+It is really easy to write unit tests for these kinds of validators. This way I can write custom logic and feel confident that it does what I expect and that I am handling edge cases. Below are some example test snippets, and [the rest are here](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/password-validator.spec.ts):
 
 ```ts copy=true
 it(`should return null if value matches RegEx`, () => {
@@ -194,4 +195,4 @@ Between creating custom validators like this and then [listening to the form sta
 
 ## Resources
 
-The repository includes [unit tests for the validator](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/password-validator.spec.ts) to help dial in the desired behavior. [Here](https://github.com/Karvel/angular-password-strength) is the repository on GitHub, and [here](https://stackblitz.com/github/Karvel/angular-password-strength) is a working demo of the code on StackBlitz.
+The repository includes [unit tests for the validator](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/password-validator.spec.ts) to help dial in the desired behavior. [Here is the repository](https://github.com/Karvel/angular-password-strength) on GitHub, and [here is a working demo](https://stackblitz.com/github/Karvel/angular-password-strength) of the code on StackBlitz.

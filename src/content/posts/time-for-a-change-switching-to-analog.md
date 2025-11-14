@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/65535/52270701195_32302b3ede_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/52270701195
 cover_image_title: Light House Fog
+cover_image_alt: One of my photos called Light House Fog. It a lighthouse in fog in San Simeon, California.
 category: development
 tags: development,angular,analogjs, wordpress,markdown
 slug: time-for-a-change-switching-to-analog

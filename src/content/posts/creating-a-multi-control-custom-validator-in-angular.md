@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/2504/3760365901_ccbfae1188_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3760365901
 cover_image_title: Sunset
+cover_image_alt: One of my photos called Sunset. It depicts sunset at a lagoon with ducks swimming through the water.
 category: development
 tags: angular,custom validator,form validation,reactive forms
 slug: creating-a-multi-control-custom-validator-in-angular
@@ -195,4 +196,4 @@ Custom validators are easy to make and very powerful. Since they can be made at 
 
 ## Resources
 
-The repository includes [unit tests for the validator](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/match-field-validator.spec.ts) to help dial in the desired behavior. [Here](https://github.com/Karvel/angular-password-strength) is the repository on GitHub, and [here](https://stackblitz.com/github/Karvel/angular-password-strength) is a working demo of the code on StackBlitz.
+The repository includes [unit tests for the validator](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/match-field-validator.spec.ts) to help dial in the desired behavior. [Here is the repository](https://github.com/Karvel/angular-password-strength) on GitHub, and [here is a working demo](https://stackblitz.com/github/Karvel/angular-password-strength) of the code on StackBlitz.

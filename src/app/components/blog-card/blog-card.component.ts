@@ -32,25 +32,19 @@ import { getMonth } from '@utils/get-month';
     PillComponent,
     ReplaceBrokenImageDirective,
     RouterLink,
-    SkeletonCardComponent
-],
+    SkeletonCardComponent,
+  ],
   template: `
     <div class="py-5 flex flex-col-reverse sm:flex-row">
       <div class="sm:pr-2 sm:max-w grow">
         <div class="flex items-center">
           @if (post?.attributes?.last_updated) {
-            <div
-              class="text-xs pt-1 sm:pt-0"
-              >
+            <div class="text-xs pt-1 sm:pt-0">
               Updated {{ post.attributes.last_updated | date }}
             </div>
           }
           @if (post?.attributes?.date && post?.attributes?.last_updated) {
-            <div
-              class="text-xs pl-2 pt-1 sm:pt-0"
-              >
-              | &nbsp;
-            </div>
+            <div class="text-xs pl-2 pt-1 sm:pt-0">| &nbsp;</div>
           }
           @if (post?.attributes?.date) {
             <div class="text-xs pt-1 sm:pt-0">
@@ -72,56 +66,62 @@ import { getMonth } from '@utils/get-month';
               [label]="post.attributes.category"
               [route]="'/category'"
               [slug]="post.attributes.category"
-              />
+            />
           </div>
         }
       </div>
       @if (post?.attributes?.cover_image) {
-        <div
-          class="relative sm:w-80 sm:min-w-[20rem] sm:h-52"
-          >
+        <div class="relative sm:w-80 sm:min-w-[20rem] sm:h-52">
           @if (showSkeleton()) {
             <app-skeleton-card
               class="rounded-md absolute min-w-full h-full"
               height="100%"
               maxWidth="100%"
               [width]="isSmallScreen ? '' : '320px'"
-              />
+            />
           }
           <a [routerLink]="['/blog', year, month, post.slug]">
             @if (isLCP) {
               <span class="flex aspect-[1/0.65]">
                 <img
                   [src]="post.attributes.cover_image || ''"
-                  [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
-                [ngStyle]="{
-                  visibility: showSkeleton() ? 'hidden' : 'visible',
-                }"
+                  [alt]="
+                    (post.attributes.cover_image_alt ||
+                      post.attributes.cover_image_title) ??
+                    'Post Cover Image'
+                  "
+                  [ngStyle]="{
+                    visibility: showSkeleton() ? 'hidden' : 'visible',
+                  }"
                   (load)="onLoad()"
                   appReplaceBrokenImage
                   class="sm:max-w-xs rounded-md w-full h-full object-cover object-center"
                   priority
-                  />
+                />
               </span>
             } @else {
               <span class="flex aspect-[1/0.65]">
                 <img
                   [src]="post.attributes.cover_image || ''"
-                  [alt]="post.attributes.cover_image_title ?? 'Post Cover Image'"
-                [ngStyle]="{
-                  visibility: showSkeleton() ? 'hidden' : 'visible',
-                }"
+                  [alt]="
+                    (post.attributes.cover_image_alt ||
+                      post.attributes.cover_image_title) ??
+                    'Post Cover Image'
+                  "
+                  [ngStyle]="{
+                    visibility: showSkeleton() ? 'hidden' : 'visible',
+                  }"
                   (load)="onLoad()"
                   appReplaceBrokenImage
                   class="sm:max-w-xs rounded-md w-full h-full object-cover object-center"
-                  />
+                />
               </span>
             }
           </a>
         </div>
       }
     </div>
-    `,
+  `,
 })
 export default class BlogCardComponent implements OnInit {
   @Input() post!: ContentFile<BlogPost>;

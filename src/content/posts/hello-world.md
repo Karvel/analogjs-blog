@@ -6,6 +6,7 @@ cover_image: https://live.staticflickr.com/3560/3480913783_36f732956d_z.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/3480913783
 cover_image_title: Banana Slug!
+cover_image_alt: One of my photos called Banana Slug! It is an up close shot of a banana slug on the forest floor.
 category: development
 tags: cms, hello world, lithium hosting
 slug: hello-world

@@ -9,6 +9,7 @@ cover_image: https://live.staticflickr.com/2458/21245815482_6431167871_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/21245815482/
 cover_image_title: Kendrick Peak
+cover_image_alt: One of my photos called Kendrick Peak. It depicts a snow-covered peak in Flagstaff, Arizona.
 category: development
 tags: development,codeeditor,git,ide
 slug: recommended-development-tools-in-linux-macos-and-windows
@@ -58,7 +59,7 @@ My personal computer is a desktop with system drives for both Linux and Windows 
   - Linux
   - MacOS
   - Windows
-  - I listed my recommended extensions [here](https://elanna.me/blog/2023/01/recommended-vs-code-extensions/).
+  - I listed [my recommended extensions here](https://elanna.me/blog/2023/01/recommended-vs-code-extensions/).
 
 ### Git Client
 

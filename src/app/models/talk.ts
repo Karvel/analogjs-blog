@@ -6,4 +6,5 @@ export interface Talk {
   date?: string;
   urlList?: Navigation[];
   imageLink?: string;
+  imageAlt?: string;
 }

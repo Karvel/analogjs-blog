@@ -96,7 +96,9 @@ export const metaTagList: MetaDefinition[] = [
                       @if (i === 0) {
                         <img
                           [src]="talk.imageLink"
-                          [alt]="talk.title || 'Talk Cover Image'"
+                          [alt]="
+                            (talk.imageAlt || talk.title) ?? 'Talk Cover Image'
+                          "
                           [ngStyle]="{
                             visibility: showSkeleton() ? 'hidden' : 'visible',
                           }"
@@ -108,7 +110,9 @@ export const metaTagList: MetaDefinition[] = [
                       } @else {
                         <img
                           [src]="talk.imageLink"
-                          [alt]="talk.title || 'Talk Cover Image'"
+                          [alt]="
+                            (talk.imageAlt || talk.title) ?? 'Talk Cover Image'
+                          "
                           [ngStyle]="{
                             visibility: showSkeleton() ? 'hidden' : 'visible',
                           }"
