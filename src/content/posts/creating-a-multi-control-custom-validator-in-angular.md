@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/2504/3760365901_ccbfae1188_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3760365901
 cover_image_title: Sunset
+cover_image_alt: One of my photos called Sunset. It depicts sunset at a lagoon with ducks swimming through the water.
 category: development
 tags: angular,custom validator,form validation,reactive forms
 slug: creating-a-multi-control-custom-validator-in-angular

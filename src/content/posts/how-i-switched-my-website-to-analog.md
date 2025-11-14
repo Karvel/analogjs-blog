@@ -9,6 +9,7 @@ cover_image: https://live.staticFlickr.com/65535/52270210933_b2f9572e2f_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.Flickr.com/photos/jadeilyn/52270210933
 cover_image_title: Light Towers
+cover_image_alt: One of my photos called Light Towers. It depicts an art installation with fiber optic lights.
 category: development
 tags: development,angular,analogjs, wordpress,markdown,rxjs
 slug: how-i-switched-my-website-to-analog

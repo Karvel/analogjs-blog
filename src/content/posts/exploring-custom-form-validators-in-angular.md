@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/5635/30961256076_198998e721_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/30961256076/
 cover_image_title: Lonely Road
+cover_image_alt: One of my photos called Lonely Road. It depicts a road through the desert with a Joshua tree nearby.
 category: development
 tags: angular,custom validator,form validation,reactive forms
 slug: exploring-custom-form-validators-in-angular

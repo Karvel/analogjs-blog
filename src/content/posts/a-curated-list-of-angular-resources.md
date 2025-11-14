@@ -9,6 +9,7 @@ cover_image: https://live.staticflickr.com/7029/6811030363_456a9347db_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/6811030363/
 cover_image_title: Sky Lodge view
+cover_image_alt: One of my photos called Sky Lodge view. It depicts a landscape in the Sonoran desert.
 category: development
 tags: development,angular,rxjs
 slug: a-curated-list-of-angular-resources

@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/5649/25379653969_84c364ab37_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/25379653969
 cover_image_title: Fireworks
+cover_image_alt: One of my photos called Fireworks. It shows fireworks from a Fourth of July event.
 category: development
 tags: 	angular, developer group, google, rxjs, valley devfest
 slug: i-am-giving-a-code-talk-about-observables
