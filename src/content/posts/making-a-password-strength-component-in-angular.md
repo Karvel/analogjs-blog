@@ -215,4 +215,4 @@ I made this as a simple tutorial example. If I were to use this in production, I
 
 ## Resources
 
-The repository includes [unit tests for the indicator controls](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/shared/components/password-strength/password-strength.component.spec.ts) to help dial in the desired behavior. [Here](https://github.com/Karvel/angular-password-strength) is the repository on GitHub, and [here](https://stackblitz.com/github/Karvel/angular-password-strength) is a working demo of the code on StackBlitz.
+The repository includes [unit tests for the indicator controls](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/shared/components/password-strength/password-strength.component.spec.ts) to help dial in the desired behavior. [Here is the repository](https://github.com/Karvel/angular-password-strength) on GitHub, and [here is a working demo](https://stackblitz.com/github/Karvel/angular-password-strength) of the code on StackBlitz.

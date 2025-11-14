@@ -59,7 +59,7 @@ My personal computer is a desktop with system drives for both Linux and Windows 
   - Linux
   - MacOS
   - Windows
-  - I listed my recommended extensions [here](https://elanna.me/blog/2023/01/recommended-vs-code-extensions/).
+  - I listed [my recommended extensions here](https://elanna.me/blog/2023/01/recommended-vs-code-extensions/).
 
 ### Git Client
 

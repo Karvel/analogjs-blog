@@ -122,7 +122,7 @@ Having worked with Angular since mid-2017, I have collected many resources that 
 ### Understanding Hot and Cold Observables
 
 - [Cold vs Hot Observables](https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html)
-- [Netflix vs. Live Broadcast: Understanding Cold and Hot Observables in RxJS 7 ](https://dev.to/md_nafishalam_58b9fca2a5/netflix-vs-live-broadcast-understanding-cold-and-hot-observables-in-rxjs-7-21h9) The original version of the article that I liked seems to be gone but this one does a decent job of using the same metaphors.
+- [Netflix vs. Live Broadcast: Understanding Cold and Hot Observables in RxJS 7](https://dev.to/md_nafishalam_58b9fca2a5/netflix-vs-live-broadcast-understanding-cold-and-hot-observables-in-rxjs-7-21h9) The original version of the article that I liked seems to be gone but this one does a decent job of using the same metaphors.
 - [Visualizing Reactive Streams: Hot and Cold Observables](https://jaredforsyth.com/posts/visualizing-reactive-streams-hot-and-cold/)
 - [Understanding RxJS Multicast Operators](https://medium.com/netanelbasal/understanding-rxjs-multicast-operators-77b3f60af0a2)
 

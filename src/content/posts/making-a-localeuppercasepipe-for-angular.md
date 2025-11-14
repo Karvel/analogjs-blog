@@ -86,4 +86,4 @@ And here is the pipe with a locale argument:
 
 The repository includes [unit tests for the pipe](https://github.com/Karvel/angular-locale-uppercase-pipe/blob/development/src/app/infrastructure/shared/pipes/locale-upper-case.pipe.spec.ts) to help dial in the desired behavior, and shows [multiple examples](https://github.com/Karvel/angular-locale-uppercase-pipe/blob/development/src/app/features/sandbox/test/test.component.html) of the pipe being used.
 
-[Here](https://github.com/Karvel/angular-locale-uppercase-pipe) is the repository on GitHub, and [here](https://stackblitz.com/github/Karvel/angular-locale-uppercase-pipe) is a working demo of the code on StackBlitz.
+[Here is the repository](https://github.com/Karvel/angular-locale-uppercase-pipe) on GitHub, and [here is a working demo](https://stackblitz.com/github/Karvel/angular-locale-uppercase-pipe) of the code on StackBlitz.

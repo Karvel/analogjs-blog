@@ -21,4 +21,4 @@ Here is the talk description:
 
 An exploration of observables, the headlining feature of RxJS and primary asynchronous structure in Angular. We will look at common use cases and pitfalls, both client and server-side, and discuss how to move away from promise-based data flow.
 
-The GitHub repo for the Angular client is [here](https://github.com/Karvel/angular-observable-examples-app). The API repo is [here](https://github.com/Karvel/angular-observables-api). The link to the slide deck is [here](https://drive.google.com/open?id=1vothDZHzTdMA1mM6F2R2XMGWpgZqlUOcmNE74edf_1Y).
+The [GitHub repo for the Angular client is here](https://github.com/Karvel/angular-observable-examples-app). The [API repo is here](https://github.com/Karvel/angular-observables-api). The [link to the slide deck is here](https://drive.google.com/open?id=1vothDZHzTdMA1mM6F2R2XMGWpgZqlUOcmNE74edf_1Y).
