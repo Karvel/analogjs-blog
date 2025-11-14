@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/3672/10356922586_7a62f75bfb_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/10356922586
 cover_image_title: Western Diamond-backed Rattlesnake
+cover_image_alt: One of my photos called Western Diamond-backed Rattlesnake, showing a rattlesnake at a zoo.
 category: development
 tags: angular,reactive forms,rxjs
 slug: making-a-password-strength-component-in-angular

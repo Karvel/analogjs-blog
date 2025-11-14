@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/2458/3776870085_fe285e9698_c.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://flickr.com/photos/jadeilyn/3776870085
 cover_image_title: So cool
+cover_image_alt: One of my photos called So cool. It depicts pelicans flying over a beach in Santa Cruz, California.
 category: development
 tags: development,linux,macos,osx
 slug: recommended-vs-code-extensions

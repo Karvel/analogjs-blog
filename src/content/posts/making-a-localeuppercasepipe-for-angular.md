@@ -8,6 +8,7 @@ cover_image: https://live.staticflickr.com/2262/2290027938_268e2f34c4_z.jpg
 cover_image_author: Elanna Grossman
 cover_image_source: https://www.flickr.com/photos/jadeilyn/2290027938/
 cover_image_title: Métro graffiti
+cover_image_alt: One of my photos called Métro graffiti, showing graffiti on the walls of a métro stairwell in Paris.
 category: development
 tags: angular,angular pipe,toLocaleUpperCase, pipe
 slug: making-a-localeuppercasepipe-for-angular

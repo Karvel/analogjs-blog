@@ -5,6 +5,7 @@ description: I gave another talk! This time it was at IWDC Fresno 2020. The talk
 canonical_url: https://elanna.me/blog/2020/03/iwdc-2020-fresno-imposter-syndrome
 cover_image: https://elanna.me/images/other/iwdc_fresno_2020.png
 cover_image_title: IWDC Fresno 2020
+cover_image_alt: The logo for Break It 2020, the IWDC Fresno 2020 convention.
 category: development
 tags: imposter syndrome,iwdc
 slug: iwdc-2020-fresno-imposter-syndrome
