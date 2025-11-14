@@ -24,7 +24,7 @@ When given a lowercase value like “ılıman ilik”, the `UpperCasePipe` will 
 
 Pipes can take arguments. I have designed this one to accept an optional locale argument. If it receives no argument, it uses a fallback value of a default language.
 
-```ts
+```ts copy=true
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { Constants } from '../../utils/constants';
@@ -57,7 +57,7 @@ I designed the pipe to prefer a passed-in locale argument to the fallback value.
 
 The constants file looks like this:
 
-```ts
+```ts copy=true
 export interface IConstant {
   defaultLanguage: string;
 }
@@ -71,13 +71,13 @@ export const Constants: IConstant = {
 
 Here is an example of using the pipe with no argument:
 
-```js
+```js copy=true
 {{ testValue | localeuppercase }}
 ```
 
 And here is the pipe with a locale argument:
 
-```js
+```js copy=true
 {{ testValue | localeuppercase: "tr-TR" }}
 ```
 

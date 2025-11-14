@@ -29,7 +29,7 @@ The built-in validators are powerful and easy to use. The [official documentatio
 
 In my sample register form, I could add four of the built-in validators to do this:
 
-```ts
+```ts copy=true
 private createForm(): FormGroup {
   const form = this.fb.group({
     email: [''],
@@ -50,7 +50,7 @@ private createForm(): FormGroup {
 
 Then I would bind the error properties to the template, and write messages based on which errors are active:
 
-```html
+```html copy=true
 <mat-form-field>
   <input
     name="password"
@@ -84,7 +84,7 @@ This works fine, and gives the user reactive feedback on if their password meets
 
 Custom form validators are simply functions. I prefer to put them in classes, and I usually make them static because of how straightforward the logic is to write. Custom validators act on the passed in `AbstractControl`. This is where the I can evaluate whatever I want about the `AbstractControl`. Custom validators expect one of two values returned. `null` means that validation passed, and there are no errors. [`ValidationErrors`](https://angular.dev/api/forms/ValidationErrors) is just a wrapping for a key value pair and is how I return error messages. These error messages can be static and hard coded, or dynamic. Below I show an example for some simple validation I could do for creating a new password:
 
-```ts
+```ts copy=true
 export class PasswordValidator {
   static validPassword(isRequired: boolean = false): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -119,7 +119,7 @@ I like putting specific logic to handle if the field is required or not here (as
 
 Custom validators are easy to use. In the component where I set up my reactive form, I can use my custom validators at any level of the form. This means that I can apply the validator to a [`FormControl`](https://angular.dev/api/forms/FormControl), a [`FormArray`](https://angular.dev/api/forms/FormArray), or an entire [`FormGroup`](https://angular.dev/api/forms/FormGroup). In a future post I will show how to create a validator that can evaluate and compare multiple control values. Here though, I just need to pass the validator to the FormControl value I am creating. I am using [`FormBuilder`](https://angular.dev/api/forms/FormBuilder) in this example:
 
-```ts
+```ts copy=true
 private createForm(): FormGroup {
   const form = this.fb.group({
     email: [''],
@@ -137,7 +137,7 @@ Since I made my method static, I invoke it as `PasswordValidator.validPassword(t
 
 Now that I have moved the logic of figuring out what message to show to the user out of the template, I can simplify what is in the template a lot:
 
-```html
+```html copy=true
 <mat-form-field>
   <input
     name="password"
@@ -161,7 +161,7 @@ I added the second check of `error.key !== 'required'` here to skip over the req
 
 It is really easy to write unit tests for these kinds of validators. This way I can write custom logic and feel confident that it does what I expect and that I am handling edge cases. Below are some example test snippets, and the rest are [here](https://github.com/Karvel/angular-password-strength/blob/main/src/app/infrastructure/utils/validators/password-validator.spec.ts):
 
-```ts
+```ts copy=true
 it(`should return null if value matches RegEx`, () => {
   passwordControl.setValue('passwordTest1!');
   expect(passwordValidator(passwordControl)).toEqual(null);
